@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { apiGet, apiPost, apiDelete } from "../../../utils/adminApi";
+import { apiGetCamel, apiPost, apiPatch, apiDelete } from "../../../utils/adminApi";
 
 /**
  * 본사 관리자 탭 (2026-05-18). HQ_ADMIN 전용.
@@ -16,12 +16,14 @@ function HqAdminsTab() {
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
   const [showAdd, setShowAdd] = useState(false);
+  const [editTarget, setEditTarget] = useState(null);
   const [tempPassword, setTempPassword] = useState(null);   // { loginId, password }
 
   const reload = async () => {
     setLoading(true); setError("");
     try {
-      const res = await apiGet("/v1/admin/hq-admins");
+      // 백엔드 SNAKE_CASE → camelCase 변환 필요 (loginId/createdAt 등)
+      const res = await apiGetCamel("/v1/admin/hq-admins");
       const list = Array.isArray(res) ? res : (Array.isArray(res?.data) ? res.data : []);
       setRows(list);
     } catch (e) {
@@ -98,17 +100,17 @@ function HqAdminsTab() {
         ) : (
           <table className="admin-detail-table">
             <thead>
-              <tr><th>이름</th><th>아이디</th><th>연락처</th><th>상태</th><th>가입일</th><th></th></tr>
+              <tr><th>이름</th><th>아이디</th><th>연락처</th><th>상태</th><th></th></tr>
             </thead>
             <tbody>
               {filtered.map((r) => (
                 <tr key={r.userId}>
                   <td><strong>{r.name || "-"}</strong></td>
-                  <td style={{ fontSize: 12 }}>{r.loginId}</td>
+                  <td style={{ fontSize: 12 }}>{r.loginId || "-"}</td>
                   <td>{r.phone || "-"}</td>
                   <td><span className="status-pill" data-status={r.status === "active" ? "active" : "inactive"}>{r.status}</span></td>
-                  <td style={{ fontSize: 12 }}>{(r.createdAt || "").slice(0, 10)}</td>
-                  <td style={{ display: "flex", gap: 6 }}>
+                  <td style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                    <button type="button" className="admin-detail-btn ghost" onClick={() => setEditTarget(r)}>수정</button>
                     <button type="button" className="admin-detail-btn ghost" onClick={() => handleResetPw(r)}>임시 PW</button>
                     {r.status === "active" ? (
                       <button type="button" className="admin-detail-btn ghost" onClick={() => handleSuspend(r)}>정지</button>
@@ -135,10 +137,69 @@ function HqAdminsTab() {
         />
       ) : null}
 
+      {editTarget ? (
+        <EditHqAdminModal
+          admin={editTarget}
+          onClose={() => setEditTarget(null)}
+          onSaved={() => { setEditTarget(null); reload(); }}
+        />
+      ) : null}
+
       {tempPassword ? (
         <TempPasswordModal info={tempPassword} onClose={() => setTempPassword(null)} />
       ) : null}
     </>
+  );
+}
+
+function EditHqAdminModal({ admin, onClose, onSaved }) {
+  const [form, setForm] = useState({
+    name: admin.name || "",
+    phone: admin.phone || "",
+    email: admin.loginId || admin.email || "",
+  });
+  const [busy, setBusy] = useState(false);
+  const [message, setMessage] = useState(null);
+
+  const save = async () => {
+    setBusy(true); setMessage(null);
+    try {
+      await apiPatch(`/v1/admin/hq-admins/${admin.userId}`, {
+        name: form.name, phone: form.phone, email: form.email,
+      });
+      onSaved();
+    } catch (e) {
+      setMessage({ ok: false, text: e?.message || "저장 실패" });
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div className="admin-modal-overlay" onClick={onClose}>
+      <div className="admin-modal" onClick={(e) => e.stopPropagation()}>
+        <h2>본사 관리자 수정</h2>
+        <div className="admin-modal-field">
+          <label>이름</label>
+          <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+        </div>
+        <div className="admin-modal-field">
+          <label>아이디</label>
+          <input value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+        </div>
+        <div className="admin-modal-field">
+          <label>연락처</label>
+          <input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+        </div>
+        {message ? <p className={`admin-detail-note ${message.ok ? "" : "error"}`}>{message.text}</p> : null}
+        <div className="admin-modal-actions">
+          <button type="button" className="admin-detail-btn" onClick={save} disabled={busy}>
+            {busy ? "저장 중…" : "저장"}
+          </button>
+          <button type="button" className="admin-detail-btn secondary" onClick={onClose}>취소</button>
+        </div>
+      </div>
+    </div>
   );
 }
 

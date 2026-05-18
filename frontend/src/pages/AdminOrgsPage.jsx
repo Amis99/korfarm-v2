@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { apiGet, apiPost, apiPatch } from "../utils/adminApi";
+import { apiGet, apiPost, apiPatch, apiDelete } from "../utils/adminApi";
 import { useAdminList } from "../hooks/useAdminList";
 import { useRequireRole } from "../hooks/useRequireRole";
 import AdminLayout from "../components/AdminLayout";
@@ -183,6 +183,31 @@ function OrgsListContent() {
       setShowEditModal(false);
     } catch (err) {
       setActionError(err.message);
+    } finally {
+      setActionLoading(false);
+    }
+  };
+
+  // 기관 완전 삭제 (HQ 전용, 활성 학생/관리자 있으면 백엔드가 거부)
+  const handleDelete = async (org) => {
+    setActionError("");
+    if (org.id === "org_hq") {
+      setActionError("본사 기관은 삭제할 수 없어요.");
+      return;
+    }
+    const confirmMsg =
+      `[${org.name}] 기관을 완전히 삭제합니다.\n\n` +
+      `소속 학생은 모두 본사(국어농장)로 자동 이관되어 무료 회원으로 전환되고,\n` +
+      `기관 관리자 권한도 자동으로 제거됩니다.\n\n` +
+      `계속할까요?`;
+    if (!window.confirm(confirmMsg)) return;
+    setActionLoading(true);
+    try {
+      await apiDelete(`/v1/admin/orgs/${org.id}`);
+      setRows((prev) => prev.filter((r) => r.id !== org.id));
+      setShowEditModal(false);
+    } catch (err) {
+      setActionError(err?.message || "삭제에 실패했어요.");
     } finally {
       setActionLoading(false);
     }
@@ -650,6 +675,16 @@ function OrgsListContent() {
               >
                 비활성화
               </button>
+              {editOrg.id !== "org_hq" ? (
+                <button
+                  className="admin-detail-btn danger"
+                  onClick={() => handleDelete(editOrg)}
+                  disabled={actionLoading}
+                  title="활성 학생·관리자가 없어야 삭제 가능"
+                >
+                  완전 삭제
+                </button>
+              ) : null}
               <button
                 className="admin-detail-btn secondary"
                 onClick={() => setShowEditModal(false)}

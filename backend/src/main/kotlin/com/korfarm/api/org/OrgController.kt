@@ -14,6 +14,7 @@ import com.korfarm.api.contracts.AdminStudentUpdateRequest
 import com.korfarm.api.contracts.AdminSubscriptionRequest
 import com.korfarm.api.security.AdminGuard
 import jakarta.validation.Valid
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -125,6 +126,17 @@ class OrgController(
     fun deactivate(@PathVariable orgId: String): ApiResponse<Map<String, String>> {
         AdminGuard.requireAnyRole("HQ_ADMIN")
         orgService.deactivateOrg(orgId)
+        return ApiResponse(success = true, data = mapOf("org_id" to orgId))
+    }
+
+    /**
+     * 2026-05-18 — 기관 완전 삭제 (HQ_ADMIN 전용).
+     * 활성 학생·관리자가 있으면 거부. org_hq 절대 불가. 마지막 활성 기관 보호.
+     */
+    @DeleteMapping("/orgs/{orgId}")
+    fun deleteOrg(@PathVariable orgId: String): ApiResponse<Map<String, String>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN")
+        orgService.deleteOrg(orgId)
         return ApiResponse(success = true, data = mapOf("org_id" to orgId))
     }
 

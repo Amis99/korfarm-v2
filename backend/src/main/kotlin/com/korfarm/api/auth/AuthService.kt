@@ -46,9 +46,29 @@ class AuthService(
     }
 
     fun signup(request: SignupRequest): AuthResponseData {
-        // 1. 중복 체크
+        // 1. 중복 체크 — 아이디
         if (userRepository.existsByEmail(request.loginId)) {
             throw ApiException("LOGIN_ID_EXISTS", "이미 등록된 아이디입니다", HttpStatus.CONFLICT)
+        }
+        // 1-1. 중복 체크 — 같은 이름+연락처 활성 사용자 있으면 차단 (2026-05-18 사용자 명시).
+        //     계정 유형별로 본인 연락처가 어느 컬럼에 들어가는지 다름:
+        //       student: studentPhone, parent: linkedParentPhone, org_admin: studentPhone(연락처 컬럼 재활용)
+        val ownPhone = when (request.accountType?.lowercase() ?: "student") {
+            "parent" -> request.linkedParentPhone
+            else -> request.studentPhone
+        }?.trim()?.takeIf { it.isNotBlank() }
+        if (!request.name.isNullOrBlank() && !ownPhone.isNullOrBlank()) {
+            // studentPhone 또는 parentPhone 어디든 같은 이름·전화 사용자 있으면 차단
+            val byStudent = userRepository.findByNameAndStudentPhone(request.name, ownPhone)
+            val byParent = userRepository.findByNameAndParentPhone(request.name, ownPhone)
+            val match = (byStudent ?: byParent)?.takeIf { it.deletedAt == null }
+            if (match != null) {
+                throw ApiException(
+                    "DUPLICATE_NAME_PHONE",
+                    "동일한 이름과 연락처로 이미 가입된 계정이 있어요. (아이디: ${match.email})",
+                    HttpStatus.CONFLICT
+                )
+            }
         }
 
         // 2. 계정 유형 검증

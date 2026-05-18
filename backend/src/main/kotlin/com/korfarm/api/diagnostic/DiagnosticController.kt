@@ -57,6 +57,13 @@ class DiagnosticController(
         return ApiResponse(success = true, data = diagnosticService.getHistory(userId))
     }
 
+    /** 어드민 — 학생 한 명의 진단 응시 이력 (2026-05-18) */
+    @GetMapping("/admin/students/{userId}/history")
+    fun getAdminHistory(@PathVariable userId: String): ApiResponse<List<SessionHistoryItem>> {
+        com.korfarm.api.security.AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        return ApiResponse(success = true, data = diagnosticService.getHistory(userId))
+    }
+
     /** 인쇄 OMR 답안 일괄 제출 → 진단 세션 생성 + 채점 + 리포트 */
     @PostMapping("/sessions/from-omr")
     fun submitFromOmr(@RequestBody request: FromOmrRequest): ApiResponse<FromOmrResponse> {

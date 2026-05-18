@@ -282,6 +282,7 @@ function StudentsTab() {
   const [deleteTarget, setDeleteTarget] = useState(null);
   const [deleteForm, setDeleteForm] = useState({ nameConfirmation: "", reason: "", immediate: false });
   const [deleteSubmitting, setDeleteSubmitting] = useState(false);
+  const [deleteNotice, setDeleteNotice] = useState(null);   // { ok, text } — 모달 안 안내
   // 휴지통
   const [showTrashModal, setShowTrashModal] = useState(false);
   const [trash, setTrash] = useState([]);
@@ -373,15 +374,36 @@ function StudentsTab() {
   const openDeleteModal = (student) => {
     setDeleteTarget(student);
     setDeleteForm({ nameConfirmation: "", reason: "", immediate: false });
+    setDeleteNotice(null);
   };
 
   const closeDeleteModal = () => {
     setDeleteTarget(null);
     setDeleteForm({ nameConfirmation: "", reason: "", immediate: false });
+    setDeleteNotice(null);
   };
 
   const submitDelete = async () => {
     if (!deleteTarget) return;
+    setDeleteNotice(null);
+    // 클라이언트 측 사전 안내 — 백엔드 400 전에 친근하게
+    const expectedName = (deleteTarget.name || deleteTarget.email || "").trim();
+    const inputName = deleteForm.nameConfirmation.trim();
+    if (!inputName) {
+      setDeleteNotice({ ok: false, text: "학생 이름을 입력해 주세요." });
+      return;
+    }
+    if (inputName !== expectedName) {
+      setDeleteNotice({
+        ok: false,
+        text: `입력한 이름이 학생 이름과 다릅니다. (예상: ${expectedName})`,
+      });
+      return;
+    }
+    if (deleteForm.reason.trim().length < 4) {
+      setDeleteNotice({ ok: false, text: "삭제 사유를 4자 이상 입력해 주세요." });
+      return;
+    }
     setDeleteSubmitting(true);
     try {
       const result = await apiPostDownload(
@@ -400,7 +422,8 @@ function StudentsTab() {
       alert(`학생 삭제 완료 — ${mode}\n백업 ZIP 다운로드 (${sizeKb} KB)`);
       closeDeleteModal();
     } catch (err) {
-      alert("삭제 실패: " + err.message);
+      // 백엔드 메시지를 그대로 친근하게 노출 (NAME_MISMATCH 등 명확한 메시지 포함)
+      setDeleteNotice({ ok: false, text: err?.message || "삭제 처리에 실패했어요." });
     } finally {
       setDeleteSubmitting(false);
     }
@@ -585,8 +608,8 @@ function StudentsTab() {
         {showBulkModal && (
           <BulkCreateStudentsModal
             orgs={orgs}
-            isHQ={isHQ}
-            defaultOrgId={isHQ ? "" : (orgs[0]?.id ?? "")}
+            isHQ={isHqAdmin}
+            defaultOrgId={isHqAdmin ? "" : (orgs[0]?.id ?? "")}
             onClose={() => setShowBulkModal(false)}
             onCompleted={() => {
               setShowBulkModal(false);
@@ -1009,6 +1032,9 @@ function StudentsTab() {
                 </span>
               </label>
             </div>
+            {deleteNotice ? (
+              <p className={`admin-detail-note ${deleteNotice.ok ? "" : "error"}`}>{deleteNotice.text}</p>
+            ) : null}
             <div className="admin-modal-actions">
               <button
                 type="button"

@@ -39,6 +39,13 @@ interface UserRepository : JpaRepository<UserEntity, String> {
         @Param("parentPhone") parentPhone: String
     ): UserEntity?
 
+    // 중복 가입 차단용: 이름과 학부모 전화번호로 조회
+    @Query("SELECT u FROM UserEntity u WHERE u.name = :name AND u.parentPhone = :parentPhone AND u.status = 'active'")
+    fun findByNameAndParentPhone(
+        @Param("name") name: String,
+        @Param("parentPhone") parentPhone: String
+    ): UserEntity?
+
     // ID 후보군 + 검색어 + 레벨 필터 — AI 비서 list_students 용. 페이징 적용.
     @Query("""
         SELECT u FROM UserEntity u

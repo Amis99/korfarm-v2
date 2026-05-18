@@ -44,11 +44,14 @@ class ParentLinkController(
     }
 
     @GetMapping("/admin/parents/links")
-    fun listLinks(): ApiResponse<List<ParentLinkView>> {
+    fun listLinks(
+        @org.springframework.web.bind.annotation.RequestParam(required = false) studentUserId: String?,
+        @org.springframework.web.bind.annotation.RequestParam(required = false) parentUserId: String?,
+    ): ApiResponse<List<ParentLinkView>> {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
         val all = parentLinkService.listAll()
         val isHq = SecurityUtils.hasAnyRole("HQ_ADMIN")
-        val data = if (isHq) all else {
+        var data = if (isHq) all else {
             // ORG_ADMIN — 자기 기관 학생 연결만 (`org_hq` 멤버십은 제외해야 본사+기관 동시 ORG_ADMIN 케이스에서 타 기관 새지 않음)
             val uid = SecurityUtils.currentUserId() ?: return ApiResponse(success = true, data = emptyList())
             val myOrgIds = orgService.callerOrgAdminOrgIds(uid)
@@ -58,6 +61,9 @@ class ParentLinkController(
                 all.filter { (studentOrgMap[it.studentUserId] ?: emptySet()).any { o -> o in myOrgIds } }
             }
         }
+        // 쿼리 파라미터 — 한 학생 또는 한 학부모의 link 만 보고 싶을 때
+        studentUserId?.let { sid -> data = data.filter { it.studentUserId == sid } }
+        parentUserId?.let { pid -> data = data.filter { it.parentUserId == pid } }
         return ApiResponse(success = true, data = data)
     }
 

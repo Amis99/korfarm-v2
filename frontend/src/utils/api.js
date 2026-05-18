@@ -105,9 +105,11 @@ const tryRefresh = async () => {
  *   "JSON 아닌 응답…" / "요청 실패: 401" 같은 에러 텍스트가 화면에 노출되지 않음.
  */
 const safeJson = async (response, method, path) => {
-  if (response.status === 401) {
+  if (response.status === 401 || response.status === 403) {
+    // 401/403 모두 토큰 만료 또는 권한 문제 → 자동 로그아웃 + redirect.
+    // 화면에 에러 텍스트 노출 X (2026-05-18 사용자 명시).
     handle401(path);
-    return new Promise(() => {}); // pending — 페이지 redirect 까지 대기
+    return new Promise(() => {});
   }
   const ct = response.headers.get("content-type") || "";
   if (!ct.includes("application/json")) {

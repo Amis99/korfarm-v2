@@ -418,9 +418,11 @@ class OrgService(
                 orgId = m.orgId,
                 orgName = org?.name,
                 phone = when (role) {
-                    "STUDENT" -> user.studentPhone
-                    "PARENT" -> user.parentPhone
-                    else -> user.studentPhone
+                    "STUDENT" -> user.studentPhone ?: user.parentPhone
+                    // 학부모는 가입 시 자기 phone 이 OrgMembership.linkedParentPhone 에 저장된 케이스가 다수.
+                    "PARENT" -> user.parentPhone ?: user.studentPhone ?: m.linkedParentPhone
+                    // ORG_ADMIN/HQ_ADMIN: 본인 phone 어디 들어갔는지 모름 → 둘 다 시도
+                    else -> user.studentPhone ?: user.parentPhone ?: m.linkedParentPhone
                 },
                 email = if (user.email.contains("@")) user.email else null,
                 membershipStatus = m.status,
@@ -667,6 +669,69 @@ class OrgService(
             ApiException("NOT_FOUND", "org not found", HttpStatus.NOT_FOUND)
         }
         org.status = "inactive"
+        orgRepository.save(org)
+    }
+
+    /**
+     * 2026-05-18 — 기관 완전 삭제 (soft delete, HQ_ADMIN 전용).
+     *
+     * 자동 처리 (사용자 정책):
+     *  - 활성 학생이 있으면 본사(org_hq) 로 자동 이관 + 무료 회원 전환 (transferStudentToHq 와 동일 효과)
+     *  - 활성 ORG_ADMIN 은 자동 권한 제거 (멤버십 inactive)
+     *  - 모든 active 수강반 → inactive
+     *  - orgs.status = "deleted"
+     *  - 청구·결제·온보딩 데이터는 보존 (이력)
+     *
+     * 안전 가드:
+     *  - org_hq 절대 불가
+     *  - 이미 deleted 인 기관 거부
+     */
+    @Transactional
+    fun deleteOrg(orgId: String) {
+        if (orgId == "org_hq") {
+            throw ApiException("PROTECTED_HQ", "본사 기관(org_hq)은 삭제할 수 없습니다", HttpStatus.BAD_REQUEST)
+        }
+        val org = orgRepository.findById(orgId).orElseThrow {
+            ApiException("NOT_FOUND", "org not found", HttpStatus.NOT_FOUND)
+        }
+        if (org.status == "deleted") {
+            throw ApiException("ALREADY_DELETED", "이미 삭제된 기관입니다", HttpStatus.BAD_REQUEST)
+        }
+
+        val activeMemberships = orgMembershipRepository.findByOrgIdAndStatus(orgId, "active")
+        val now = LocalDateTime.now()
+
+        // 1) 활성 학생 → 본사로 자동 이관 (무료 회원 전환)
+        activeMemberships.filter { it.role == "STUDENT" }.forEach { m ->
+            try {
+                transferStudentToHq(orgId, m.userId)
+            } catch (ex: Exception) {
+                // 이미 이전된 경우 등은 무시
+                m.status = "inactive"
+                orgMembershipRepository.save(m)
+            }
+        }
+
+        // 2) 활성 ORG_ADMIN → 권한 자동 제거 (멤버십 inactive)
+        activeMemberships.filter { it.role == "ORG_ADMIN" }.forEach { m ->
+            m.status = "inactive"
+            orgMembershipRepository.save(m)
+        }
+
+        // 3) PARENT 등 기타 멤버십도 자동 inactive
+        activeMemberships.filter { it.role !in listOf("STUDENT", "ORG_ADMIN") }.forEach { m ->
+            m.status = "inactive"
+            orgMembershipRepository.save(m)
+        }
+
+        // 4) 수강반 inactive 처리
+        classRepository.findByOrgIdAndStatusOrderByNameAsc(orgId, "active").forEach {
+            it.status = "inactive"
+            classRepository.save(it)
+        }
+
+        // 5) 기관 자체 soft delete
+        org.status = "deleted"
         orgRepository.save(org)
     }
 

@@ -1,6 +1,9 @@
 package com.korfarm.api.student
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.SerializationFeature
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.IdGenerator
 import com.korfarm.api.user.UserRepository
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.io.ByteArrayOutputStream
 import java.time.LocalDateTime
+import java.util.Base64
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
@@ -30,6 +34,18 @@ class StudentDeletionService(
     private val objectMapper: ObjectMapper
 ) {
     private val logger = LoggerFactory.getLogger(StudentDeletionService::class.java)
+
+    /**
+     * 백업 ZIP 전용 ObjectMapper (2026-05-18).
+     * 일반 ObjectMapper 는 SNAKE_CASE·non-null·timezone 설정이 영향 — 백업은 그것 무관하게 안전 직렬화.
+     * - JavaTimeModule 명시 등록 (LocalDateTime 등 안전)
+     * - WRITE_DATES_AS_TIMESTAMPS 비활성화 (ISO 문자열)
+     * - FAIL_ON_EMPTY_BEANS 비활성화
+     */
+    private val backupMapper: ObjectMapper = jacksonObjectMapper()
+        .registerModule(JavaTimeModule())
+        .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+        .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
 
     /** 학생 삭제 + 백업 ZIP 생성. immediate=true 면 즉시 hard delete, 아니면 soft + 30일 후 hard. */
     @Transactional
@@ -149,18 +165,27 @@ class StudentDeletionService(
     /** user_id 컬럼이 있는 모든 테이블 + users 테이블 데이터를 ZIP(JSON) 으로 dump */
     private fun buildBackupZip(userId: String): ByteArray {
         val baos = ByteArrayOutputStream()
+        val tablesDumped = mutableListOf<String>()
         ZipOutputStream(baos).use { zip ->
-            // 1) users 테이블 (id 컬럼)
-            val userRows = jdbc.queryForList("SELECT * FROM users WHERE id = ?", userId)
-            writeJsonEntry(zip, "users.json", userRows)
+            // 1) users 테이블 (id 컬럼) — 실패해도 백업 자체는 계속 진행
+            try {
+                val userRows = sanitizeRows(jdbc.queryForList("SELECT * FROM users WHERE id = ?", userId))
+                writeJsonEntry(zip, "users.json", userRows)
+            } catch (ex: Exception) {
+                logger.warn("dump failed for table users: {}", ex.message)
+                writeJsonEntry(zip, "users.json", mapOf("error" to (ex.message ?: "dump 실패")))
+            }
 
             // 2) user_id 컬럼이 있는 모든 테이블 자동 dump
-            val tables = findTablesWithUserId()
+            val tables = try { findTablesWithUserId() } catch (ex: Exception) {
+                logger.warn("findTablesWithUserId failed: {}", ex.message); emptyList()
+            }
             for (table in tables) {
                 try {
-                    val rows = jdbc.queryForList("SELECT * FROM `$table` WHERE user_id = ?", userId)
+                    val rows = sanitizeRows(jdbc.queryForList("SELECT * FROM `$table` WHERE user_id = ?", userId))
                     if (rows.isNotEmpty()) {
                         writeJsonEntry(zip, "$table.json", rows)
+                        tablesDumped.add(table)
                     }
                 } catch (ex: Exception) {
                     logger.warn("dump failed for table {}: {}", table, ex.message)
@@ -171,18 +196,51 @@ class StudentDeletionService(
             val meta = mapOf(
                 "userId" to userId,
                 "exportedAt" to LocalDateTime.now().toString(),
-                "tablesIncluded" to tables,
-                "userTableRowCount" to userRows.size
+                "tablesIncluded" to tablesDumped,
+                "tablesCandidates" to tables,
             )
             writeJsonEntry(zip, "_meta.json", meta)
         }
         return baos.toByteArray()
     }
 
+    /**
+     * 직렬화 안전화: 행 안의 byte[] / Blob / 알 수 없는 타입을 Base64 또는 toString 으로 변환.
+     * Jackson 이 처리하지 못하는 타입을 미리 안전한 표현으로 바꿔 ZIP 생성 자체가 실패하지 않게.
+     */
+    private fun sanitizeRows(rows: List<Map<String, Any?>>): List<Map<String, Any?>> {
+        return rows.map { row ->
+            row.mapValues { (_, v) ->
+                when (v) {
+                    null -> null
+                    is ByteArray -> "base64:${Base64.getEncoder().encodeToString(v)}"
+                    is java.sql.Blob -> try {
+                        val bytes = v.getBytes(1, v.length().toInt()); "base64:${Base64.getEncoder().encodeToString(bytes)}"
+                    } catch (_: Exception) { "(blob)" }
+                    is java.sql.Clob -> try { v.getSubString(1, v.length().toInt()) } catch (_: Exception) { "(clob)" }
+                    is java.sql.Timestamp, is java.sql.Date, is java.sql.Time,
+                    is java.time.LocalDateTime, is java.time.LocalDate, is java.time.LocalTime,
+                    is java.util.Date, is Number, is String, is Boolean -> v
+                    else -> v.toString()
+                }
+            }
+        }
+    }
+
     private fun writeJsonEntry(zip: ZipOutputStream, name: String, data: Any) {
-        zip.putNextEntry(ZipEntry(name))
-        zip.write(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsBytes(data))
-        zip.closeEntry()
+        try {
+            zip.putNextEntry(ZipEntry(name))
+            zip.write(backupMapper.writerWithDefaultPrettyPrinter().writeValueAsBytes(data))
+            zip.closeEntry()
+        } catch (ex: Exception) {
+            logger.warn("zip entry write failed for {}: {}", name, ex.message)
+            // 이미 putNextEntry 만 호출하고 write 실패한 경우 ZipOutputStream 이 corrupted 될 수 있음 —
+            // 가능한 한 fallback 메시지로 닫는다.
+            try {
+                zip.write("""{"error":"serialization failed: ${ex.message?.replace("\"", "'")}"}""".toByteArray())
+                zip.closeEntry()
+            } catch (_: Exception) { /* 이미 망가졌으면 다음 entry 에 영향 — caller 가 알 수 있게 로그만 */ }
+        }
     }
 
     /** information_schema 에서 user_id 컬럼이 있는 테이블 목록 (system 테이블 제외) */
@@ -200,18 +258,62 @@ class StudentDeletionService(
         )
     }
 
-    /** 모든 user_id row + users row 영구 삭제 */
+    /**
+     * 모든 user_id row + users.id 를 참조하는 모든 외래키 row + users row 영구 삭제.
+     *
+     * 2026-05-18 fix:
+     *   - 옛 구현은 user_id 컬럼만 처리해서 duel_rooms.created_by 등 다른 컬럼명이 users 를 참조하는 경우
+     *     DELETE FROM users 가 SQLIntegrityConstraintViolation 으로 500 에러.
+     *   - information_schema.key_column_usage 에서 users.id 를 참조하는 모든 외래키를 동적 탐색해
+     *     각 (테이블, 컬럼) 쌍에 대해 DELETE 시도 후 마지막에 users 본체 삭제.
+     */
     private fun hardDeleteUserData(userId: String) {
+        // 1) user_id 컬럼이 있는 테이블 (기존 동작 유지)
         val tables = findTablesWithUserId()
         for (table in tables) {
             try {
                 jdbc.update("DELETE FROM `$table` WHERE user_id = ?", userId)
             } catch (ex: Exception) {
-                logger.warn("delete failed for table {}: {}", table, ex.message)
+                logger.warn("delete failed for table {} by user_id: {}", table, ex.message)
             }
         }
-        // users 본체 (FK 잔재 무시 위해 마지막)
-        jdbc.update("DELETE FROM users WHERE id = ?", userId)
+        // 2) users.id 를 참조하는 모든 외래키 컬럼 (user_id 가 아닌 컬럼명 포함 — created_by/deleted_by 등)
+        val refs = try { findReferencingColumns() } catch (ex: Exception) {
+            logger.warn("findReferencingColumns failed: {}", ex.message); emptyList()
+        }
+        for ((refTable, refColumn) in refs) {
+            try {
+                jdbc.update("DELETE FROM `$refTable` WHERE `$refColumn` = ?", userId)
+            } catch (ex: Exception) {
+                logger.warn("delete failed for table {}.{}: {}", refTable, refColumn, ex.message)
+            }
+        }
+        // 3) users 본체
+        try {
+            jdbc.update("DELETE FROM users WHERE id = ?", userId)
+        } catch (ex: Exception) {
+            logger.warn("DELETE FROM users WHERE id = {} 실패: {}", userId, ex.message)
+            throw ex
+        }
+    }
+
+    /** information_schema 에서 users.id 를 참조하는 모든 외래키 컬럼 추출. */
+    private fun findReferencingColumns(): List<Pair<String, String>> {
+        val rows = jdbc.queryForList(
+            """
+            SELECT table_name, column_name
+              FROM information_schema.key_column_usage
+             WHERE referenced_table_schema = DATABASE()
+               AND referenced_table_name = 'users'
+               AND referenced_column_name = 'id'
+               AND table_schema = DATABASE()
+            """.trimIndent()
+        )
+        return rows.mapNotNull { row ->
+            val t = (row["TABLE_NAME"] ?: row["table_name"]) as? String ?: return@mapNotNull null
+            val c = (row["COLUMN_NAME"] ?: row["column_name"]) as? String ?: return@mapNotNull null
+            t to c
+        }
     }
 
     data class DeletionResult(

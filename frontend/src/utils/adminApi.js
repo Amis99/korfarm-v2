@@ -105,12 +105,12 @@ const safeJson = async (response, method, path) => {
     );
   }
   if (!response.ok) {
-    // 403 → 권한 부족 → 자동 로그아웃 시도 + 에러 throw
+    // 403 → 토큰 만료 또는 권한 부족 → 자동 로그아웃 + redirect.
+    // 화면에 에러 메시지가 노출되지 않도록 401 과 동일하게 pending Promise 반환.
+    // (2026-05-18 사용자 명시: 403 도 안내 없이 로그인 페이지로)
     if (response.status === 403) {
       handleAuthFailure(403);
-      throw new Error(
-        "관리자 권한이 필요하거나 세션이 만료되었습니다. 다시 로그인해 주세요."
-      );
+      return new Promise(() => {});
     }
     let msg = `${method} ${path} 요청 실패: ${response.status}`;
     try {

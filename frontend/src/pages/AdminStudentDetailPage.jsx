@@ -35,7 +35,7 @@ const TABS = [
   { key: "tests", label: "테스트 성적" },
   { key: "inventory", label: "인벤토리" },
   { key: "duel", label: "대결 전적" },
-  { key: "report", label: "통합 성적표" },
+  { key: "report", label: "통합 분석표" },
 ];
 
 const MODULE_KEY_LABELS = {
@@ -71,6 +71,8 @@ function AdminStudentDetailPage() {
   const [testHistory, setTestHistory] = useState([]);
   const [loadingTests, setLoadingTests] = useState(false);
   const [testsLoaded, setTestsLoaded] = useState(false);
+  // 진단 응시 이력 (테스트 성적 탭에 통합, 2026-05-18)
+  const [diagHistory, setDiagHistory] = useState([]);
   const [inventory, setInventory] = useState(null);
   const [ledger, setLedger] = useState([]);
   const [loadingInventory, setLoadingInventory] = useState(false);
@@ -117,9 +119,13 @@ function AdminStudentDetailPage() {
     }
     if (tab === "tests" && !testsLoaded) {
       setLoadingTests(true);
-      apiGetCamel(`/v1/admin/students/${userId}/test-history`)
-        .then((data) => { setTestHistory(Array.isArray(data) ? data : []); })
-        .catch((e) => console.error(e))
+      Promise.all([
+        apiGetCamel(`/v1/admin/students/${userId}/test-history`).catch(() => []),
+        apiGetCamel(`/v1/diagnostic/admin/students/${userId}/history`).catch(() => []),
+      ]).then(([tests, diags]) => {
+        setTestHistory(Array.isArray(tests) ? tests : []);
+        setDiagHistory(Array.isArray(diags) ? diags : []);
+      })
         .finally(() => { setLoadingTests(false); setTestsLoaded(true); });
     }
     if (tab === "inventory" && !inventoryLoaded) {
@@ -143,7 +149,32 @@ function AdminStudentDetailPage() {
   }, [tab, userId]);
 
   // 각 리스트 페이지네이션 (탭별 독립)
-  const learningPg = usePagination(learningLogs, 15);
+  // 학습 현황 필터 — 상태(전체/완료/진행중) + 유형(콘텐츠 타입) + 검색
+  const [learningStatusFilter, setLearningStatusFilter] = useState("all");
+  const [learningTypeFilter, setLearningTypeFilter] = useState("all");
+  const [learningSearch, setLearningSearch] = useState("");
+  const learningTypes = useMemo(() => {
+    const m = new Map();
+    learningLogs.forEach((l) => {
+      const t = l.contentType || "기타";
+      if (!m.has(t)) m.set(t, contentTypeLabel(t));
+    });
+    return Array.from(m, ([key, label]) => ({ key, label }));
+  }, [learningLogs]);
+  const filteredLearningLogs = useMemo(() => {
+    const q = learningSearch.trim().toLowerCase();
+    return learningLogs.filter((l) => {
+      if (learningStatusFilter === "completed" && l.status !== "COMPLETED") return false;
+      if (learningStatusFilter === "in_progress" && l.status === "COMPLETED") return false;
+      if (learningTypeFilter !== "all" && (l.contentType || "기타") !== learningTypeFilter) return false;
+      if (q) {
+        const hay = `${l.contentTitle || ""} ${l.contentId || ""}`.toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    });
+  }, [learningLogs, learningStatusFilter, learningTypeFilter, learningSearch]);
+  const learningPg = usePagination(filteredLearningLogs, 15);
   const testPg = usePagination(testHistory, 15);
   const ledgerPg = usePagination(ledger, 15);
 
@@ -214,7 +245,22 @@ function AdminStudentDetailPage() {
           </div>
         </div>
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap", margin: "20px 0 16px" }}>
-          {TABS.map((t) => (<button key={t.key} style={tabStyle(t.key)} onClick={() => setTab(t.key)}>{t.label}</button>))}
+          {TABS.map((t) => (
+            <button
+              key={t.key}
+              style={tabStyle(t.key)}
+              onClick={() => {
+                // 통합 분석표 탭 — 학생 페이지의 분석표로 바로 이동 (2026-05-18 사용자 요청).
+                if (t.key === "report") {
+                  navigate(`/report?studentId=${encodeURIComponent(userId)}`);
+                  return;
+                }
+                setTab(t.key);
+              }}
+            >
+              {t.label}
+            </button>
+          ))}
         </div>
 
         {tab === "info" && (
@@ -274,7 +320,28 @@ function AdminStudentDetailPage() {
             <h2>학습 현황</h2>
             {loadingLearning ? (<p className="admin-detail-note">로딩 중...</p>) : learningLogs.length === 0 ? (<p className="admin-detail-note">학습 기록이 없습니다.</p>) : (
               <>
-                <p className="admin-detail-note" style={{ marginBottom: 12 }}>최근 {learningLogs.length}건 (완료: {learningLogs.filter((l) => l.status === "COMPLETED").length}건)</p>
+                <div className="admin-detail-toolbar" style={{ marginBottom: 12 }}>
+                  <div className="admin-detail-search">
+                    <span className="material-symbols-outlined">search</span>
+                    <input
+                      value={learningSearch}
+                      onChange={(e) => setLearningSearch(e.target.value)}
+                      placeholder="콘텐츠 제목·ID 검색"
+                    />
+                  </div>
+                  <select value={learningStatusFilter} onChange={(e) => setLearningStatusFilter(e.target.value)}>
+                    <option value="all">전체 상태</option>
+                    <option value="completed">완료만</option>
+                    <option value="in_progress">진행중만</option>
+                  </select>
+                  <select value={learningTypeFilter} onChange={(e) => setLearningTypeFilter(e.target.value)}>
+                    <option value="all">전체 유형</option>
+                    {learningTypes.map((t) => <option key={t.key} value={t.key}>{t.label}</option>)}
+                  </select>
+                </div>
+                <p className="admin-detail-note" style={{ marginBottom: 12 }}>
+                  전체 {learningLogs.length}건 · 조건 매칭 {filteredLearningLogs.length}건 (완료: {filteredLearningLogs.filter((l) => l.status === "COMPLETED").length}건)
+                </p>
                 <div style={{ overflowX: "auto" }}>
                   <table className="admin-detail-table"><thead><tr><th>유형</th><th>콘텐츠</th><th>상태</th><th>점수</th><th>정답률</th><th>획득 씨앗</th><th>시작일</th><th>완료일</th></tr></thead>
                     <tbody>{learningPg.paged.map((log, i) => (
@@ -298,28 +365,62 @@ function AdminStudentDetailPage() {
         )}
 
         {tab === "tests" && (
-          <div className="admin-detail-card">
-            <h2>테스트 응시 이력</h2>
-            {loadingTests ? (<p className="admin-detail-note">로딩 중...</p>) : testHistory.length === 0 ? (<p className="admin-detail-note">테스트 응시 기록이 없습니다.</p>) : (
-              <div style={{ overflowX: "auto" }}>
-                <table className="admin-detail-table"><thead><tr><th>시험명</th><th>시험일</th><th>점수</th><th>만점</th><th>정답</th><th>총문항</th><th>정답률</th><th>제출일</th><th>성적표</th></tr></thead>
-                  <tbody>{testPg.paged.map((t, i) => (
-                    <tr key={t.testId || i}>
-                      <td>{t.testTitle || "-"}</td>
-                      <td style={{ fontSize: 12 }}>{t.examDate || "-"}</td>
-                      <td style={{ fontWeight: 700 }}>{t.score}</td>
-                      <td>{t.totalPoints}</td>
-                      <td>{t.correctCount}</td>
-                      <td>{t.totalQuestions}</td>
-                      <td>{t.accuracy != null ? `${t.accuracy}%` : "-"}</td>
-                      <td style={{ fontSize: 12 }}>{t.submittedAt ? String(t.submittedAt).replace("T", " ").slice(0, 16) : "-"}</td>
-                      <td><button className="admin-detail-btn secondary" style={{ fontSize: 11, padding: "3px 8px" }} onClick={() => navigate(`/admin/tests/${t.testId}/statistics`)}>상세</button></td>
-                    </tr>
-                  ))}</tbody>
-                </table>
-                <Pagination page={testPg.page} totalPages={testPg.totalPages} onChange={testPg.setPage} />
-              </div>
-            )}
+          <div style={{ display: "grid", gap: 20 }}>
+            <div className="admin-detail-card">
+              <h2>진단 응시 이력</h2>
+              {loadingTests ? (<p className="admin-detail-note">로딩 중...</p>) : diagHistory.length === 0 ? (<p className="admin-detail-note">진단 응시 기록이 없습니다.</p>) : (
+                <div style={{ overflowX: "auto" }}>
+                  <table className="admin-detail-table">
+                    <thead><tr><th>단계</th><th>모드</th><th>점수(TCI)</th><th>판정 레벨</th><th>응시일</th><th>역량 평가표</th></tr></thead>
+                    <tbody>
+                      {diagHistory.map((d, i) => (
+                        <tr key={d.sessionId || i}>
+                          <td><strong>{d.tier || "-"}</strong></td>
+                          <td>{d.mode === "offline" ? "인쇄 OMR" : "온라인"}</td>
+                          <td>{d.tci != null ? d.tci.toFixed(1) : "-"}</td>
+                          <td>{d.level || "-"}</td>
+                          <td style={{ fontSize: 12 }}>{(d.date || "").replace("T", " ").slice(0, 16)}</td>
+                          <td>
+                            <button
+                              type="button"
+                              className="admin-detail-btn secondary"
+                              style={{ fontSize: 11, padding: "3px 8px" }}
+                              onClick={() => navigate(`/diagnostic/v2/report/${d.sessionId}`)}
+                            >
+                              평가표
+                            </button>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+
+            <div className="admin-detail-card">
+              <h2>시험·챕터 응시 이력</h2>
+              {loadingTests ? (<p className="admin-detail-note">로딩 중...</p>) : testHistory.length === 0 ? (<p className="admin-detail-note">시험·챕터 응시 기록이 없습니다.</p>) : (
+                <div style={{ overflowX: "auto" }}>
+                  <table className="admin-detail-table"><thead><tr><th>시험명</th><th>시험일</th><th>점수</th><th>만점</th><th>정답</th><th>총문항</th><th>정답률</th><th>제출일</th><th>성적표</th></tr></thead>
+                    <tbody>{testPg.paged.map((t, i) => (
+                      <tr key={t.testId || i}>
+                        <td>{t.testTitle || "-"}</td>
+                        <td style={{ fontSize: 12 }}>{t.examDate || "-"}</td>
+                        <td style={{ fontWeight: 700 }}>{t.score}</td>
+                        <td>{t.totalPoints}</td>
+                        <td>{t.correctCount}</td>
+                        <td>{t.totalQuestions}</td>
+                        <td>{t.accuracy != null ? `${t.accuracy}%` : "-"}</td>
+                        <td style={{ fontSize: 12 }}>{t.submittedAt ? String(t.submittedAt).replace("T", " ").slice(0, 16) : "-"}</td>
+                        <td><button className="admin-detail-btn secondary" style={{ fontSize: 11, padding: "3px 8px" }} onClick={() => navigate(`/admin/tests/${t.testId}/statistics`)}>상세</button></td>
+                      </tr>
+                    ))}</tbody>
+                  </table>
+                  <Pagination page={testPg.page} totalPages={testPg.totalPages} onChange={testPg.setPage} />
+                </div>
+              )}
+            </div>
           </div>
         )}
 
