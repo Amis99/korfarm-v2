@@ -1639,6 +1639,177 @@ DELETE FROM study_plans           WHERE id      &lt;&gt; @keep;</pre>
   <div class="callout info">
     학습 계획표 Rev.2 작업 마무리. 다음 작업 항목은 보고서 7번 우선순위 표의 1~8번 (학생당 plan 다중 정책·createPlan 빈 배열 문제·assignedAt 계산 버그 등) 으로 이어질 수 있습니다.
   </div>
+
+  <h3>8.13 정책 확정 — 학생당 plan 1개 (다중 plan 폐기) <span class="badge ok">2026-05-21 결정</span></h3>
+
+  <div class="callout" style="border-left-color: var(--accent);">
+    <strong>사용자 확정 정책:</strong>
+    <ul style="margin: 6px 0 0;">
+      <li>학생당 학습 계획표는 <strong>무조건 1개</strong>. 다중 plan 운영 안 함.</li>
+      <li>오래 된 행은 자동 삭제 또는 진행중/완료 행 필터링으로 매트릭스 가독성 확보.</li>
+    </ul>
+  </div>
+
+  <h4>A-1 항목 폐기 처리</h4>
+  <p>
+    6.A.1 "학생당 plan 1개 가정 vs 다중 plan" 항목은 사고가 아니라 <strong>의도된 동작</strong> 으로 재분류.
+    <code>StudentMatrixTab.jsx:46</code> 의 <code>plans[0]</code> 만 잡는 로직이 정책에 부합.
+  </p>
+
+  <h4>1개 정책을 강제하는 코드 방어 (현 상태)</h4>
+  <ul>
+    <li><strong>가입 시 자동 생성</strong> — <code>AuthService.kt:189</code> 의 <code>hasAnyPlan(userId).not()</code> 가드로 plan 1개만 생성 ✅</li>
+    <li><strong>템플릿 복제</strong> — <code>cloneTemplatesForStudent</code> 의 <code>findByTemplateOriginId</code> 로 중복 복제 차단 ✅</li>
+    <li><strong>propagate 자동 default plan</strong> — P-4B 의 candidates.isNotEmpty() 가드로 기존 plan 있으면 새로 안 만듦 ✅</li>
+    <li><strong>어드민 수동 createPlan</strong> — 현재 가드 없음. target=user 일 때 그 학생이 이미 plan 있으면 거부하는 로직 필요 (후속 작업 후보).</li>
+  </ul>
+
+  <h4>새 기능 — 행 필터링 (사용자 제안)</h4>
+  <p>
+    매트릭스 상단 툴바에 행(scope) 단위 필터 추가:
+  </p>
+  <ul>
+    <li><strong>진행중</strong> — 그 scope 의 셀 중 하나라도 status ∈ {pending, in_progress, submitted, scored, partial, retry}</li>
+    <li><strong>완료(기간 설정)</strong> — 그 scope 의 모든 셀이 status ∈ {completed, passed, reviewed} 이고 마지막 reviewed_at 가 지정 기간 안</li>
+    <li><strong>오래된 행 자동 숨김</strong> — N개월 전 완료된 행은 default 로 숨김. "전체 보기" 토글로 다시 노출</li>
+  </ul>
+
+  <h4>다음 작업 후보 (사용자 결정 대기)</h4>
+  <table>
+    <thead><tr><th style="width: 7%; text-align: center;">#</th><th>항목</th><th style="width: 12%; text-align: center;">시급도</th><th>비고</th></tr></thead>
+    <tbody>
+      <tr style="background: var(--accent-soft);">
+        <td style="text-align: center;">N-1</td>
+        <td><strong>매트릭스 행 필터링 + 오래된 행 자동 숨김 ✅ 완료 (2026-05-21)</strong></td>
+        <td style="text-align: center;"><span class="badge ok">완료</span></td>
+        <td>
+          <code>StudyPlanMatrix</code> 툴바에 <strong>행 표시</strong> 셀렉트 4옵션 추가:
+          최근 활동 (90일, default) / 진행중만 / 완료만 / 전체.<br>
+          <code>classifyScopeStatus(scope, cells)</code> — empty / active / completed-recent / completed-old 분류.
+          기준: 모든 활성 셀(disabled 제외)이 completed/passed/reviewed 이고 마지막 reviewedAt(또는 assignedAt·dueAt fallback) 가 90일 이전이면 stale.<br>
+          빈 행은 항상 표시(신규 추가 안 가려짐). 숨겨진 행 개수는 툴바에 회색 칩으로 "오래된 행 N건 숨김" 안내 (클릭 시 전체 표시).<br>
+          초기화 버튼에 rowFilter 도 포함.
+        </td>
+      </tr>
+      <tr style="background: var(--accent-soft);">
+        <td style="text-align: center;">N-2</td>
+        <td><strong>StudyPlanCreateForm 폐기 ✅ 완료 (2026-05-21)</strong></td>
+        <td style="text-align: center;"><span class="badge ok">완료</span></td>
+        <td>
+          진단: grep 결과 <code>StudyPlanCreateForm</code> 의 외부 import / 라우트 / 버튼 진입점 <strong>0건</strong> — 이미 dead code.<br>
+          처리: 파일 <code>frontend/src/components/StudyPlanCreateForm.jsx</code> 삭제. 백엔드 <code>POST /v1/admin/study-plans</code> endpoint 는 향후 기관 default 템플릿 신설·관리자 도구용으로 유지.<br>
+          부수 효과: N-8 (디자인 표준 위반 inline style 다용) 도 동시 해소.
+        </td>
+      </tr>
+      <tr style="background: var(--accent-soft);">
+        <td style="text-align: center;">N-3</td>
+        <td><strong>캘린더 assignedAt 버그 ✅ 완료 (2026-05-21)</strong></td>
+        <td style="text-align: center;"><span class="badge ok">완료</span></td>
+        <td>
+          V0148 마이그 — <code>study_plan_cells.assigned_at DATETIME NULL</code> 컬럼 신설.<br>
+          헬퍼 <code>markAssigned(cell)</code> 추가 → 첫 배정 시점에 한 번만 박힘.<br>
+          7개 트리거 적용: <code>assignCellContent</code>, <code>addCellAssignment</code> 첫 배정, korfarm bulk 첫 배정,
+          글쓰기 fill 첫 배정, <code>mergeCellLearningContent</code> (korfarm/단일ref/자유텍스트 3분기), <code>updateCellStatus</code> 의 unassigned→다른 status 전환.<br>
+          <code>removeCellAssignment</code> 에서 셀이 빈 상태로 돌아가면 assignedAt = null 리셋.<br>
+          <code>CellResponse.toResponse</code> 는 cell.assignedAt 우선, NULL 이면 updatedAt fallback (기존 잔재 호환).
+        </td>
+      </tr>
+      <tr style="background: var(--accent-soft);">
+        <td style="text-align: center;">N-4</td>
+        <td><strong>테스트 응시 → 셀 상태 동기화 ✅ 완료 (2026-05-21)</strong></td>
+        <td style="text-align: center;"><span class="badge ok">완료</span></td>
+        <td>
+          진단: <code>syncTestCellStatus</code> 는 매트릭스 조회 시점의 lazy sync 만 — 캘린더·진행률·통합 분석표에서는 미응시로 표시되는 사고.<br>
+          수정: <code>StudyPlanService.syncTestCellsForUser(userId, testId)</code> public 추가 + <code>TestService.submitOmr</code> 끝에 <code>@Lazy</code> inject 로 호출. 응시 즉시 모든 read 경로에 정확.
+        </td>
+      </tr>
+      <tr style="background: var(--accent-soft);">
+        <td style="text-align: center;">N-5</td>
+        <td><strong>createPlan 1개 정책 방어 ✅ 완료 (2026-05-21)</strong></td>
+        <td style="text-align: center;"><span class="badge ok">완료</span></td>
+        <td>
+          <code>StudyPlanService.createPlan</code> 시작부에 가드 추가 — target_type=user 학생 중 이미 active non-template plan 보유자가 있으면
+          <code>HTTP 409 ALREADY_HAS_PLAN</code> 으로 거부. 메시지에 학생 ID + 학생간 복제 사용 안내.<br>
+          기관 default 템플릿(<code>is_template=true</code>) 흐름이나 target_type=class 케이스는 영향 없음.
+        </td>
+      </tr>
+      <tr style="background: var(--accent-soft);">
+        <td style="text-align: center;">N-6</td>
+        <td><strong>글쓰기 셀 ↔ wisdom_posts 자동 연결 ✅ 완료 (2026-05-21)</strong></td>
+        <td style="text-align: center;"><span class="badge ok">완료</span></td>
+        <td>
+          <code>WisdomService.createPost</code> 의 planCellId null 분기 보강 — 본인 plan 의 미해결 글쓰기 셀(status ∈ {unassigned, pending, partial})
+          중 매칭 키로 자동 연결:<br>
+          ① <code>cell.cellRefId == topicKey</code><br>
+          ② <code>asset.refId == topicKey</code><br>
+          ③ <code>cell.assignedLabel == topicLabel</code><br>
+          매칭 시 plan_cell_id 박힘 + 셀 status="submitted" + submission_count++ 기존 로직 자동 적용.
+          매칭 안 되면 일반 글로 그대로 저장(기존 동작).
+        </td>
+      </tr>
+      <tr style="background: var(--accent-soft);">
+        <td style="text-align: center;">N-7</td>
+        <td><strong>propagateDelta org 권한 가드 ✅ 완료 (2026-05-21)</strong></td>
+        <td style="text-align: center;"><span class="badge ok">완료</span></td>
+        <td>
+          진단: <code>resolveAdminScope</code> 자체는 정상이지만 <code>propagateDelta</code> 진입 시 sourcePlan 의 orgId 검사 없어
+          ORG_ADMIN 이 다른 기관 plan 의 scope/asset 라벨 정보 노출 가능.<br>
+          수정: <code>propagateDelta</code> 시작부에 <code>if (scope is AdminScope.Org && sourcePlan.orgId != scope.orgId)</code>
+          → <code>HTTP 403 FORBIDDEN</code>. <code>propagateCell</code> 은 propagateDelta 위임이라 자동 적용.<br>
+          HQ_ADMIN (AdminScope.All) 은 모든 기관 가능.
+        </td>
+      </tr>
+      <tr style="background: var(--accent-soft);">
+        <td style="text-align: center;">N-10</td>
+        <td><strong>plan endpoint 권한 가드 일괄 ✅ 완료 (2026-05-21)</strong></td>
+        <td style="text-align: center;"><span class="badge ok">완료</span></td>
+        <td>
+          <code>verifyAdminAccessToPlan(planId)</code> · <code>verifyAdminAccessToCell(cellId)</code> 헬퍼 신설 — ORG_ADMIN 은 자기 기관 plan 만, HQ_ADMIN 은 모든 기관.
+          22개 admin 메서드에 일괄 가드 적용:
+          <code>getPlanDetail</code> · <code>updatePlan</code> · <code>archivePlan</code> · <code>unarchivePlan</code> · <code>deletePlan</code> ·
+          <code>applyTemplateToCurrentStudents</code> · <code>addScope</code> · <code>updateScope</code> · <code>deleteScope</code> · <code>reorderScopes</code> ·
+          <code>addAsset</code> · <code>updateAsset</code> · <code>deleteAsset</code> · <code>reorderAssets</code> ·
+          <code>getStudentsWithProgress</code> · <code>getSubmissions</code> · <code>getMatrix(isAdmin)</code> ·
+          <code>assignCellContent</code> · <code>addCellAssignment</code> · <code>removeCellAssignment</code> · <code>updateCellStatus</code> ·
+          <code>getCellFiles</code> · <code>disableCell</code> · <code>enableCell</code> · <code>createSchedule</code> · <code>updateSchedule</code> · <code>deleteSchedule</code> ·
+          <code>adminGetTestAssetStudents</code> · <code>propagateDelta</code>.<br>
+          <code>reviewCell</code> / <code>gradeCell</code> 은 <code>updateCellStatus</code> 위임이라 자동 가드.
+          <code>propagateCell</code> 은 <code>propagateDelta</code> 위임으로 자동 가드.<br>
+          <code>submitCell</code> 은 학생 endpoint (본인 cell.userId 검사) 그대로.
+        </td>
+      </tr>
+      <tr style="background: var(--accent-soft);">
+        <td style="text-align: center;">N-8</td>
+        <td><strong>StudyPlanCreateForm 디자인 표준화 ✅ N-2 폐기로 자동 해소 (2026-05-21)</strong></td>
+        <td style="text-align: center;"><span class="badge ok">완료</span></td>
+        <td>파일 자체가 사라져 디자인 표준 위반 코드도 함께 제거.</td>
+      </tr>
+      <tr style="background: var(--accent-soft);">
+        <td style="text-align: center;">N-11</td>
+        <td><strong>국어농장 학습 완료 즉시 sync ✅ 완료 (2026-05-21)</strong></td>
+        <td style="text-align: center;"><span class="badge ok">완료</span></td>
+        <td>
+          진단: 학생이 학습 계획표 외부 경로(일일퀴즈·콘텐츠 직접 진입 등)로 학습 완료해도
+          <code>syncKorfarmCellStatus</code> 는 lazy sync 만 — 어드민/학생이 매트릭스를 열기 전까지 캘린더·진행률·통합 분석표에서 미수행 표시.
+          N-4(테스트) 와 같은 사고.<br>
+          수정: <code>StudyPlanService.syncKorfarmCellsForUser(userId, contentId)</code> public 신설 (기존 private syncKorfarmCellStatus 의 단일 학생 버전).
+          <code>FarmLearningService.complete</code> 끝에 <code>@Lazy</code> inject 로 호출. cell + assignment 동시 갱신.
+          학습 완료 즉시 모든 read 경로에 정확한 값.
+        </td>
+      </tr>
+      <tr style="background: var(--accent-soft);">
+        <td style="text-align: center;">N-9</td>
+        <td><strong>학습활동 배부 알림 강제 ✅ 완료 (2026-05-21)</strong></td>
+        <td style="text-align: center;"><span class="badge ok">완료</span></td>
+        <td>
+          <code>StudentDashboardSummary</code> 에 <code>recentlyAssignedCount</code> 추가 — 24h 이내 <code>assignedAt</code> 박힌 미수행 셀 카운트.<br>
+          <code>StudyPlanReminderModal</code>: <code>recentlyAssignedCount &gt; 0</code> 이면 localStorage 24h dismiss 무시하고 강제 노출.
+          모달 본문에 "✨ 새로 배정된 학습 N건 — 확인해 주세요!" 빨간 박스로 강조.<br>
+          어드민이 학습활동·국어농장·테스트·글쓰기 어떤 셀이든 새로 배정하면 24h 안에 학생이 ReminderModal 에서 확인 가능.
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </section>
 
 <footer>

@@ -19,6 +19,37 @@ const STATUS_FILTER_OPTIONS = [
   { value: "disabled", label: "비활성" },
 ];
 
+// N-1 (2026-05-21) — 행(scope) 단위 필터. 학생당 plan 1개 정책으로 누적되는 오래된 행 자동 숨김.
+const ROW_FILTER_OPTIONS = [
+  { value: "recent", label: "최근 활동 (90일)" },   // default — 오래된 완료 행 숨김
+  { value: "active", label: "진행중만" },
+  { value: "completed", label: "완료만" },
+  { value: "all", label: "전체 (오래된 행 포함)" },
+];
+const STALE_DAYS = 90;
+
+/** scope 의 모든 활성 셀 상태로 행 분류 — "active" / "completed-recent" / "completed-old" / "empty" */
+function classifyScopeStatus(scope, cells) {
+  const scopeCells = (cells || []).filter((c) =>
+    c.scopeId === scope.id && !c.isDisabled && c.status !== "disabled"
+  );
+  if (scopeCells.length === 0) return "empty";  // 빈 행 — 신규 추가나 모든 셀 비활성
+  const COMPLETED_SET = new Set(["completed", "passed", "reviewed"]);
+  const hasActive = scopeCells.some((c) => !COMPLETED_SET.has(c.status));
+  if (hasActive) return "active";
+  // 모든 셀이 완료 — 가장 최근 활동 시점으로 stale 판정
+  let lastActivity = 0;
+  scopeCells.forEach((c) => {
+    const ts = c.reviewedAt || c.assignedAt || c.dueAt;
+    if (!ts) return;
+    const t = new Date(ts).getTime();
+    if (!isNaN(t) && t > lastActivity) lastActivity = t;
+  });
+  if (lastActivity === 0) return "completed-recent";  // 시점 정보 없으면 보존
+  const daysSince = (Date.now() - lastActivity) / (1000 * 60 * 60 * 24);
+  return daysSince <= STALE_DAYS ? "completed-recent" : "completed-old";
+}
+
 // 6단계 라벨 매핑 — DB status → STATUS_FILTER_OPTIONS.value 와 비교용
 function classifyCellStatus(cell) {
   if (!cell) return "unassigned";
@@ -48,6 +79,7 @@ export default function StudyPlanMatrix({
   const [scopeSearch, setScopeSearch] = useState("");
   const [scopeSort, setScopeSort] = useState("created");   // 'created' | 'label'
   const [assetSort, setAssetSort] = useState("created");   // 'created' | 'label' | 'type'
+  const [rowFilter, setRowFilter] = useState("recent");    // N-1: 행 필터 default — 오래된 완료 행 자동 숨김
 
   const cellMap = {};
   (cells || []).forEach((c) => {
@@ -61,12 +93,30 @@ export default function StudyPlanMatrix({
       const q = scopeSearch.trim().toLowerCase();
       arr = arr.filter((s) => (s.label || "").toLowerCase().includes(q));
     }
+    // N-1 (2026-05-21) — 행 필터 적용
+    arr = arr.filter((s) => {
+      const status = classifyScopeStatus(s, cells);
+      if (status === "empty") return true; // 신규 추가 빈 행은 항상 표시
+      switch (rowFilter) {
+        case "active":     return status === "active";
+        case "completed":  return status === "completed-recent" || status === "completed-old";
+        case "all":        return true;
+        case "recent":
+        default:           return status !== "completed-old";  // 90일 이전 완료 행만 숨김
+      }
+    });
     if (scopeSort === "label") {
       arr = [...arr].sort((a, b) => (a.label || "").localeCompare(b.label || "", "ko"));
     }
     // 'created' 는 백엔드 sortOrder ASC 그대로
     return arr;
-  }, [scopes, scopeSearch, scopeSort]);
+  }, [scopes, cells, scopeSearch, scopeSort, rowFilter]);
+
+  // 숨겨진 오래된 행 개수 — 사용자에게 "N건 숨김" 안내용
+  const hiddenOldRowCount = useMemo(() => {
+    if (rowFilter !== "recent") return 0;
+    return (scopes || []).filter((s) => classifyScopeStatus(s, cells) === "completed-old").length;
+  }, [scopes, cells, rowFilter]);
 
   const filteredAssets = useMemo(() => {
     let arr = (assets || []);
@@ -171,6 +221,17 @@ export default function StudyPlanMatrix({
             <option key={k} value={k}>{v}</option>
           ))}
         </select>
+        {/* N-1 (2026-05-21) — 행 단위 필터 (오래된 완료 행 자동 숨김 default) */}
+        <select
+          className="sp-toolbar-select"
+          value={rowFilter}
+          onChange={(e) => setRowFilter(e.target.value)}
+          title="행 표시 — 90일 이상 지난 완료 행은 default 로 숨김"
+        >
+          {ROW_FILTER_OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>{o.label}</option>
+          ))}
+        </select>
         <select
           className="sp-toolbar-select"
           value={scopeSort}
@@ -190,7 +251,7 @@ export default function StudyPlanMatrix({
           <option value="label">열: 가나다순</option>
           <option value="type">열: 자산종류</option>
         </select>
-        {(statusFilter !== "all" || assetTypeFilter !== "all" || scopeSearch || scopeSort !== "created" || assetSort !== "created") && (
+        {(statusFilter !== "all" || assetTypeFilter !== "all" || scopeSearch || scopeSort !== "created" || assetSort !== "created" || rowFilter !== "recent") && (
           <button
             className="sp-toolbar-reset"
             onClick={() => {
@@ -199,8 +260,27 @@ export default function StudyPlanMatrix({
               setScopeSearch("");
               setScopeSort("created");
               setAssetSort("created");
+              setRowFilter("recent");
             }}
           >초기화</button>
+        )}
+        {/* N-1 — 숨겨진 오래된 행 안내 칩 */}
+        {hiddenOldRowCount > 0 && rowFilter === "recent" && (
+          <span
+            className="sp-toolbar-hidden-rows"
+            style={{
+              fontSize: 12,
+              color: "var(--admin-muted, #5a6b5f)",
+              background: "rgba(120,120,120,0.08)",
+              padding: "4px 10px",
+              borderRadius: 12,
+              cursor: "pointer",
+            }}
+            onClick={() => setRowFilter("all")}
+            title="90일 이상 지난 완료 행을 숨겼습니다. 클릭하면 전체 표시."
+          >
+            오래된 행 {hiddenOldRowCount}건 숨김
+          </span>
         )}
         {/* 일괄 PDF 인쇄 — 매트릭스의 모든 국어농장 배정 콘텐츠 ID 수집 후 새 탭으로 */}
         <button

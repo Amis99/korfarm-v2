@@ -292,7 +292,9 @@ data class StudentDashboardSummary(
     val totalPending: Int,
     val totalSubmitted: Int,
     val totalUnassigned: Int,
-    val upcomingSchedules: Int
+    val upcomingSchedules: Int,
+    /** N-9 (2026-05-21) — 24h 이내 신규 배정된 셀 수. > 0 이면 ReminderModal 강제 노출. */
+    val recentlyAssignedCount: Int = 0
 )
 
 data class UpcomingItemResponse(
@@ -379,7 +381,8 @@ internal fun StudyPlanCellEntity.toResponse(
         assetType = asset?.assetType, assetKind = asset?.assetKind, refId = asset?.refId,
         cellRefId = cellRefId,
         dueAt = dueAt?.toString(),
-        assignedAt = if (status != "unassigned") updatedAt.toString() else null,
+        // V0148 / N-3 — cell.assignedAt 우선 사용. NULL 이면 기존 updatedAt fallback (백필 없는 잔재 호환).
+        assignedAt = assignedAt?.toString() ?: if (status != "unassigned") updatedAt.toString() else null,
         assignedLabel = assignedLabel,
         isOverdue = overdue,
         isDisabled = disabled,

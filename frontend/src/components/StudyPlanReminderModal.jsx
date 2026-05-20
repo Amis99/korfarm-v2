@@ -18,20 +18,19 @@ export default function StudyPlanReminderModal() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
+    // N-9 (2026-05-21) — recentlyAssignedCount > 0 이면 dismiss 무시하고 강제 노출
     const dismissed = localStorage.getItem(STORAGE_KEY);
-    if (dismissed) {
-      const ts = Number(dismissed);
-      if (Date.now() - ts < 24 * 60 * 60 * 1000) return;
-    }
+    const dismissedRecently = dismissed &&
+      Date.now() - Number(dismissed) < 24 * 60 * 60 * 1000;
     apiGet("/v1/study-plans/summary")
       .then((data) => {
-        if (data && data.activePlans > 0) {
-          setSummary(data);
-          setShow(true);
-          // 임박 활동 조회
-          if (data.upcomingItems) {
-            setUpcoming(data.upcomingItems.slice(0, 3));
-          }
+        if (!data || data.activePlans <= 0) return;
+        const forceShow = (data.recentlyAssignedCount || 0) > 0;
+        if (dismissedRecently && !forceShow) return;
+        setSummary(data);
+        setShow(true);
+        if (data.upcomingItems) {
+          setUpcoming(data.upcomingItems.slice(0, 3));
         }
       })
       .catch(() => {});
@@ -69,6 +68,19 @@ export default function StudyPlanReminderModal() {
         </span>
         <h2>학습 계획표 알림</h2>
         <p>진행 중인 학습 계획표가 {summary.activePlans}건 있습니다.</p>
+        {/* N-9 — 24h 내 신규 배정 강조 */}
+        {summary.recentlyAssignedCount > 0 && (
+          <p style={{
+            background: "rgba(255,127,42,0.12)",
+            color: "#c0392b",
+            padding: "8px 12px",
+            borderRadius: 8,
+            fontWeight: 700,
+            margin: "8px 0"
+          }}>
+            ✨ 새로 배정된 학습 <strong>{summary.recentlyAssignedCount}건</strong> — 확인해 주세요!
+          </p>
+        )}
         {summary.totalPending > 0 && (
           <p>미수행 할일: <strong>{summary.totalPending}건</strong></p>
         )}

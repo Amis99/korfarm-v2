@@ -7,6 +7,8 @@ import com.korfarm.api.diagnostic.scoring.COMPETENCIES
 import com.korfarm.api.economy.EconomyService
 import com.korfarm.api.paid.ContentRepository
 import com.korfarm.api.paid.ContentVersionRepository
+import org.slf4j.LoggerFactory
+import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDate
@@ -22,7 +24,11 @@ class FarmLearningService(
     private val economyService: EconomyService,
     private val learningCompetencyService: LearningCompetencyService,
     private val objectMapper: ObjectMapper,
+    // N-11 (2026-05-21) — 학습 완료 즉시 study_plan_cells 동기화. 순환 의존 방어로 @Lazy.
+    @Lazy private val studyPlanService: com.korfarm.api.studyplan.StudyPlanService,
 ) {
+    private val logger = LoggerFactory.getLogger(FarmLearningService::class.java)
+
     companion object {
         val DAILY_SEED_LIMIT_TYPES = setOf("DAILY_QUIZ", "DAILY_READING")
         const val DAILY_SEED_MAX = 10
@@ -118,6 +124,14 @@ class FarmLearningService(
                 learningCompetencyService.recordVector(userId, log.contentId, source, results)
             }
         } catch (_: Exception) { /* 누적 실패는 학습 완료 자체를 막지 않음 */ }
+
+        // N-11 (2026-05-21) — 학습 계획표 korfarm 셀/assignment 즉시 sync.
+        // 학습 계획표 외부 경로로 학습해도 캘린더·진행률·통합 분석표에서 즉시 정확한 값 표시.
+        try {
+            studyPlanService.syncKorfarmCellsForUser(userId, log.contentId)
+        } catch (e: Exception) {
+            logger.warn("study_plan korfarm cell sync 실패: userId={} contentId={} error={}", userId, log.contentId, e.message)
+        }
 
         return FarmCompleteResponse(success = true, earnedSeed = actualEarned, dailySeedRemaining = dailySeedRemaining)
     }

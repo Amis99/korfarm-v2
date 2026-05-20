@@ -65,6 +65,30 @@ class StudyPlanService(
 
     @Transactional
     fun createPlan(orgId: String, createdBy: String, req: CreateStudyPlanRequest): StudyPlanEntity {
+        // N-5 (2026-05-21) — 학생당 plan 1개 정책 방어.
+        // target_type=user 로 박힌 학생 중 이미 active non-template plan 보유 시 거부.
+        // 기관 default 템플릿 신설 (target_type=class) 또는 학생간 복제(propagate)·자동 생성 사용 권장.
+        val userTargets = req.targets.filter { it.targetType == "user" }
+        if (userTargets.isNotEmpty()) {
+            val alreadyOwned = userTargets.mapNotNull { t ->
+                val existing = targetRepo.findByTargetTypeAndTargetId("user", t.targetId)
+                    .map { it.planId }
+                if (existing.isEmpty()) return@mapNotNull null
+                val active = planRepo.findAllById(existing)
+                    .filter { !it.isTemplate && it.status == "active" }
+                if (active.isEmpty()) null else t.targetId
+            }
+            if (alreadyOwned.isNotEmpty()) {
+                throw ApiException(
+                    "ALREADY_HAS_PLAN",
+                    "학생당 학습 계획표는 1개만 운영합니다. " +
+                        "이미 plan 보유 학생: ${alreadyOwned.joinToString()}. " +
+                        "기존 plan 에 행/열을 추가하거나 학생간 복제 기능을 사용하세요.",
+                    HttpStatus.CONFLICT
+                )
+            }
+        }
+
         val plan = StudyPlanEntity(
             id = IdGenerator.newId("sp"),
             orgId = orgId,
@@ -197,7 +221,7 @@ class StudyPlanService(
 
     @Transactional(readOnly = true)
     fun getPlanDetail(planId: String): StudyPlanDetailResponse {
-        val plan = findPlan(planId)
+        val plan = verifyAdminAccessToPlan(planId)
         val targets = targetRepo.findByPlanId(planId).map { t ->
             val name = when (t.targetType) {
                 "class" -> classRepo.findById(t.targetId).orElse(null)?.name
@@ -221,7 +245,7 @@ class StudyPlanService(
 
     @Transactional
     fun updatePlan(planId: String, req: UpdateStudyPlanRequest): StudyPlanEntity {
-        val plan = findPlan(planId)
+        val plan = verifyAdminAccessToPlan(planId)
         req.title?.let { plan.title = it }
         req.description?.let { plan.description = it }
         req.examScope?.let { plan.examScope = it }
@@ -233,21 +257,21 @@ class StudyPlanService(
 
     @Transactional
     fun archivePlan(planId: String) {
-        val plan = findPlan(planId)
+        val plan = verifyAdminAccessToPlan(planId)
         plan.status = "archived"
         planRepo.save(plan)
     }
 
     @Transactional
     fun unarchivePlan(planId: String) {
-        val plan = findPlan(planId)
+        val plan = verifyAdminAccessToPlan(planId)
         plan.status = "active"
         planRepo.save(plan)
     }
 
     @Transactional
     fun deletePlan(planId: String) {
-        findPlan(planId)
+        verifyAdminAccessToPlan(planId)
         val cellIds = cellRepo.findByPlanId(planId).map { it.id }
         if (cellIds.isNotEmpty()) {
             cellFileRepo.deleteByCellIdIn(cellIds)
@@ -265,7 +289,7 @@ class StudyPlanService(
 
     @Transactional
     fun addScope(planId: String, req: AddScopeRequest): StudyPlanScopeEntity {
-        findPlan(planId)
+        verifyAdminAccessToPlan(planId)
         // sortOrder 자동 결정 — 기본은 기존 max+1 (신규 행이 가장 아래로 들어감)
         val nextSortOrder = scopeRepo.findByPlanIdOrderBySortOrder(planId)
             .maxOfOrNull { it.sortOrder + 1 } ?: 0
@@ -292,6 +316,7 @@ class StudyPlanService(
 
     @Transactional
     fun updateScope(planId: String, scopeId: String, req: UpdateScopeRequest): StudyPlanScopeEntity {
+        verifyAdminAccessToPlan(planId)
         val scope = scopeRepo.findById(scopeId).orElseThrow {
             ApiException("NOT_FOUND", "scope not found", HttpStatus.NOT_FOUND)
         }
@@ -302,6 +327,7 @@ class StudyPlanService(
 
     @Transactional
     fun deleteScope(planId: String, scopeId: String) {
+        verifyAdminAccessToPlan(planId)
         val cells = cellRepo.findByScopeId(scopeId)
         cells.forEach { cellFileRepo.deleteByCellId(it.id) }
         cellRepo.deleteByScopeId(scopeId)
@@ -310,6 +336,7 @@ class StudyPlanService(
 
     @Transactional
     fun reorderScopes(planId: String, ids: List<String>) {
+        verifyAdminAccessToPlan(planId)
         ids.forEachIndexed { idx, id ->
             scopeRepo.findById(id).ifPresent { it.sortOrder = idx; scopeRepo.save(it) }
         }
@@ -319,7 +346,7 @@ class StudyPlanService(
 
     @Transactional
     fun addAsset(planId: String, req: AddAssetRequest): StudyPlanAssetEntity {
-        findPlan(planId)
+        verifyAdminAccessToPlan(planId)
         validateAssetType(req.assetType)
         // sortOrder 자동 결정 — 기본은 기존 min-1 (신규 열이 가장 좌측으로 들어감)
         val prevSortOrder = assetRepo.findByPlanIdOrderBySortOrder(planId)
@@ -351,6 +378,7 @@ class StudyPlanService(
 
     @Transactional
     fun updateAsset(planId: String, assetId: String, req: UpdateAssetRequest): StudyPlanAssetEntity {
+        verifyAdminAccessToPlan(planId)
         val asset = assetRepo.findById(assetId).orElseThrow {
             ApiException("NOT_FOUND", "asset not found", HttpStatus.NOT_FOUND)
         }
@@ -364,6 +392,7 @@ class StudyPlanService(
 
     @Transactional
     fun deleteAsset(planId: String, assetId: String) {
+        verifyAdminAccessToPlan(planId)
         val cells = cellRepo.findByAssetId(assetId)
         cells.forEach { cellFileRepo.deleteByCellId(it.id) }
         cellRepo.deleteByAssetId(assetId)
@@ -372,6 +401,7 @@ class StudyPlanService(
 
     @Transactional
     fun reorderAssets(planId: String, ids: List<String>) {
+        verifyAdminAccessToPlan(planId)
         ids.forEachIndexed { idx, id ->
             assetRepo.findById(id).ifPresent { it.sortOrder = idx; assetRepo.save(it) }
         }
@@ -381,6 +411,7 @@ class StudyPlanService(
 
     @Transactional(readOnly = true)
     fun getStudentsWithProgress(planId: String): List<StudentProgressResponse> {
+        verifyAdminAccessToPlan(planId)
         val userIds = resolveAllPlanUserIds(planId)
         val allCells = cellRepo.findByPlanId(planId)
         val cellsByUser = allCells.groupBy { it.userId }
@@ -458,6 +489,7 @@ class StudyPlanService(
 
     @Transactional(readOnly = true)
     fun getSubmissions(planId: String): List<SubmissionResponse> {
+        verifyAdminAccessToPlan(planId)
         val allCells = cellRepo.findByPlanId(planId)
             .filter { it.submissionCount > 0 || it.status in listOf("submitted", "partial", "completed", "scored", "passed") }
         if (allCells.isEmpty()) return emptyList()
@@ -488,6 +520,7 @@ class StudyPlanService(
 
     @Transactional
     fun getMatrix(planId: String, userId: String, isAdmin: Boolean = false): MatrixResponse {
+        if (isAdmin) verifyAdminAccessToPlan(planId)  // 학생 모드는 controller 의 verifyPlanAccess 가 보장
         val scopeEntities = scopeRepo.findByPlanIdOrderBySortOrder(planId)
         val scopes = scopeEntities.map { it.toResponse() }
         val assets = assetRepo.findByPlanIdOrderBySortOrder(planId)
@@ -660,7 +693,7 @@ class StudyPlanService(
      */
     @Transactional
     fun assignCellContent(cellId: String, req: AssignCellContentRequest): StudyPlanCellEntity {
-        val cell = findCell(cellId)
+        val cell = verifyAdminAccessToCell(cellId)
         val asset = assetRepo.findById(cell.assetId).orElseThrow {
             ApiException("NOT_FOUND", "asset not found", HttpStatus.NOT_FOUND)
         }
@@ -697,6 +730,7 @@ class StudyPlanService(
         cell.status = "pending"
         cell.score = null
         cell.reviewedBy = null
+        markAssigned(cell)
         cell.reviewedAt = null
         cellRepo.save(cell)
 
@@ -827,6 +861,7 @@ class StudyPlanService(
             if (firstNew != null) {
                 cell.cellRefId = firstNew.refId
                 cell.assignedLabel = firstNew.assignedLabel ?: "AI 추천 학습"
+                markAssigned(cell)
                 cellRepo.save(cell)
             }
         }
@@ -955,6 +990,7 @@ class StudyPlanService(
             if (firstNew != null) {
                 cell.cellRefId = firstNew.refId
                 cell.assignedLabel = firstNew.assignedLabel ?: "글쓰기 주제"
+                markAssigned(cell)
                 cellRepo.save(cell)
             }
         }
@@ -983,7 +1019,7 @@ class StudyPlanService(
 
     @Transactional
     fun addCellAssignment(cellId: String, refId: String, label: String?): StudyPlanCellAssignmentEntity {
-        val cell = findCell(cellId)
+        val cell = verifyAdminAccessToCell(cellId)
         val asset = assetRepo.findById(cell.assetId).orElseThrow {
             ApiException("NOT_FOUND", "asset not found", HttpStatus.NOT_FOUND)
         }
@@ -1009,6 +1045,7 @@ class StudyPlanService(
             cell.cellRefId = refId
             if (cell.assignedLabel.isNullOrBlank()) cell.assignedLabel = label
             if (cell.status == "unassigned") cell.status = "pending"
+            markAssigned(cell)
             cellRepo.save(cell)
         }
         return saved
@@ -1016,6 +1053,7 @@ class StudyPlanService(
 
     @Transactional
     fun removeCellAssignment(cellId: String, assignmentId: String) {
+        verifyAdminAccessToCell(cellId)
         val a = cellAssignmentRepo.findById(assignmentId).orElseThrow {
             ApiException("NOT_FOUND", "assignment not found", HttpStatus.NOT_FOUND)
         }
@@ -1029,6 +1067,7 @@ class StudyPlanService(
         if (remaining.isEmpty()) {
             cell.cellRefId = null
             cell.status = "unassigned"
+            cell.assignedAt = null     // V0148 / N-3 — 빈 셀로 돌아가면 배정일도 리셋
             cellRepo.save(cell)
         } else if (cell.cellRefId == a.refId) {
             // 삭제된 게 첫 배정이었으면 다음 row 의 ref 로 갱신
@@ -1052,7 +1091,7 @@ class StudyPlanService(
 
     @Transactional
     fun updateCellStatus(cellId: String, adminId: String, req: UpdateCellStatusRequest): StudyPlanCellEntity {
-        val cell = findCell(cellId)
+        val cell = verifyAdminAccessToCell(cellId)
         val asset = assetRepo.findById(cell.assetId).orElseThrow {
             ApiException("NOT_FOUND", "asset not found", HttpStatus.NOT_FOUND)
         }
@@ -1062,6 +1101,10 @@ class StudyPlanService(
                 "${asset.assetType} 에셋에서 ${cell.status} → ${req.status} 전이는 허용되지 않습니다",
                 HttpStatus.BAD_REQUEST
             )
+        }
+        // V0148 / N-3 — unassigned → 다른 status 로 첫 전환 시 assignedAt 박기 (예: 학습활동 "배부")
+        if (cell.status == "unassigned" && req.status != "unassigned") {
+            markAssigned(cell)
         }
         cell.status = req.status
         req.score?.let { cell.score = it }
@@ -1109,6 +1152,7 @@ class StudyPlanService(
 
     @Transactional(readOnly = true)
     fun getCellFiles(cellId: String): List<CellFileResponse> {
+        verifyAdminAccessToCell(cellId)
         return cellFileRepo.findByCellId(cellId).map { it.toResponse() }
     }
 
@@ -1116,7 +1160,7 @@ class StudyPlanService(
 
     @Transactional
     fun createSchedule(planId: String, req: CreateScheduleRequest): StudyPlanScheduleEntity {
-        findPlan(planId)
+        verifyAdminAccessToPlan(planId)
         val schedule = StudyPlanScheduleEntity(
             id = IdGenerator.newId("spsc"),
             planId = planId,
@@ -1134,6 +1178,7 @@ class StudyPlanService(
         val schedule = scheduleRepo.findById(scheduleId).orElseThrow {
             ApiException("NOT_FOUND", "schedule not found", HttpStatus.NOT_FOUND)
         }
+        verifyAdminAccessToPlan(schedule.planId)
         req.scopeId?.let { schedule.scopeId = it }
         req.assetId?.let { schedule.assetId = it }
         req.scheduledDate?.let { schedule.scheduledDate = LocalDate.parse(it) }
@@ -1144,6 +1189,10 @@ class StudyPlanService(
 
     @Transactional
     fun deleteSchedule(scheduleId: String) {
+        val schedule = scheduleRepo.findById(scheduleId).orElseThrow {
+            ApiException("NOT_FOUND", "schedule not found", HttpStatus.NOT_FOUND)
+        }
+        verifyAdminAccessToPlan(schedule.planId)
         scheduleRepo.deleteById(scheduleId)
     }
 
@@ -1189,12 +1238,20 @@ class StudyPlanService(
             activePlanIds, today, weekLater
         ).size
 
+        // N-9 (2026-05-21) — 24h 이내 신규 배정 카운터. assignedAt 박힌 미수행 셀.
+        val cutoff = LocalDateTime.now().minusHours(24)
+        val recentlyAssignedCount = cells.count {
+            it.assignedAt != null && it.assignedAt!!.isAfter(cutoff) &&
+                it.status !in setOf("disabled", "completed", "passed", "reviewed")
+        }
+
         return StudentDashboardSummary(
             activePlans = activePlans.size,
             totalPending = totalPending,
             totalSubmitted = totalSubmitted,
             totalUnassigned = totalUnassigned,
-            upcomingSchedules = upcomingSchedules
+            upcomingSchedules = upcomingSchedules,
+            recentlyAssignedCount = recentlyAssignedCount
         )
     }
 
@@ -1411,7 +1468,58 @@ class StudyPlanService(
         }
     }
 
+    /**
+     * 국어농장 학습 완료 직후 호출 (N-11 / 2026-05-21) — 학생의 모든 plan 의 korfarm 셀/assignment 를 즉시 동기화.
+     * 학생이 학습 계획표 외부 경로(일일퀴즈·콘텐츠 직접 진입 등)로 학습해도 cell.status 가 즉시 갱신되어
+     * 캘린더·진행률·통합 분석표 모든 read 경로에서 정확한 값 표시.
+     * FarmLearningService.complete 끝에서 호출.
+     */
+    @Transactional
+    fun syncKorfarmCellsForUser(userId: String, contentId: String) {
+        val planIds = targetRepo.findByTargetTypeAndTargetId("user", userId).map { it.planId }
+        if (planIds.isEmpty()) return
+        val cells = cellRepo.findByPlanIdInAndUserId(planIds, userId)
+        if (cells.isEmpty()) return
+        val assetMap = assetRepo.findAllById(cells.map { it.assetId }.distinct()).associateBy { it.id }
+        // private syncKorfarmCellStatus 가 cell.cellRefId / asset.refId / assignment.refId 모두 검사하므로 contentId 직접 매칭 불필요
+        syncKorfarmCellStatus(cells, userId, assetMap)
+    }
+
     // ── 자동 동기화: 테스트 제출 ──
+
+    /**
+     * 시험 응시 직후 호출 (N-4 / 2026-05-21) — 학생의 모든 plan 의 test 셀 중
+     * 이번 응시 testId 와 매치되는 셀을 pending|retry → scored 로 즉시 갱신.
+     *
+     * TestService.submitOmr 끝에서 호출. lazy sync(syncTestCellStatus) 와 동일 로직이지만
+     * 시험 응시 시점에 트리거되어 캘린더·진행률·통합 분석표 등 모든 read 경로에서 정확.
+     */
+    @Transactional
+    fun syncTestCellsForUser(userId: String, testId: String) {
+        val planIds = targetRepo.findByTargetTypeAndTargetId("user", userId).map { it.planId }
+        if (planIds.isEmpty()) return
+        val cells = cellRepo.findByPlanIdInAndUserId(planIds, userId)
+        if (cells.isEmpty()) return
+        val assetMap = assetRepo.findAllById(cells.map { it.assetId }.distinct()).associateBy { it.id }
+        val testCells = cells.filter {
+            assetMap[it.assetId]?.assetType == "test" && it.status in setOf("pending", "retry")
+        }
+        if (testCells.isEmpty()) return
+        val submission = testSubmissionRepo
+            .findFirstByTestIdAndUserIdOrderByAttemptNoDesc(testId, userId) ?: return
+        testCells.forEach { cell ->
+            val refId = cell.cellRefId ?: assetMap[cell.assetId]?.refId
+            if (refId != testId) return@forEach
+            if (cell.status == "retry") {
+                val retrySetAt = cell.reviewedAt ?: return@forEach
+                if (submission.createdAt <= retrySetAt) return@forEach
+            }
+            cell.status = "scored"
+            cell.score = submission.score
+            cellRepo.save(cell)
+            createEvent(cell, "scored", "점수: ${submission.score}")
+        }
+    }
 
     private fun syncTestCellStatus(
         cells: List<StudyPlanCellEntity>,
@@ -1453,6 +1561,46 @@ class StudyPlanService(
         return cellRepo.findById(cellId).orElseThrow {
             ApiException("NOT_FOUND", "cell not found", HttpStatus.NOT_FOUND)
         }
+    }
+
+    /**
+     * V0148 / N-3 — 셀이 처음 배정될 때 assignedAt 박기.
+     * cell.assignedAt 이 NULL 일 때만 박음. 이후 상태 변경에서는 보존.
+     * 캘린더 막대의 "배정일 ~ 마감일" 시작점.
+     */
+    private fun markAssigned(cell: StudyPlanCellEntity) {
+        if (cell.assignedAt == null) {
+            cell.assignedAt = LocalDateTime.now()
+        }
+    }
+
+    /**
+     * N-10 (2026-05-21) — plan 접근 권한 가드.
+     * ORG_ADMIN 은 자기 기관 plan 만, HQ_ADMIN 은 모든 기관. 그 외 FORBIDDEN.
+     * 모든 plan/scope/asset/cell/schedule mutation·read 메서드 진입 시 호출.
+     */
+    private fun verifyAdminAccessToPlan(planId: String): StudyPlanEntity {
+        val plan = planRepo.findById(planId).orElseThrow {
+            ApiException("NOT_FOUND", "study plan not found", HttpStatus.NOT_FOUND)
+        }
+        val currentUserId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        val scope = resolveAdminScope(currentUserId)
+        if (scope is AdminScope.Org && plan.orgId != scope.orgId) {
+            throw ApiException(
+                "FORBIDDEN",
+                "다른 기관의 학습 계획표에 접근할 수 없습니다.",
+                HttpStatus.FORBIDDEN
+            )
+        }
+        return plan
+    }
+
+    /** N-10 — cell 단위 권한 가드. cell.planId 로 verifyAdminAccessToPlan 호출. */
+    private fun verifyAdminAccessToCell(cellId: String): StudyPlanCellEntity {
+        val cell = findCell(cellId)
+        verifyAdminAccessToPlan(cell.planId)
+        return cell
     }
 
     private fun resolveAllPlanUserIds(planId: String): Set<String> {
@@ -1572,6 +1720,7 @@ class StudyPlanService(
      */
     @Transactional
     fun applyTemplateToCurrentStudents(templateId: String): Int {
+        verifyAdminAccessToPlan(templateId)
         val template = planRepo.findById(templateId).orElseThrow {
             ApiException("NOT_FOUND", "template not found", HttpStatus.NOT_FOUND)
         }
@@ -1859,7 +2008,9 @@ class StudyPlanService(
         currentUserId: String,
         req: PropagateDeltaRequest
     ): PropagateDeltaResponse {
-        val sourcePlan = findPlan(sourcePlanId)
+        // N-7 + N-10 — 권한 가드 통합 (ORG_ADMIN 은 자기 기관 plan 만, HQ_ADMIN 은 모든 기관)
+        val sourcePlan = verifyAdminAccessToPlan(sourcePlanId)
+        val scope = resolveAdminScope(currentUserId)
         val sourceScopes = scopeRepo.findByPlanIdOrderBySortOrder(sourcePlanId)
             .filter { req.scopeIds.isNullOrEmpty() || it.id in req.scopeIds }
         val sourceAssets = assetRepo.findByPlanIdOrderBySortOrder(sourcePlanId)
@@ -1868,8 +2019,6 @@ class StudyPlanService(
         if (sourceScopes.isEmpty() && sourceAssets.isEmpty()) {
             return PropagateDeltaResponse()
         }
-
-        val scope = resolveAdminScope(currentUserId)
         val targetUserIds = resolveTargetUserIdsForPropagation(scope, req, sourcePlan)
         if (targetUserIds.isEmpty()) {
             return PropagateDeltaResponse()
@@ -2081,6 +2230,7 @@ class StudyPlanService(
                     tgtCell.assignedLabel = firstFromAssignments.assignedLabel
                     tgtCell.dueAt = firstFromAssignments.dueAt ?: srcCell.dueAt
                     tgtCell.status = "pending"
+                    markAssigned(tgtCell)
                     cellRepo.save(tgtCell)
                     changed = true
                 } else if (srcCell.cellRefId != null) {
@@ -2088,6 +2238,7 @@ class StudyPlanService(
                     tgtCell.assignedLabel = srcCell.assignedLabel
                     tgtCell.dueAt = srcCell.dueAt
                     tgtCell.status = "pending"
+                    markAssigned(tgtCell)
                     cellRepo.save(tgtCell)
                     changed = true
                 }
@@ -2099,6 +2250,7 @@ class StudyPlanService(
                 tgtCell.assignedLabel = srcCell.assignedLabel ?: tgtCell.assignedLabel
                 tgtCell.dueAt = srcCell.dueAt
                 tgtCell.status = "pending"
+                markAssigned(tgtCell)
                 cellRepo.save(tgtCell)
                 changed = true
             } else if (tgtCell.cellRefId == null && srcCell.assignedLabel != null) {
@@ -2106,6 +2258,7 @@ class StudyPlanService(
                 tgtCell.assignedLabel = srcCell.assignedLabel
                 tgtCell.dueAt = srcCell.dueAt
                 tgtCell.status = "pending"
+                markAssigned(tgtCell)
                 cellRepo.save(tgtCell)
                 changed = true
             }
@@ -2142,7 +2295,7 @@ class StudyPlanService(
      */
     @Transactional
     fun disableCell(cellId: String, actorId: String): StudyPlanCellEntity {
-        val cell = findCell(cellId)
+        val cell = verifyAdminAccessToCell(cellId)
         if (cell.status == "disabled") return cell
         val asset = assetRepo.findById(cell.assetId).orElse(null)
         val assetType = asset?.assetType ?: "korfarm"
@@ -2166,7 +2319,7 @@ class StudyPlanService(
      */
     @Transactional
     fun enableCell(cellId: String, actorId: String): StudyPlanCellEntity {
-        val cell = findCell(cellId)
+        val cell = verifyAdminAccessToCell(cellId)
         if (cell.status != "disabled") return cell
         cell.status = if (cell.cellRefId != null) "pending" else "unassigned"
         cell.disabledBy = null
@@ -2494,11 +2647,8 @@ class StudyPlanService(
         val asset = assetRepo.findById(assetId).orElseThrow {
             ApiException("NOT_FOUND", "asset not found", HttpStatus.NOT_FOUND)
         }
-        val plan = findPlan(asset.planId)
-        val scope = resolveAdminScope(currentUserId)
-        if (scope is AdminScope.Org && scope.orgId != plan.orgId) {
-            throw ApiException("FORBIDDEN", "권한이 없습니다", HttpStatus.FORBIDDEN)
-        }
+        // N-10 — verifyAdminAccessToPlan 으로 통합 (기존 인라인 가드와 동일 동작)
+        val plan = verifyAdminAccessToPlan(asset.planId)
 
         val cells = cellRepo.findByAssetId(assetId)
         val userIds = cells.map { it.userId }.toSet()

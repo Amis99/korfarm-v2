@@ -13,6 +13,8 @@ import com.korfarm.api.learning.LearningCompetencyService
 import com.korfarm.api.learning.SeedRewardPolicy
 import com.korfarm.api.learning.mapDomainToCompetency
 import com.korfarm.api.user.UserRepository
+import org.slf4j.LoggerFactory
+import org.springframework.context.annotation.Lazy
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -39,7 +41,10 @@ class TestService(
     private val diagResponseRepo: com.korfarm.api.diagnostic.DiagResponseRepository,
     private val classRepository: com.korfarm.api.org.ClassRepository,
     private val classMembershipRepository: com.korfarm.api.org.ClassMembershipRepository,
+    // N-4 (2026-05-21) — 시험 응시 직후 study_plan_cells 자동 동기화. 순환 의존 방어로 @Lazy.
+    @Lazy private val studyPlanService: com.korfarm.api.studyplan.StudyPlanService,
 ) {
+    private val logger = LoggerFactory.getLogger(TestService::class.java)
 
     // 시험지 ID/series 로 종류 분류 — diagnostic / chapter / misc
     private fun resolveKind(paper: TestPaperEntity): String = when {
@@ -336,6 +341,14 @@ class TestService(
         try {
             testStatisticsService.recomputeAndCache(testId)
         } catch (_: Exception) { /* 통계 갱신 실패해도 채점은 성공 */ }
+
+        // N-4 (2026-05-21) — 학습 계획표 test 셀 자동 동기화 (pending|retry → scored)
+        // 응시한 학생 본인의 모든 plan 에서 cell.cellRefId 또는 asset.refId = testId 인 셀 갱신.
+        try {
+            studyPlanService.syncTestCellsForUser(userId, testId)
+        } catch (e: Exception) {
+            logger.warn("study_plan test cell sync 실패: testId={} userId={} error={}", testId, userId, e.message)
+        }
 
         return saved
     }

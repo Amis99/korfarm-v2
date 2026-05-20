@@ -196,6 +196,12 @@ class StudyPlanCellEntity(
     @Column(name = "assigned_label")
     var assignedLabel: String? = null,
 
+    /** 첫 배정 시점 (V0148 / N-3) — 캘린더 막대의 "배정일 ~ 마감일" 시작점.
+     *  cell.status 가 unassigned 에서 다른 값으로 처음 전환되거나 cellRefId 가 채워질 때 박힘.
+     *  이후 상태 변경에서는 갱신 안 함. NULL 이면 frontend 가 updated_at fallback. */
+    @Column(name = "assigned_at")
+    var assignedAt: LocalDateTime? = null,
+
     var score: Int? = null,
 
     @Column(name = "submission_count", nullable = false)

@@ -8,6 +8,8 @@ import com.korfarm.api.files.FileService
 import com.korfarm.api.grapefruit.GrapefruitService
 import com.korfarm.api.org.OrgMembershipRepository
 import com.korfarm.api.security.SecurityUtils
+import com.korfarm.api.studyplan.StudyPlanAssetRepository
+import com.korfarm.api.studyplan.StudyPlanCellEntity
 import com.korfarm.api.studyplan.StudyPlanCellRepository
 import com.korfarm.api.user.UserRepository
 import org.springframework.beans.factory.annotation.Value
@@ -32,6 +34,7 @@ class WisdomService(
     private val userRepository: UserRepository,
     private val aiWisdomClient: AiWisdomClient,
     private val studyPlanCellRepository: StudyPlanCellRepository,
+    private val studyPlanAssetRepository: StudyPlanAssetRepository,
     private val aiFeedbackJobRepository: AiFeedbackJobRepository,
     private val aiFeedbackJobService: AiFeedbackJobService,
     private val orgMembershipRepository: OrgMembershipRepository,
@@ -169,9 +172,39 @@ class WisdomService(
         }
     }
 
+    /**
+     * N-6 (2026-05-21) — 학생이 일반 글쓰기 진입 (URL ?planCellId 없이) 시
+     * 본인 plan 의 미해결 글쓰기 셀과 자동 매칭. 매칭 키:
+     *   1) cell.cellRefId == topicKey
+     *   2) asset.refId == topicKey
+     *   3) cell.assignedLabel == topicLabel
+     * 미해결 = status in (unassigned, pending, partial). 가장 첫 매칭 셀 반환.
+     */
+    private fun findMatchingWritingCellForAutoLink(
+        userId: String,
+        request: CreateWisdomPostRequest,
+    ): StudyPlanCellEntity? {
+        val topicKey = request.topicKey?.takeIf { it.isNotBlank() }
+        val topicLabel = request.topicLabel?.takeIf { it.isNotBlank() }
+        if (topicKey == null && topicLabel == null) return null
+        val statuses = listOf("unassigned", "pending", "partial")
+        val candidates = statuses.flatMap { studyPlanCellRepository.findByUserIdAndStatus(userId, it) }
+        if (candidates.isEmpty()) return null
+        val assetIds = candidates.map { it.assetId }.toSet()
+        val assetMap = if (assetIds.isEmpty()) emptyMap()
+            else studyPlanAssetRepository.findAllById(assetIds).associateBy { it.id }
+        return candidates.firstOrNull { cell ->
+            val asset = assetMap[cell.assetId] ?: return@firstOrNull false
+            if (asset.assetType != "writing") return@firstOrNull false
+            (topicKey != null && (cell.cellRefId == topicKey || asset.refId == topicKey)) ||
+                (topicLabel != null && cell.assignedLabel == topicLabel)
+        }
+    }
+
     @Transactional
     fun createPost(userId: String, request: CreateWisdomPostRequest): WisdomPostDetail {
-        // 학습 계획표 셀 연동: planCellId 가 있으면 본인 셀인지 검증 후 연결
+        // 학습 계획표 셀 연동: planCellId 가 있으면 본인 셀인지 검증 후 연결.
+        // N-6 (2026-05-21) — planCellId 미지정 시 본인 plan 의 미해결 글쓰기 셀 자동 매칭.
         val planCell = request.planCellId?.let { cellId ->
             val cell = studyPlanCellRepository.findById(cellId).orElseThrow {
                 ApiException("NOT_FOUND", "study plan cell not found", HttpStatus.NOT_FOUND)
@@ -180,7 +213,7 @@ class WisdomService(
                 throw ApiException("FORBIDDEN", "본인의 셀이 아닙니다", HttpStatus.FORBIDDEN)
             }
             cell
-        }
+        } ?: findMatchingWritingCellForAutoLink(userId, request)
 
         val post = WisdomPostEntity(
             id = IdGenerator.newId("wis"),
