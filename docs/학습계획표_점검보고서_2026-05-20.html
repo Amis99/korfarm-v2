@@ -1570,6 +1570,75 @@ cellRepo.findByPlanId(sourcePlanId)
     plan_id 가 다른 학생의 셀이 섞인 row 일부 발견. 이는 1차/2차 배포의 propagate 시도 잔재로 추정.
     P-5 적용 후에는 발생하지 않으며, 기존 잔재 데이터는 어드민이 수동 정리하거나 별도 보정 스크립트가 필요할 수 있음.
   </div>
+
+  <h3>8.12 운영 데이터 초기화 + 최종 검증 통과 <span class="badge ok">2026-05-21 완료</span></h3>
+
+  <p>
+    P-5 배포 후 백민준은 정상 복제됐으나 남현승은 여전히 "배정 전" 으로 보이는 사례 보고.
+    DB 직접 조회 결과 남현승 plan 의 셀은 <code>status='pending'</code> + <code>assigned_label="시즌 3"</code> 등 학습 내용이 정상 박혀 있어 frontend cache 가능성이 컸음.
+    사용자 결정으로 깨끗한 baseline 확보를 위해 운영 데이터 초기화 진행.
+  </p>
+
+  <h4>초기화 범위 (사용자 명시 — 홍주영 plan 만 보존)</h4>
+  <table class="compact">
+    <thead><tr><th>대상</th><th>건수</th></tr></thead>
+    <tbody>
+      <tr><td>삭제된 plan</td><td>85</td></tr>
+      <tr><td>삭제된 targets</td><td>85</td></tr>
+      <tr><td>삭제된 scopes</td><td>93</td></tr>
+      <tr><td>삭제된 assets</td><td>259</td></tr>
+      <tr><td>삭제된 cells</td><td>299</td></tr>
+      <tr><td>보존 plan 내 잘못된 user 셀 정리</td><td>2</td></tr>
+      <tr><td>wisdom_posts.plan_cell_id 영향</td><td>0</td></tr>
+    </tbody>
+  </table>
+
+  <h4>초기화 SQL 핵심</h4>
+  <pre style="background: var(--panel-alt); border: 1px solid var(--stroke-soft); border-radius: 6px; padding: 10px 12px; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.8rem; overflow-x: auto; margin: 6px 0;">
+SET @keep := 'sp_165093e3a27448bf82d9e8739b8a67c5';
+SET @keep_user := 'u_b92e32ab99044efd8ff183c3be91f08c';
+
+-- 자식 → 부모 순서로 삭제 + 보존 plan 내 잘못된 user 셀도 정리
+DELETE spca FROM study_plan_cell_assignments spca
+  JOIN study_plan_cells c ON c.id = spca.cell_id
+  WHERE c.plan_id &lt;&gt; @keep OR (c.plan_id = @keep AND c.user_id &lt;&gt; @keep_user);
+DELETE scf  FROM study_plan_cell_files scf JOIN study_plan_cells c ON c.id = scf.cell_id
+  WHERE c.plan_id &lt;&gt; @keep OR (c.plan_id = @keep AND c.user_id &lt;&gt; @keep_user);
+DELETE FROM study_plan_events     WHERE plan_id &lt;&gt; @keep;
+DELETE FROM study_plan_schedules  WHERE plan_id &lt;&gt; @keep;
+DELETE FROM study_plan_cells
+  WHERE plan_id &lt;&gt; @keep OR (plan_id = @keep AND user_id &lt;&gt; @keep_user);
+DELETE FROM study_plan_assets     WHERE plan_id &lt;&gt; @keep;
+DELETE FROM study_plan_scopes     WHERE plan_id &lt;&gt; @keep;
+DELETE FROM study_plan_targets    WHERE plan_id &lt;&gt; @keep;
+DELETE FROM study_plans           WHERE id      &lt;&gt; @keep;</pre>
+
+  <h4>최종 검증 결과</h4>
+  <div class="callout" style="border-left-color: var(--accent);">
+    초기화 후 baseline: plans 1 / targets 1 / scopes 1 / assets 2 / cells 2 / user_id 종류 1 (홍주영만).
+    <br>
+    사용자 재시도 결과 <strong>"잘 돼" 통보</strong> — P-5 패치가 정상 작동.
+    P-4B 의 자동 default plan 생성 + P-5A 의 학습 내용 셀 우선 + P-5B 의 status='pending' 전환이
+    함께 작동해 다른 학생들에게 행/열 + 학습 내용이 한 번에 복제되는 흐름 확정.
+  </div>
+
+  <h4>최종 패치 묶음 (커밋 <code>f7b6c6929</code>)</h4>
+  <table class="compact">
+    <thead><tr><th>패치</th><th>요약</th></tr></thead>
+    <tbody>
+      <tr><td>P-1A · P-1B</td><td>셀 데이터 복제 확장 + conflictPolicy dry-run 폐기</td></tr>
+      <tr><td>P-2A · P-2B · P-2C</td><td>셀 단위 복제 API + CellPropagateModal + 매트릭스 진입점 상시 노출</td></tr>
+      <tr><td>P-3A · P-3B · P-3C</td><td>V0147 disabled 컬럼 + API + 매트릭스/캘린더/모달 회색 처리</td></tr>
+      <tr><td>P-4A · P-4B · P-4C · P-4D</td><td>source 학생 제외 + 자동 default plan + 디버깅 카운터 + alert 보강</td></tr>
+      <tr><td>P-4E</td><td>AdminClassView.classId ↔ c.id 매핑 사고 fix + 백엔드 빈 문자열 방어</td></tr>
+      <tr><td>P-5A · P-5B</td><td>sourceCellMap 우선순위 + activity 분기 status='pending' 전환</td></tr>
+      <tr><td>운영 데이터</td><td>홍주영 제외 모든 plan 초기화 (sp_165093e3 + 홍주영 셀 2개만 보존)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout info">
+    학습 계획표 Rev.2 작업 마무리. 다음 작업 항목은 보고서 7번 우선순위 표의 1~8번 (학생당 plan 다중 정책·createPlan 빈 배열 문제·assignedAt 계산 버그 등) 으로 이어질 수 있습니다.
+  </div>
 </section>
 
 <footer>
