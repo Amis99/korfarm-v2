@@ -281,6 +281,35 @@ class AdminStudyPlanController(
         return ApiResponse(success = true, data = service.getCellFiles(cellId))
     }
 
+    /** 셀 비활성화 (V0147 / Rev.2) — 행/열 구조상 불필요한 셀을 진행률·화면에서 제외 */
+    @PatchMapping("/cells/{cellId}/disable")
+    fun disableCell(@PathVariable cellId: String): ApiResponse<CellResponse> {
+        requireAdmin()
+        val cell = service.disableCell(cellId, currentUser())
+        return ApiResponse(success = true, data = cell.toResponse())
+    }
+
+    /** 비활성 셀 복원 */
+    @PatchMapping("/cells/{cellId}/enable")
+    fun enableCell(@PathVariable cellId: String): ApiResponse<CellResponse> {
+        requireAdmin()
+        val cell = service.enableCell(cellId, currentUser())
+        return ApiResponse(success = true, data = cell.toResponse())
+    }
+
+    /**
+     * 셀 단위 일괄 복제 (Rev.2 신설) — 이 셀 1개의 학습 내용을 다른 학생들에게 복제.
+     * 정책은 propagateDelta 와 동일 (보고서 8.6/8.7/8.8).
+     */
+    @PostMapping("/cells/{cellId}/propagate")
+    fun propagateCell(
+        @PathVariable cellId: String,
+        @RequestBody req: PropagateDeltaRequest
+    ): ApiResponse<PropagateDeltaResponse> {
+        requireAdmin()
+        return ApiResponse(success = true, data = service.propagateCell(cellId, currentUser(), req))
+    }
+
     // ── 캘린더 일정 ──
 
     @PostMapping("/{planId}/schedules")

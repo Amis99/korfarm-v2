@@ -34,10 +34,13 @@ export default function StudyPlanCreateForm({ onClose, onCreated }) {
     }).catch(() => {});
   }, []);
 
+  // AdminClassView 의 실제 필드는 classId — c.id fallback 으로 SNAKE/camel 모두 호환
+  const classIdOf = (c) => c?.id || c?.classId || c?.class_id;
   const toggleClass = (cls) => {
+    const target = classIdOf(cls);
     setSelectedClasses((prev) =>
-      prev.find((c) => c.id === cls.id)
-        ? prev.filter((c) => c.id !== cls.id)
+      prev.find((c) => classIdOf(c) === target)
+        ? prev.filter((c) => classIdOf(c) !== target)
         : [...prev, cls]
     );
   };
@@ -55,7 +58,7 @@ export default function StudyPlanCreateForm({ onClose, onCreated }) {
     setError(null);
     try {
       const targets = [
-        ...selectedClasses.map((c) => ({ targetType: "class", targetId: c.id })),
+        ...selectedClasses.map((c) => ({ targetType: "class", targetId: classIdOf(c) })),
         ...selectedUsers.map((u) => ({ targetType: "user", targetId: u.userId })),
       ];
       await apiPost("/v1/admin/study-plans", {
@@ -139,12 +142,15 @@ export default function StudyPlanCreateForm({ onClose, onCreated }) {
             <div className="asp-form-group">
               <label>수강반 선택</label>
               <div style={{ maxHeight: 160, overflowY: "auto" }}>
-                {classes.map((cls) => (
-                  <label key={cls.id} style={{ display: "flex", alignItems: "center", gap: 8, padding: "4px 0", fontSize: "0.82rem", color: "#ccc", cursor: "pointer" }}>
-                    <input type="checkbox" checked={!!selectedClasses.find((c) => c.id === cls.id)} onChange={() => toggleClass(cls)} />
-                    {cls.name}
-                  </label>
-                ))}
+                {classes.map((cls) => {
+                  const cid = classIdOf(cls);
+                  return (
+                    <label key={cid} style={{ display: "flex", alignItems: "center", gap: 8, padding: "4px 0", fontSize: "0.82rem", color: "#ccc", cursor: "pointer" }}>
+                      <input type="checkbox" checked={!!selectedClasses.find((c) => classIdOf(c) === cid)} onChange={() => toggleClass(cls)} />
+                      {cls.name}
+                    </label>
+                  );
+                })}
               </div>
             </div>
             <div className="asp-form-group">
@@ -162,11 +168,14 @@ export default function StudyPlanCreateForm({ onClose, onCreated }) {
               )}
             </div>
             <div className="asp-chip-list">
-              {selectedClasses.map((c) => (
-                <span key={c.id} className="asp-chip">
-                  {c.name} <button onClick={() => toggleClass(c)}>&times;</button>
-                </span>
-              ))}
+              {selectedClasses.map((c) => {
+                const cid = classIdOf(c);
+                return (
+                  <span key={cid} className="asp-chip">
+                    {c.name} <button onClick={() => toggleClass(c)}>&times;</button>
+                  </span>
+                );
+              })}
               {selectedUsers.map((u) => (
                 <span key={u.userId} className="asp-chip">
                   {u.name || u.email} <button onClick={() => toggleUser(u)}>&times;</button>

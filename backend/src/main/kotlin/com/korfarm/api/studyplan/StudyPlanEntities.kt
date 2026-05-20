@@ -210,6 +210,14 @@ class StudyPlanCellEntity(
     @Column(name = "reviewed_at")
     var reviewedAt: LocalDateTime? = null,
 
+    /** 비활성화한 어드민 ID (V0147 신설) */
+    @Column(name = "disabled_by")
+    var disabledBy: String? = null,
+
+    /** 비활성화 시각 (V0147 신설). NULL 이면 활성 상태. */
+    @Column(name = "disabled_at")
+    var disabledAt: LocalDateTime? = null,
+
     @Column(name = "created_at", nullable = false)
     var createdAt: LocalDateTime = LocalDateTime.now(),
 

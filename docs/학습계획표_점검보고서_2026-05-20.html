@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>학습 계획표 기능 점검 보고서 — 2026-05-20 (Rev. 2)</title>
+<style>
+  :root {
+    --ink: #1f3a2c;
+    --muted: #5a6b5f;
+    --accent: #2d6a4f;
+    --accent-strong: #1f4a37;
+    --accent-soft: #e9f3ec;
+    --stroke: rgba(31, 58, 44, 0.15);
+    --stroke-soft: rgba(31, 58, 44, 0.08);
+    --panel: #ffffff;
+    --panel-alt: #f5f9f3;
+    --warn: #c0392b;
+    --warn-soft: #fdecea;
+    --info: #1565c0;
+    --info-soft: #e3f2fd;
+    --orange: #ef6c00;
+    --orange-soft: #fff3e0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+    color: var(--ink);
+    background: #f7faf6;
+    line-height: 1.7;
+    margin: 0;
+    padding: 32px 16px 80px;
+  }
+  .wrap {
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  header.report-head {
+    background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+    color: #fff;
+    padding: 28px 28px 24px;
+    border-radius: 14px 14px 0 0;
+    box-shadow: 0 4px 12px rgba(31, 74, 55, 0.18);
+  }
+  header.report-head h1 {
+    margin: 0 0 6px;
+    font-size: 1.55rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  header.report-head .sub {
+    font-size: 0.92rem;
+    opacity: 0.88;
+  }
+  header.report-head .meta {
+    margin-top: 14px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 0.82rem;
+    opacity: 0.92;
+  }
+  header.report-head .meta span::before {
+    content: "·";
+    margin-right: 8px;
+    opacity: 0.6;
+  }
+  header.report-head .meta span:first-child::before { content: ""; margin: 0; }
+
+  nav.toc {
+    background: var(--panel);
+    border: 1px solid var(--stroke);
+    border-top: none;
+    padding: 18px 28px;
+    border-radius: 0 0 14px 14px;
+    margin-bottom: 28px;
+  }
+  nav.toc h2 {
+    margin: 0 0 10px;
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  nav.toc ol {
+    margin: 0;
+    padding-left: 22px;
+    columns: 2;
+    column-gap: 28px;
+    font-size: 0.92rem;
+  }
+  nav.toc ol li {
+    margin-bottom: 4px;
+    break-inside: avoid;
+  }
+  nav.toc a {
+    color: var(--accent-strong);
+    text-decoration: none;
+  }
+  nav.toc a:hover { text-decoration: underline; }
+
+  section {
+    background: var(--panel);
+    border: 1px solid var(--stroke);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 22px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  }
+  section h2 {
+    margin: 0 0 16px;
+    font-size: 1.25rem;
+    color: var(--accent-strong);
+    border-bottom: 2px solid var(--accent-soft);
+    padding-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  section h2 .num {
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+  section h3 {
+    font-size: 1.02rem;
+    color: var(--accent-strong);
+    margin: 22px 0 10px;
+    padding-left: 10px;
+    border-left: 4px solid var(--accent);
+  }
+  section h4 {
+    font-size: 0.92rem;
+    color: var(--ink);
+    margin: 14px 0 6px;
+    font-weight: 700;
+  }
+  section p { margin: 0 0 10px; }
+  section ul, section ol { margin: 0 0 12px; padding-left: 22px; }
+  section ul li, section ol li { margin-bottom: 4px; }
+
+  blockquote.purpose {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    margin: 0 0 16px;
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    font-size: 1.0rem;
+    color: var(--accent-strong);
+    font-weight: 600;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 16px;
+    font-size: 0.9rem;
+  }
+  table th, table td {
+    border: 1px solid var(--stroke);
+    padding: 8px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  table th {
+    background: var(--panel-alt);
+    color: var(--accent-strong);
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+  table.compact td, table.compact th { padding: 6px 10px; font-size: 0.85rem; }
+
+  code, .code {
+    font-family: "JetBrains Mono", "D2Coding", Consolas, Menlo, monospace;
+    font-size: 0.85em;
+    background: rgba(31, 74, 55, 0.06);
+    color: var(--accent-strong);
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    vertical-align: middle;
+  }
+  .badge.high { background: var(--warn-soft); color: var(--warn); }
+  .badge.mid { background: var(--orange-soft); color: var(--orange); }
+  .badge.low { background: var(--info-soft); color: var(--info); }
+  .badge.ok { background: var(--accent-soft); color: var(--accent-strong); }
+
+  .callout {
+    border: 1px solid var(--stroke);
+    border-left: 4px solid var(--accent);
+    background: var(--panel-alt);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 10px 0 14px;
+    font-size: 0.92rem;
+  }
+  .callout.warn { border-left-color: var(--warn); background: var(--warn-soft); }
+  .callout.info { border-left-color: var(--info); background: var(--info-soft); }
+  .callout strong { color: var(--accent-strong); }
+  .callout.warn strong { color: var(--warn); }
+
+  .issue {
+    border: 1px solid var(--stroke);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 0 0 14px;
+    background: #fff;
+  }
+  .issue .head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .issue .head .id {
+    font-weight: 800;
+    color: var(--accent-strong);
+    font-size: 0.95rem;
+  }
+  .issue .head .title {
+    font-weight: 700;
+    font-size: 0.98rem;
+    flex: 1;
+  }
+  .issue .body {
+    font-size: 0.92rem;
+    color: var(--ink);
+  }
+  .issue ul { margin-top: 6px; padding-left: 18px; }
+  .issue .fix {
+    margin-top: 10px;
+    background: var(--accent-soft);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    color: var(--accent-strong);
+  }
+  .issue .fix strong::before { content: "권장 "; }
+
+  .role-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+    margin: 8px 0 0;
+  }
+  .role-card {
+    border: 1px solid var(--stroke);
+    border-radius: 10px;
+    padding: 14px 16px;
+    background: var(--panel-alt);
+  }
+  .role-card h4 {
+    margin: 0 0 8px;
+    color: var(--accent-strong);
+    font-size: 0.98rem;
+    border-bottom: 1px dashed var(--stroke);
+    padding-bottom: 6px;
+  }
+  .role-card ol { margin: 0; padding-left: 20px; font-size: 0.88rem; }
+  .role-card ol li { margin-bottom: 4px; }
+
+  .root-cause {
+    background: var(--warn-soft);
+    border: 1px solid rgba(192, 57, 43, 0.25);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 10px 0 14px;
+  }
+  .root-cause h4 {
+    margin: 0 0 8px;
+    color: var(--warn);
+    font-size: 0.98rem;
+  }
+  .root-cause .twocol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .root-cause .twocol > div {
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.88rem;
+  }
+  .root-cause .twocol h5 {
+    margin: 0 0 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  .root-cause .twocol .yes h5 { color: var(--accent-strong); }
+  .root-cause .twocol .no h5 { color: var(--warn); }
+  .root-cause .twocol ul { margin: 0; padding-left: 18px; font-size: 0.85rem; }
+  @media (max-width: 720px) {
+    .root-cause .twocol { grid-template-columns: 1fr; }
+  }
+
+  .plan-step {
+    border: 1px solid var(--stroke);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 0 0 16px;
+    background: #fff;
+  }
+  .plan-step h4 {
+    margin: 0 0 10px;
+    color: var(--accent-strong);
+    font-size: 1.0rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .plan-step h4 .pid {
+    background: var(--accent);
+    color: #fff;
+    padding: 2px 9px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 800;
+  }
+  .plan-step .what { font-size: 0.92rem; margin: 0 0 8px; }
+  .plan-step pre {
+    background: var(--panel-alt);
+    border: 1px solid var(--stroke-soft);
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-family: "JetBrains Mono", Consolas, monospace;
+    font-size: 0.8rem;
+    overflow-x: auto;
+    margin: 6px 0;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .plan-step .sub-list { font-size: 0.88rem; padding-left: 20px; margin: 6px 0 4px; }
+
+  .flow {
+    background: var(--panel-alt);
+    border: 1px dashed var(--stroke);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    color: var(--muted);
+    font-family: "JetBrains Mono", Consolas, monospace;
+    overflow-x: auto;
+    white-space: pre;
+    margin: 8px 0 14px;
+  }
+
+  footer {
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px solid var(--stroke);
+    color: var(--muted);
+    font-size: 0.82rem;
+    text-align: center;
+  }
+
+  @media (max-width: 720px) {
+    body { padding: 20px 10px 60px; }
+    section { padding: 18px 18px; }
+    header.report-head { padding: 22px 20px 18px; }
+    nav.toc ol { columns: 1; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="report-head">
+  <h1>학습 계획표(Study Plan) 기능 점검 보고서</h1>
+  <div class="sub">본사·기관 관리자 입장에서의 점검·보완 검토 <strong>(Rev. 2 — 일괄 복제 결함 root cause 확정)</strong></div>
+  <div class="meta">
+    <span>작성일: 2026-05-20</span>
+    <span>Rev.2 갱신: 2026-05-20 (8번 섹션 신설)</span>
+    <span>대상: <code>backend/.../studyplan/*</code> + <code>frontend/.../study-plan*</code></span>
+    <span>마이그레이션: V0027 / V0034 / V0035 / V0082 / V0083 / V0087 / V0092</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <h2>목차</h2>
+  <ol>
+    <li><a href="#s1">기능의 목적</a></li>
+    <li><a href="#s2">DB 구조 (9개 테이블)</a></li>
+    <li><a href="#s3">구현 방식 — 핵심 흐름</a></li>
+    <li><a href="#s4">라우팅·메뉴 등록</a></li>
+    <li><a href="#s5">실제 프로세스 (역할별)</a></li>
+    <li><a href="#s6">발견된 오류·취약점·보완 의견</a></li>
+    <li><a href="#s7">다음 단계 제안 (우선순위)</a></li>
+    <li><a href="#s8" style="color: var(--warn); font-weight: 700;">★ 수정 작업 계획 (Rev.2 신설)</a></li>
+  </ol>
+</nav>
+
+<!-- ───────────────────────────────────────── -->
+<section id="s1">
+  <h2><span class="num">1</span>기능의 목적</h2>
+  <blockquote class="purpose">
+    한 학생/한 반에 대해 <strong>시험 범위(행) × 학습 자원(열)</strong>의 매트릭스로 할일을 박아 두고,
+    학생이 수행한 결과를 자동·수동으로 셀에 누적·검수하는 통합 학습 관리 도구.
+  </blockquote>
+  <ul>
+    <li>시험 대비·정규 학습 진도·자유 글쓰기·테스트 응시 등 <strong>이질적인 학습 단위 4종</strong>(국어농장 콘텐츠 · 학습활동 파일 제출 · 테스트 · 글쓰기)을 한 평면에 묶음.</li>
+    <li>어드민(본사·기관)에게는 <strong>권한 범위 내 모든 학생의 진행 현황·제출·미수행을 한 화면</strong>에서 보고, 셀 단위로 검수·점수·메모를 박을 수 있는 컨트롤 패널 역할.</li>
+    <li>학생·학부모에게는 <strong>"오늘 뭐 해야 하나"</strong>를 모달·캘린더·매트릭스로 안내하는 To-Do 보드.</li>
+  </ul>
+</section>
+
+<!-- ───────────────────────────────────────── -->
+<section id="s2">
+  <h2><span class="num">2</span>DB 구조 (study_plan_*, 9개 테이블)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 24%;">테이블</th>
+        <th style="width: 36%;">역할</th>
+        <th>핵심 컬럼 · 제약</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>study_plans</code></td>
+        <td>계획표 본체</td>
+        <td><code>org_id</code>, <code>start/end_date</code>, <code>status</code>, <code>is_template</code>(V0082), <code>template_origin_id</code></td>
+      </tr>
+      <tr>
+        <td><code>study_plan_targets</code></td>
+        <td>배정 대상</td>
+        <td><code>target_type ∈ {class, user}</code> + <code>target_id</code></td>
+      </tr>
+      <tr>
+        <td><code>study_plan_scopes</code></td>
+        <td>매트릭스 세로축 (범위 행)</td>
+        <td><code>label</code>, <code>sort_order</code></td>
+      </tr>
+      <tr>
+        <td><code>study_plan_assets</code></td>
+        <td>매트릭스 가로축 (자원 열)</td>
+        <td><code>asset_type ∈ {korfarm, activity, test, writing}</code>, <code>asset_kind</code>, <code>ref_id</code>, <code>config_json</code></td>
+      </tr>
+      <tr>
+        <td><code>study_plan_cells</code></td>
+        <td>학생×scope×asset 한 셀</td>
+        <td><code>UNIQUE(scope_id, asset_id, user_id)</code>, <code>status</code>, <code>cell_ref_id</code>, <code>due_at</code>, <code>assigned_label</code>, <code>score</code></td>
+      </tr>
+      <tr>
+        <td><code>study_plan_cell_assignments</code> (V0092)</td>
+        <td>국어농장 셀 복수 배정</td>
+        <td><code>cell_id FK CASCADE</code> — 한 셀에 콘텐츠 N개</td>
+      </tr>
+      <tr>
+        <td><code>study_plan_cell_files</code></td>
+        <td>학습활동 제출 파일</td>
+        <td><code>cell_id</code>, <code>file_id</code>, <code>uploaded_by</code></td>
+      </tr>
+      <tr>
+        <td><code>study_plan_schedules</code></td>
+        <td>어드민이 직접 박는 캘린더 일정</td>
+        <td><code>scheduled_date</code>, <code>label</code>, <code>memo</code></td>
+      </tr>
+      <tr>
+        <td><code>study_plan_events</code> (V0034)</td>
+        <td>상태 전이 이벤트 로그</td>
+        <td><code>event_type</code>, <code>event_date</code>, <code>cell_id</code></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3>마이그레이션 흐름</h3>
+  <div class="flow">V0027 최초 스키마
+  ↓
+V0034 study_plan_events 로그 테이블 추가
+  ↓
+V0035 status 리설계 (approved→completed, rejected→pending, grading→submitted, failed→pending)
+  ↓
+V0082 is_template / template_origin_id, wisdom_posts.plan_cell_id, assignments 도메인 DROP
+  ↓
+V0083 전체 데이터 DELETE 리셋 (학생 단위 모델로 재설계)
+  ↓
+V0087 due_at + assigned_label
+  ↓
+V0092 study_plan_cell_assignments 신설 (국어농장 복수 배정)</div>
+  <div class="callout warn">
+    <strong>주의 :</strong> V0027 의 cell/asset/scope 사이에 FK 가 없습니다. V0092 에서 <code>cell_id</code> 에만 FK CASCADE 가 추가됐고, 그 외 plan/scope/asset 삭제는 서비스 레이어 <code>deleteByXxx</code> 가 책임집니다.
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────── -->
+<section id="s3">
+  <h2><span class="num">3</span>구현 방식 — 핵심 흐름</h2>
+
+  <h3>가. 자동 생성 (학생 가입·승인 시점)</h3>
+  <p><code>AuthService.kt:177-196</code> 과 <code>MembershipApprovalService.kt:103-114</code> 두 곳에서 동일한 2단 체인:</p>
+  <ol>
+    <li><code>cloneTemplatesForStudent(orgId, userId)</code> — 기관에 <code>is_template=true</code> 인 plan 이 있으면 그걸 학생용으로 복제 (target=user, status=active, <code>template_origin_id</code> 추적).</li>
+    <li>(1)이 0건이고 학생에게 plan 이 아예 없으면 → <code>createDefaultPlanForStudent(orgId, userId)</code> 호출. <strong>"기본" 1행 × 국어농장·테스트·글쓰기 3열 = 3셀</strong>짜리 빈 plan 1개 생성, <code>endDate = today+365</code>.</li>
+  </ol>
+  <div class="callout warn">
+    두 단계 모두 <code>try-catch</code> warn 로그라 <strong>실패해도 가입은 통과</strong>. 즉, 학생이 plan 없이 가입 완료될 수 있음.
+  </div>
+
+  <h3>나. 어드민 수동 생성</h3>
+  <p><code>StudyPlanCreateForm.jsx</code> → <code>POST /v1/admin/study-plans</code> (<code>CreateStudyPlanRequest</code>). 화면에서는 제목·기간·대상(반/학생) 만 받고
+  <strong>scopes/assets/schedules 는 빈 배열 강제</strong>. cell 0개 상태로 출발 → 어드민이 학생별 탭에서 행/열을 직접 추가.</p>
+
+  <h3>다. 행·열·셀 편집</h3>
+  <ul>
+    <li><code>StudentMatrixTab</code> 에서 <code>+ 행 추가</code>, <code>+ 열 추가</code> 팝오버 (자산 종류 + 라벨 입력).</li>
+    <li>셀 클릭 → <code>unassigned/overdue</code> 면 <code>CellAssignModal</code> (콘텐츠/테스트/주제 검색 + 마감일) / 그 외엔 <code>StudyPlanCellModal</code> (검수·점수·메모·외부 화면 점프).</li>
+    <li>행/열 추가 직후 "<strong>적용 대상에 동일 추가</strong>" 알약 노출 → <code>PropagateDeltaModal</code> 로 같은 반/기관/선택 학생에 일괄 복제(<code>POST /propagate-delta</code>, <code>conflictPolicy=skip|overwrite</code>).</li>
+  </ul>
+
+  <h3>라. 상태 머신 (validateStatusTransition)</h3>
+  <table class="compact">
+    <thead>
+      <tr><th>자산 종류</th><th>상태 전이</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>국어농장 (korfarm)</td><td><code>unassigned → pending → in_progress → completed</code></td></tr>
+      <tr><td>학습활동 (activity)</td><td><code>unassigned → pending → submitted → completed / partial</code></td></tr>
+      <tr><td>테스트 (test)</td><td><code>pending → scored → passed / retry</code></td></tr>
+      <tr><td>글쓰기 (writing)</td><td><code>pending → submitted → reviewed / partial → completed</code></td></tr>
+    </tbody>
+  </table>
+  <p>만료(<code>isOverdue</code>)는 <code>due_at &lt; now</code> 이면서 status ∉ {completed, submitted, reviewed} 인 셀에 동적 계산.</p>
+
+  <h3>마. 외부 화면 점프</h3>
+  <p><code>CellAction</code> 응답 모델 + 프론트 <code>handleCellClick</code> 으로 셀 종류별 라우팅:</p>
+  <ul>
+    <li>국어농장 셀 → <code>/learning/{contentId}</code> (학생) / <code>/admin/students/{id}?tab=learning&amp;contentId=…</code> (어드민)</li>
+    <li>테스트 셀 → <code>/tests/{testId}/omr</code> 또는 <code>/admin/tests/{testId}/statistics?studentId=…</code></li>
+    <li>글쓰기 셀 → <code>/writing/{levelId}/new?planCellId=…&amp;topicKey=…</code> (또는 이미 쓴 글이면 <code>/writing/post/{postId}</code>)</li>
+    <li>학습활동 셀 → 학생 <code>/study-plan/submit/{cellId}</code> (presign 업로드 후 <code>POST /cells/{id}/submit</code>)</li>
+  </ul>
+
+  <h3>바. 통합 4 API (Phase D — 어드민 대시보드용)</h3>
+  <table class="compact">
+    <thead><tr><th>엔드포인트</th><th>용도</th></tr></thead>
+    <tbody>
+      <tr><td><code>GET /v1/admin/study-plans/test-assets</code> + <code>/test-assets/{id}/students</code></td><td>배정된 시험 모음·드릴다운</td></tr>
+      <tr><td><code>GET /v1/admin/study-plans/calendar</code> + <code>/calendar/{date}</code></td><td>모든 학생의 due_at + schedules 일별 집계</td></tr>
+      <tr><td><code>GET /v1/admin/submissions?assetType=activity</code></td><td>학습활동 제출물 통합 리스트</td></tr>
+      <tr><td><code>GET /v1/admin/wisdom/integrated-posts</code></td><td>글농장 글 + <code>plan_cell_id</code> 결합</td></tr>
+    </tbody>
+  </table>
+
+  <h3>사. 추천 일괄 등록 (통합 분석표)</h3>
+  <p><code>POST /v1/study-plans/bulk-from-recommendations</code> — 통합 분석표에서 학생/학부모/어드민이 추천 콘텐츠를 학생 plan 의 국어농장 셀에 묶어 등록.
+  plan 없으면 자동 생성, 첫 콘텐츠는 <code>cell.cellRefId</code> 채우고 나머지는 assignments row.</p>
+</section>
+
+<!-- ───────────────────────────────────────── -->
+<section id="s4">
+  <h2><span class="num">4</span>라우팅·메뉴 등록</h2>
+  <ul>
+    <li>어드민 사이드바: <code>AdminLayout.jsx:30</code> → <code>/admin/study-plans</code> (<code>event_note</code> 아이콘) <span class="badge ok">HQ_ADMIN / ORG_ADMIN</span></li>
+    <li>라우트 (App.jsx):
+      <ul>
+        <li><code>/admin/study-plans</code> — <code>AdminStudyPlanDashboardPage</code> (5탭: 캘린더·학생별·제출물·글쓰기·테스트)</li>
+        <li><code>/study-plan</code> — 학생용 <code>StudyPlanPage</code> (매트릭스 + 캘린더)</li>
+        <li><code>/study-plan/submit/:cellId</code> — 학생 학습활동 제출 페이지</li>
+        <li><code>/parents/children/:studentId/study-plan</code> — 학부모용 read-only</li>
+      </ul>
+    </li>
+    <li>학생 홈에는 <code>StudyPlanReminderModal</code> 자동 띄움 (24h dismiss localStorage).</li>
+    <li>통합 분석표(<code>AnalysisReportPage</code>) 에 <code>ReportStudyPlanMatrix</code> 임베드 — 학생의 plan 매트릭스 미리보기.</li>
+  </ul>
+</section>
+
+<!-- ───────────────────────────────────────── -->
+<section id="s5">
+  <h2><span class="num">5</span>실제 프로세스 (역할별)</h2>
+
+  <div class="role-grid">
+    <div class="role-card">
+      <h4>본사 · 기관 관리자</h4>
+      <ol>
+        <li><strong>기관 default 템플릿 설계 (선택)</strong> — 학습 계획표 1개를 만들어 <code>is_template=true</code> 표식 → 이후 가입 학생에게 자동 복제. 기존 학생은 <code>POST /v1/admin/study-plans/{id}/apply-to-students</code> 로 일괄 반영.</li>
+        <li><strong>학생별 탭 진입</strong> → 상단 학생 셀렉터(기관·반·학생 3단) → 학생의 활성 plan 1건(<code>list[0]</code>) 매트릭스 로드.</li>
+        <li>행 추가(예: "2학기 중간 1주차")·열 추가(국어농장 1·테스트 1·글쓰기 1 …) → "동일 추가" 알약으로 같은 반에 propagate.</li>
+        <li>셀 클릭으로 콘텐츠/시험/주제 검색·마감일·라벨 배정 → 학생에게 노출.</li>
+        <li>캘린더 탭에서 일자별 액션 집계 확인 → 학생별 드릴다운 → 셀 모달에서 검수/점수/메모.</li>
+        <li>제출물 탭(activity 전용)·테스트 탭·글쓰기 탭에서 자산 종류별 일별 진행 모아보기 → 행 클릭 시 학생별 탭/외부 결과 화면으로 점프.</li>
+      </ol>
+    </div>
+
+    <div class="role-card">
+      <h4>학생</h4>
+      <ol>
+        <li>로그인 후 홈에서 <code>StudyPlanReminderModal</code> 로 미수행/임박 활동 안내.</li>
+        <li><code>/study-plan</code> 진입 → plan select(여러 개 가능) → "할일 목록"(매트릭스) 또는 "캘린더".</li>
+        <li>셀 클릭 → 자산별 화면 점프 (학습 콘텐츠 / OMR 응시 / 글농장 글쓰기 / 사진 제출 페이지). <code>unassigned</code> 셀은 무반응.</li>
+        <li>제출/응시 시 셀 상태가 <code>submitted/scored/completed</code> 등으로 전이, 캘린더 진행률 게이지에 반영.</li>
+      </ol>
+    </div>
+
+    <div class="role-card">
+      <h4>학부모</h4>
+      <ol>
+        <li><code>/parents/children/:studentId/study-plan</code> — <code>verifyParentChildLink</code> 통과한 자녀의 매트릭스·캘린더만 read-only 로 확인.</li>
+        <li>셀 클릭 동작 없음 (주입된 <code>onCellClick</code> 없음). 진행 현황 모니터링 전용.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────── -->
+<section id="s6">
+  <h2><span class="num">6</span>발견된 오류·취약점·보완 의견</h2>
+
+  <h3>A. 정합성 · 로직 오류 <span class="badge high">★★★ 시급</span></h3>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">A-1</span>
+      <span class="title">"학생당 plan 1개 가정" — 학생이 plan 2개 이상이면 데이터 누락</span>
+      <span class="badge high">★★★</span>
+    </div>
+    <div class="body">
+      <code>StudentMatrixTab.jsx:46</code> 의 <code>const target = plans[0]</code> 한 줄로 첫 plan 만 편집 대상으로 잡습니다.
+      그런데 학생이 plan 2개를 갖게 되는 경로가 실제로 존재합니다:
+      <ul>
+        <li>(a) <code>createDefaultPlanForStudent</code> 가 만든 default plan + (b) 어드민이 새 plan 을 만들어 그 학생을 target 으로 박는 경우 → 어드민 화면은 (a)만 편집, 학생 화면(<code>StudyPlanPage</code>)은 select 로 (a)·(b) 둘 다 노출 → <strong>어드민이 박은 행/열이 학생 화면에서 안 보일 수 있음</strong>.</li>
+        <li>학생 화면도 첫 plan(<code>plans[0]</code>) 만 캘린더 진행률 게이지에 반영 — 다른 plan 의 임박 활동은 안 보임.</li>
+      </ul>
+      <div class="fix"><strong>:</strong> 학생 단위로 plan 을 통합 매트릭스로 합치거나(권장), 어드민 학생별 탭에 plan select 를 노출.</div>
+    </div>
+  </div>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">A-2</span>
+      <span class="title">CreateStudyPlanRequest 가 scopes/assets/schedules 빈 배열 강제</span>
+      <span class="badge high">★★★</span>
+    </div>
+    <div class="body">
+      <code>StudyPlanCreateForm.jsx:64-66</code> 이 빈 배열을 강제 → 어드민이 새 plan 을 만들면 cell 0개 상태.
+      자동 생성된 default plan 과 별도로 또 빈 plan 이 생기는 구조라 A-1 문제를 유발합니다. 신규 plan 의 의도도 모호.
+      <div class="fix"><strong>:</strong> 새 plan 생성 시 default plan 을 덮어쓸지/추가할지 명시적 선택을 받거나, scopes/assets 를 단계 3으로 받아 의미 있는 plan 만 생성.</div>
+    </div>
+  </div>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">A-3</span>
+      <span class="title">캘린더 assignedAt 이 cell.updated_at 기반 — 점프 버그</span>
+      <span class="badge high">★★★</span>
+    </div>
+    <div class="body">
+      <code>StudyPlanCalendar.jsx:67</code> 의 <code>assignedAt</code> 계산이 <code>cell.updated_at</code> 기반.
+      셀에 상태 변화(완료·메모·점수 입력 등)가 한 번이라도 일어나면 <code>updatedAt</code> 갱신 → 캘린더 시작 막대가 "오늘" 로 점프해
+      due_at 까지의 길이가 1일짜리로 축소됩니다. 의도는 "배정일 ~ 마감일" 전 구간 표시인데 실제로는 마감일 직전만 표시되는 경우 발생.
+      <div class="fix"><strong>:</strong> <code>assigned_at</code> 칼럼을 별도로 두거나, <code>study_plan_events.event_type='assigned'</code> 첫 이벤트의 created_at 사용.</div>
+    </div>
+  </div>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">A-4</span>
+      <span class="title">테스트 셀의 상태 전이 자동화 미흡 가능성</span>
+      <span class="badge high">★★★</span>
+    </div>
+    <div class="body">
+      학생이 OMR 응시 후 셀이 <code>pending → scored</code> 로 바뀌어야 캘린더 진행률·<code>testTaken</code> 분기가 작동합니다.
+      코드 grep 상 <code>test_submissions</code> ↔ <code>study_plan_cells</code> 동기화 로직 호출이 명확히 보이지 않습니다
+      (시험 제출 핸들러에서 study_plan_cells.status UPDATE 가 박혀 있는지 별도 확인 필요).
+      <div class="fix"><strong>확인 필요:</strong> TestSubmissionService 같은 곳에서 study_plan 셀을 찾아 상태 업데이트하는지 grep. 끊겨 있으면 핵심 기능 미작동.</div>
+    </div>
+  </div>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">A-5</span>
+      <span class="title">글쓰기 셀 ↔ wisdom_posts.plan_cell_id 연결의 일방성</span>
+      <span class="badge high">★★★</span>
+    </div>
+    <div class="body">
+      <code>wisdom_posts.plan_cell_id</code> 는 글쓰기 페이지에 <code>?planCellId=</code> 가 URL 로 들어왔을 때만 박힙니다 (<code>StudyPlanPage.jsx:110</code>).
+      학생이 글농장 메뉴에서 일반 글쓰기를 시작하면 <code>plan_cell_id</code> 가 NULL → "글쓰기" 탭의 plan 매핑 결락.
+      또한 글쓰기 셀에서 같은 학생이 두 번째 글을 쓰면 첫 글만 <code>plan_cell_id</code> 가 박힘.
+      <div class="fix"><strong>:</strong> 글농장 글쓰기 페이지 진입 시 학생의 활성 plan 에서 미해결 글쓰기 셀을 찾아 자동 연결할지 묻거나, 셀 단위 N:M 매핑 테이블 도입.</div>
+    </div>
+  </div>
+
+  <h3>B. 보안 · 권한 <span class="badge mid">★★</span></h3>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">B-6</span>
+      <span class="title">propagateDelta(targetScope='org') 권한 검증 명확성</span>
+      <span class="badge mid">★★</span>
+    </div>
+    <div class="body">
+      Explore 요약상 <code>resolveAdminScope</code> 가 호출되지만, HQ_ADMIN 의 자기 기관 검사가 없으면 다른 기관에 일괄 복제 가능.
+      ORG_ADMIN 의 경우 plan 의 <code>orgId</code> 와 자기 <code>orgId</code> 일치 검사 필요.
+      <div class="fix"><strong>확인 필요:</strong> <code>StudyPlanService.kt:1851</code> <code>resolveAdminScope</code> 본문 검토.</div>
+    </div>
+  </div>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">B-7</span>
+      <span class="title">bulkFromRecommendations 의 학부모 권한 케이스</span>
+      <span class="badge mid">★★</span>
+    </div>
+    <div class="body">
+      <code>StudyPlanController</code> <code>bulkFromRecommendations</code> 의 <code>verifyParentChildLink</code> 는 정확히 박혀 있으나,
+      같은 endpoint 에서 학부모가 <code>studentId</code> 를 자녀가 아닌 임의 ID 로 보낸 경우 403 이 정확히 반환되는지 케이스 테스트 필요.
+    </div>
+  </div>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">B-8</span>
+      <span class="title">study_plan_cell_files 다운로드 권한 분기</span>
+      <span class="badge mid">★★</span>
+    </div>
+    <div class="body">
+      <code>/v1/files/{fileId}/download</code> 의 purpose 인증(security_policy.md)이
+      <code>study_plan</code> purpose 에 대해 학생·해당 학생의 학부모·해당 기관 어드민만 통과시키는지 별도 확인.
+    </div>
+  </div>
+
+  <h3>C. UX · 디자인 일관성 <span class="badge low">★</span></h3>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">C-9</span>
+      <span class="title">StudyPlanCreateForm 디자인 표준 위반</span>
+      <span class="badge low">★</span>
+    </div>
+    <div class="body">
+      inline style 다용 · 다크 톤(<code>#ccc</code>, <code>#8a7468</code>) — <code>feedback_admin_design_unity.md</code> 의 <code>admin-detail.css</code> 표준 클래스 사용 원칙 위반.
+      다른 어드민 모달과 톤 안 맞음.
+    </div>
+  </div>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">C-10</span>
+      <span class="title">모달·확인이 alert() / window.confirm() 다용</span>
+      <span class="badge low">★</span>
+    </div>
+    <div class="body">
+      <code>StudentMatrixTab</code>, <code>CellAssignModal</code> 등 — 표준 디자인 토큰 모달로 통일 필요.
+    </div>
+  </div>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">C-11</span>
+      <span class="title">"학생 plan 없음" 안내 문구가 디버깅 톤</span>
+      <span class="badge low">★</span>
+    </div>
+    <div class="body">
+      <code>StudentMatrixTab</code> 의 "이 학생은 아직 학습 계획표가 없습니다. (가입 시 자동 생성 정책 확인 필요)" 문구는 운영에 노출되는 사용자 문구로 부적절.
+      가입 시 자동 생성이 try-catch warn 로 조용히 실패할 수 있는데, 그 결과를 사용자에게 디버깅 톤으로 안내합니다.
+    </div>
+  </div>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">C-12</span>
+      <span class="title">학습활동 "배부" 시 학생 알림 없음</span>
+      <span class="badge low">★</span>
+    </div>
+    <div class="body">
+      <code>StudyPlanCellModal.jsx:418-425</code> — "배부" 버튼이 <code>status='pending'</code> 으로만 전환. 학생이 다음 접속 시까지 인지 못함.
+      <code>ReminderModal</code> 의 24h dismiss 정책과 결합되면 더 늦어짐.
+    </div>
+  </div>
+
+  <h3>D. 데이터 무결성 <span class="badge mid">★★</span></h3>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">D-13</span>
+      <span class="title">FK 부재 — 고아 row 위험</span>
+      <span class="badge mid">★★</span>
+    </div>
+    <div class="body">
+      V0027 의 <code>study_plan_cells</code>, <code>study_plan_assets</code>, <code>study_plan_scopes</code> 등은 FK 없이 varchar 컬럼.
+      V0092 에서 <code>cell_id</code> 만 FK 추가. plan/scope/asset 삭제 시 서비스 레이어 <code>deleteByXxx</code> 가 책임지지만,
+      직접 SQL / 덤프 복원 등 경로에서 고아 row 발생 가능. 매트릭스 응답이 고아 cell 을 무시하는지 확인 필요.
+    </div>
+  </div>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">D-14</span>
+      <span class="title">propagateDelta race condition</span>
+      <span class="badge mid">★★</span>
+    </div>
+    <div class="body">
+      <code>propagateDelta</code> 가 conflict 검출 → 사용자 정책 선택 → 적용의 2단 흐름인데,
+      그 사이에 다른 어드민이 같은 학생의 행/열을 추가하면 적용 시점에 다시 conflict 발생.
+      적용 단계도 다시 검증하는지 확인 필요.
+    </div>
+  </div>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">D-15</span>
+      <span class="title">backfillDefaultPlansForActiveStudents vs backfillDefaultPlansHQ 중복</span>
+      <span class="badge low">★</span>
+    </div>
+    <div class="body">
+      두 메서드가 거의 같은 일을 함. 응답 구조만 다름 (<code>BackfillResult</code> vs <code>BackfillDefaultPlanResponse</code>). 정리 권장.
+    </div>
+  </div>
+
+  <h3>E. 기능 부재 <span class="badge low">★</span></h3>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">E-16</span>
+      <span class="title">어드민이 학생별 plan 을 갈아끼우거나 삭제할 UI 없음</span>
+      <span class="badge low">★</span>
+    </div>
+    <div class="body">
+      <code>DELETE /v1/admin/study-plans/{planId}</code> 엔드포인트는 있으나 학생별 탭에서 호출 안 됨.
+      학생이 plan 2개로 꼬였을 때 어드민이 정리할 수단 미비.
+    </div>
+  </div>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">E-17</span>
+      <span class="title">applyTemplateToCurrentStudents 결과 보고 빈약</span>
+      <span class="badge low">★</span>
+    </div>
+    <div class="body">
+      응답은 <code>newlyCloned</code> 숫자만. 실패 학생 명단·기존 복제본 skip 명단 반환 없음.
+    </div>
+  </div>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">E-18</span>
+      <span class="title">학습활동 제출 후 학부모 알림 없음</span>
+      <span class="badge low">★</span>
+    </div>
+    <div class="body">
+      학부모 화면은 read-only인데, 자녀의 새 제출/미수행을 알릴 모달·뱃지 없음.
+    </div>
+  </div>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">E-19</span>
+      <span class="title">upcomingItems 정확도</span>
+      <span class="badge low">★</span>
+    </div>
+    <div class="body">
+      <code>StudyPlanReminderModal</code> 의 "임박 활동" 이 <code>/v1/study-plans/upcoming</code> 응답에 의존하는데,
+      학생의 모든 plan 을 합쳐서 정렬하는지 첫 plan 만인지 코드상 명확하지 않음 (서비스 메서드 추가 확인 필요).
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────── -->
+<section id="s7">
+  <h2><span class="num">7</span>다음 단계 제안 (우선순위)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 6%; text-align: center;">#</th>
+        <th>항목</th>
+        <th style="width: 12%; text-align: center;">시급도</th>
+        <th>비고</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background: var(--warn-soft);">
+        <td style="text-align: center;"><strong>0-A</strong></td>
+        <td><strong>propagateDelta 가 cellRefId/assignments/dueAt 미복제 — "다른 학생에게 배정 안 박힘" root cause (8.1 / P-1A·1B)</strong></td>
+        <td style="text-align: center;"><span class="badge high">★★★</span></td>
+        <td><strong>사용자 보고. Rev.2 확정. 백엔드 패치 1순위.</strong></td>
+      </tr>
+      <tr style="background: var(--warn-soft);">
+        <td style="text-align: center;"><strong>0-B</strong></td>
+        <td><strong>셀/행/열 단위 복제 진입점 신설 (8.2 / P-2A·2B·2C)</strong></td>
+        <td style="text-align: center;"><span class="badge high">★★★</span></td>
+        <td><strong>사용자 요청. 매트릭스에서 임의 셀을 다른 학생에게 박는 흐름 부재.</strong></td>
+      </tr>
+      <tr style="background: var(--warn-soft);">
+        <td style="text-align: center;"><strong>0-C</strong></td>
+        <td><strong>셀 비활성화 (status='disabled') 기능 (8.3 / P-3A·3B·3C)</strong></td>
+        <td style="text-align: center;"><span class="badge high">★★★</span></td>
+        <td><strong>사용자 요청. 행/열 구조상 불필요한 셀의 회색 비활성 처리 + 진행률 제외.</strong></td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">1</td>
+        <td>학생당 plan 1개 가정 vs 다중 plan 정책 결정 (A-1)</td>
+        <td style="text-align: center;"><span class="badge high">★★★</span></td>
+        <td>어드민 화면이 학생의 두 번째 plan 못 보는 핵심 사고. 정책 먼저 합의.</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">2</td>
+        <td><code>createPlan</code> 의 scopes/assets 빈 배열 문제 (A-2)</td>
+        <td style="text-align: center;"><span class="badge high">★★★</span></td>
+        <td>UI 또는 서비스 레이어 중 한 곳에서 명시적 처리.</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">3</td>
+        <td>캘린더 <code>assignedAt = updatedAt</code> 버그 (A-3)</td>
+        <td style="text-align: center;"><span class="badge high">★★★</span></td>
+        <td><code>study_plan_events('assigned')</code> 활용으로 교체.</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">4</td>
+        <td>테스트 응시 → 셀 상태 동기화 검증 (A-4)</td>
+        <td style="text-align: center;"><span class="badge high">★★★</span></td>
+        <td>코드 grep 추가 필요. 끊겨 있으면 핵심 기능 미작동.</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">5</td>
+        <td><code>propagateDelta</code> org 권한 검증 점검 (B-6)</td>
+        <td style="text-align: center;"><span class="badge mid">★★</span></td>
+        <td><code>resolveAdminScope</code> 본문 확인.</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">6</td>
+        <td>글쓰기 셀 ↔ wisdom_posts 자동 연결 정책 (A-5)</td>
+        <td style="text-align: center;"><span class="badge mid">★★</span></td>
+        <td>학생 일반 글쓰기와의 통합.</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">7</td>
+        <td>StudyPlanCreateForm 디자인 표준화 (C-9)</td>
+        <td style="text-align: center;"><span class="badge low">★</span></td>
+        <td><code>admin-detail.css</code> 토큰 적용.</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">8</td>
+        <td>학습활동 "배부" 시 학생 알림 (C-12)</td>
+        <td style="text-align: center;"><span class="badge low">★</span></td>
+        <td>푸시 또는 ReminderModal 강제 노출.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout info">
+    위 번호 중 한 묶음을 골라 주시거나, 추가로 보고 싶은 영역을 알려 주시면
+    해당 항목의 root cause 를 더 깊이 파거나 패치 후보 코드를 제시하겠습니다.
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────── -->
+<section id="s8" style="border: 2px solid var(--warn);">
+  <h2><span class="num" style="background: var(--warn);">8</span>수정 작업 계획 <span class="badge high" style="margin-left: 6px;">Rev.2 신설</span></h2>
+
+  <p>사용자 지적 3건의 root cause 를 코드로 확정하고, 패치 방향과 영향 범위를 정리합니다.
+  실제 수정 작업은 아래 계획을 바탕으로 사용자의 승인을 받은 후 시작합니다.</p>
+
+  <!-- ─── 8.1 ─── -->
+  <h3>8.1 propagateDelta — "다른 학생에게 배정이 안 박힘" 의 root cause</h3>
+
+  <div class="root-cause">
+    <h4>핵심 결함</h4>
+    <p style="margin: 0 0 8px; font-size: 0.92rem;">
+      <code>StudyPlanService.kt:1836</code> <code>propagateDelta()</code> 의 동작 범위가
+      <strong>"scope/asset 라벨 복제 + 빈 cell 자동 생성"</strong>까지로 끝납니다.
+      셀 내부의 실제 배정 데이터(콘텐츠·마감일·복수배정 리스트)는 <strong>전혀 복제되지 않습니다</strong>.
+    </p>
+    <div class="twocol">
+      <div class="yes">
+        <h5>✅ 복제되는 것</h5>
+        <ul>
+          <li>scope 라벨 (행 이름)</li>
+          <li>asset 라벨 · assetType · assetKind</li>
+          <li>asset.refId (열 단위 기본 콘텐츠)</li>
+          <li>빈 cell 생성 (status=<code>unassigned</code>)</li>
+        </ul>
+      </div>
+      <div class="no">
+        <h5>❌ 복제 안 되는 것</h5>
+        <ul>
+          <li><code>cell.cellRefId</code> — 셀의 개별 배정 콘텐츠 ID</li>
+          <li><code>study_plan_cell_assignments</code> — 국어농장 셀의 복수 콘텐츠 (N개 묶음)</li>
+          <li><code>cell.dueAt</code> — 마감일</li>
+          <li><code>cell.assignedLabel</code> · <code>cell.score</code></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <h4>코드 증거</h4>
+  <ul>
+    <li><code>propagateDelta</code> 본문(1900-1990) 에서 <code>cellAssignmentRepo</code> 호출 <strong>0건</strong>.
+      복제 루프는 <code>createCell(plan.id, scope.id, asset, uid)</code> 만 호출 (라인 1931 · 1972).</li>
+    <li><code>createCell()</code> (1504-1516) 은 항상 <code>cellRefId = if (asset.assetType == "korfarm" && asset.refId != null) asset.refId else null</code>
+      로만 채움 — 즉 asset 의 기본 refId 만 옮기고, 소스 셀의 cellRefId/assignments 는 무시.</li>
+    <li>결과: 받는 학생 plan 에 행/열은 생성되지만 셀은 모두 "배정 전" 상태로 출발 → UI 상 "배정이 안 됨" 으로 보이는 정확한 원인.</li>
+  </ul>
+
+  <h4>패치 방향 — <code>propagateDelta</code> 셀 데이터까지 복제 확장</h4>
+
+  <div class="plan-step">
+    <h4><span class="pid">P-1A</span> 소스 셀 데이터를 함께 복제하는 옵션 추가</h4>
+    <p class="what">새 행/열이 생성될 때, 같은 source plan 의 동일 scope/asset 위치의 셀 데이터를 함께 옮긴다.</p>
+    <pre>// propagateDelta 의 sourceScopes.forEach 안에서
+val sourcePlanCells = cellRepo.findByPlanId(sourcePlanId)
+val sourceCellMap = sourcePlanCells.associateBy { "${it.scopeId}_${it.assetId}" }
+val sourceAssignmentsMap = cellAssignmentRepo.findByCellIdIn(sourcePlanCells.map { it.id })
+                                              .groupBy { it.cellId }
+
+// 새 scope/asset 한 쌍으로 만들어지는 cell 마다:
+val srcCell = sourceCellMap["${s.id}_${a.id}"] ?: return@inner
+val newCell = createCell(plan.id, newScopeId, newAsset, uid)
+newCell.cellRefId      = srcCell.cellRefId
+newCell.dueAt          = srcCell.dueAt           // 학생마다 +N일 보정 옵션
+newCell.assignedLabel  = srcCell.assignedLabel
+newCell.status         = if (srcCell.cellRefId != null) "pending" else "unassigned"
+cellRepo.save(newCell)
+
+// 국어농장 복수 배정 복제
+sourceAssignmentsMap[srcCell.id]?.forEach { a ->
+    cellAssignmentRepo.save(StudyPlanCellAssignmentEntity(
+        id = IdGenerator.newId("spca"),
+        cellId = newCell.id, refId = a.refId,
+        assignedLabel = a.assignedLabel,
+        status = "pending",
+        dueAt = a.dueAt, sortOrder = a.sortOrder
+    ))
+}</pre>
+    <ul class="sub-list">
+      <li>새 request 필드 <code>includeCellData: Boolean = true</code> (default true) 로 켜고 끄기.</li>
+      <li>마감일은 학생별 가입일·기존 plan 의 startDate 등을 고려해 보정 옵션 (<code>dueOffsetMode: "as-is" | "shift-from-today"</code>) 제공.</li>
+      <li>국어농장 외 자산(test/writing/activity) 도 cellRefId/dueAt 까지 복제.</li>
+    </ul>
+  </div>
+
+  <div class="plan-step">
+    <h4><span class="pid">P-1B</span> 라벨 충돌 시 셀 데이터 처리 정책</h4>
+    <p class="what">대상 학생 plan 에 같은 라벨의 scope/asset 이 이미 있을 때 셀 데이터 복제 정책.</p>
+    <ul class="sub-list">
+      <li><code>skip</code> — 기존 라벨 유지, 셀 데이터도 안 건드림 (현재 동작 그대로).</li>
+      <li><code>overwrite</code> — 라벨·sortOrder 만 덮어쓰던 현행을 <strong>셀의 cellRefId·dueAt·assignments 도 덮어쓰도록 확장</strong>.</li>
+      <li>새 옵션 <code>merge</code> — 행/열은 유지, 셀 데이터만 덮어씀 (라벨 보존 + 콘텐츠 재배정).</li>
+    </ul>
+  </div>
+
+  <!-- ─── 8.2 ─── -->
+  <h3>8.2 셀/행/열 단위 일괄 복제 기능 신설</h3>
+
+  <div class="callout">
+    현재 UI는 "행/열 추가 직후 알약" 으로만 propagate 모달 진입. 이미 만들어진 셀을 어드민이 매트릭스에서 골라
+    다른 학생에게 박는 진입점이 백엔드·프론트 모두 부재합니다.
+  </div>
+
+  <div class="plan-step">
+    <h4><span class="pid">P-2A</span> 셀 단위 복제 API 신설</h4>
+    <p class="what">새 endpoint: <code>POST /v1/admin/study-plans/cells/{cellId}/propagate</code></p>
+    <pre>{
+  "targetScope": "org" | "class" | "users",
+  "classId":     string?,    // class 일 때
+  "userIds":     string[]?,  // users 일 때
+  "conflictPolicy": null | "skip" | "overwrite" | "merge",
+  "dueOffsetMode":  "as-is" | "shift-from-today",  // default "as-is"
+  "createMissingRowCol": true                     // 빈 행/열 없으면 자동 추가
+}</pre>
+    <p class="what">서비스 로직 :</p>
+    <ol class="sub-list">
+      <li>source cell 의 scope.label · asset.label · cellRefId · dueAt · assignments 추출.</li>
+      <li>대상 학생들의 plan 에서 같은 라벨의 scope/asset 찾기.</li>
+      <li>없고 <code>createMissingRowCol=true</code> 면 자동 생성 (asset type 까지 일치시켜야 함).</li>
+      <li>그 scope×asset 위치의 셀에 cellRefId/dueAt/assignedLabel 적용 + assignments 복제.</li>
+      <li>conflictPolicy 에 따라 기존 셀의 배정과 충돌 처리.</li>
+    </ol>
+  </div>
+
+  <div class="plan-step">
+    <h4><span class="pid">P-2B</span> 매트릭스에 "복제" 진입점 신설</h4>
+    <p class="what"><code>StudyPlanCellModal</code> 어드민 화면 하단에 <strong>"이 셀 다른 학생에게 복제"</strong> 버튼 추가.</p>
+    <ul class="sub-list">
+      <li>버튼 클릭 → 새 <code>CellPropagateModal</code> 띄움.</li>
+      <li>구조는 <code>PropagateDeltaModal</code> 과 유사하나 행/열 선택 박스 대신 "선택된 셀 1개" 표시.</li>
+      <li>매트릭스에 다중 선택 모드 토글 추가 — 여러 셀 체크박스 → "선택 셀 일괄 복제" 버튼 (Phase 2).</li>
+    </ul>
+  </div>
+
+  <div class="plan-step">
+    <h4><span class="pid">P-2C</span> 기존 PropagateDeltaModal 진입 동선 개편</h4>
+    <p class="what">"행/열 추가 직후" 1회성 알약 외에 항시 매트릭스 상단 툴바에서 진입 가능하도록.</p>
+    <ul class="sub-list">
+      <li><code>StudyPlanMatrix</code> 툴바에 <strong>"학생간 복제"</strong> 드롭다운 추가.</li>
+      <li>선택지: 행 단위 / 열 단위 / 셀 단위 / 전체 복제.</li>
+      <li>매트릭스 행·열 헤더에 호버 시 "▤ 이 행 복제" / "▥ 이 열 복제" 핸들 노출.</li>
+    </ul>
+  </div>
+
+  <!-- ─── 8.3 ─── -->
+  <h3>8.3 셀 비활성화 기능 신설</h3>
+
+  <div class="callout">
+    행/열 구분상 불필요한 셀이 발생하는 경우, 어드민이 해당 셀만 의도적으로 비활성화하여
+    매트릭스에서 진행 대상에서 제외하고 학생·학부모 화면에서도 회색 처리로 표시합니다.
+  </div>
+
+  <div class="plan-step">
+    <h4><span class="pid">P-3A</span> DB 마이그레이션 — status 값 확장</h4>
+    <p class="what">새 status 값 <code>'disabled'</code> 도입. 기존 enum 영향 없음 (varchar(32)).</p>
+    <pre>-- V0147__study_plan_cell_disabled.sql (예정)
+-- 별도 컬럼은 불필요. status='disabled' 만으로 충분.
+-- 다만 audit 용 disabled_by / disabled_at 두면 좋음:
+ALTER TABLE study_plan_cells
+  ADD COLUMN disabled_by VARCHAR(255) NULL AFTER reviewed_by,
+  ADD COLUMN disabled_at DATETIME    NULL AFTER reviewed_at;</pre>
+  </div>
+
+  <div class="plan-step">
+    <h4><span class="pid">P-3B</span> 백엔드 — 비활성/활성 API</h4>
+    <p class="what">새 endpoint 2개:</p>
+    <pre>PATCH /v1/admin/study-plans/cells/{cellId}/disable
+  body: { reason?: string }
+  effect: cell.status = "disabled", disabled_by = currentUser, disabled_at = now
+          진행률 집계에서 제외 (totalCells 에서 disabled 빼고 계산)
+
+PATCH /v1/admin/study-plans/cells/{cellId}/enable
+  effect: status 를 "unassigned" 또는 직전 status 로 복원
+          disabled_by / disabled_at = null</pre>
+    <ul class="sub-list">
+      <li><code>validateStatusTransition()</code> 에 disabled 추가 — 어느 상태에서든 disabled 로 진입 가능, disabled 에서 모든 상태로 복원 가능.</li>
+      <li><code>getProgress()</code> 의 totalCells/pendingCells/completedCells 등 카운트에서 status='disabled' 제외.</li>
+      <li><code>study_plan_events</code> 에 event_type='disabled'/'enabled' 기록.</li>
+      <li><code>CellResponse</code> 에 <code>isDisabled: Boolean</code> 필드 추가.</li>
+    </ul>
+  </div>
+
+  <div class="plan-step">
+    <h4><span class="pid">P-3C</span> 프론트엔드 — 표시 분기</h4>
+    <p class="what">매트릭스 · 캘린더 · 셀 모달 모두 disabled 셀 처리.</p>
+    <ul class="sub-list">
+      <li><code>StudyPlanMatrix</code>: disabled 셀은 회색 배경 + "—" 아이콘 + opacity 0.5 + cursor:not-allowed 처리. 학생/학부모 화면에서도 동일.</li>
+      <li><code>CellStatusBadge</code>: 새 케이스 추가 — 회색 배경, "비활성" 라벨.</li>
+      <li><code>StudyPlanCellModal</code> 어드민 화면: 셀이 disabled 가 아니면 <strong>"이 셀 비활성화"</strong> 버튼, disabled 면 <strong>"활성화 복원"</strong> 버튼 노출.</li>
+      <li><code>StudyPlanCalendar</code>: disabled 셀은 일별 dayActions 집계에서 제외 (진행률 게이지 분모 보정).</li>
+      <li><code>SubmissionsTab</code> / <code>TestTab</code> / <code>WritingTab</code> 통합 리스트에도 disabled 필터 옵션 추가 (기본은 제외).</li>
+    </ul>
+  </div>
+
+  <h3>8.4 영향 범위 · 회귀 점검 체크리스트</h3>
+  <ul>
+    <li>기존 plan 의 셀 status 데이터에 'disabled' 가 들어가 있는 row 0건 (마이그 안전).</li>
+    <li><code>propagateDelta</code> 변경 후 기존 호출처 ── <code>PropagateDeltaModal</code> 의 "행/열 추가 직후 알약" 흐름이 기본 동작(빈 셀 추가) 그대로 유지되는지 회귀 테스트.</li>
+    <li>국어농장 복수 배정 (assignments) 복제 시 사용자 가입일·plan startDate 와의 dueAt 정합성 — <code>dueOffsetMode</code> 의 default 값 정책 결정 필요.</li>
+    <li>학습활동 / 글쓰기 / 테스트 셀의 cellRefId 복제가 비즈니스적으로 맞는지 — 글쓰기는 학생마다 다른 글이 필요할 텐데 같은 topicKey 만 복제하는 게 옳음. 자산별 복제 깊이 분기 필요.</li>
+    <li>학부모 read-only 화면에서 disabled 셀이 자녀에게 의도적으로 비활성화된 항목임을 명확히 전달하는 카피.</li>
+    <li>통합 분석표 추천 일괄 등록과의 호환 — disabled 셀에 추천 콘텐츠가 박히려 할 때 처리 정책.</li>
+  </ul>
+
+  <h3>8.5 작업 순서 (제안)</h3>
+  <table class="compact">
+    <thead>
+      <tr>
+        <th style="width: 8%; text-align: center;">단계</th>
+        <th>작업</th>
+        <th style="width: 14%;">예상 영향</th>
+        <th style="width: 14%;">의존</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: center;">1</td>
+        <td><strong>P-1A · P-1B</strong> — propagateDelta 셀 데이터 복제 확장 (백엔드 단독)</td>
+        <td>기존 행/열 복제 회귀</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">2</td>
+        <td><strong>P-2A · P-2B</strong> — 셀 단위 복제 API + 모달</td>
+        <td>새 진입점 추가</td>
+        <td>P-1A 완료</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">3</td>
+        <td><strong>P-3A → P-3B → P-3C</strong> — 비활성화 기능 (마이그 → 백 → 프론트)</td>
+        <td>진행률 계산 회귀</td>
+        <td>독립</td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">4</td>
+        <td><strong>P-2C</strong> — Matrix 툴바 "학생간 복제" 동선 통합</td>
+        <td>UX 개편</td>
+        <td>P-2A 완료</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>8.6 사용자 확정 정책 <span class="badge ok">2026-05-20 결정 완료</span></h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 26%;">결정 항목</th>
+        <th style="width: 26%;">확정값</th>
+        <th>구현 영향</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>① 마감일 복제 정책</strong></td>
+        <td><code>as-is</code> (날짜 그대로)</td>
+        <td>
+          소스 셀의 <code>dueAt</code> 을 변경 없이 그대로 대상 학생 셀에 복제.
+          <code>dueOffsetMode</code> request 필드 불필요 — 항상 그대로.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>② 라벨 충돌 정책 default</strong></td>
+        <td><code>appendOrMergeCells</code> (행/열 추가 + 동일 학생 내 셀 병합)</td>
+        <td>
+          기본: 라벨이 다르면 <strong>새 scope/asset 추가</strong>.<br>
+          예외: 같은 학생에 같은 라벨의 행/열이 이미 있으면 <strong>그 위치의 셀만 추가/덮어쓰기</strong>
+          — 매트릭스에 같은 라벨이 중복으로 쌓이지 않도록.
+          conflicts 감지·dry-run 로직은 제거.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>③ 자산별 복제 깊이</strong></td>
+        <td>결과·산출물 제외, <strong>학습 내용만</strong> 복제</td>
+        <td>아래 화이트리스트(8.7) 참조.</td>
+      </tr>
+      <tr>
+        <td><strong>④ 비활성화 권한</strong></td>
+        <td>HQ_ADMIN / ORG_ADMIN 만 (학부모 X)</td>
+        <td>
+          <code>/disable</code>·<code>/enable</code> 두 endpoint 에 <code>AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")</code>.
+          학생/학부모 화면은 disabled 셀을 회색으로 표시하되 토글 버튼 없음.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>8.7 자산별 복제 화이트리스트 (결정 ③ 상세)</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 18%;">자산 종류</th>
+        <th style="width: 38%;">✅ 복제 (학습 내용)</th>
+        <th>❌ 제외 (결과·산출물)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>공통 (cell)</strong></td>
+        <td>
+          <code>cellRefId</code>, <code>dueAt</code>, <code>assignedLabel</code>
+        </td>
+        <td>
+          <code>score</code>, <code>submissionCount</code>, <code>adminNote</code>,
+          <code>reviewedBy</code>, <code>reviewedAt</code>, <code>status</code>
+          (새 셀은 <code>cellRefId</code> 유무로 <code>pending</code> 또는 <code>unassigned</code>)
+        </td>
+      </tr>
+      <tr>
+        <td>국어농장 (korfarm)</td>
+        <td>
+          <code>study_plan_cell_assignments.refId</code>,
+          <code>assignedLabel</code>, <code>dueAt</code>, <code>sortOrder</code>
+        </td>
+        <td>
+          <code>status</code> (항상 pending 로 리셋), <code>score</code>, <code>completedAt</code>
+        </td>
+      </tr>
+      <tr>
+        <td>학습활동 (activity)</td>
+        <td>
+          <code>cellRefId</code> · <code>assignedLabel</code> (활동 라벨), <code>dueAt</code>
+        </td>
+        <td>
+          <code>study_plan_cell_files</code> (제출 사진/PDF) — 학생 산출물이므로 복제 제외
+        </td>
+      </tr>
+      <tr>
+        <td>테스트 (test)</td>
+        <td>
+          <code>cellRefId</code> (= testId), <code>dueAt</code>
+        </td>
+        <td>
+          <code>test_submissions</code> 응시 결과·점수, <code>study_plan_cells.score</code>
+        </td>
+      </tr>
+      <tr>
+        <td>글쓰기 (writing)</td>
+        <td>
+          <code>cellRefId</code> 또는 <code>configJson.topicKey / topicLabel / levelId</code>,
+          <code>assignedLabel</code>, <code>dueAt</code>
+        </td>
+        <td>
+          <code>wisdom_posts</code> 자체 (학생이 작성한 글), <code>wisdomPostId</code> 연결,
+          첨삭 데이터
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>8.8 셀 병합 규칙 (결정 ② 예외 — 같은 라벨 행/열이 이미 있을 때)</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 20%;">자산 종류</th>
+        <th style="width: 32%;">기존 셀 상태</th>
+        <th>병합 동작</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="2"><strong>국어농장 (korfarm)</strong><br><em>(셀 안에 콘텐츠 N개 가능)</em></td>
+        <td>기존 assignments 있음</td>
+        <td>
+          <strong>합집합 (refId 중복은 skip)</strong>.<br>
+          소스의 assignments[refId] 가 이미 있으면 건너뛰고, 없는 것만 sortOrder 뒤에 append.<br>
+          기존 cellRefId 는 유지. status/score 는 건드리지 않음.
+        </td>
+      </tr>
+      <tr>
+        <td>기존 assignments 0건 (빈 셀)</td>
+        <td>
+          소스의 모든 assignments 를 그대로 복제 + 첫 항목으로 cell.cellRefId/assignedLabel/dueAt 채움.
+          cell.status = "pending".
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="2"><strong>학습활동 · 테스트 · 글쓰기</strong><br><em>(셀 1개 = 콘텐츠 1개 구조)</em></td>
+        <td>기존 cellRefId 있음 (배정 완료)</td>
+        <td>
+          <strong>건너뛰기 (skip)</strong>.<br>
+          이미 다른 콘텐츠가 배정된 셀은 보호 — 결과·산출물이 묶여 있을 수 있어 덮어쓰기 위험.<br>
+          (덮어쓰기를 원하면 어드민이 해당 셀을 명시적으로 재배정해야 함.)
+        </td>
+      </tr>
+      <tr>
+        <td>기존 cellRefId 없음 (unassigned)</td>
+        <td>
+          소스의 cellRefId/dueAt/assignedLabel 로 채움.<br>
+          cell.status = "pending".
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout warn">
+    <strong>운영 규칙:</strong> 같은 학생에 같은 라벨이 있을 때 "셀 단위" 와 "행/열 단위" 복제는 동일한 병합 규칙을 따릅니다.
+    매트릭스에 같은 라벨 행/열이 중복으로 쌓이지 않도록 보장하되, 이미 콘텐츠가 박힌 셀은 보호합니다.
+    어드민이 의도적으로 덮어쓰려면 해당 셀을 직접 재배정해야 합니다.
+  </div>
+
+  <div class="callout">
+    <strong>P-1A 패치 의사 코드 갱신 (결정 반영 후):</strong>
+    <pre style="background: var(--panel-alt); border: 1px solid var(--stroke-soft); border-radius: 6px; padding: 10px 12px; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.8rem; overflow-x: auto; margin: 6px 0; line-height: 1.5;">
+// 결정 ② — 같은 라벨이 있으면 기존 행 재사용, 없으면 새 행 추가
+val existingScopesByLabel = scopeRepo.findByPlanIdOrderBySortOrder(plan.id).associateBy { it.label }
+sourceScopes.forEach { s ->
+    val targetScope = existingScopesByLabel[s.label] ?: run {
+        val ns = StudyPlanScopeEntity(
+            id = IdGenerator.newId("sps"),
+            planId = plan.id,
+            label = s.label,
+            sortOrder = nextSortOrder(plan.id, "scope")
+        )
+        scopeRepo.save(ns); ns
+    }
+    // targetScope 가 새 row 면 cells 도 새로 만들고, 기존이면 셀 병합 규칙(8.8) 적용
+    // ... assets 동일 ...
+}
+
+// 결정 ③ — 학습 내용만 복제
+val newCell = createCell(plan.id, newScopeId, newAsset, uid)
+newCell.cellRefId     = srcCell.cellRefId       // 학습 내용 ✅
+newCell.dueAt         = srcCell.dueAt           // 결정 ① 그대로 ✅
+newCell.assignedLabel = srcCell.assignedLabel   // 학습 내용 ✅
+newCell.status        = if (srcCell.cellRefId != null) "pending" else "unassigned"
+// score/submissionCount/adminNote/reviewedBy/reviewedAt — 복제 안 함 ❌
+cellRepo.save(newCell)
+
+// 국어농장 복수 배정 복제 — refId/label/dueAt 만, status 는 pending 리셋
+sourceAssignmentsMap[srcCell.id]?.forEach { a ->
+    cellAssignmentRepo.save(StudyPlanCellAssignmentEntity(
+        id = IdGenerator.newId("spca"),
+        cellId = newCell.id,
+        refId = a.refId,                        // 학습 내용 ✅
+        assignedLabel = a.assignedLabel,        // 학습 내용 ✅
+        dueAt = a.dueAt,                        // 학습 내용 ✅
+        sortOrder = a.sortOrder,
+        status = "pending"                      // 결과 ❌ 리셋
+        // score/completedAt 미설정 (null)
+    ))
+}
+// cell_files / wisdom_posts / test_submissions — 절대 복제 안 함</pre>
+  </div>
+
+  <div class="callout info">
+    위 정책 4건이 모두 확정되었습니다. 다음 turn 에 <strong>P-1A → P-1B → P-3A → P-3B → P-3C → P-2A → P-2B → P-2C</strong>
+    순서로 패치 작업을 시작하겠습니다. 작업 시작 전 마지막 확인 요청만 보내 드린 뒤 진행합니다.
+  </div>
+
+  <h3>8.9 1차 배포 후 라이브 점검 사고 <span class="badge high">2026-05-20 발견</span></h3>
+
+  <div class="root-cause">
+    <h4>증상</h4>
+    <p style="margin: 0 0 6px; font-size: 0.92rem;">
+      어드민이 학생별 탭에서 "학생간 복제" → "같은 수강반(무적 고3)" + 행 "기본" + 열 "간쓸개"/"선택지 워크북(1)" 선택 → "일괄 적용" 결과:
+      <strong>새 행/열 추가 <span style="color: var(--warn);">0건</span> / 기존 셀 병합 <span style="color: var(--warn);">0건</span></strong>.
+      어떤 학생에게도 복제되지 않음.
+    </p>
+  </div>
+
+  <h4>추가 root cause</h4>
+  <ul>
+    <li>
+      <strong>(1) source 학생이 candidate 에 포함</strong> — <code>resolveTargetUserIdsForPropagation</code> 이
+      대상 수강반의 모든 학생을 candidate 로 잡는데, source plan 의 target user(=어드민이 매트릭스 편집 중인 그 학생)도 그 안에 들어있음.
+      그러면 본인 plan 에 대해 라벨 일치로 모두 기존 재사용 + 셀 데이터도 동일 → <code>changed = false</code> → 카운터 증가 없음.
+    </li>
+    <li>
+      <strong>(2) 대상 학생 중 plan 0개인 자는 userPlanMap 에 미포함</strong> — 가입 시 <code>cloneTemplatesForStudent</code> /
+      <code>createDefaultPlanForStudent</code> 가 try-catch warn 으로 조용히 실패한 학생이 있으면 그 학생은 plan 0개라
+      복제 루프가 한 번도 돌지 않음. 운영상 plan 자동 생성 실패가 누적된 학생이 다수일 수 있음.
+    </li>
+    <li>
+      <strong>(3) 응답에 디버깅 정보 부재</strong> — "0건" 만 보고 사용자는 원인 파악 불가. 대상 학생 수·plan 있는 학생 수·skip 사유 노출 필요.
+    </li>
+  </ul>
+
+  <h4>패치 방향 (P-4)</h4>
+  <div class="plan-step">
+    <h4><span class="pid">P-4A</span> source 학생 제외</h4>
+    <p class="what"><code>resolveTargetUserIdsForPropagation</code> 결과에서 sourcePlan 의 target user(=같은 학생 plan) 들을 빼고 반환.
+    자기 자신에게 복제는 의미 없음.</p>
+    <pre>val sourceTargetUserIds = targetRepo.findByPlanId(sourcePlan.id)
+    .filter { it.targetType == "user" }
+    .map { it.targetId }.toSet()
+return orgFiltered - sourceTargetUserIds</pre>
+  </div>
+
+  <div class="plan-step">
+    <h4><span class="pid">P-4B</span> plan 0개 학생에게 자동 default plan 생성</h4>
+    <p class="what"><code>userPlanMap</code> 채울 때 plan 0개인 학생에게 <code>createDefaultPlanForStudent</code> 호출.
+    가입 시 자동 생성이 실패한 학생도 복제 흐름에서 자동 복구.</p>
+    <pre>if (candidates.isNotEmpty()) {
+    userPlanMap[uid] = candidates.first()
+} else {
+    val membership = orgMembershipRepo.findByUserIdAndStatus(uid, "active").firstOrNull()
+    if (membership != null) {
+        val newPlan = createDefaultPlanForStudent(membership.orgId, uid)
+        userPlanMap[uid] = newPlan
+    }
+}</pre>
+  </div>
+
+  <div class="plan-step">
+    <h4><span class="pid">P-4C</span> 응답에 디버깅 카운터 추가</h4>
+    <p class="what"><code>PropagateDeltaResponse</code> 에 <code>eligibleUsers</code>, <code>usersWithPlan</code>,
+    <code>skippedNoPlan</code> 추가. 프론트 alert 도 정보량 보강 — "대상 X명 / plan 있음 Y명 / 새 행/열 N건 / 셀 병합 M건".</p>
+  </div>
+
+  <div class="plan-step">
+    <h4><span class="pid">P-4D</span> 프론트 alert 메시지 보강</h4>
+    <p class="what"><code>PropagateDeltaModal</code> 과 <code>CellPropagateModal</code> 의 완료 메시지에 디버깅 카운터 노출.
+    skippedNoPlan &gt; 0 이면 "plan 자동 생성 실패 학생 있음" 같은 안내.</p>
+  </div>
+
+  <h3>8.10 2차 배포 후 실제 root cause — SNAKE_CASE↔camelCase 경계 사고 <span class="badge high">2026-05-20 발견·즉시 수정</span></h3>
+
+  <div class="root-cause">
+    <h4>증상</h4>
+    <p style="margin: 0 0 6px; font-size: 0.92rem;">
+      P-4 배포 후 다시 점검 시 alert 가 "대상 학생 0명 (plan 보유 0명)" + "ℹ 대상 학생이 없습니다 (자기 자신 제외)" 로 표시.
+      그러나 운영 DB 직접 조회 결과 "무적 고3" 클래스에는 active 멤버 3명 (남현승·백민준·홍주영) 이 존재.
+    </p>
+  </div>
+
+  <h4>실제 root cause</h4>
+  <p>
+    백엔드 <code>AdminClassView</code> 의 응답 필드는 <code>classId</code> 인데,
+    <code>PropagateDeltaModal</code> 의 옵션 매핑은 <code>c.id</code> 를 읽고 있었음:
+  </p>
+  <pre style="background: var(--panel-alt); border: 1px solid var(--stroke-soft); border-radius: 6px; padding: 10px 12px; font-family: 'JetBrains Mono', Consolas, monospace; font-size: 0.8rem; overflow-x: auto; margin: 6px 0;">
+{classes.map((c) =&gt; (
+  &lt;option key={c.id} value={c.id}&gt;{c.name}&lt;/option&gt;   // ❌ c.id 가 항상 undefined
+))}</pre>
+  <p>
+    결과: 사용자가 "무적 고3" 을 선택해도 <code>value=""</code>(빈 문자열) → <code>body.classId=""</code> → 백엔드
+    <code>cid = req.classId ?: return emptySet()</code> 의 elvis 가 빈 문자열을 통과시켜 빈 문자열로 클래스 멤버 조회 →
+    <code>classMembershipRepo.findByClassIdAndStatus("", "active")</code> 가 0건 반환.
+    이게 "0명" 의 진짜 원인. P-4A 의 source 학생 제외 로직과는 무관.
+  </p>
+
+  <h4>패치 (P-4E)</h4>
+  <ul>
+    <li><strong>프론트</strong> — <code>PropagateDeltaModal</code> / <code>CellPropagateModal</code> 에 <code>const id = c.id || c.classId || c.class_id</code> fallback.
+      메모리 룰 <em>feedback_snake_camel_boundary.md</em> 의 silent-fallback 사고와 동일 패턴.</li>
+    <li><strong>백엔드</strong> — <code>resolveTargetUserIdsForPropagation</code> 의 <code>classId</code> 검증을
+      <code>?.takeIf { it.isNotBlank() } ?: return emptySet()</code> 로 강화 (빈 문자열 들어와도 NPE 없이 0명 처리).
+      <code>userIds</code> 도 동일 방어.</li>
+  </ul>
+
+  <div class="callout warn">
+    <strong>회귀 점검 항목</strong>: AdminClassView 응답을 사용하는 다른 화면에서도 <code>c.id</code> 매핑이 있는지 grep 으로 확인 필요.
+    동일 사고가 다른 곳에 잠재해 있을 수 있음.
+  </div>
+
+  <h3>8.11 3차 배포 후 — 셀 학습 내용 미복제 사고 <span class="badge high">2026-05-20 발견·즉시 수정</span></h3>
+
+  <div class="root-cause">
+    <h4>증상</h4>
+    <p style="margin: 0 0 6px; font-size: 0.92rem;">
+      P-4E 배포 후 학생간 복제 재시도 결과: 다른 학생 매트릭스에 행/열 라벨은 정상 추가되지만
+      모든 셀이 <strong>"배정 전" 상태</strong>로 표시. 학습 내용(assignedLabel, dueAt)이 복제되지 않음.
+    </p>
+  </div>
+
+  <h4>RDS 직접 조회로 확인된 실제 root cause 2건</h4>
+
+  <div class="plan-step">
+    <h4><span class="pid">P-5A</span> <code>sourceCellMap.first()</code> 가 unassigned 셀을 잡음</h4>
+    <p class="what">
+      <code>cellRepo.findByPlanId(sourcePlanId)</code> 결과를 <code>(scopeId, assetId)</code> 로 group 한 뒤 첫 셀을 사용하는데,
+      한 sourcePlan 안에 같은 (scope, asset) 위치의 셀이 2개 이상 (자기 자신 + 다른 user) 또는 unassigned·pending 두 셀이 공존하는 케이스에서
+      <code>list.first()</code> 가 unassigned/다른 user 셀을 잡아 학습 내용이 비어 있는 채로 병합 시도.
+    </p>
+    <pre>// 수정: source plan 의 target user 셀만 + 학습 내용 채워진 셀 우선
+val sourcePlanTargetUserIds = targetRepo.findByPlanId(sourcePlanId)
+    .filter { it.targetType == "user" }.map { it.targetId }.toSet()
+
+cellRepo.findByPlanId(sourcePlanId)
+    .filter {
+        it.scopeId in srcScopeIds && it.assetId in srcAssetIds &&
+        (sourcePlanTargetUserIds.isEmpty() || it.userId in sourcePlanTargetUserIds)
+    }
+    .groupBy { "${it.scopeId}_${it.assetId}" }
+    .mapValues { (_, list) -&gt;
+        list.sortedWith(compareBy(
+            { if (it.cellRefId != null || it.assignedLabel != null) 0 else 1 },
+            { if (it.status != "unassigned") 0 else 1 },
+            { it.createdAt }
+        )).first()
+    }</pre>
+  </div>
+
+  <div class="plan-step">
+    <h4><span class="pid">P-5B</span> activity/test/writing 분기에 status="pending" 누락</h4>
+    <p class="what">
+      <code>mergeCellLearningContent</code> 의 자유 텍스트(ref 없는 activity) 분기에서 <code>assignedLabel</code>·<code>dueAt</code> 만 복제하고
+      <code>status</code> 는 <code>unassigned</code> 그대로 둠 → 매트릭스에 "배정 전" 으로 표시됨.
+    </p>
+    <pre>} else if (tgtCell.cellRefId == null && srcCell.assignedLabel != null) {
+    tgtCell.assignedLabel = srcCell.assignedLabel
+    tgtCell.dueAt = srcCell.dueAt
+    tgtCell.status = "pending"   // ← P-5B 추가
+    cellRepo.save(tgtCell)
+    changed = true
+}</pre>
+  </div>
+
+  <div class="callout warn">
+    <strong>발견된 부가 이상 데이터</strong>: RDS 조회 중 한 plan 안에 같은 라벨의 행/열이 중복 생성됐거나
+    plan_id 가 다른 학생의 셀이 섞인 row 일부 발견. 이는 1차/2차 배포의 propagate 시도 잔재로 추정.
+    P-5 적용 후에는 발생하지 않으며, 기존 잔재 데이터는 어드민이 수동 정리하거나 별도 보정 스크립트가 필요할 수 있음.
+  </div>
+</section>
+
+<footer>
+  국어농장 v2 · 학습 계획표 점검 보고서 · 2026-05-20<br>
+  대상: <code>backend/src/main/kotlin/com/korfarm/api/studyplan/*</code> + <code>frontend/src/{pages,components}/StudyPlan*</code> + <code>frontend/src/components/study-plan-dashboard/*</code>
+</footer>
+
+</div>
+</body>
+</html>

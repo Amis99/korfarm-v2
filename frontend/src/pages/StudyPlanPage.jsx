@@ -63,8 +63,9 @@ export default function StudyPlanPage() {
     const aKind = asset?.assetKind || cell?.assetKind;
     const refId = cell?.cellRefId || asset?.refId || cell?.refId;
 
-    // unassigned 셀은 학생이 클릭해도 무반응
+    // unassigned 셀 또는 비활성 셀은 학생이 클릭해도 무반응
     if (cell.status === "unassigned") return;
+    if (cell.status === "disabled" || cell.isDisabled) return;
 
     // 국어농장: 콘텐츠로 이동
     if (aType === "korfarm" && refId) {

@@ -4,6 +4,7 @@ import { apiGet, apiPatch, API_BASE, TOKEN_KEY } from "../utils/api";
 import { apiGetCamel } from "../utils/adminApi";
 import CellStatusBadge from "./CellStatusBadge";
 import KorfarmContentSearchModal from "./KorfarmContentSearchModal";
+import CellPropagateModal from "./study-plan-dashboard/CellPropagateModal";
 import "../styles/admin-study-plan.css";
 
 // 셀 데이터에서 안전하게 config_json 을 추출 (다양한 필드 케이스 지원)
@@ -28,6 +29,7 @@ export default function StudyPlanCellModal({ cell, scope, asset, onClose, onUpda
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
   const [showContentSearch, setShowContentSearch] = useState(false);
+  const [showPropagate, setShowPropagate] = useState(false);
 
   useEffect(() => {
     if (!cell?.cellId) return;
@@ -160,6 +162,26 @@ export default function StudyPlanCellModal({ cell, scope, asset, onClose, onUpda
     }
   };
 
+  // V0147 / Rev.2 — 셀 비활성화 / 복원
+  const isDisabled = cell?.status === "disabled" || cell?.isDisabled;
+  const handleToggleDisabled = async () => {
+    const confirmMsg = isDisabled
+      ? "이 셀을 다시 활성화하시겠습니까?"
+      : "이 셀을 비활성화하시겠습니까?\n진행률 분모에서 제외되고, 학생·학부모 화면에서 회색으로 표시됩니다.";
+    if (!window.confirm(confirmMsg)) return;
+    setSaving(true);
+    setError(null);
+    try {
+      const endpoint = isDisabled ? "enable" : "disable";
+      await apiPatch(`/v1/admin/study-plans/cells/${cell.cellId}/${endpoint}`, {});
+      onUpdated?.();
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setSaving(false);
+    }
+  };
+
   // 국어농장 콘텐츠 배정 API
   const handleAssignContent = async (content) => {
     setSaving(true);
@@ -191,6 +213,17 @@ export default function StudyPlanCellModal({ cell, scope, asset, onClose, onUpda
           <KorfarmContentSearchModal
             onSelect={handleAssignContent}
             onClose={() => setShowContentSearch(false)}
+          />
+        )}
+
+        {showPropagate && (
+          <CellPropagateModal
+            cell={cell}
+            scope={scope}
+            asset={asset}
+            currentUserId={cell?.userId}
+            onClose={() => setShowPropagate(false)}
+            onApplied={() => { setShowPropagate(false); onUpdated?.(); }}
           />
         )}
 
@@ -558,7 +591,36 @@ export default function StudyPlanCellModal({ cell, scope, asset, onClose, onUpda
           </div>
         )}
 
-        <div style={{ textAlign: "right", marginTop: 16 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 16, gap: 8, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+            {/* V0147 / Rev.2 — 셀 비활성화 / 복원 (HQ_ADMIN / ORG_ADMIN 전용) */}
+            <button
+              className={isDisabled ? "asp-btn-approve" : "asp-btn-retry"}
+              onClick={handleToggleDisabled}
+              disabled={saving}
+              title={isDisabled ? "이 셀을 다시 활성화합니다" : "이 셀을 비활성화 — 진행률 분모 제외"}
+              style={{ padding: "8px 16px" }}
+            >
+              <span className="material-symbols-outlined" style={{ verticalAlign: "middle", fontSize: 16, marginRight: 4 }}>
+                {isDisabled ? "play_circle" : "block"}
+              </span>
+              {isDisabled ? "셀 활성화 복원" : "이 셀 비활성화"}
+            </button>
+            {/* Rev.2 — 셀 단위 복제 (비활성/배정 전 셀은 제외) */}
+            {!isDisabled && cell?.status !== "unassigned" && (
+              <button
+                className="asp-btn-jump"
+                onClick={() => setShowPropagate(true)}
+                title="이 셀의 학습 내용을 다른 학생에게 복제 (결과·산출물 제외)"
+                style={{ padding: "8px 16px" }}
+              >
+                <span className="material-symbols-outlined" style={{ verticalAlign: "middle", fontSize: 16, marginRight: 4 }}>
+                  group_add
+                </span>
+                이 셀 다른 학생에게 복제
+              </button>
+            )}
+          </div>
           <button
             className="asp-btn-prev"
             onClick={onClose}

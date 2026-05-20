@@ -189,18 +189,31 @@ export default function StudentMatrixTab({ userId, focusCellId }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
       <div className="admin-detail-card">
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12, gap: 8, flexWrap: "wrap" }}>
           <h2 style={{ margin: 0, color: "var(--admin-ink)" }}>{plan?.title || "학습 계획표"}</h2>
-          {showPropagatePill && (lastAddedScopeId || lastAddedAssetId) && (
+          <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+            {showPropagatePill && (lastAddedScopeId || lastAddedAssetId) && (
+              <span style={{
+                fontSize: 12,
+                color: "var(--admin-accent-strong, #1f4a37)",
+                background: "rgba(45,106,79,0.08)",
+                padding: "4px 10px",
+                borderRadius: 12,
+              }}>
+                ↳ 방금 추가한 항목 자동 선택
+              </span>
+            )}
+            {/* Rev.2 — 학생간 복제 진입점 항상 노출. 행/열 다중 선택은 모달에서. */}
             <button
               className="admin-detail-btn"
               onClick={() => setPropagateModal({})}
               style={{ display: "inline-flex", alignItems: "center", gap: 4 }}
+              title="이 학생의 행/열·셀의 학습 내용을 다른 학생에게 일괄 복제"
             >
-              <span className="material-symbols-outlined" style={{ fontSize: 18 }}>send</span>
-              적용 대상에 동일 추가
+              <span className="material-symbols-outlined" style={{ fontSize: 18 }}>group_add</span>
+              학생간 복제
             </button>
-          )}
+          </div>
         </div>
 
         {/* 매트릭스 — 8행까지 보이는 세로 스크롤 컨테이너 */}

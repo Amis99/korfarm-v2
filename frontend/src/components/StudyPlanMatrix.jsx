@@ -16,11 +16,13 @@ const STATUS_FILTER_OPTIONS = [
   { value: "overdue", label: "미완료" },
   { value: "done", label: "수행완료" },
   { value: "reviewed", label: "점검완료" },
+  { value: "disabled", label: "비활성" },
 ];
 
-// 5단계 라벨 매핑 — DB status → STATUS_FILTER_OPTIONS.value 와 비교용
+// 6단계 라벨 매핑 — DB status → STATUS_FILTER_OPTIONS.value 와 비교용
 function classifyCellStatus(cell) {
   if (!cell) return "unassigned";
+  if (cell.status === "disabled" || cell.isDisabled) return "disabled";
   if (cell.status === "unassigned") return "unassigned";
   if (cell.isOverdue) return "overdue";
   if (cell.status === "reviewed") return "reviewed";
@@ -131,6 +133,7 @@ export default function StudyPlanMatrix({
 
   const getCellClassName = (cell) => {
     if (!cell) return "";
+    if (cell.status === "disabled" || cell.isDisabled) return "cell-disabled";
     if (cell.status === "unassigned") return "cell-unassigned";
     if (cell.status === "partial") return "cell-partial";
     return "";
@@ -321,8 +324,10 @@ export default function StudyPlanMatrix({
                 const dimmed = statusFilter !== "all" && stage !== statusFilter;
                 const dimStyle = dimmed ? { opacity: 0.25 } : undefined;
                 const studentUnassigned = !admin && cell?.status === "unassigned";
+                const isDisabled = cell?.status === "disabled" || cell?.isDisabled;
+                const studentDisabled = !admin && isDisabled;
                 const handleClick = () => {
-                  if (studentUnassigned) return;
+                  if (studentUnassigned || studentDisabled) return;
                   onCellClick?.(cell, scope, asset);
                 };
                 return (

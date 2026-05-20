@@ -419,6 +419,7 @@ class StudyPlanService(
             var total = 0; var completed = 0; var pending = 0; var submitted = 0
             var unassigned = 0; var inProgress = 0; var partial = 0
             cells.forEach { cell ->
+                if (cell.status == "disabled") return@forEach  // V0147 — 진행률 분모 제외
                 val isKorfarm = cell.assetId in korfarmAssetIds
                 val (t, c) = countForCell(cell, isKorfarm, { it.status in setOf("completed", "passed") }, { it.status == "completed" })
                 total += t; completed += c
@@ -1305,6 +1306,10 @@ class StudyPlanService(
     // ── 상태 전이 검증 ──
 
     private fun validateStatusTransition(assetType: String, from: String, to: String): Boolean {
+        // V0147 / Rev.2 — 어느 상태에서든 disabled 진입 가능, disabled 에서 unassigned/pending 으로 복원 가능
+        if (to == "disabled") return from != "disabled"
+        if (from == "disabled") return to in setOf("unassigned", "pending")
+
         val validTransitions = when (assetType) {
             "korfarm" -> mapOf(
                 "unassigned" to setOf("pending"),
@@ -1832,6 +1837,22 @@ class StudyPlanService(
     // Phase C: 행/열 일괄 적용 (충돌 감지)
     // ─────────────────────────────────────────────────────────────
 
+    /**
+     * 행/열 (선택 시 셀 학습 내용까지) 일괄 복제 — Rev.2 (2026-05-20).
+     *
+     * 정책 (사용자 확정 2026-05-20):
+     *  ① 마감일: as-is 그대로 복제
+     *  ② 라벨 충돌: 라벨이 다르면 새 행/열 추가, 같으면 기존 재사용 + 셀 병합
+     *  ③ 학습 내용만 복제 (cellRefId/dueAt/assignedLabel + assignments[refId/label/dueAt/sortOrder])
+     *     — score/submissionCount/adminNote/reviewedBy/reviewedAt/files/wisdom_posts 제외
+     *
+     * 셀 학습 내용 복제는 sourceScopes 와 sourceAssets 가 모두 비어있지 않을 때만 발생
+     * (둘 중 하나만 지정하면 행 또는 열 라벨만 복제, 셀은 빈 상태로 출발).
+     *
+     * 셀 병합 규칙 (8.8):
+     *  - 국어농장: assignments 합집합 (refId 중복 skip). 빈 셀이면 첫 항목으로 cellRefId 채움.
+     *  - 학습활동/테스트/글쓰기: 기존 cellRefId 있으면 skip (산출물 보호). 없으면 채움.
+     */
     @Transactional
     fun propagateDelta(
         sourcePlanId: String,
@@ -1854,139 +1875,305 @@ class StudyPlanService(
             return PropagateDeltaResponse()
         }
 
-        // 학생당 plan 1개 가정 — 각 학생의 active non-template plan 을 찾음
+        // 셀 학습 내용 복제 여부 — 두 축 모두 선택됐을 때만
+        val copyCellData = sourceScopes.isNotEmpty() && sourceAssets.isNotEmpty()
+        // P-5A — sourcePlan 의 target user 셀만 + 학습 내용 채워진 셀 우선 (unassigned 후순위)
+        val sourcePlanTargetUserIds = targetRepo.findByPlanId(sourcePlanId)
+            .filter { it.targetType == "user" }
+            .map { it.targetId }.toSet()
+        val sourceCellMap: Map<String, StudyPlanCellEntity> = if (copyCellData) {
+            val srcScopeIds = sourceScopes.map { it.id }.toSet()
+            val srcAssetIds = sourceAssets.map { it.id }.toSet()
+            cellRepo.findByPlanId(sourcePlanId)
+                .filter {
+                    it.scopeId in srcScopeIds && it.assetId in srcAssetIds &&
+                        (sourcePlanTargetUserIds.isEmpty() || it.userId in sourcePlanTargetUserIds)
+                }
+                .groupBy { "${it.scopeId}_${it.assetId}" }
+                .mapValues { (_, list) ->
+                    // 학습 내용 있는 셀 우선: cellRefId 또는 assignedLabel 채워진 + 비-unassigned 우선
+                    list.sortedWith(compareBy(
+                        { if (it.cellRefId != null || it.assignedLabel != null) 0 else 1 },
+                        { if (it.status != "unassigned") 0 else 1 },
+                        { it.createdAt }
+                    )).first()
+                }
+        } else emptyMap()
+
+        val sourceAssignmentsByCell: Map<String, List<StudyPlanCellAssignmentEntity>> =
+            if (sourceCellMap.isNotEmpty()) {
+                cellAssignmentRepo.findByCellIdIn(sourceCellMap.values.map { it.id })
+                    .groupBy { it.cellId }
+            } else emptyMap()
+
+        // 학생당 plan 1개 가정 — 각 학생의 active non-template plan
+        // Rev.2 P-4B — plan 0개 학생에게는 default plan 자동 생성 (가입 시 자동 생성 실패 보정)
         val userPlanMap = mutableMapOf<String, StudyPlanEntity>()
+        var skippedNoPlan = 0
         targetUserIds.forEach { uid ->
             val planIds = targetRepo.findByTargetTypeAndTargetId("user", uid).map { it.planId }
-            if (planIds.isEmpty()) return@forEach
-            val candidates = planRepo.findAllById(planIds)
-                .filter { !it.isTemplate && it.status == "active" }
-                .sortedByDescending { it.createdAt }
+            val candidates = if (planIds.isEmpty()) emptyList()
+                else planRepo.findAllById(planIds)
+                    .filter { !it.isTemplate && it.status == "active" }
+                    .sortedByDescending { it.createdAt }
             if (candidates.isNotEmpty()) {
                 userPlanMap[uid] = candidates.first()
+            } else {
+                // plan 자동 생성 시도
+                try {
+                    val membership = orgMembershipRepo.findByUserIdAndStatus(uid, "active").firstOrNull()
+                    if (membership != null) {
+                        userPlanMap[uid] = createDefaultPlanForStudent(membership.orgId, uid)
+                    } else {
+                        skippedNoPlan += 1
+                    }
+                } catch (_: Exception) {
+                    skippedNoPlan += 1
+                }
             }
         }
 
-        // 충돌 감지
-        val conflicts = mutableListOf<PropagateConflict>()
-        val perUserConflictLabels = mutableMapOf<String, Pair<MutableSet<String>, MutableSet<String>>>()
-        userPlanMap.forEach { (uid, plan) ->
-            val existingScopeLabels = scopeRepo.findByPlanIdOrderBySortOrder(plan.id).map { it.label }.toSet()
-            val existingAssetLabels = assetRepo.findByPlanIdOrderBySortOrder(plan.id).map { it.label }.toSet()
-            val scopeConflicts = mutableSetOf<String>()
-            val assetConflicts = mutableSetOf<String>()
-            sourceScopes.forEach { s -> if (s.label in existingScopeLabels) scopeConflicts.add(s.label) }
-            sourceAssets.forEach { a -> if (a.label in existingAssetLabels) assetConflicts.add(a.label) }
-            if (scopeConflicts.isNotEmpty() || assetConflicts.isNotEmpty()) {
-                perUserConflictLabels[uid] = scopeConflicts to assetConflicts
-                val userName = userRepo.findById(uid).orElse(null)?.name
-                scopeConflicts.forEach { conflicts.add(PropagateConflict(uid, userName, "scope", it)) }
-                assetConflicts.forEach { conflicts.add(PropagateConflict(uid, userName, "asset", it)) }
-            }
-        }
-
-        // policy 미지정 + 충돌 있음 → dry-run
-        if (req.conflictPolicy == null && conflicts.isNotEmpty()) {
-            return PropagateDeltaResponse(conflicts = conflicts, appliedCount = 0)
-        }
-
-        // 실제 적용
         var appliedCount = 0
-        var skippedCount = 0
-        var overwrittenCount = 0
+        var mergedCellCount = 0
         val results = mutableListOf<PropagateUserResult>()
 
         userPlanMap.forEach { (uid, plan) ->
-            val (scopeConflictLabels, assetConflictLabels) = perUserConflictLabels[uid]
-                ?: (emptySet<String>() to emptySet<String>())
             var applied = false
 
-            val existingScopesByLabel = scopeRepo.findByPlanIdOrderBySortOrder(plan.id).associateBy { it.label }
-            val existingAssetsByLabel = assetRepo.findByPlanIdOrderBySortOrder(plan.id).associateBy { it.label }
-
+            // 1) scopes 매핑 — 라벨 일치 시 재사용, 없으면 추가
+            val existingScopesByLabel = scopeRepo.findByPlanIdOrderBySortOrder(plan.id)
+                .associateBy { it.label }.toMutableMap()
+            var nextScopeOrder = (existingScopesByLabel.values.maxOfOrNull { it.sortOrder } ?: -1) + 1
+            val scopeMap = mutableMapOf<String, StudyPlanScopeEntity>() // sourceScopeId → targetScope
             sourceScopes.forEach { s ->
-                if (s.label in scopeConflictLabels) {
-                    when (req.conflictPolicy) {
-                        "skip" -> skippedCount += 1
-                        "overwrite" -> {
-                            existingScopesByLabel[s.label]?.let { existing ->
-                                existing.sortOrder = s.sortOrder
-                                scopeRepo.save(existing)
-                            }
-                            overwrittenCount += 1
-                            applied = true
-                        }
-                    }
+                val tgt = existingScopesByLabel[s.label]
+                if (tgt != null) {
+                    scopeMap[s.id] = tgt
                 } else {
-                    val newScope = StudyPlanScopeEntity(
+                    val ns = StudyPlanScopeEntity(
                         id = IdGenerator.newId("sps"),
                         planId = plan.id,
                         label = s.label,
-                        sortOrder = s.sortOrder
+                        sortOrder = nextScopeOrder++
                     )
-                    scopeRepo.save(newScope)
-                    val planAssets = assetRepo.findByPlanIdOrderBySortOrder(plan.id)
-                    planAssets.forEach { a ->
-                        if (cellRepo.findByScopeIdAndAssetIdAndUserId(newScope.id, a.id, uid) == null) {
-                            createCell(plan.id, newScope.id, a, uid)
-                        }
-                    }
+                    scopeRepo.save(ns)
+                    existingScopesByLabel[s.label] = ns
+                    scopeMap[s.id] = ns
                     appliedCount += 1
                     applied = true
+
+                    // 새 scope 생성 시 기존 모든 asset 과의 교차 셀 자동 생성
+                    assetRepo.findByPlanIdOrderBySortOrder(plan.id).forEach { a ->
+                        if (cellRepo.findByScopeIdAndAssetIdAndUserId(ns.id, a.id, uid) == null) {
+                            createCell(plan.id, ns.id, a, uid)
+                        }
+                    }
                 }
             }
 
+            // 2) assets 매핑 — 라벨 일치 시 재사용, 없으면 추가
+            val existingAssetsByLabel = assetRepo.findByPlanIdOrderBySortOrder(plan.id)
+                .associateBy { it.label }.toMutableMap()
+            var nextAssetOrder = (existingAssetsByLabel.values.maxOfOrNull { it.sortOrder } ?: -1) + 1
+            val assetMap = mutableMapOf<String, StudyPlanAssetEntity>()
             sourceAssets.forEach { a ->
-                if (a.label in assetConflictLabels) {
-                    when (req.conflictPolicy) {
-                        "skip" -> skippedCount += 1
-                        "overwrite" -> {
-                            existingAssetsByLabel[a.label]?.let { existing ->
-                                existing.refId = a.refId
-                                existing.configJson = a.configJson
-                                existing.sortOrder = a.sortOrder
-                                existing.assetKind = a.assetKind
-                                existing.assetType = a.assetType
-                                assetRepo.save(existing)
-                            }
-                            overwrittenCount += 1
-                            applied = true
-                        }
-                    }
+                val tgt = existingAssetsByLabel[a.label]
+                if (tgt != null) {
+                    assetMap[a.id] = tgt
                 } else {
                     validateAssetType(a.assetType)
-                    val newAsset = StudyPlanAssetEntity(
+                    val na = StudyPlanAssetEntity(
                         id = IdGenerator.newId("spa"),
                         planId = plan.id,
                         assetType = a.assetType,
                         label = a.label,
                         assetKind = a.assetKind,
                         refId = a.refId,
-                        sortOrder = a.sortOrder,
+                        sortOrder = nextAssetOrder++,
                         configJson = a.configJson
                     )
-                    assetRepo.save(newAsset)
-                    val planScopes = scopeRepo.findByPlanIdOrderBySortOrder(plan.id)
-                    planScopes.forEach { sc ->
-                        if (cellRepo.findByScopeIdAndAssetIdAndUserId(sc.id, newAsset.id, uid) == null) {
-                            createCell(plan.id, sc.id, newAsset, uid)
-                        }
-                    }
+                    assetRepo.save(na)
+                    existingAssetsByLabel[a.label] = na
+                    assetMap[a.id] = na
                     appliedCount += 1
                     applied = true
+
+                    // 새 asset 생성 시 기존 모든 scope 와의 교차 셀 자동 생성
+                    scopeRepo.findByPlanIdOrderBySortOrder(plan.id).forEach { sc ->
+                        if (cellRepo.findByScopeIdAndAssetIdAndUserId(sc.id, na.id, uid) == null) {
+                            createCell(plan.id, sc.id, na, uid)
+                        }
+                    }
+                }
+            }
+
+            // 3) 셀 학습 내용 병합 — 두 축 모두 선택됐을 때만
+            if (copyCellData) {
+                sourceScopes.forEach { srcScope ->
+                    sourceAssets.forEach { srcAsset ->
+                        val tgtScope = scopeMap[srcScope.id] ?: return@forEach
+                        val tgtAsset = assetMap[srcAsset.id] ?: return@forEach
+                        val srcCell = sourceCellMap["${srcScope.id}_${srcAsset.id}"] ?: return@forEach
+                        val tgtCell = cellRepo.findByScopeIdAndAssetIdAndUserId(tgtScope.id, tgtAsset.id, uid)
+                            ?: createCell(plan.id, tgtScope.id, tgtAsset, uid)
+                        val srcAssignments = sourceAssignmentsByCell[srcCell.id] ?: emptyList()
+                        val merged = mergeCellLearningContent(tgtCell, srcCell, srcAssignments, tgtAsset)
+                        if (merged) {
+                            mergedCellCount += 1
+                            applied = true
+                        }
+                    }
                 }
             }
 
             results.add(PropagateUserResult(uid, applied))
         }
 
+        // Rev.2 — conflicts dry-run 폐기. 항상 즉시 적용 결과만 반환.
         return PropagateDeltaResponse(
-            conflicts = if (req.conflictPolicy == null) conflicts else emptyList(),
+            conflicts = emptyList(),
             appliedCount = appliedCount,
-            skippedCount = skippedCount,
-            overwrittenCount = overwrittenCount,
-            results = results
+            skippedCount = 0,
+            overwrittenCount = mergedCellCount,
+            results = results,
+            eligibleUsers = targetUserIds.size,
+            usersWithPlan = userPlanMap.size,
+            skippedNoPlan = skippedNoPlan
         )
+    }
+
+    /**
+     * 셀 병합 규칙 (보고서 8.8) — 학습 내용만 복제, 결과·산출물 제외.
+     * @return 실제 변경 발생 여부.
+     */
+    private fun mergeCellLearningContent(
+        tgtCell: StudyPlanCellEntity,
+        srcCell: StudyPlanCellEntity,
+        srcAssignments: List<StudyPlanCellAssignmentEntity>,
+        tgtAsset: StudyPlanAssetEntity
+    ): Boolean {
+        var changed = false
+        if (tgtAsset.assetType == "korfarm") {
+            // 국어농장 — assignments 합집합 (refId 중복 skip)
+            val existing = cellAssignmentRepo.findByCellIdOrderBySortOrderAscCreatedAtAsc(tgtCell.id)
+            val existingRefIds = existing.map { it.refId }.toSet()
+            var nextOrder = (existing.maxOfOrNull { it.sortOrder } ?: -1) + 1
+            srcAssignments.forEach { sa ->
+                if (sa.refId in existingRefIds) return@forEach
+                cellAssignmentRepo.save(StudyPlanCellAssignmentEntity(
+                    id = IdGenerator.newId("spca"),
+                    cellId = tgtCell.id,
+                    refId = sa.refId,
+                    assignedLabel = sa.assignedLabel,
+                    status = "pending",            // 결과 리셋
+                    score = null,
+                    dueAt = sa.dueAt,              // 마감일 그대로
+                    completedAt = null,
+                    sortOrder = nextOrder++
+                ))
+                changed = true
+            }
+            // 빈 셀이면 첫 항목으로 cell.cellRefId 채움
+            if (existing.isEmpty() && tgtCell.cellRefId == null) {
+                val firstFromAssignments = srcAssignments.firstOrNull()
+                if (firstFromAssignments != null) {
+                    tgtCell.cellRefId = firstFromAssignments.refId
+                    tgtCell.assignedLabel = firstFromAssignments.assignedLabel
+                    tgtCell.dueAt = firstFromAssignments.dueAt ?: srcCell.dueAt
+                    tgtCell.status = "pending"
+                    cellRepo.save(tgtCell)
+                    changed = true
+                } else if (srcCell.cellRefId != null) {
+                    tgtCell.cellRefId = srcCell.cellRefId
+                    tgtCell.assignedLabel = srcCell.assignedLabel
+                    tgtCell.dueAt = srcCell.dueAt
+                    tgtCell.status = "pending"
+                    cellRepo.save(tgtCell)
+                    changed = true
+                }
+            }
+        } else {
+            // 학습활동·테스트·글쓰기 — 기존 cellRefId 있으면 산출물 보호로 skip
+            if (tgtCell.cellRefId == null && srcCell.cellRefId != null) {
+                tgtCell.cellRefId = srcCell.cellRefId
+                tgtCell.assignedLabel = srcCell.assignedLabel ?: tgtCell.assignedLabel
+                tgtCell.dueAt = srcCell.dueAt
+                tgtCell.status = "pending"
+                cellRepo.save(tgtCell)
+                changed = true
+            } else if (tgtCell.cellRefId == null && srcCell.assignedLabel != null) {
+                // ref 없는 자유 텍스트 활동 — 라벨만 복제. P-5B: status 도 pending 으로 전환.
+                tgtCell.assignedLabel = srcCell.assignedLabel
+                tgtCell.dueAt = srcCell.dueAt
+                tgtCell.status = "pending"
+                cellRepo.save(tgtCell)
+                changed = true
+            }
+        }
+        return changed
+    }
+
+    /**
+     * 셀 단위 일괄 복제 (Rev.2 신설) — 매트릭스에서 특정 셀 1개를 다른 학생들에게 박을 때 사용.
+     * 내부적으로 propagateDelta 에 위임하며, scopeIds/assetIds 를 source cell 의 1개로 자동 지정한다.
+     * 따라서 보고서 8.6/8.7/8.8 정책이 그대로 적용된다.
+     */
+    @Transactional
+    fun propagateCell(
+        cellId: String,
+        currentUserId: String,
+        req: PropagateDeltaRequest
+    ): PropagateDeltaResponse {
+        val sourceCell = findCell(cellId)
+        val derivedReq = req.copy(
+            scopeIds = listOf(sourceCell.scopeId),
+            assetIds = listOf(sourceCell.assetId)
+        )
+        return propagateDelta(sourceCell.planId, currentUserId, derivedReq)
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // 셀 비활성화 / 복원 (V0147 / Rev.2)
+    // ─────────────────────────────────────────────────────────────
+
+    /**
+     * 셀을 비활성화한다. 행/열 구조상 불필요한 셀을 어드민이 골라 진행률·화면에서 제외.
+     * 비활성 셀은 study_plan_cells.status='disabled' 로 표시되며, 회색 처리로 노출된다.
+     */
+    @Transactional
+    fun disableCell(cellId: String, actorId: String): StudyPlanCellEntity {
+        val cell = findCell(cellId)
+        if (cell.status == "disabled") return cell
+        val asset = assetRepo.findById(cell.assetId).orElse(null)
+        val assetType = asset?.assetType ?: "korfarm"
+        if (!validateStatusTransition(assetType, cell.status, "disabled")) {
+            throw ApiException(
+                "BAD_REQUEST",
+                "이 셀은 비활성화할 수 없습니다 (status=${cell.status})",
+                HttpStatus.BAD_REQUEST
+            )
+        }
+        cell.status = "disabled"
+        cell.disabledBy = actorId
+        cell.disabledAt = LocalDateTime.now()
+        cellRepo.save(cell)
+        createEvent(cell, "disabled")
+        return cell
+    }
+
+    /**
+     * 비활성 셀을 복원한다. cellRefId 가 있으면 pending, 없으면 unassigned 로 돌린다.
+     */
+    @Transactional
+    fun enableCell(cellId: String, actorId: String): StudyPlanCellEntity {
+        val cell = findCell(cellId)
+        if (cell.status != "disabled") return cell
+        cell.status = if (cell.cellRefId != null) "pending" else "unassigned"
+        cell.disabledBy = null
+        cell.disabledAt = null
+        cellRepo.save(cell)
+        createEvent(cell, "enabled")
+        return cell
     }
 
     private fun resolveTargetUserIdsForPropagation(
@@ -2005,13 +2192,14 @@ class StudyPlanService(
                     .map { it.userId }.toSet()
             }
             "class" -> {
-                val cid = req.classId ?: return emptySet()
+                // Rev.2 P-4E — 빈 문자열도 방어 (프론트 매핑 사고 회귀 대비)
+                val cid = req.classId?.takeIf { it.isNotBlank() } ?: return emptySet()
                 classMembershipRepo.findByClassIdAndStatus(cid, "active").map { it.userId }.toSet()
             }
-            "users" -> req.userIds?.toSet() ?: emptySet()
+            "users" -> req.userIds?.filter { it.isNotBlank() }?.toSet() ?: emptySet()
             else -> emptySet()
         }
-        return when (scope) {
+        val orgFiltered = when (scope) {
             is AdminScope.All -> candidate
             is AdminScope.Org -> {
                 val orgUserIds = orgMembershipRepo.findByOrgIdAndStatus(scope.orgId, "active")
@@ -2020,6 +2208,11 @@ class StudyPlanService(
                 candidate.intersect(orgUserIds)
             }
         }
+        // Rev.2 P-4A — source plan 의 target user 는 제외 (자기 자신 plan 에는 복제 의미 없음)
+        val sourceTargetUserIds = targetRepo.findByPlanId(sourcePlan.id)
+            .filter { it.targetType == "user" }
+            .map { it.targetId }.toSet()
+        return orgFiltered - sourceTargetUserIds
     }
 
     // ─────────────────────────────────────────────────────────────

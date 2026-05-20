@@ -60,6 +60,8 @@ export default function StudyPlanCalendar({ schedules, startDate, endDate, admin
     const assetMap = {};
     (assets || []).forEach((a) => { assetMap[a.id] = a; });
     cells.forEach((c) => {
+      // V0147 / Rev.2 — 비활성 셀은 캘린더 진행률 분모에서 제외
+      if (c.status === "disabled" || c.isDisabled) return;
       if (c.status === "unassigned" || !c.dueAt) return;
       const due = new Date(String(c.dueAt).slice(0, 10) + "T00:00:00");
       // 배정일 — 백엔드가 cell.updated_at 기반 assignedAt 제공.

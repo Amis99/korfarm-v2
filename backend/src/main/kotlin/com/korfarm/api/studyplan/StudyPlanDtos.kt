@@ -226,6 +226,10 @@ data class CellResponse(
     val assignedLabel: String? = null,
     /** 만료 여부 — dueAt < now 이면서 status NOT IN ('completed','submitted','reviewed') */
     val isOverdue: Boolean = false,
+    /** 비활성 셀 여부 (V0147 / Rev.2) — true 면 진행률 분모 제외 + 화면에서 회색 처리 */
+    val isDisabled: Boolean = false,
+    /** 비활성화 시각 (ISO LocalDateTime) */
+    val disabledAt: String? = null,
     /** 셀 클릭 시 화면 전환에 필요한 정보. asset_type 별로 다른 필드. */
     val cellAction: CellAction? = null,
     /** 국어농장 셀 복수 배정 — assignment row 들. 다른 자산 종류는 비어 있음. */
@@ -365,7 +369,8 @@ internal fun StudyPlanCellEntity.toResponse(
     testPdfFileId: String? = null
 ): CellResponse {
     val now = java.time.LocalDateTime.now()
-    val overdue = dueAt != null && dueAt!!.isBefore(now) &&
+    val disabled = status == "disabled"
+    val overdue = !disabled && dueAt != null && dueAt!!.isBefore(now) &&
         status !in setOf("completed", "submitted", "reviewed")
     return CellResponse(
         cellId = id, scopeId = scopeId, assetId = assetId, userId = userId,
@@ -377,6 +382,8 @@ internal fun StudyPlanCellEntity.toResponse(
         assignedAt = if (status != "unassigned") updatedAt.toString() else null,
         assignedLabel = assignedLabel,
         isOverdue = overdue,
+        isDisabled = disabled,
+        disabledAt = disabledAt?.toString(),
         cellAction = cellAction,
         assignments = assignments,
         testPdfFileId = testPdfFileId,
@@ -421,14 +428,22 @@ data class BackfillDefaultPlanResponse(
     val alreadyHas: Int
 )
 
-// ── Phase C: 행/열 일괄 적용 (충돌 감지) ──
+// ── Phase C: 행/열·셀 일괄 적용 (Rev.2 2026-05-20 — appendOrMergeCells) ──
+//
+// 정책 (사용자 확정):
+//  - 라벨이 다르면 새 scope/asset 추가, 같으면 기존 재사용 + 셀 병합
+//  - sourceScopes + sourceAssets 둘 다 지정 시 그 교차 셀의 학습 내용까지 복제
+//  - 마감일 그대로, 결과·산출물 제외 (보고서 8.6/8.7/8.8)
+//
+// conflictPolicy 필드는 더 이상 사용하지 않음. 들어와도 무시됨.
 data class PropagateDeltaRequest(
     val targetScope: String,                  // "org" | "class" | "users"
     val classId: String? = null,
     val userIds: List<String>? = null,
     val scopeIds: List<String>? = null,       // 복제할 scope id 들 (planId 기준)
     val assetIds: List<String>? = null,       // 복제할 asset id 들 (planId 기준)
-    val conflictPolicy: String? = null        // null | "skip" | "overwrite"
+    @Deprecated("Rev.2 정책 변경으로 무시됨 — 호환 위해 남김")
+    val conflictPolicy: String? = null
 )
 
 data class PropagateConflict(
@@ -448,7 +463,14 @@ data class PropagateDeltaResponse(
     val appliedCount: Int = 0,
     val skippedCount: Int = 0,
     val overwrittenCount: Int = 0,
-    val results: List<PropagateUserResult> = emptyList()
+    val results: List<PropagateUserResult> = emptyList(),
+    // Rev.2 P-4C — 디버깅 카운터 (사용자가 "0건" 의 원인을 알 수 있도록)
+    /** 대상 학생 수 (source 학생 제외 후) */
+    val eligibleUsers: Int = 0,
+    /** 그 중 plan 보유 학생 수 (자동 plan 생성 포함) */
+    val usersWithPlan: Int = 0,
+    /** plan 자동 생성도 실패해 skip 된 학생 수 */
+    val skippedNoPlan: Int = 0
 )
 
 // ── Phase D: 통합 리스트 4 API ──

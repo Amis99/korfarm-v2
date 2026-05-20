@@ -1,35 +1,29 @@
 import { useEffect, useMemo, useState } from "react";
 import { apiGet, apiPost } from "../../utils/api";
-import { useAuth } from "../../hooks/useAuth";
 
 /**
- * 학생 plan 의 행/열을 다른 학생들에게 일괄 적용.
+ * 학습 계획표 셀 단위 복제 모달 (Rev.2 / 2026-05-20).
+ *
+ * 매트릭스 한 셀의 학습 내용을 다른 학생들에게 일괄 복제.
+ * 정책: 라벨이 같은 행/열이 있으면 그 위치 셀에 학습 내용 병합,
+ *       없으면 행/열을 자동 추가 후 셀 채움.
+ *       결과·산출물(점수/제출물/wisdom_posts/test_submissions)은 복제 제외.
+ *
  * Props:
- *   planId       원본 plan
- *   plan         원본 plan 객체 (scopes, assets 추출용)
- *   defaultScopeId / defaultAssetId   가장 최근 추가된 항목 자동 선택
- *   currentUserId   현재 학생 (자기 자신 제외)
+ *   cell, scope, asset    매트릭스의 source cell + 자산 정보
+ *   currentUserId         현재 학생(자기 자신 제외)
  *   onClose
- *   onApplied    적용 성공 시 호출
+ *   onApplied             복제 성공 시 호출
  */
-export default function PropagateDeltaModal({
-  planId, plan, defaultScopeId, defaultAssetId, currentUserId, onClose, onApplied,
-}) {
-  const { user } = useAuth();
-  const isHq = (user?.roles || []).includes("HQ_ADMIN");
-
-  const [targetScope, setTargetScope] = useState("class"); // org/class/users
+export default function CellPropagateModal({ cell, scope, asset, currentUserId, onClose, onApplied }) {
+  const [targetScope, setTargetScope] = useState("class");
   const [classId, setClassId] = useState("");
   const [classes, setClasses] = useState([]);
   const [students, setStudents] = useState([]);
   const [pickedStudents, setPickedStudents] = useState(new Set());
 
-  const [scopeIds, setScopeIds] = useState(new Set(defaultScopeId ? [defaultScopeId] : []));
-  const [assetIds, setAssetIds] = useState(new Set(defaultAssetId ? [defaultAssetId] : []));
-
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
-  // Rev.2 (2026-05-20) — 충돌 dry-run 폐기. 라벨 충돌 시 새 행/열 추가, 같으면 기존 셀에 학습 내용만 병합.
 
   useEffect(() => {
     apiGet("/v1/admin/classes")
@@ -49,25 +43,12 @@ export default function PropagateDeltaModal({
 
   const toggle = (set, id) => {
     const n = new Set(set);
-    if (n.has(id)) n.delete(id); else n.add(id);
+    if (n.has(id)) n.delete(id);
+    else n.add(id);
     return n;
   };
 
-  const buildBody = () => {
-    const body = {
-      targetScope,
-      scopeIds: Array.from(scopeIds),
-      assetIds: Array.from(assetIds),
-    };
-    if (targetScope === "class") body.classId = classId;
-    if (targetScope === "users") body.userIds = Array.from(pickedStudents);
-    return body;
-  };
-
   const validate = () => {
-    if (scopeIds.size === 0 && assetIds.size === 0) {
-      return "복제할 행 또는 열을 1개 이상 선택해 주세요.";
-    }
     if (targetScope === "class" && !classId) return "수강반을 선택해 주세요.";
     if (targetScope === "users" && pickedStudents.size === 0) return "학생을 1명 이상 선택해 주세요.";
     return null;
@@ -75,11 +56,17 @@ export default function PropagateDeltaModal({
 
   const submit = async () => {
     const v = validate();
-    if (v) { setError(v); return; }
+    if (v) {
+      setError(v);
+      return;
+    }
     setSubmitting(true);
     setError(null);
     try {
-      const res = await apiPost(`/v1/admin/study-plans/${planId}/propagate-delta`, buildBody());
+      const body = { targetScope };
+      if (targetScope === "class") body.classId = classId;
+      if (targetScope === "users") body.userIds = Array.from(pickedStudents);
+      const res = await apiPost(`/v1/admin/study-plans/cells/${cell.cellId}/propagate`, body);
       const applied = res?.appliedCount ?? 0;
       const merged = res?.overwrittenCount ?? 0;
       const eligible = res?.eligibleUsers ?? 0;
@@ -95,25 +82,61 @@ export default function PropagateDeltaModal({
       onApplied?.();
       onClose?.();
     } catch (e) {
-      setError(e?.message || "일괄 적용 실패");
+      setError(e?.message || "셀 복제 실패");
     } finally {
       setSubmitting(false);
     }
   };
 
-  // 메인 모달
+  // 소스 셀 요약
+  const assetTypeLabel = {
+    korfarm: "국어농장",
+    activity: "학습활동",
+    test: "테스트",
+    writing: "글쓰기",
+  }[asset?.assetType] || asset?.assetType || "—";
+
   return (
     <div className="admin-modal-overlay" onClick={onClose}>
       <div className="admin-modal admin-modal-wide" onClick={(e) => e.stopPropagation()}>
-        <h2>다른 학생에게 동일하게 추가</h2>
+        <h2>이 셀 다른 학생에게 복제</h2>
+
+        {/* 소스 셀 요약 */}
+        <div className="admin-modal-section" style={{ background: "var(--admin-panel-light, #f5f9f3)", padding: 12, borderRadius: 8 }}>
+          <div style={{ fontSize: 12, color: "var(--admin-muted)", marginBottom: 6 }}>복제할 셀</div>
+          <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+            <span style={{
+              padding: "2px 8px",
+              borderRadius: 12,
+              background: "var(--admin-accent-soft)",
+              color: "var(--admin-accent-strong)",
+              fontSize: 11,
+              fontWeight: 700,
+            }}>{assetTypeLabel}</span>
+            <span style={{ fontWeight: 600 }}>{scope?.label} / {asset?.label}</span>
+            {cell?.assignedLabel && (
+              <span style={{ color: "var(--admin-muted)", fontSize: 13 }}>· {cell.assignedLabel}</span>
+            )}
+            {cell?.dueAt && (
+              <span style={{ marginLeft: "auto", fontSize: 12, color: "var(--admin-muted)" }}>
+                마감 {String(cell.dueAt).slice(0, 10)}
+              </span>
+            )}
+          </div>
+          {(cell?.assignments?.length || 0) > 0 && (
+            <div style={{ marginTop: 8, fontSize: 12, color: "var(--admin-muted)" }}>
+              배정 콘텐츠 {cell.assignments.length}건
+            </div>
+          )}
+        </div>
 
         <div className="admin-modal-section">
-          <h3>대상</h3>
+          <h3>복제 대상</h3>
           <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
             <label style={{ display: "flex", alignItems: "center", gap: 4 }}>
               <input
                 type="radio"
-                name="targetScope"
+                name="cellPropTargetScope"
                 checked={targetScope === "org"}
                 onChange={() => setTargetScope("org")}
               /> 같은 기관 전원
@@ -121,7 +144,7 @@ export default function PropagateDeltaModal({
             <label style={{ display: "flex", alignItems: "center", gap: 4 }}>
               <input
                 type="radio"
-                name="targetScope"
+                name="cellPropTargetScope"
                 checked={targetScope === "class"}
                 onChange={() => setTargetScope("class")}
               /> 같은 수강반
@@ -129,7 +152,7 @@ export default function PropagateDeltaModal({
             <label style={{ display: "flex", alignItems: "center", gap: 4 }}>
               <input
                 type="radio"
-                name="targetScope"
+                name="cellPropTargetScope"
                 checked={targetScope === "users"}
                 onChange={() => setTargetScope("users")}
               /> 선택 학생
@@ -152,7 +175,6 @@ export default function PropagateDeltaModal({
             >
               <option value="">수강반 선택</option>
               {classes.map((c) => {
-                // AdminClassView 의 응답 필드는 classId — c.id fallback 으로 SNAKE_CASE/camelCase 모두 호환
                 const id = c.id || c.classId || c.class_id;
                 return <option key={id} value={id}>{c.name}</option>;
               })}
@@ -182,42 +204,9 @@ export default function PropagateDeltaModal({
           )}
         </div>
 
-        <div className="admin-modal-section">
-          <h3>적용할 행/열</h3>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-            <div>
-              <div style={{ fontSize: 12, color: "var(--admin-muted)", marginBottom: 4 }}>행 (범위)</div>
-              {(plan?.scopes || []).map((s) => (
-                <label key={s.id} style={{ display: "flex", gap: 6, padding: "4px 0", alignItems: "center" }}>
-                  <input
-                    type="checkbox"
-                    checked={scopeIds.has(s.id)}
-                    onChange={() => setScopeIds((p) => toggle(p, s.id))}
-                  />
-                  <span>{s.label}</span>
-                </label>
-              ))}
-              {(plan?.scopes || []).length === 0 && (
-                <div style={{ color: "var(--admin-muted)", fontSize: 12 }}>행이 없습니다.</div>
-              )}
-            </div>
-            <div>
-              <div style={{ fontSize: 12, color: "var(--admin-muted)", marginBottom: 4 }}>열 (자산)</div>
-              {(plan?.assets || []).map((a) => (
-                <label key={a.id} style={{ display: "flex", gap: 6, padding: "4px 0", alignItems: "center" }}>
-                  <input
-                    type="checkbox"
-                    checked={assetIds.has(a.id)}
-                    onChange={() => setAssetIds((p) => toggle(p, a.id))}
-                  />
-                  <span>{a.label}</span>
-                </label>
-              ))}
-              {(plan?.assets || []).length === 0 && (
-                <div style={{ color: "var(--admin-muted)", fontSize: 12 }}>열이 없습니다.</div>
-              )}
-            </div>
-          </div>
+        <div className="admin-modal-section" style={{ fontSize: 12, color: "var(--admin-muted)", background: "rgba(33,150,243,0.06)", padding: 10, borderRadius: 6 }}>
+          ※ 학습 내용(콘텐츠·마감일·라벨)만 복제됩니다. 점수·제출물·작성한 글 같은 결과는 복제되지 않습니다.<br />
+          같은 라벨의 행/열이 대상 학생에게 이미 있으면 그 위치 셀에 학습 내용을 병합하고, 없으면 행/열을 자동으로 추가합니다.
         </div>
 
         {error && (
@@ -226,8 +215,8 @@ export default function PropagateDeltaModal({
 
         <div className="admin-modal-actions">
           <button className="admin-detail-btn secondary" onClick={onClose}>취소</button>
-          <button className="admin-detail-btn" onClick={() => submit()} disabled={submitting}>
-            {submitting ? "적용 중..." : "일괄 적용"}
+          <button className="admin-detail-btn" onClick={submit} disabled={submitting}>
+            {submitting ? "복제 중..." : "이 셀 복제"}
           </button>
         </div>
       </div>

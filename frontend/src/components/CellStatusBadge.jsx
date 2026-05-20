@@ -16,10 +16,13 @@ const STAGE = {
   overdue:    { label: "미완료",   cls: "stage-overdue" },
   done:       { label: "수행완료", cls: "stage-done" },
   reviewed:   { label: "점검완료", cls: "stage-reviewed" },
+  disabled:   { label: "비활성",   cls: "stage-disabled" },
 };
 
-/** status + isOverdue → 5단계 stage 분류 */
+/** status + isOverdue → 6단계 stage 분류 */
 function classifyStage(status, isOverdue) {
+  // V0147 / Rev.2 — 비활성 셀은 다른 어떤 상태보다 우선
+  if (status === "disabled") return STAGE.disabled;
   if (status === "unassigned") return STAGE.unassigned;
   // 점검 완료 (어드민 확인까지 끝남) — 만료여도 점검 완료가 우선
   if (status === "completed" || status === "passed" || status === "reviewed") {
