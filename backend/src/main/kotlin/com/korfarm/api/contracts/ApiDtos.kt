@@ -48,6 +48,8 @@ data class UpdateProfileRequest(
     val studentPhone: String? = null,
     val parentPhone: String? = null,
     val profileImageUrl: String? = null,
+    // N-28 (2026-05-21) — deprecated. 비번 변경은 POST /v1/auth/change-password 사용.
+    // 호환성 위해 필드는 남기되 서버에서 무시(AuthService.updateProfile 참고).
     val password: String? = null,
     val learningStartMode: String? = null,
     val shippingName: String? = null,
@@ -55,6 +57,11 @@ data class UpdateProfileRequest(
     val shippingZipCode: String? = null,
     val shippingAddress: String? = null,
     val shippingAddressDetail: String? = null
+)
+
+data class ChangePasswordRequest(
+    @field:jakarta.validation.constraints.NotBlank val oldPassword: String,
+    @field:jakarta.validation.constraints.NotBlank val newPassword: String
 )
 
 data class SubmitAnswer(

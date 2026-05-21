@@ -494,6 +494,26 @@ function StudentsTab() {
     }
   };
 
+  // N-29 (2026-05-21) — 학생 비번 재설정. HQ_ADMIN / ORG_ADMIN(자기 기관) 가능.
+  const handleResetPassword = async (s) => {
+    if (!window.confirm(`${s.name || s.email} 의 임시 비밀번호를 발급할까요?\n기존 비밀번호는 즉시 무효화됩니다.`)) return;
+    try {
+      const res = await apiPost(`/v1/admin/users/${s.id}/reset-password`, {});
+      const tempPwd = res?.tempPassword || res?.data?.tempPassword;
+      if (tempPwd) {
+        // 임시 비밀번호 1회 노출. 어드민이 본인에게 직접 전달.
+        window.prompt(
+          `${s.name || s.email} 의 임시 비밀번호입니다.\n이 창을 닫으면 다시 볼 수 없습니다.\n복사 후 학생/학부모에게 직접 전달하세요.`,
+          tempPwd
+        );
+      } else {
+        window.alert("임시 비밀번호가 생성되지 않았습니다. 다시 시도해 주세요.");
+      }
+    } catch (err) {
+      window.alert(err?.message || "비밀번호 재설정에 실패했습니다.");
+    }
+  };
+
   const handleEdit = async () => {
     if (!editStudent) return;
     setActionError("");
@@ -721,6 +741,14 @@ function StudentsTab() {
                           onClick={() => openInventory(s)}
                         >
                           인벤토리
+                        </button>
+                        <button
+                          className="admin-detail-btn secondary xs"
+                          type="button"
+                          title="임시 비밀번호 발급"
+                          onClick={() => handleResetPassword(s)}
+                        >
+                          비번 재설정
                         </button>
                         {s.orgId && s.orgId !== "org_hq" && (
                           <button

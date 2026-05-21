@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { apiGet, apiPut } from "../utils/api";
+import { apiGet, apiPut, apiPost } from "../utils/api";
 import { useAuth } from "../hooks/useAuth";
 import "../styles/auth.css";
 
@@ -49,7 +49,12 @@ function ProfilePage() {
   const [levelId, setLevelId] = useState("");
   const [studentPhone, setStudentPhone] = useState("");
   const [parentPhone, setParentPhone] = useState("");
+  // N-28 (2026-05-21) — 비번 변경은 별도 영역(현재 비번 + 새 비번)으로 분리. 프로필 저장과 무관.
+  const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [pwdSaving, setPwdSaving] = useState(false);
+  const [pwdMessage, setPwdMessage] = useState("");
+  const [pwdError, setPwdError] = useState("");
   const [learningStartMode, setLearningStartMode] = useState("calendar");
   const [loginId, setLoginId] = useState("");
   const [avatarUrl, setAvatarUrl] = useState("");
@@ -83,10 +88,6 @@ function ProfilePage() {
     if (!region) { setError("지역을 선택해 주세요."); return; }
     if (!isParent && !school.trim()) { setError("학교를 입력해 주세요."); return; }
     if (!isParent && !levelId) { setError("학년을 선택해 주세요."); return; }
-    if (newPassword && newPassword.length < 8) {
-      setError("비밀번호는 8자 이상이어야 합니다.");
-      return;
-    }
 
     const selectedLevel = !isParent ? GRADE_LEVELS.find((g) => g.levelId === levelId) : null;
     const body = {
@@ -104,13 +105,11 @@ function ProfilePage() {
     if (avatarPreview || avatarUrl) {
       body.profile_image_url = avatarPreview || avatarUrl;
     }
-    if (newPassword) body.password = newPassword;
 
     setSaving(true);
     try {
-      const result = await apiPut("/v1/auth/me", body);
+      await apiPut("/v1/auth/me", body);
       setSuccess("저장되었습니다.");
-      setNewPassword("");
       if (avatarPreview) {
         setAvatarUrl(avatarPreview);
         setAvatarPreview("");
@@ -119,6 +118,27 @@ function ProfilePage() {
       setError("저장에 실패했습니다.");
     } finally {
       setSaving(false);
+    }
+  };
+
+  // N-28 (2026-05-21) — 별도 비밀번호 변경 흐름. 현재 비번 확인 + 새 비번 입력 → POST /v1/auth/change-password
+  const handleChangePassword = async (event) => {
+    event.preventDefault();
+    setPwdError("");
+    setPwdMessage("");
+    if (!oldPassword) { setPwdError("현재 비밀번호를 입력해 주세요."); return; }
+    if (!newPassword || newPassword.length < 8) { setPwdError("새 비밀번호는 8자 이상이어야 합니다."); return; }
+    if (oldPassword === newPassword) { setPwdError("새 비밀번호는 기존과 달라야 합니다."); return; }
+    setPwdSaving(true);
+    try {
+      await apiPost("/v1/auth/change-password", { oldPassword, newPassword });
+      setPwdMessage("비밀번호가 변경되었습니다.");
+      setOldPassword("");
+      setNewPassword("");
+    } catch (err) {
+      setPwdError(err?.message || "비밀번호 변경에 실패했습니다.");
+    } finally {
+      setPwdSaving(false);
     }
   };
 
@@ -259,15 +279,6 @@ function ProfilePage() {
                 />
               </label>
               {/* 학습 시작일 select 비활성화 (2026-05-10) — 일괄 day1 고정 */}
-              <label>
-                비밀번호 변경
-                <input
-                  type="password"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  placeholder="변경할 비밀번호 (8자 이상)"
-                />
-              </label>
               {error && <div className="auth-error">{error}</div>}
               {success && <div style={{ color: "#27ae60", fontSize: 13 }}>{success}</div>}
               <div className="auth-actions">
@@ -277,6 +288,38 @@ function ProfilePage() {
                 <Link className="auth-secondary" to="/start">
                   돌아가기
                 </Link>
+              </div>
+            </form>
+
+            {/* N-28 (2026-05-21) — 비밀번호 변경 영역. 별도 form, 현재 비번 검증 후 변경. */}
+            <form onSubmit={handleChangePassword} style={{ marginTop: 24, paddingTop: 16, borderTop: "1px solid rgba(0,0,0,0.08)" }}>
+              <h3 style={{ fontSize: "1rem", margin: "0 0 8px", color: "#5a4030" }}>비밀번호 변경</h3>
+              <label>
+                현재 비밀번호
+                <input
+                  type="password"
+                  value={oldPassword}
+                  onChange={(e) => setOldPassword(e.target.value)}
+                  placeholder="현재 비밀번호"
+                  autoComplete="current-password"
+                />
+              </label>
+              <label>
+                새 비밀번호
+                <input
+                  type="password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  placeholder="새 비밀번호 (8자 이상)"
+                  autoComplete="new-password"
+                />
+              </label>
+              {pwdError && <div className="auth-error">{pwdError}</div>}
+              {pwdMessage && <div style={{ color: "#27ae60", fontSize: 13 }}>{pwdMessage}</div>}
+              <div className="auth-actions">
+                <button className="auth-primary" type="submit" disabled={pwdSaving}>
+                  {pwdSaving ? "변경 중..." : "비밀번호 변경"}
+                </button>
               </div>
             </form>
           </div>

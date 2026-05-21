@@ -129,6 +129,15 @@ class AuthController(
         return ApiResponse(success = true, data = profile)
     }
 
+    // N-28 (2026-05-21) — 본인 비밀번호 변경. oldPassword 검증 필수.
+    @PostMapping("/change-password")
+    fun changePassword(@Valid @RequestBody request: com.korfarm.api.contracts.ChangePasswordRequest): ApiResponse<Map<String, String>> {
+        val userId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        authService.changePassword(userId, request.oldPassword, request.newPassword)
+        return ApiResponse(success = true, data = mapOf("message" to "비밀번호가 변경되었습니다."))
+    }
+
     @PostMapping("/request-password-reset")
     fun requestPasswordReset(@RequestBody body: Map<String, String>): ApiResponse<Map<String, String>> {
         val loginId = body["loginId"]

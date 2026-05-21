@@ -4,12 +4,15 @@ import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.ApiResponse
 import com.korfarm.api.org.OrgMembershipRepository
 import com.korfarm.api.security.AdminGuard
+import com.korfarm.api.security.SecurityUtils
 import com.korfarm.api.user.UserRepository
 import org.springframework.http.HttpStatus
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -25,6 +28,7 @@ import java.time.LocalDateTime
 class AdminUserController(
     private val userRepository: UserRepository,
     private val orgMembershipRepository: OrgMembershipRepository,
+    private val passwordEncoder: PasswordEncoder,
 ) {
     @PatchMapping("/{userId}")
     @Transactional
@@ -92,5 +96,51 @@ class AdminUserController(
             orgMembershipRepository.save(it)
         }
         return ApiResponse(success = true, data = mapOf("userId" to userId))
+    }
+
+    /**
+     * N-29 (2026-05-21) — 어드민이 대상 사용자의 비밀번호를 임시 비번으로 재설정.
+     * HQ_ADMIN: 모든 사용자. ORG_ADMIN: 자기 기관 active 멤버십 사용자만.
+     * 응답: 평문 임시 비번 1회 노출 (관리자가 본인에게 직접 전달).
+     */
+    @PostMapping("/{userId}/reset-password")
+    @Transactional
+    fun resetPassword(@PathVariable userId: String): ApiResponse<Map<String, String>> {
+        AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        val callerId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        val target = userRepository.findById(userId).orElseThrow {
+            ApiException("NOT_FOUND", "사용자를 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        if (target.deletedAt != null) {
+            throw ApiException("BAD_REQUEST", "삭제된 계정입니다", HttpStatus.BAD_REQUEST)
+        }
+        if (!SecurityUtils.hasAnyRole("HQ_ADMIN")) {
+            val callerOrgs = orgMembershipRepository.findByUserIdAndStatus(callerId, "active")
+                .filter { it.role == "ORG_ADMIN" && it.orgId != "org_hq" }
+                .map { it.orgId }.toSet()
+            if (callerOrgs.isEmpty()) {
+                throw ApiException("FORBIDDEN", "기관 관리자 권한이 없습니다", HttpStatus.FORBIDDEN)
+            }
+            val targetOrgs = orgMembershipRepository.findByUserIdAndStatus(userId, "active")
+                .map { it.orgId }.toSet()
+            if (callerOrgs.intersect(targetOrgs).isEmpty()) {
+                throw ApiException("FORBIDDEN", "해당 사용자에 대한 권한이 없습니다", HttpStatus.FORBIDDEN)
+            }
+        }
+        val temp = generateTemporaryPassword()
+        target.passwordHash = passwordEncoder.encode(temp)
+        userRepository.save(target)
+        return ApiResponse(success = true, data = mapOf(
+            "userId" to userId,
+            "tempPassword" to temp,
+            "message" to "임시 비밀번호: $temp — 본인에게 즉시 전달하고 첫 로그인 후 변경하도록 안내해 주세요.",
+        ))
+    }
+
+    /** 임시 비밀번호 12자 — 헷갈리는 0/O/I/l 제외. OrgService.generateTemporaryPassword 와 동일 정책. */
+    private fun generateTemporaryPassword(): String {
+        val chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789"
+        return (1..12).map { chars.random() }.joinToString("")
     }
 }

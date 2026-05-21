@@ -1,40 +1,18 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { apiPost } from "../utils/api";
 import "../styles/auth.css";
 
+// N-30 (2026-05-21) — 셀프 비밀번호 재설정은 아직 미지원 (이메일/SMS 토큰 인프라 부재).
+// 안내문만 표시하고 어드민 문의를 권장. 이메일 토큰 흐름 도입 후 input·form 복원 예정.
 function ResetPage() {
-  const [loginId, setLoginId] = useState("");
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (!loginId.trim()) { setError("아이디를 입력하세요."); return; }
-    setLoading(true);
-    setError("");
-    setMessage("");
-    try {
-      const data = await apiPost("/v1/auth/request-password-reset", {
-        loginId: loginId.trim(),
-      });
-      setMessage(data.message || "비밀번호 초기화 요청이 접수되었습니다. 선생님 또는 관리자에게 문의하세요.");
-    } catch (e) {
-      setError(e.message || "요청에 실패했습니다.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <div className="auth-page">
       <div className="auth-shell">
         <section className="auth-hero">
           <span className="auth-highlight">PASSWORD RESET</span>
-          <h1>비밀번호를 재설정할까요?</h1>
+          <h1>비밀번호를 잊으셨나요?</h1>
           <p>
-            아이디를 입력하면 본인 확인 후 재설정 안내를 받을 수 있어요.
+            현재 셀프 재설정 흐름은 준비 중이에요.
+            가입한 기관(학원·학교) 관리자 또는 본사 관리자에게 임시 비밀번호 발급을 요청해 주세요.
           </p>
           <div className="auth-links">
             <span>이미 비밀번호가 기억났나요?</span>
@@ -44,32 +22,20 @@ function ResetPage() {
 
         <section className="auth-panel">
           <div className="auth-card">
-            <h2>비밀번호 찾기</h2>
-            <p>가입한 아이디를 입력해 주세요.</p>
-            <form onSubmit={handleSubmit}>
-              <label>
-                아이디
-                <input
-                  type="text"
-                  value={loginId}
-                  onChange={(event) => setLoginId(event.target.value)}
-                  placeholder="아이디를 입력하세요"
-                  required
-                />
-              </label>
-              {message && <div className="auth-error" style={{ color: "#2ecc71" }}>{message}</div>}
-              {error && <div className="auth-error">{error}</div>}
-              <div className="auth-actions">
-                <button className="auth-primary" type="submit" disabled={loading}>
-                  {loading ? "요청 중..." : "안내 받기"}
-                </button>
-                <Link className="auth-secondary" to="/login">
-                  로그인으로
-                </Link>
-              </div>
-            </form>
+            <h2>비밀번호 재설정 안내</h2>
+            <ul style={{ margin: "0 0 16px", padding: "0 0 0 18px", lineHeight: 1.7, color: "#5a4030" }}>
+              <li>학생·학부모: <strong>가입한 학원(또는 학교) 관리자</strong>에게 임시 비밀번호 재발급을 요청하세요.</li>
+              <li>기관 관리자: <strong>본사(국어농장) 관리자</strong>에게 문의해 주세요.</li>
+              <li>임시 비밀번호로 로그인한 뒤 <strong>내 정보 → 비밀번호 변경</strong>에서 바로 새 비밀번호로 바꾸세요.</li>
+            </ul>
+            <p style={{ fontSize: "0.85rem", color: "#8a7468", margin: "0 0 16px" }}>
+              ※ 이메일·문자 인증을 통한 셀프 재설정 흐름은 추후 지원 예정입니다.
+            </p>
+            <div className="auth-actions">
+              <Link className="auth-primary" to="/login">로그인으로 돌아가기</Link>
+              <Link className="auth-secondary" to="/signup">회원가입</Link>
+            </div>
             <div className="auth-links">
-              <Link to="/signup">회원가입</Link>
               <Link to="/">랜딩 페이지</Link>
             </div>
           </div>

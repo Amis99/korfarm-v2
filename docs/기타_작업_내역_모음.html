@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>국어농장 v2 — 기타 작업 내역 모음</title>
+  <style>
+    :root {
+      --bg: #f7ecdf;
+      --ink: #2b221d;
+      --muted: #6a5040;
+      --stroke: rgba(61, 47, 40, 0.18);
+      --accent: #b45309;
+      --high: #c0392b;
+      --ok: #2c7a3f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle at top, #fff5ea 0%, var(--bg) 60%, #f1e4d3 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      color: var(--ink);
+      line-height: 1.6;
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 24px 80px; }
+    h1 { font-size: 1.9rem; margin: 0 0 8px; }
+    h2 { font-size: 1.35rem; margin: 32px 0 12px; border-bottom: 2px solid var(--accent); padding-bottom: 4px; }
+    h3 { font-size: 1.1rem; margin: 20px 0 8px; color: var(--accent); }
+    h4 { font-size: 0.98rem; margin: 14px 0 6px; }
+    section { background: #fffaf4; border: 1px solid var(--stroke); padding: 20px 24px; border-radius: 12px; margin-bottom: 24px; }
+    code { background: #f1e4d3; padding: 1px 6px; border-radius: 4px; font-size: 0.92em; }
+    pre {
+      background: #fff;
+      border: 1px solid var(--stroke);
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+    table.compact { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.92rem; }
+    table.compact th, table.compact td { border: 1px solid var(--stroke); padding: 8px 10px; text-align: left; vertical-align: top; }
+    table.compact th { background: rgba(180, 83, 9, 0.08); }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; font-weight: 600; vertical-align: middle; margin-left: 6px; }
+    .badge.high { background: rgba(192, 57, 43, 0.18); color: var(--high); }
+    .badge.ok { background: rgba(44, 122, 63, 0.18); color: var(--ok); }
+    .badge.p0 { background: var(--high); color: #fff; }
+    .badge.p1 { background: rgba(192, 57, 43, 0.65); color: #fff; }
+    .badge.p2 { background: rgba(180, 83, 9, 0.75); color: #fff; }
+    .badge.p3 { background: rgba(106, 80, 64, 0.6); color: #fff; }
+    .root-cause { background: rgba(192, 57, 43, 0.08); border-left: 3px solid var(--high); padding: 10px 14px; border-radius: 0 6px 6px 0; margin: 10px 0; }
+    .callout { background: rgba(180, 83, 9, 0.06); border-left: 3px solid var(--accent); padding: 10px 14px; border-radius: 0 6px 6px 0; margin: 10px 0; font-size: 0.94rem; }
+    ul, ol { margin: 6px 0; padding-left: 22px; }
+    li { margin: 4px 0; }
+    footer { margin-top: 40px; padding: 16px 24px; color: var(--muted); font-size: 0.85rem; text-align: center; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>국어농장 v2 — 기타 작업 내역 모음</h1>
+  <p style="color: var(--muted); margin: 0 0 24px;">학습 계획표 점검 보고서와 별개로 진행하는 기타 운영 작업(비밀번호·결제·알림·접근 가드 등) 내역.</p>
+
+  <section>
+    <h2>1. 비밀번호 찾기·재설정 기능 점검 <span class="badge high">2026-05-21 N-27</span></h2>
+
+    <h3>1.1 현재 동작 정리</h3>
+
+    <table class="compact">
+      <thead>
+        <tr><th>사용자 유형</th><th>셀프 재설정 (잊었을 때)</th><th>어드민 강제 재설정</th><th>로그인 후 본인 변경</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>학생 (STUDENT)</td>
+          <td>❌ <code>/reset</code> UI 만 있고 백엔드 무동작</td>
+          <td>❌ endpoint 미존재</td>
+          <td>✅ <code>PUT /v1/auth/me</code> password 필드 — <strong>oldPassword 검증 X</strong></td>
+        </tr>
+        <tr>
+          <td>학부모 (PARENT)</td>
+          <td>❌ 동일</td>
+          <td>❌ endpoint 미존재</td>
+          <td>✅ 동일 — <strong>oldPassword 검증 X</strong></td>
+        </tr>
+        <tr>
+          <td>기관 관리자 (ORG_ADMIN)</td>
+          <td>❌ 동일</td>
+          <td>❌ endpoint 미존재</td>
+          <td>✅ 동일 — <strong>oldPassword 검증 X</strong></td>
+        </tr>
+        <tr>
+          <td>본사 관리자 (HQ_ADMIN)</td>
+          <td>❌ 동일</td>
+          <td>✅ <code>POST /v1/admin/hq/{userId}/reset-password</code> (HQ_ADMIN→HQ_ADMIN 만)</td>
+          <td>✅ 동일 — <strong>oldPassword 검증 X</strong></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>1.2 발견된 문제</h3>
+
+    <div class="root-cause">
+      <h4><span class="badge p0">P0</span> oldPassword 검증 누락 — <strong>계정 탈취 위험</strong></h4>
+      <p>
+        <code>UpdateProfileRequest.password</code> (<code>ApiDtos.kt:51</code>) 필드가 그대로 <code>passwordHash</code> 갱신.
+        <code>AuthService.updateProfile</code> (<code>AuthService.kt:290-292</code>): <code>request.password?.let { if (it.length &gt;= 8) user.passwordHash = passwordEncoder.encode(it) }</code>.
+        <strong>현재 비밀번호 확인 단계가 없음</strong>.
+      </p>
+      <ul>
+        <li>JWT 토큰 탈취 또는 XSS 로 sessionStorage 의 token 유출 시 → 즉시 비번 변경 가능 → 영구 계정 탈취.</li>
+        <li>모든 사용자 유형(학생·학부모·기관·본사 관리자) 공통 노출.</li>
+        <li>일반적 패턴: <code>oldPassword</code> 검증 + 새 비번 변경 endpoint 분리 (예: <code>POST /v1/auth/change-password</code>).</li>
+      </ul>
+    </div>
+
+    <div class="root-cause">
+      <h4><span class="badge p1">P1</span> 실질적 셀프 비밀번호 찾기 기능 없음</h4>
+      <p>
+        <code>/reset</code> 페이지 → <code>POST /v1/auth/request-password-reset</code> 호출 → 백엔드(<code>AuthController.kt:132-141</code>) 가
+        <code>userRepository.existsByEmail</code> 호출 후 결과 무시, <strong>무조건 같은 안내 메시지 응답</strong>:
+      </p>
+      <pre>"message" to "비밀번호 초기화 요청이 접수되었습니다. 선생님 또는 관리자에게 문의하세요."</pre>
+      <ul>
+        <li>이메일 발송 X · 임시 비번 발급 X · 토큰 발급 X. UI 만 있고 실제 동작 0.</li>
+        <li>사용자가 안내문 그대로 "선생님 또는 관리자에게 문의" 해야 함 — 셀프 회복 불가.</li>
+        <li>UI 헤더 "본인 확인 후 재설정 안내를 받을 수 있어요" 표현이 실제와 다름. misleading.</li>
+      </ul>
+    </div>
+
+    <div class="root-cause">
+      <h4><span class="badge p1">P1</span> 어드민의 학생·학부모·기관 비번 재설정 endpoint 부재</h4>
+      <p>
+        HQ_ADMIN 의 <code>POST /v1/admin/hq/{userId}/reset-password</code> 는 <strong>본사 관리자(HQ_ADMIN) 만</strong> 대상.
+        <code>requireHqMembership(userId)</code> 가드로 다른 유형 차단.
+      </p>
+      <ul>
+        <li>학생이 비번 잊었을 때 ORG_ADMIN 또는 HQ_ADMIN 이 reset 할 백엔드 endpoint 자체가 없음.</li>
+        <li>운영 임시 처방: 어드민이 RDS 직접 UPDATE 또는 DB 콘솔 접근 — 운영 부담 + 사고 위험.</li>
+        <li>OrgService 의 학생/관리자 생성 시점에는 평문 임시 비번 응답이 있으나 사후 재설정 경로는 없음.</li>
+      </ul>
+    </div>
+
+    <div class="root-cause">
+      <h4><span class="badge p2">P2</span> 이메일·SMS 인증 인프라 부재</h4>
+      <ul>
+        <li>임시 비번 발송 채널 없음. 토큰 발급 + URL link + 만료 정책 없음.</li>
+        <li>비번 재설정 안전성·UX 의 기반 인프라. 도입 시 SMTP/SendGrid · 인증번호 관리 테이블 등 필요.</li>
+        <li>장기 과제. 단기는 어드민 강제 재설정 endpoint 로 운영 가능.</li>
+      </ul>
+    </div>
+
+    <div class="root-cause">
+      <h4><span class="badge p2">P2</span> 임시 비밀번호 평문 API 응답</h4>
+      <p>
+        <code>HqAdminController.resetPassword</code> 응답에 평문 임시 비번 포함 (<code>"tempPassword": "..." , "message": "임시 비밀번호: ..."</code>).
+        OrgService 의 학생 생성 응답도 동일.
+      </p>
+      <ul>
+        <li>어드민이 본인에게 직접 전달용 의도. 운영 정책으로 인정.</li>
+        <li>다만 API 응답·서버 로그·HTTP 캐시·중간 프록시 등에 평문 노출 가능. 운영 로그 마스킹 권장.</li>
+        <li>장기 개선: 임시 토큰 URL 발급 + 한 번 사용 후 만료 패턴.</li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <h4><span class="badge ok">OK</span> 계정 열거 공격 방지</h4>
+      <p><code>request-password-reset</code> 가 존재 여부와 무관하게 같은 응답 반환 — 의도된 동작. OK. 다만 <code>existsByEmail</code> 호출이 결과 사용 없어 무의미 (제거 가능).</p>
+    </div>
+
+    <h3>1.3 권장 수정 우선순위</h3>
+
+    <table class="compact">
+      <thead><tr><th>#</th><th>Task</th><th>우선순위</th><th>예상 작업량</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><strong>UpdateProfileRequest.password 분리</strong> — 별도 <code>POST /v1/auth/change-password</code> endpoint 신설.
+            <code>oldPassword</code> + <code>newPassword</code> 받아 현재 비번 검증 후 갱신. UpdateProfileRequest 에서 password 필드 제거 또는 ignore.</td>
+          <td><span class="badge p0">P0</span></td>
+          <td>백엔드 30분 + 프론트 프로필 화면 30분</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><strong>어드민(HQ/ORG) 학생·학부모 비번 재설정 endpoint 신설</strong> —
+            <code>POST /v1/admin/users/{userId}/reset-password</code>. OrgScopeResolver 로 ORG_ADMIN 의 자기 기관 학생만 허용. 평문 임시 비번 1회 응답(기존 패턴).</td>
+          <td><span class="badge p1">P1</span></td>
+          <td>백엔드 1시간 + 어드민 UI 30분</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><strong>/reset 페이지 안내문 정정</strong> — "현재 셀프 재설정은 지원하지 않습니다. 가입한 기관 관리자 또는 본사 관리자에게 문의해 주세요." 로 변경.
+            기존 misleading 표현 제거. 또는 셀프 재설정 인프라(이메일/SMS) 도입 후 정상화.</td>
+          <td><span class="badge p2">P2</span></td>
+          <td>15분</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><strong>이메일/SMS 토큰 기반 셀프 재설정</strong> — 토큰 테이블 + 발송 채널 + 재설정 페이지(URL token).</td>
+          <td><span class="badge p2">P2</span></td>
+          <td>장기 (반나절 이상)</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><strong>임시 비밀번호 응답·로그 마스킹</strong> — 응답에서는 유지하되 서버 로그·관찰 가능 layer 에는 평문 안 남기기.</td>
+          <td><span class="badge p3">P3</span></td>
+          <td>30분</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>1.4 적용 결과 (2026-05-21·22 배포) <span class="badge ok">N-28~N-31 완료</span></h3>
+
+    <h4>N-28 — change-password endpoint 분리 (P0)</h4>
+    <table class="compact">
+      <thead><tr><th>#</th><th>변경</th><th>위치</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><code>AuthService.updateProfile</code> 의 password 처리 코드 제거. <code>UpdateProfileRequest.password</code> 필드는 호환성 위해 남기되 서버에서 무시.</td><td><code>AuthService.kt:290</code></td></tr>
+        <tr><td>2</td><td><code>changePassword(userId, oldPassword, newPassword)</code> 신설 — oldPassword 매치 검증 + 새 비번 8자 검증 + 동일 비번 차단. INVALID_OLD_PASSWORD / SAME_PASSWORD 에러.</td><td><code>AuthService.kt</code></td></tr>
+        <tr><td>3</td><td><code>POST /v1/auth/change-password</code> endpoint 신설. <code>ChangePasswordRequest(oldPassword, newPassword)</code> DTO.</td><td><code>AuthController.kt</code>, <code>ApiDtos.kt</code></td></tr>
+        <tr><td>4</td><td>ProfilePage (학생·학부모) — 기존 프로필 폼에서 password input 제거. 별도 "비밀번호 변경" 폼 신설 (현재/새 비번 2 input + 별도 submit).</td><td><code>ProfilePage.jsx</code></td></tr>
+        <tr><td>5</td><td>AdminSettingsPage (관리자) — 현재 비번 input 추가, <code>PUT /v1/auth/me</code> 호출 → <code>POST /v1/auth/change-password</code>.</td><td><code>AdminSettingsPage.jsx</code></td></tr>
+      </tbody>
+    </table>
+    <p style="color: var(--muted); font-size: 0.92rem;">
+      회귀 점검: <code>UpdateProfileRequest.password</code> 호출처 grep — ProfilePage / AdminSettingsPage 2 곳 외 없음. 서버는 그래도 받으면 무시(이중 안전).
+    </p>
+
+    <h4>N-29 — 어드민 비번 재설정 endpoint + UI (P1)</h4>
+    <table class="compact">
+      <thead><tr><th>#</th><th>변경</th><th>위치</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><code>POST /v1/admin/users/{userId}/reset-password</code> 신설. HQ_ADMIN 은 모든 사용자, ORG_ADMIN 은 active 멤버십 교차하는 사용자만. 평문 임시 비번 1회 응답.</td><td><code>AdminUserController.kt</code></td></tr>
+        <tr><td>2</td><td>StudentsTab: row 액션에 "비번 재설정" 버튼 + handleResetPassword (confirm → POST → prompt 로 임시 비번 1회 노출).</td><td><code>StudentsTab.jsx</code></td></tr>
+        <tr><td>3</td><td>ParentsTab: 마지막 컬럼에 "비번 재설정" 버튼 + handleResetPassword.</td><td><code>ParentsTab.jsx</code></td></tr>
+        <tr><td>4</td><td>OrgAdminsTab: 마지막 컬럼에 "비번 재설정" 버튼 + inline 핸들러.</td><td><code>OrgAdminsTab.jsx</code></td></tr>
+        <tr><td>5</td><td>HqAdminsTab — 이미 기존 <code>/v1/admin/hq-admins/{id}/reset-password</code> 사용 중. 변경 없음.</td><td>기존</td></tr>
+      </tbody>
+    </table>
+    <p style="color: var(--muted); font-size: 0.92rem;">
+      회귀 점검: ORG_ADMIN 권한 검증을 callerOrgs ∩ targetOrgs 교집합으로 — 다른 기관 학생·관리자 차단 보장. OrgScopeResolver 패턴과 일관.
+    </p>
+
+    <h4>N-30 — /reset 페이지 안내문 정정 (P2)</h4>
+    <ul>
+      <li>input·form·apiPost 모두 제거. 안내문 카드로 교체.</li>
+      <li>"학생·학부모는 가입한 기관 관리자에게, 기관 관리자는 본사 관리자에게 임시 비밀번호 발급 요청" 명시.</li>
+      <li>"이메일·문자 인증 셀프 재설정은 추후 지원 예정" 메모.</li>
+    </ul>
+
+    <h4>N-31 — 임시 비번 서버 로그 마스킹 (P3)</h4>
+    <p style="color: var(--muted);">
+      <code>logger.info/log.info/println</code> 등 grep — 평문 비번 출력 코드 없음. 응답 body 만 노출. 별도 마스킹 불필요. <span class="badge ok">OK</span>
+    </p>
+
+    <h3>1.5 회귀 점검</h3>
+    <ul>
+      <li>✅ 회원가입(<code>AuthService.signup</code>) 의 password 처리 영향 없음 — signup 은 <code>SignupRequest.password</code> 별도 필드 사용.</li>
+      <li>✅ OrgService 학생/관리자 생성의 임시 비번 응답 패턴 그대로 유지.</li>
+      <li>✅ HqAdminController.resetPassword (HQ→HQ 만 본사 관리자 대상) 그대로 운영. AdminUserController 의 신규 endpoint 와 충돌 없음 — 둘 다 본사 관리자 재설정 가능.</li>
+      <li>✅ <code>PUT /v1/auth/me</code> 에서 password 필드가 들어와도 서버 무시 — 옛 프론트 잔존 호출 사고 차단.</li>
+      <li>✅ 토큰·세션 그대로 — 본인 비번 변경 후 기존 JWT 유효 (의도된 동작). 필요 시 토큰 invalidate 정책 별도 검토.</li>
+    </ul>
+
+    <h3>1.6 잔여 / 후속</h3>
+    <ul>
+      <li><strong>이메일·문자 셀프 재설정</strong> — SMTP/SendGrid 도입 + 토큰 테이블 + 발송·소비 흐름. 장기 과제.</li>
+      <li><strong>비번 변경 후 다른 디바이스 토큰 무효화</strong> — 현재 RefreshToken 만 남음. 보안 강화 시 필요.</li>
+      <li><strong>임시 비번 응답 모달 UI 개선</strong> — 현재 prompt() 박스. 정식 모달 + 클립보드 복사 버튼 권장.</li>
+    </ul>
+  </section>
+
+<footer>
+  국어농장 v2 · 기타 작업 내역 모음 · 시작 2026-05-21<br>
+  학습 계획표 점검 보고서와는 분리. 비밀번호·결제·알림·접근 가드 등 기타 운영 작업 누적.
+</footer>
+
+</div>
+</body>
+</html>

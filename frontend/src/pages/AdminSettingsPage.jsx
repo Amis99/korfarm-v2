@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../hooks/useAuth";
-import { apiGet, apiPut } from "../utils/api";
+import { apiGet, apiPost, apiPut } from "../utils/api";
 
 function AdminSettingsPage() {
   const { user } = useAuth();
   const [me, setMe] = useState(null);
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
+  // N-28 (2026-05-21) — 현재 비번 검증 후 변경
+  const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [saving, setSaving] = useState(false);
@@ -27,6 +29,10 @@ function AdminSettingsPage() {
     e.preventDefault();
     setError("");
     setSuccess("");
+    if (!oldPassword) {
+      setError("현재 비밀번호를 입력해 주세요.");
+      return;
+    }
     if (!newPassword) {
       setError("새 비밀번호를 입력해 주세요.");
       return;
@@ -39,10 +45,16 @@ function AdminSettingsPage() {
       setError("새 비밀번호와 확인이 일치하지 않습니다.");
       return;
     }
+    if (oldPassword === newPassword) {
+      setError("새 비밀번호는 기존과 달라야 합니다.");
+      return;
+    }
     setSaving(true);
     try {
-      await apiPut("/v1/auth/me", { password: newPassword });
+      // N-28 (2026-05-21) — change-password endpoint 로 분리. oldPassword 검증 필수.
+      await apiPost("/v1/auth/change-password", { oldPassword, newPassword });
       setSuccess("비밀번호가 변경되었습니다. 다음 로그인부터 새 비밀번호를 사용하세요.");
+      setOldPassword("");
       setNewPassword("");
       setConfirmPassword("");
     } catch (err) {
@@ -133,7 +145,16 @@ function AdminSettingsPage() {
           새 비밀번호는 영문/숫자/특수문자 조합 8자 이상 권장.
         </p>
         <form onSubmit={handleSavePassword}>
-          <label style={labelStyle}>새 비밀번호 (8자 이상)</label>
+          <label style={labelStyle}>현재 비밀번호</label>
+          <input
+            type="password"
+            value={oldPassword}
+            onChange={(e) => setOldPassword(e.target.value)}
+            placeholder="현재 비밀번호"
+            style={inputStyle}
+            autoComplete="current-password"
+          />
+          <label style={{ ...labelStyle, marginTop: 12 }}>새 비밀번호 (8자 이상)</label>
           <input
             type="password"
             value={newPassword}

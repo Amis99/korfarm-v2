@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { apiGet } from "../../../utils/adminApi";
+import { apiGet, apiPost } from "../../../utils/adminApi";
 import ParentLinkManageModal from "./ParentLinkManageModal";
 
 /**
@@ -28,6 +28,26 @@ function ParentsTab() {
   };
 
   useEffect(() => { reload(); }, []);
+
+  // N-29 (2026-05-21) — 학부모 비번 재설정
+  const handleResetPassword = async (e, r) => {
+    e.stopPropagation();
+    if (!window.confirm(`${r.name || r.loginId} 의 임시 비밀번호를 발급할까요?`)) return;
+    try {
+      const res = await apiPost(`/v1/admin/users/${r.userId}/reset-password`, {});
+      const tempPwd = res?.tempPassword || res?.data?.tempPassword;
+      if (tempPwd) {
+        window.prompt(
+          `${r.name || r.loginId} 의 임시 비밀번호입니다.\n이 창을 닫으면 다시 볼 수 없습니다.\n복사 후 학부모에게 직접 전달하세요.`,
+          tempPwd
+        );
+      } else {
+        window.alert("임시 비밀번호가 생성되지 않았습니다.");
+      }
+    } catch (err) {
+      window.alert(err?.message || "비밀번호 재설정 실패");
+    }
+  };
 
   const orgs = useMemo(() => {
     const m = new Map();
@@ -80,6 +100,7 @@ function ParentsTab() {
                 <th>연락처</th>
                 <th>연결된 자녀</th>
                 <th>가입일</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -95,6 +116,16 @@ function ParentsTab() {
                       : <span style={{ color: "#aaa" }}>미연결</span>}
                   </td>
                   <td style={{ fontSize: 12 }}>{(r.createdAt || "").slice(0, 10)}</td>
+                  <td onClick={(e) => e.stopPropagation()}>
+                    <button
+                      className="admin-detail-btn secondary xs"
+                      type="button"
+                      title="임시 비밀번호 발급"
+                      onClick={(e) => handleResetPassword(e, r)}
+                    >
+                      비번 재설정
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

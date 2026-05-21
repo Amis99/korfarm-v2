@@ -22,6 +22,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.dao.DataAccessException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import org.slf4j.LoggerFactory
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -252,6 +253,28 @@ class AuthService(
         ))
     }
 
+    /**
+     * N-28 (2026-05-21) — 본인 비밀번호 변경. oldPassword 검증 후 newPassword 갱신.
+     * 잘못된 oldPassword: INVALID_OLD_PASSWORD. newPassword 8자 미만: BAD_REQUEST.
+     */
+    @Transactional
+    fun changePassword(userId: String, oldPassword: String, newPassword: String) {
+        if (newPassword.length < 8) {
+            throw ApiException("BAD_REQUEST", "새 비밀번호는 8자 이상이어야 합니다.", HttpStatus.BAD_REQUEST)
+        }
+        val user = userRepository.findById(userId).orElseThrow {
+            ApiException("NOT_FOUND", "user not found", HttpStatus.NOT_FOUND)
+        }
+        if (!passwordEncoder.matches(oldPassword, user.passwordHash)) {
+            throw ApiException("INVALID_OLD_PASSWORD", "현재 비밀번호가 일치하지 않습니다.", HttpStatus.UNAUTHORIZED)
+        }
+        if (passwordEncoder.matches(newPassword, user.passwordHash)) {
+            throw ApiException("SAME_PASSWORD", "기존 비밀번호와 다른 값을 입력해 주세요.", HttpStatus.BAD_REQUEST)
+        }
+        user.passwordHash = passwordEncoder.encode(newPassword)
+        userRepository.save(user)
+    }
+
     fun login(loginId: String, password: String): AuthResponseData {
         val user = userRepository.findByEmail(loginId)
             ?: throw ApiException("INVALID_CREDENTIALS", "invalid credentials", HttpStatus.UNAUTHORIZED)
@@ -287,9 +310,8 @@ class AuthService(
         request.shippingZipCode?.let { user.shippingZipCode = it }
         request.shippingAddress?.let { user.shippingAddress = it }
         request.shippingAddressDetail?.let { user.shippingAddressDetail = it }
-        request.password?.let {
-            if (it.length >= 8) user.passwordHash = passwordEncoder.encode(it)
-        }
+        // N-28 (2026-05-21) — 비번 변경은 별도 POST /v1/auth/change-password 만 허용.
+        // updateProfile 에서 password 필드를 받으면 무시한다 (oldPassword 검증 우회 차단).
         request.learningStartMode?.let {
             user.learningStartDate = if (it == "day1") LocalDate.now() else null
         }

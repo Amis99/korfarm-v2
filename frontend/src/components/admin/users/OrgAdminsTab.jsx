@@ -80,7 +80,7 @@ function OrgAdminsTab() {
         ) : (
           <table className="admin-detail-table">
             <thead>
-              <tr><th>이름</th><th>아이디</th><th>기관</th><th>연락처</th><th>이메일</th><th>가입일</th></tr>
+              <tr><th>이름</th><th>아이디</th><th>기관</th><th>연락처</th><th>이메일</th><th>가입일</th><th></th></tr>
             </thead>
             <tbody>
               {filtered.map((r) => (
@@ -91,6 +91,33 @@ function OrgAdminsTab() {
                   <td>{r.phone || "-"}</td>
                   <td style={{ fontSize: 12 }}>{r.email || "-"}</td>
                   <td style={{ fontSize: 12 }}>{(r.createdAt || "").slice(0, 10)}</td>
+                  <td onClick={(e) => e.stopPropagation()}>
+                    <button
+                      className="admin-detail-btn secondary xs"
+                      type="button"
+                      title="임시 비밀번호 발급 (N-29)"
+                      onClick={async (e) => {
+                        e.stopPropagation();
+                        if (!window.confirm(`${r.name || r.loginId} 의 임시 비밀번호를 발급할까요?`)) return;
+                        try {
+                          const res = await apiPost(`/v1/admin/users/${r.userId}/reset-password`, {});
+                          const tempPwd = res?.tempPassword || res?.data?.tempPassword;
+                          if (tempPwd) {
+                            window.prompt(
+                              `${r.name || r.loginId} 의 임시 비밀번호입니다.\n이 창을 닫으면 다시 볼 수 없습니다.\n복사 후 관리자에게 직접 전달하세요.`,
+                              tempPwd
+                            );
+                          } else {
+                            window.alert("임시 비밀번호가 생성되지 않았습니다.");
+                          }
+                        } catch (err) {
+                          window.alert(err?.message || "비밀번호 재설정 실패");
+                        }
+                      }}
+                    >
+                      비번 재설정
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
