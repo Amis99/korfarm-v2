@@ -211,8 +211,10 @@
 .engine-footer {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 16px;
+  padding: 16px;
+  flex-wrap: wrap;
 }
 
 .engine-exit {
@@ -220,9 +222,9 @@
   background: var(--engine-orange);
   color: #fff;
   border-radius: 14px;
-  padding: 24px 40px;
+  padding: 14px 28px;
   font-weight: 700;
-  font-size: 28px;
+  font-size: 20px;
   cursor: pointer;
 }
 
@@ -2111,12 +2113,29 @@ mark.highlight {
     overflow-x: hidden;
   }
 
+  /* N-19 (2026-05-21) — 좁은 viewport 에서도 종이 가운데 정렬, 좌우 답답함 완화 */
   .engine-viewport {
-    justify-content: flex-start;
+    justify-content: center;
+    padding: 16px 4px 24px;
   }
 
   .engine-stage {
     width: calc(var(--sheet-width) * var(--body-scale));
+  }
+
+  /* 모바일 시험 모듈/footer 보정 */
+  .exam-module {
+    padding: 8px 20px 32px;
+  }
+  .exam-q {
+    padding: 14px 8px 18px;
+  }
+  .engine-footer {
+    padding: 12px 8px;
+  }
+  .engine-exit {
+    padding: 10px 20px;
+    font-size: 16px;
   }
 }
 
@@ -2473,14 +2492,13 @@ mark.highlight {
   display: flex;
   flex-direction: column;
   gap: 0;
-  /* N-18 (2026-05-21) — 종이 좌우 경계에 글자가 닿아 잘려보이던 사고 fix.
-     stack 모드의 engine-body padding 0 + exam-module 4px 만으로는 부족했음. */
-  padding: 8px 28px 40px;
+  /* N-18/N-19 (2026-05-21) — 종이 좌우 경계 안쪽 padding 보강 + 모바일 조정 */
+  padding: 12px 40px 40px;
 }
 
 /* 문항 카드 */
 .exam-q {
-  padding: 16px 10px 20px;
+  padding: 16px 12px 20px;
   border-bottom: 1px dashed #d0c8b8;
 }
 .exam-q:last-of-type {
