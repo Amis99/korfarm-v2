@@ -1929,11 +1929,11 @@ fun verifyStudentTestAccess(testId: String, userId: String) {
       </tr>
       <tr>
         <td>N-15B</td>
-        <td><code>adminListTestAssets</code> dueAt 우선순위 — paper.examDate ?: cells.maxOf{dueAt}.
-          기타 시험도 examDate null 가능하므로 잠재 버그.
-          <strong>현재 보류</strong> — 후속 적용 권장.</td>
-        <td><code>StudyPlanService.kt:2680</code></td>
-        <td><span class="badge high">대기</span></td>
+        <td><code>adminListTestAssets</code> dueAt 우선순위 — <code>paper.examDate ?: cells.mapNotNull{dueAt}.max.toLocalDate</code>.
+          <strong>필터 보강</strong>: dueAt == null (마감일 없는 시험) 은 from/to 무관하게 항상 포함.
+          기타 시험도 examDate 미설정 가능한 잠재 누락 차단.</td>
+        <td><code>StudyPlanService.kt:2683-2707</code></td>
+        <td><span class="badge ok">완료</span></td>
       </tr>
     </tbody>
   </table>

@@ -2688,13 +2688,17 @@ class StudyPlanService(
             val pending = cells.count { it.status in listOf("pending", "retry") }
             val avg = cells.mapNotNull { it.score }.let { if (it.isEmpty()) null else it.average() }
             val paper = asset.refId?.let { paperMap[it] }
+            // N-15B (2026-05-21) — dueAt 우선순위: paper.examDate → 셀의 가장 늦은 dueAt.
+            // 둘 다 null 이면 "마감일 없는 시험" 으로 filter 에서 통과(아래 필터).
+            val cellDueAtMax = cells.mapNotNull { it.dueAt }.maxOrNull()?.toLocalDate()?.toString()
+            val effectiveDueAt = paper?.examDate?.toString() ?: cellDueAtMax
             AdminTestAssetItem(
                 assetId = asset.id,
                 planId = asset.planId,
                 planTitle = planMap[asset.planId]?.title ?: "",
                 testTitle = paper?.title ?: asset.label,
                 testId = asset.refId,
-                dueAt = paper?.examDate?.toString(),
+                dueAt = effectiveDueAt,
                 totalAssigned = total,
                 completed = completed,
                 pending = pending,
@@ -2702,9 +2706,10 @@ class StudyPlanService(
             )
         }
 
+        // N-15B — dueAt 이 null 인 시험은 "마감일 없음" 으로 항상 포함. from/to 는 dueAt 있는 시험에만 적용.
         val filtered = items.filter { item ->
-            val d = item.dueAt
-            (from == null || (d != null && d >= from)) && (to == null || (d != null && d <= to))
+            val d = item.dueAt ?: return@filter true
+            (from == null || d >= from) && (to == null || d <= to)
         }
 
         val totalCount = filtered.size
