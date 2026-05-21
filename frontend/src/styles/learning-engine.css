@@ -2398,9 +2398,10 @@ mark.highlight {
   .choice-label { font-size: 19px; padding: 4px 10px; }
   .question-choice { padding: 12px 16px; }
 
-  /* ── 모달 내 글자: 레벨 무관 컴팩트 통일 (소쉬르 기준 20% 축소) ──
-     모든 자식 폰트 13px !important. 통합 사이즈 규칙(38/36/34/32) cascade 완전 차단.
-     224px 폭 모달에 13px 폰트. */
+  /* ── 모달 내 글자: 시험지 본문(.cum-card * 22px) × zoom(--body-scale) 시각 크기 ──
+     모달은 document.body portal로 .engine-scale zoom을 못 받음 → 인라인 style에서
+     22 × bodyScale로 동적 계산한 --modal-font-size 변수를 자식에 전달.
+     변수 미설정 시 fallback 13px. 통합 사이즈 규칙(38/36/34/32) cascade 완전 차단. */
   .question-modal,
   .question-modal *,
   .question-modal-stem,
@@ -2410,17 +2411,17 @@ mark.highlight {
   .question-modal .question-choice span,
   .question-modal-choices .question-choice,
   .question-modal-choices .question-choice span {
-    font-size: 13px !important;
+    font-size: var(--modal-font-size, 13px) !important;
     line-height: 1.4 !important;
   }
   .question-modal .question-choice {
     padding: 8px 10px !important;
   }
   .question-modal-header h3 {
-    font-size: 12px !important;
+    font-size: calc(var(--modal-font-size, 13px) * 0.95) !important;
   }
   .question-modal-drag-hint {
-    font-size: 9px !important;
+    font-size: calc(var(--modal-font-size, 13px) * 0.7) !important;
   }
   /* 모바일 모달 — 224px 고정 (소쉬르 기준 20% 축소, 레벨 무관 통일) */
   .question-modal {
@@ -2472,12 +2473,14 @@ mark.highlight {
   display: flex;
   flex-direction: column;
   gap: 0;
-  padding: 8px 4px 40px;
+  /* N-18 (2026-05-21) — 종이 좌우 경계에 글자가 닿아 잘려보이던 사고 fix.
+     stack 모드의 engine-body padding 0 + exam-module 4px 만으로는 부족했음. */
+  padding: 8px 28px 40px;
 }
 
 /* 문항 카드 */
 .exam-q {
-  padding: 16px 6px 20px;
+  padding: 16px 10px 20px;
   border-bottom: 1px dashed #d0c8b8;
 }
 .exam-q:last-of-type {
