@@ -91,7 +91,8 @@ function ExamModule({ content }) {
   };
 
   // 서술형 입력 (N-21, 2026-05-21)
-  const handleEssayChange = (questionId, text, questionIdx) => {
+  // N-25 (2026-05-21) — 자동 다음 문제 노출 제거. Enter 키로 명시적 제출.
+  const handleEssayChange = (questionId, text) => {
     if (isSubmitting) return;
     setAnswers((prev) => {
       const next = { ...prev };
@@ -99,12 +100,15 @@ function ExamModule({ content }) {
       else next[questionId] = text;
       return next;
     });
-    // 첫 입력이 들어오면 다음 문제 자동 노출
-    if (text && questionIdx === currentIndex && currentIndex < questions.length - 1) {
-      if (advanceRef.current) clearTimeout(advanceRef.current);
-      advanceRef.current = setTimeout(() => {
-        setCurrentIndex((prev) => Math.max(prev, questionIdx + 1));
-      }, 800);
+  };
+
+  // Enter = 제출(다음 문제 노출). Shift+Enter = 줄바꿈(기본 동작 유지).
+  const handleEssayKeyDown = (e, questionIdx) => {
+    if (e.key !== "Enter" || e.shiftKey) return;
+    if (isSubmitting) return;
+    e.preventDefault();
+    if (questionIdx === currentIndex && currentIndex < questions.length - 1) {
+      setCurrentIndex((prev) => Math.max(prev, questionIdx + 1));
     }
   };
 
@@ -184,9 +188,10 @@ function ExamModule({ content }) {
                 <textarea
                   className="exam-essay-input"
                   rows={4}
-                  placeholder="답안을 입력하세요"
+                  placeholder="답안을 입력한 뒤 Enter — 줄바꿈은 Shift + Enter"
                   value={selectedId || ""}
-                  onChange={(e) => handleEssayChange(q.id, e.target.value, idx)}
+                  onChange={(e) => handleEssayChange(q.id, e.target.value)}
+                  onKeyDown={(e) => handleEssayKeyDown(e, idx)}
                   disabled={isSubmitting}
                 />
               </div>

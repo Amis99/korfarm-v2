@@ -113,9 +113,16 @@ function OnlineTestRenderer({
           <div className="otr-essay">
             <textarea
               className="otr-essay-input"
-              placeholder="답안을 입력하세요..."
+              placeholder="답안을 입력한 뒤 Enter — 줄바꿈은 Shift + Enter"
               value={answers[String(q.number)] || ""}
               onChange={(e) => onAnswer(q.number, e.target.value || null)}
+              onKeyDown={(e) => {
+                // N-25 (2026-05-21) — Enter 로 다음 문제 이동. Shift+Enter 는 줄바꿈.
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  if (currentIdx < totalQ - 1) goTo(currentIdx + 1);
+                }
+              }}
               rows={6}
             />
           </div>

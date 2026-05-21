@@ -2348,6 +2348,39 @@ fun verifyStudentTestAccess(testId: String, userId: String) {
 </section>
 
 <section>
+  <h2>8.24 신규 — 온라인 응시 서술형 Enter 제출 + 채점 흐름 확인 <span class="badge ok">2026-05-21 fix</span></h2>
+
+  <h4>증상</h4>
+  <p>N-21 직후 도입한 setTimeout 800ms 자동 전환이 어색. 학생이 타이핑 중간에 의도와 다르게 다음 문제로 넘어감.</p>
+
+  <h4>적용 결과 (N-25)</h4>
+  <table class="compact">
+    <thead><tr><th>#</th><th>변경</th><th>위치</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>handleEssayChange 의 setTimeout 자동 다음 문제 노출 제거</td><td><code>ExamModule.jsx</code></td></tr>
+      <tr><td>2</td><td>handleEssayKeyDown 신설 — Enter (Shift 없음) → 다음 문제 노출, Shift+Enter → 줄바꿈(기본)</td><td><code>ExamModule.jsx</code></td></tr>
+      <tr><td>3</td><td>textarea placeholder "답안을 입력한 뒤 Enter — 줄바꿈은 Shift + Enter" 안내</td><td><code>ExamModule.jsx</code></td></tr>
+      <tr><td>4</td><td>OnlineTestRenderer 의 서술형 textarea 도 동일 Enter → goTo(next) 분기 추가</td><td><code>OnlineTestRenderer.jsx</code></td></tr>
+    </tbody>
+  </table>
+
+  <h4>서술형 채점 흐름 (사용자 질문 답)</h4>
+  <p>현재 서술형 채점은 <strong>2 단계</strong>:</p>
+  <ol>
+    <li><strong>1차 — 키워드 매칭 즉시 채점</strong>: 학생 제출 시 <code>TestService.gradeByKeywords</code> 가
+      <code>essay_keywords_json</code> 매칭으로 점수 산출. 챕터 테스트는 <code>EssayGradingService.createGradingsForSubmission</code> 가
+      grading row 도 같이 만듦 (status="keyword_graded").</li>
+    <li><strong>2차 — AI 채점</strong>: 어드민이 별도로 트리거. <code>EssayGradingService.aiGrade(submissionId, questionNumber)</code> →
+      <code>aiGradingClient.grade(studentAnswer, modelAnswer, rubric, maxPoints)</code> 호출. status="ai_graded".
+      자동 호출 X — 어드민 화면의 AI 채점 버튼 누르면 동작.</li>
+  </ol>
+  <p style="color: var(--muted); font-size: 0.92rem;">
+    → 즉 학생 제출 직후 표시되는 점수는 키워드 매칭. AI 채점은 어드민이 따로 돌려야 적용됨.
+    기타 테스트(TestStorage)는 grading row 자체가 없어 AI 채점 흐름 미연결 — 키워드 매칭만 사용. (후속 확장 가능)
+  </p>
+</section>
+
+<section>
   <h2>9. 작업 절차 규약 (2026-05-21 사용자 명시) <span class="badge ok">정책</span></h2>
 
   <div class="callout" style="border-left-color: var(--accent);">
