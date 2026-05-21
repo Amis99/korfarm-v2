@@ -1915,9 +1915,17 @@ fun verifyStudentTestAccess(testId: String, userId: String) {
       <tr>
         <td>N-15A</td>
         <td><code>verifyStudentTestAccess</code> 가드 — <code>orgId == null || orgId == "org_hq"</code> 둘 다 본사 시험 인정.
-          <strong>현재 보류</strong> — N-15D 로 챕터 시험이 학습 계획표에 들어올 일이 없어졌으나 다른 경로(직접 URL 입력 등) 의 회귀를 막으려면 후속 적용 권장.</td>
-        <td><code>TestService.kt:1407</code></td>
-        <td><span class="badge high">대기</span></td>
+          추가로 <code>listTests</code> source 필터 3분기(hq/org/전체) 도 같이 갱신 — 학생 시험 보관함에 본사 시험(org_hq) 노출 보장.</td>
+        <td><code>TestService.kt:1407 + 75-94</code></td>
+        <td><span class="badge ok">완료</span></td>
+      </tr>
+      <tr>
+        <td>N-15C</td>
+        <td>"본사 시험" 컨벤션 회귀 점검 — TestService 의 본사 시험 판정 6 곳(<code>listTests</code> × 3 source 분기, <code>findTests</code> 1232L, <code>getStudentsForTest</code> 1313L,
+          <code>verifyAdminTestAccess</code> 1374L, <code>verifyAdminTestEditAccess</code> 1390L, <code>verifyStudentTestAccess</code> 1411L) 모두
+          <code>null || "org_hq"</code> 로 일관. 다른 모듈(OcrTestService.draft.orgId / Agent.orgId) 의 null 검사는 다른 의미라 무관.</td>
+        <td>TestService.kt 전반</td>
+        <td><span class="badge ok">완료 (N-15A 와 동시)</span></td>
       </tr>
       <tr>
         <td>N-15B</td>

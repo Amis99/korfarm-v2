@@ -83,14 +83,15 @@ class TestService(
         var papers = testPaperRepo.findByStatus("open")
             .filter { resolveKind(it) in setOf("misc", "response_only") }
 
-        // source 필터: "hq" = 본사(orgId가 null), "org" = 소속 기관
+        // source 필터: "hq" = 본사(orgId 가 null 또는 "org_hq"), "org" = 소속 기관
+        // N-15A (2026-05-21) — 본사 시험 판정을 verifyStudentTestAccess 와 일치 (null || "org_hq")
         if (source == "hq") {
-            papers = papers.filter { it.orgId == null }
+            papers = papers.filter { it.orgId == null || it.orgId == "org_hq" }
         } else if (source == "org") {
-            papers = papers.filter { it.orgId != null && userOrgIds.contains(it.orgId) }
+            papers = papers.filter { it.orgId != null && it.orgId != "org_hq" && userOrgIds.contains(it.orgId) }
         } else {
             // 전체: 본사 + 소속 기관 시험만 (다른 기관 시험은 제외)
-            papers = papers.filter { it.orgId == null || userOrgIds.contains(it.orgId) }
+            papers = papers.filter { it.orgId == null || it.orgId == "org_hq" || userOrgIds.contains(it.orgId) }
         }
 
         // levelId 필터 — 기타 테스트는 그룹 매칭 (학생 saussure1 → saussure 그룹 시험 응시 가능)
@@ -1402,11 +1403,12 @@ class TestService(
 
     /**
      * 학생이 시험에 접근할 수 있는지 검증.
-     * 본사 시험(orgId=null)은 모든 학생 접근 가능. 기관 시험은 해당 기관 소속만 가능.
+     * 본사 시험(orgId == null 또는 "org_hq")은 모든 학생 접근 가능. 기관 시험은 해당 기관 소속만 가능.
+     * N-15A (2026-05-21) — verifyAdminTestAccess/verifyAdminTestEditAccess 와 본사 시험 판정 일치.
      */
     fun verifyStudentTestAccess(testId: String, userId: String) {
         val paper = findPaper(testId)
-        if (paper.orgId == null) return // 본사 시험은 모든 학생 접근 가능
+        if (paper.orgId == null || paper.orgId == "org_hq") return // 본사 시험은 모든 학생 접근 가능
         if (paper.series == "diagnostic") return // 진단 시험지는 모든 학생 접근 가능
         val userOrgIds = orgMembershipRepository.findByUserIdAndStatus(userId, "active").map { it.orgId }
         if (!userOrgIds.contains(paper.orgId)) {
