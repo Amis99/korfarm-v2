@@ -457,7 +457,117 @@ class TestService(
                 org.slf4j.LoggerFactory.getLogger(TestService::class.java)
                     .warn("진단 동기화 실패 (paperId=$testId): ${e.message}", e)
             }
+        } else {
+            // N-16 (2026-05-21) — 일반 시험 payload 의 questions/passages 를
+            // test_questions 테이블 + paper.totalQuestions/totalPoints 와 동기화.
+            // 학생 응시·통계·리스트 카운트는 모두 test_questions 기반이라
+            // 이 동기화가 빠지면 본문 편집해도 학생에게 0문항으로 보인다.
+            try {
+                syncQuestionsFromPayload(paper, normalizedPayloadJson)
+            } catch (e: Exception) {
+                org.slf4j.LoggerFactory.getLogger(TestService::class.java)
+                    .warn("test_questions 동기화 실패 (paperId=$testId): ${e.message}", e)
+            }
         }
+    }
+
+    /**
+     * N-16 (2026-05-21) — 일반(misc/response_only) 시험 payload → test_questions·paper 카운트 동기화.
+     * test_submissions 의 답안은 answers_json 컬럼에 자체 보관 (test_questions fk 없음) → delete-insert 안전.
+     * payload.question.id 를 그대로 entity.id 로 사용해 stable.
+     */
+    @Transactional
+    fun syncQuestionsFromPayload(paper: TestPaperEntity, payloadJson: String) {
+        val payload: Map<String, Any?> = try {
+            objectMapper.readValue(payloadJson, object : TypeReference<Map<String, Any?>>() {})
+        } catch (_: Exception) { return }
+
+        val questions = (payload["questions"] as? List<*>)?.filterIsInstance<Map<String, Any?>>() ?: emptyList()
+        val passages = (payload["passages"] as? List<*>)?.filterIsInstance<Map<String, Any?>>() ?: emptyList()
+        val passageMap = passages.associateBy { (it["id"] as? String).orEmpty() }
+
+        questionRepo.deleteByTestId(paper.id)
+
+        val entities = questions.mapIndexed { idx, q ->
+            val pid = (q["passageId"] as? String).orEmpty()
+            val pass = passageMap[pid]
+            val passageText = (pass?.get("text") as? String)
+                ?: (pass?.get("content") as? String)
+            val domain = (q["domain"] as? String)
+                ?: (pass?.get("domain") as? String)?.takeIf { it.isNotBlank() }
+            val subDomain = (q["subDomain"] as? String)
+                ?: (pass?.get("subDomain") as? String)?.takeIf { it.isNotBlank() }
+            val correct = (q["answerId"] as? String)
+                ?: (q["correctAnswer"] as? String)
+                ?: (q["answer"] as? String)
+            val choices = q["choices"]
+            val essayKw = q["essayKeywords"]
+            val essayRubricRaw = q["essayRubric"]
+            val essayRubricJson = when (essayRubricRaw) {
+                null -> null
+                is String -> essayRubricRaw.takeIf { it.isNotBlank() }
+                else -> objectMapper.writeValueAsString(essayRubricRaw)
+            }
+            TestQuestionEntity(
+                id = (q["id"] as? String)?.takeIf { it.isNotBlank() } ?: IdGenerator.newId("tq"),
+                testId = paper.id,
+                number = (q["number"] as? Number)?.toInt() ?: (idx + 1),
+                type = (q["type"] as? String) ?: "MULTI_CHOICE",
+                domain = domain,
+                subDomain = subDomain,
+                passage = passageText,
+                stem = q["stem"] as? String,
+                points = (q["points"] as? Number)?.toInt() ?: 0,
+                correctAnswer = correct,
+                choicesJson = choices?.let { objectMapper.writeValueAsString(it) },
+                choiceExplanationsJson = q["choiceExplanations"]?.let { objectMapper.writeValueAsString(it) },
+                intent = q["intent"] as? String,
+                essayKeywordsJson = essayKw?.let { objectMapper.writeValueAsString(it) },
+                essayRubricJson = essayRubricJson,
+                modelAnswer = q["modelAnswer"] as? String
+            )
+        }
+        questionRepo.saveAll(entities)
+        paper.totalQuestions = entities.size
+        paper.totalPoints = entities.sumOf { it.points }
+        testPaperRepo.save(paper)
+    }
+
+    /**
+     * N-16 (2026-05-21) — 배포 시 1회: payload_json 이 있는데 test_questions 가 비어있는
+     * 일반 시험을 일괄 재동기화. ApplicationRunner 가 부팅 시 호출.
+     */
+    @Transactional
+    fun bulkSyncQuestionsFromPayload(): Map<String, Any?> {
+        val log = org.slf4j.LoggerFactory.getLogger(TestService::class.java)
+        val candidates = testPaperRepo.findAll().filter { paper ->
+            !paper.id.startsWith("diag_paper_") &&
+                paper.series != "chapter" &&
+                paper.series != "diagnostic" &&
+                !paper.payloadJson.isNullOrBlank() &&
+                questionRepo.findByTestIdOrderByNumberAsc(paper.id).isEmpty()
+        }
+        if (candidates.isEmpty()) {
+            return mapOf("syncedCount" to 0, "syncedIds" to emptyList<String>())
+        }
+        val synced = mutableListOf<String>()
+        val failed = mutableListOf<String>()
+        candidates.forEach { paper ->
+            try {
+                syncQuestionsFromPayload(paper, paper.payloadJson!!)
+                synced.add(paper.id)
+            } catch (e: Exception) {
+                failed.add(paper.id)
+                log.warn("bulkSync 실패 (${paper.id}): ${e.message}", e)
+            }
+        }
+        log.info("N-16 bulkSync 완료 — synced=${synced.size}, failed=${failed.size}")
+        return mapOf(
+            "syncedCount" to synced.size,
+            "syncedIds" to synced,
+            "failedCount" to failed.size,
+            "failedIds" to failed
+        )
     }
 
     private fun normalizeDiagnosticPayloadJson(payloadJson: String): String {
