@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { apiGet, apiGetCamel, apiPost, apiPatch, apiDelete } from "../../../utils/adminApi";
+import TempPasswordModal from "./TempPasswordModal";
 
 /**
  * 기관 관리자 탭 (2026-05-18). HQ_ADMIN 전용.
@@ -17,6 +18,8 @@ function OrgAdminsTab() {
   const [orgFilter, setOrgFilter] = useState("all");
   const [showAdd, setShowAdd] = useState(false);
   const [selected, setSelected] = useState(null);
+  // N-32 (2026-05-22) — 임시 비밀번호 모달
+  const [tempPwdModal, setTempPwdModal] = useState(null);
 
   const reload = async () => {
     setLoading(true); setError("");
@@ -103,10 +106,7 @@ function OrgAdminsTab() {
                           const res = await apiPost(`/v1/admin/users/${r.userId}/reset-password`, {});
                           const tempPwd = res?.tempPassword || res?.data?.tempPassword;
                           if (tempPwd) {
-                            window.prompt(
-                              `${r.name || r.loginId} 의 임시 비밀번호입니다.\n이 창을 닫으면 다시 볼 수 없습니다.\n복사 후 관리자에게 직접 전달하세요.`,
-                              tempPwd
-                            );
+                            setTempPwdModal({ name: r.name, loginId: r.loginId, tempPassword: tempPwd });
                           } else {
                             window.alert("임시 비밀번호가 생성되지 않았습니다.");
                           }
@@ -132,6 +132,14 @@ function OrgAdminsTab() {
       {selected ? (
         <OrgAdminEditModal admin={selected} orgs={orgs} onClose={() => setSelected(null)} onChanged={() => { setSelected(null); reload(); }} />
       ) : null}
+
+      <TempPasswordModal
+        open={!!tempPwdModal}
+        name={tempPwdModal?.name}
+        loginId={tempPwdModal?.loginId}
+        tempPassword={tempPwdModal?.tempPassword}
+        onClose={() => setTempPwdModal(null)}
+      />
     </>
   );
 }

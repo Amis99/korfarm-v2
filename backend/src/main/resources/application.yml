@@ -1,4 +1,18 @@
 spring:
+  # N-34 (2026-05-22) — 이메일 발송 (비밀번호 재설정 토큰).
+  # 환경변수 미설정 시 host="" 로 두면 발송 시 예외 → AuthService 가 캐치 후 응답엔 영향 X.
+  mail:
+    host: ${MAIL_HOST:}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
   jackson:
     property-naming-strategy: SNAKE_CASE
     default-property-inclusion: non_null
@@ -52,3 +66,9 @@ claude:
   api:
     key: ${CLAUDE_API_KEY:}
     url: https://api.anthropic.com/v1/messages
+
+# N-34 (2026-05-22) — 비밀번호 재설정 이메일
+app-mail:
+  from: ${MAIL_FROM:no-reply@googerfarm.com}
+  from-name: ${MAIL_FROM_NAME:국어농장}
+  reset-link-base: ${PASSWORD_RESET_LINK_BASE:https://googerfarm.com/reset}

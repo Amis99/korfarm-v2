@@ -5,6 +5,7 @@ import { useAdminList } from "../../../hooks/useAdminList";
 import { useAuth } from "../../../hooks/useAuth";
 
 import OrgSelect from "../../OrgSelect";
+import TempPasswordModal from "./TempPasswordModal";
 import "../../../styles/admin-detail.css";
 
 const STUDENTS = [
@@ -273,6 +274,8 @@ function StudentsTab() {
   const [classes, setClasses] = useState([]);
   const [showInventoryModal, setShowInventoryModal] = useState(false);
   const [inventoryStudent, setInventoryStudent] = useState(null);
+  // N-32 (2026-05-22) — 임시 비밀번호 표시 모달 state
+  const [tempPwdModal, setTempPwdModal] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   // 우측 요약 그룹화
   const [summaryDim, setSummaryDim] = useState("org"); // org / class / level / subscription
@@ -495,17 +498,14 @@ function StudentsTab() {
   };
 
   // N-29 (2026-05-21) — 학생 비번 재설정. HQ_ADMIN / ORG_ADMIN(자기 기관) 가능.
+  // N-32 (2026-05-22) — prompt() → TempPasswordModal 로 교체.
   const handleResetPassword = async (s) => {
     if (!window.confirm(`${s.name || s.email} 의 임시 비밀번호를 발급할까요?\n기존 비밀번호는 즉시 무효화됩니다.`)) return;
     try {
       const res = await apiPost(`/v1/admin/users/${s.id}/reset-password`, {});
       const tempPwd = res?.tempPassword || res?.data?.tempPassword;
       if (tempPwd) {
-        // 임시 비밀번호 1회 노출. 어드민이 본인에게 직접 전달.
-        window.prompt(
-          `${s.name || s.email} 의 임시 비밀번호입니다.\n이 창을 닫으면 다시 볼 수 없습니다.\n복사 후 학생/학부모에게 직접 전달하세요.`,
-          tempPwd
-        );
+        setTempPwdModal({ name: s.name, loginId: s.email, tempPassword: tempPwd });
       } else {
         window.alert("임시 비밀번호가 생성되지 않았습니다. 다시 시도해 주세요.");
       }
@@ -1146,6 +1146,15 @@ function StudentsTab() {
           </div>
         </div>
       ) : null}
+
+      {/* N-32 (2026-05-22) — 임시 비밀번호 1회 표시 모달 */}
+      <TempPasswordModal
+        open={!!tempPwdModal}
+        name={tempPwdModal?.name}
+        loginId={tempPwdModal?.loginId}
+        tempPassword={tempPwdModal?.tempPassword}
+        onClose={() => setTempPwdModal(null)}
+      />
     </>
   );
 }

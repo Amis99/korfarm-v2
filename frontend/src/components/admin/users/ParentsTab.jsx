@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { apiGet, apiPost } from "../../../utils/adminApi";
 import ParentLinkManageModal from "./ParentLinkManageModal";
+import TempPasswordModal from "./TempPasswordModal";
 
 /**
  * 학부모 탭 (2026-05-18). HQ_ADMIN 전용.
@@ -13,6 +14,8 @@ function ParentsTab() {
   const [search, setSearch] = useState("");
   const [orgFilter, setOrgFilter] = useState("all");
   const [selected, setSelected] = useState(null);
+  // N-32 (2026-05-22) — 임시 비밀번호 표시 모달
+  const [tempPwdModal, setTempPwdModal] = useState(null);
 
   const reload = async () => {
     setLoading(true); setError("");
@@ -37,10 +40,7 @@ function ParentsTab() {
       const res = await apiPost(`/v1/admin/users/${r.userId}/reset-password`, {});
       const tempPwd = res?.tempPassword || res?.data?.tempPassword;
       if (tempPwd) {
-        window.prompt(
-          `${r.name || r.loginId} 의 임시 비밀번호입니다.\n이 창을 닫으면 다시 볼 수 없습니다.\n복사 후 학부모에게 직접 전달하세요.`,
-          tempPwd
-        );
+        setTempPwdModal({ name: r.name, loginId: r.loginId, tempPassword: tempPwd });
       } else {
         window.alert("임시 비밀번호가 생성되지 않았습니다.");
       }
@@ -140,6 +140,14 @@ function ParentsTab() {
           onChanged={reload}
         />
       ) : null}
+
+      <TempPasswordModal
+        open={!!tempPwdModal}
+        name={tempPwdModal?.name}
+        loginId={tempPwdModal?.loginId}
+        tempPassword={tempPwdModal?.tempPassword}
+        onClose={() => setTempPwdModal(null)}
+      />
     </>
   );
 }

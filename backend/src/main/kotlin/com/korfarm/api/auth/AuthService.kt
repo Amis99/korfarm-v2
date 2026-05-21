@@ -256,6 +256,7 @@ class AuthService(
     /**
      * N-28 (2026-05-21) — 본인 비밀번호 변경. oldPassword 검증 후 newPassword 갱신.
      * 잘못된 oldPassword: INVALID_OLD_PASSWORD. newPassword 8자 미만: BAD_REQUEST.
+     * N-33 (2026-05-22) — 변경 성공 시 그 사용자의 모든 refresh token revoke (다른 디바이스 강제 로그아웃).
      */
     @Transactional
     fun changePassword(userId: String, oldPassword: String, newPassword: String) {
@@ -273,6 +274,20 @@ class AuthService(
         }
         user.passwordHash = passwordEncoder.encode(newPassword)
         userRepository.save(user)
+        revokeAllRefreshTokens(userId)
+    }
+
+    /**
+     * N-33 (2026-05-22) — 그 사용자의 활성 refresh token 전부 revoke.
+     * 비번 변경·어드민 재설정 시 다른 디바이스 강제 로그아웃 목적.
+     * access token (15분 짧음) 은 자연 만료. refresh 시점에 토큰 없어 차단.
+     */
+    @Transactional
+    fun revokeAllRefreshTokens(userId: String) {
+        val now = LocalDateTime.now()
+        val tokens = refreshTokenRepository.findByUserIdAndRevokedAtIsNull(userId)
+        tokens.forEach { it.revokedAt = now }
+        if (tokens.isNotEmpty()) refreshTokenRepository.saveAll(tokens)
     }
 
     fun login(loginId: String, password: String): AuthResponseData {

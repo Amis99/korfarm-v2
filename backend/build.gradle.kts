@@ -33,6 +33,8 @@ dependencies {
     implementation("org.apache.pdfbox:pdfbox:3.0.2")
     implementation("software.amazon.awssdk:s3:2.25.16")
     implementation("software.amazon.awssdk:s3-transfer-manager:2.25.16")
+    // N-34 (2026-05-22) — 이메일 발송 (비밀번호 재설정 토큰)
+    implementation("org.springframework.boot:spring-boot-starter-mail")
     runtimeOnly("com.mysql:mysql-connector-j")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

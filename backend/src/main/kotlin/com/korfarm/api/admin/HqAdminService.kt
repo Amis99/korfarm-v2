@@ -25,6 +25,7 @@ class HqAdminService(
     private val userRepository: UserRepository,
     private val orgMembershipRepository: OrgMembershipRepository,
     private val passwordEncoder: PasswordEncoder,
+    private val authService: com.korfarm.api.auth.AuthService,
 ) {
     companion object {
         const val ORG_HQ = "org_hq"
@@ -154,6 +155,8 @@ class HqAdminService(
         val temp = generateTempPassword(12)
         user.passwordHash = passwordEncoder.encode(temp)
         userRepository.save(user)
+        // N-33 (2026-05-22) — 본사 관리자도 모든 활성 refresh token revoke
+        authService.revokeAllRefreshTokens(userId)
         return temp
     }
 

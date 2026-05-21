@@ -15,6 +15,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 // 나머지 페이지 (lazy import - 코드 분할)
 const SignupPage = lazy(() => import("./pages/SignupPage"));
 const ResetPage = lazy(() => import("./pages/ResetPage"));
+const ResetConfirmPage = lazy(() => import("./pages/ResetConfirmPage"));
 const ProfilePage = lazy(() => import("./pages/ProfilePage"));
 const PendingApprovalPage = lazy(() => import("./pages/PendingApprovalPage"));
 
@@ -231,6 +232,7 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/reset" element={<ResetPage />} />
+          <Route path="/reset/:token" element={<ResetConfirmPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/guide" element={<GuidePage />} />
           <Route path="/diagnostic-info" element={<DiagnosticInfoPage />} />

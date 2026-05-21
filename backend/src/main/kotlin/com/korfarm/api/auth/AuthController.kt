@@ -26,6 +26,7 @@ class AuthController(
     private val orgService: OrgService,
     private val orgMembershipRepository: com.korfarm.api.org.OrgMembershipRepository,
     private val orgRepository: com.korfarm.api.org.OrgRepository,
+    private val passwordResetService: PasswordResetService,
 ) {
     @GetMapping("/check-login-id")
     fun checkLoginId(@RequestParam loginId: String): ApiResponse<Map<String, Boolean>> {
@@ -138,15 +139,30 @@ class AuthController(
         return ApiResponse(success = true, data = mapOf("message" to "비밀번호가 변경되었습니다."))
     }
 
+    // N-34 (2026-05-22) — 이메일 토큰 기반 셀프 비번 재설정 요청.
+    // 계정 존재 여부와 무관하게 동일 응답 (계정 열거 방지). 존재 시 PasswordResetService 가 토큰·이메일 처리.
     @PostMapping("/request-password-reset")
-    fun requestPasswordReset(@RequestBody body: Map<String, String>): ApiResponse<Map<String, String>> {
+    fun requestPasswordReset(
+        @RequestBody body: Map<String, String>,
+        request: jakarta.servlet.http.HttpServletRequest
+    ): ApiResponse<Map<String, String>> {
         val loginId = body["loginId"]
             ?: throw ApiException("BAD_REQUEST", "loginId 필수", HttpStatus.BAD_REQUEST)
-        // 계정 존재 여부와 무관하게 동일한 응답 반환 (계정 열거 공격 방지)
-        userRepository.existsByEmail(loginId)
+        passwordResetService.requestReset(loginId, request.remoteAddr)
         return ApiResponse(success = true, data = mapOf(
-            "message" to "비밀번호 초기화 요청이 접수되었습니다. 선생님 또는 관리자에게 문의하세요."
+            "message" to "가입된 계정이라면 비밀번호 재설정 안내 메일이 발송됩니다. 메일함을 확인해 주세요."
         ))
+    }
+
+    // N-34 (2026-05-22) — 토큰으로 비번 재설정 (이메일 링크 클릭 후 호출).
+    @PostMapping("/reset-password")
+    fun resetPasswordWithToken(@RequestBody body: Map<String, String>): ApiResponse<Map<String, String>> {
+        val token = body["token"]
+            ?: throw ApiException("BAD_REQUEST", "token 필수", HttpStatus.BAD_REQUEST)
+        val newPassword = body["newPassword"]
+            ?: throw ApiException("BAD_REQUEST", "newPassword 필수", HttpStatus.BAD_REQUEST)
+        passwordResetService.resetPasswordWithToken(token, newPassword)
+        return ApiResponse(success = true, data = mapOf("message" to "비밀번호가 재설정되었습니다. 새 비밀번호로 로그인해 주세요."))
     }
 
     @GetMapping("/orgs")

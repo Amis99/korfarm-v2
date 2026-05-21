@@ -2,6 +2,7 @@ package com.korfarm.api.admin
 
 import com.korfarm.api.common.ApiException
 import com.korfarm.api.common.ApiResponse
+import com.korfarm.api.auth.AuthService
 import com.korfarm.api.org.OrgMembershipRepository
 import com.korfarm.api.security.AdminGuard
 import com.korfarm.api.security.SecurityUtils
@@ -29,6 +30,7 @@ class AdminUserController(
     private val userRepository: UserRepository,
     private val orgMembershipRepository: OrgMembershipRepository,
     private val passwordEncoder: PasswordEncoder,
+    private val authService: AuthService,
 ) {
     @PatchMapping("/{userId}")
     @Transactional
@@ -131,6 +133,8 @@ class AdminUserController(
         val temp = generateTemporaryPassword()
         target.passwordHash = passwordEncoder.encode(temp)
         userRepository.save(target)
+        // N-33 (2026-05-22) — 대상 사용자의 모든 refresh token revoke. 학생이 다른 디바이스에서 로그인 중이면 강제 로그아웃.
+        authService.revokeAllRefreshTokens(userId)
         return ApiResponse(success = true, data = mapOf(
             "userId" to userId,
             "tempPassword" to temp,
