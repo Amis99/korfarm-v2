@@ -171,8 +171,14 @@ class ProTestSessionService(
         // TestService로 채점
         val submission = testService.submitOmr(session.testId, userId, userId, request.answers)
 
-        // 서술형 채점 레코드 생성
+        // 서술형 채점 레코드 생성 (1차 — 키워드 매칭)
         essayGradingService.createGradingsForSubmission(submission.id, session.testId, userId, request.answers)
+        // N-26 (2026-05-21) — 2차: Sonnet AI 자동 채점 (병렬 호출). 실패해도 키워드 점수 fallback.
+        try {
+            essayGradingService.aiGradeAllEssaysOfSubmission(submission.id)
+        } catch (e: Exception) {
+            logger.warn("AI 자동 채점 실패 (submission=${submission.id}): ${e.message}")
+        }
 
         val paper = testPaperRepo.findById(session.testId).orElse(null)
         val totalPoints = paper?.totalPoints ?: 100

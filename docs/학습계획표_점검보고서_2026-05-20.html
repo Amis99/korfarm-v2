@@ -2381,6 +2381,41 @@ fun verifyStudentTestAccess(testId: String, userId: String) {
 </section>
 
 <section>
+  <h2>8.25 신규 — 서술형 AI 자동 채점 (Sonnet 4.6) <span class="badge ok">2026-05-21 fix</span></h2>
+
+  <h4>증상</h4>
+  <p>8.24 보고대로 학생 제출 직후 자동 AI 채점이 없었음. 챕터 테스트는 어드민 수동 트리거만, 기타 테스트는 grading row 자체 미생성.</p>
+
+  <h4>적용 결과 (N-26)</h4>
+  <table class="compact">
+    <thead><tr><th>#</th><th>변경</th><th>위치</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>AiGradingClient 모델 ID <code>claude-sonnet-4-20250514</code> → <code>claude-sonnet-4-6</code></td><td><code>AiGradingClient.kt</code></td></tr>
+      <tr><td>2</td><td><code>aiGradeAllEssaysOfSubmission(submissionId)</code> 신설 — 8 thread pool 병렬 호출, 90s timeout. 이미 ai_graded / human_overridden 인 row 는 skip. AI 실패 시 키워드 점수 fallback (기존 row 그대로)</td><td><code>EssayGradingService.kt</code></td></tr>
+      <tr><td>3</td><td><code>findBySubmissionIdOrderByQuestionNumberAsc</code> 메서드 추가</td><td><code>EssayGradingRepo.kt</code></td></tr>
+      <tr><td>4</td><td>챕터 테스트 자동 호출 — <code>ProTestSessionService.submitOmr</code> 에서 createGradingsForSubmission 직후 aiGradeAllEssaysOfSubmission 호출</td><td><code>ProTestSessionService.kt</code></td></tr>
+      <tr><td>5</td><td>기타 테스트 자동 호출 — <code>TestController.submit</code> 에서 submitOmr 직후 createGradingsForSubmission + aiGradeAllEssaysOfSubmission. 기존엔 grading row 자체 미생성이었음</td><td><code>TestController.kt</code></td></tr>
+    </tbody>
+  </table>
+
+  <h4>채점 흐름 (N-26 적용 후)</h4>
+  <ol>
+    <li><strong>1차 즉시</strong>: 학생 제출 → <code>gradeByKeywords</code> + <code>createGradingsForSubmission</code> (status="keyword_graded" / "pending")</li>
+    <li><strong>2차 동기</strong>: 같은 제출 트랜잭션 끝나기 전 <code>aiGradeAllEssaysOfSubmission</code> 호출. 서술형 N개 병렬(<code>min(N,8)</code> thread). Sonnet 4.6 으로 각 문항 채점. status="ai_graded".</li>
+    <li><strong>fallback</strong>: AI 응답 90s timeout 또는 예외 시 키워드 점수 그대로 사용. 학생은 어쨌든 결과 페이지 진입 가능.</li>
+    <li><strong>3차 수동(기존)</strong>: 어드민이 어드민 화면에서 keyword 재채점·수동 점수 조정·인간 override 가능.</li>
+  </ol>
+
+  <h4>주의 · 비용</h4>
+  <ul>
+    <li>학생 응답 시간 증가: 서술형 N개 × Sonnet 호출(평균 3~5s). 병렬 8 thread 라 대부분 5~10s 이내.</li>
+    <li>API 비용: <code>aiGenLogService</code> 로 token 사용량 기록(kind="pro-grading"). 모니터링 가능.</li>
+    <li>실패 시 키워드 점수 fallback — 학생 응시 차단 X.</li>
+    <li>학생용 결과 화면이 ai_score / ai_feedback 표시하도록 후속 점검 필요할 수 있음(현재 EssayGradingView 가 둘 다 전달 — UI 측 확인).</li>
+  </ul>
+</section>
+
+<section>
   <h2>9. 작업 절차 규약 (2026-05-21 사용자 명시) <span class="badge ok">정책</span></h2>
 
   <div class="callout" style="border-left-color: var(--accent);">

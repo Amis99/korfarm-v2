@@ -25,7 +25,8 @@ class AiGradingClient(
 ) {
     private val log = LoggerFactory.getLogger(AiGradingClient::class.java)
     private val httpClient = HttpClient.newHttpClient()
-    private val modelId = "claude-sonnet-4-20250514"
+    // N-26 (2026-05-21) — Sonnet 4.6 으로 갱신
+    private val modelId = "claude-sonnet-4-6"
 
     fun grade(
         studentAnswer: String,

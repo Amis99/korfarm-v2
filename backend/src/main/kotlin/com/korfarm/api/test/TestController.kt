@@ -26,6 +26,7 @@ class TestController(
     private val testService: TestService,
     private val testPaperRepo: TestPaperRepo,
     private val fileService: FileService,
+    private val essayGradingService: com.korfarm.api.pro.EssayGradingService,
 ) {
     private fun currentUser(): String =
         SecurityUtils.currentUserId()
@@ -177,6 +178,14 @@ class TestController(
         requireStudent()
         testService.verifyStudentTestAccess(testId, userId)
         val sub = testService.submitOmr(testId, userId, userId, request.answers)
+        // N-26 (2026-05-21) — 기타 테스트도 서술형 grading row + AI(Sonnet) 자동 채점
+        try {
+            essayGradingService.createGradingsForSubmission(sub.id, testId, userId, request.answers)
+            essayGradingService.aiGradeAllEssaysOfSubmission(sub.id)
+        } catch (e: Exception) {
+            org.slf4j.LoggerFactory.getLogger(TestController::class.java)
+                .warn("AI 자동 채점 실패 (submission=${sub.id}): ${e.message}")
+        }
         return ApiResponse(
             success = true,
             data = mapOf(

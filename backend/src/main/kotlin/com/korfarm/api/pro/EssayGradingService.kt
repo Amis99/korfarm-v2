@@ -19,6 +19,34 @@ class EssayGradingService(
     private val objectMapper: ObjectMapper
 ) {
 
+    /**
+     * N-26 (2026-05-21) — 제출 직후 모든 서술형 문항을 AI(Sonnet 4.6) 로 일괄 자동 채점.
+     * 병렬 호출(8 thread pool) 로 응답 시간 단축. AI 실패 시 키워드 채점 결과 그대로 사용.
+     * createGradingsForSubmission 직후 호출 권장.
+     */
+    fun aiGradeAllEssaysOfSubmission(submissionId: String) {
+        val gradings = essayGradingRepo.findBySubmissionIdOrderByQuestionNumberAsc(submissionId)
+            .filter { it.status != "ai_graded" && it.status != "human_overridden" }
+        if (gradings.isEmpty()) return
+        val log = org.slf4j.LoggerFactory.getLogger(EssayGradingService::class.java)
+        val pool = java.util.concurrent.Executors.newFixedThreadPool(
+            minOf(8, gradings.size).coerceAtLeast(1)
+        )
+        try {
+            gradings.map { g ->
+                pool.submit {
+                    try {
+                        aiGrade(AiGradeRequest(submissionId = g.submissionId, questionNumber = g.questionNumber))
+                    } catch (e: Exception) {
+                        log.warn("AI 자동 채점 실패 (submission=$submissionId q=${g.questionNumber}): ${e.message}")
+                    }
+                }
+            }.forEach { it.get(90, java.util.concurrent.TimeUnit.SECONDS) }
+        } finally {
+            pool.shutdown()
+        }
+    }
+
     // 서술형 채점 레코드 생성 (제출 시 호출)
     @Transactional
     fun createGradingsForSubmission(submissionId: String, testId: String, userId: String, answers: Map<String, String>) {
