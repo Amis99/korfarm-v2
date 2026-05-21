@@ -381,11 +381,28 @@
 
 /* ── OMR grid ── */
 .ts-omr-status {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
   font-size: 14px;
   color: var(--muted);
   margin-bottom: 16px;
   font-weight: 600;
+}
+
+/* N-20B (2026-05-21) — 서버 측 잔여 시간 타이머 */
+.ts-omr-timer {
+  font-variant-numeric: tabular-nums;
+  color: #1b5e20;
+  background: rgba(76,175,80,0.12);
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+.ts-omr-timer.warn {
+  color: #c62828;
+  background: rgba(244,67,54,0.12);
 }
 
 .ts-omr-grid {

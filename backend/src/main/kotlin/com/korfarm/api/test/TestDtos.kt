@@ -206,6 +206,18 @@ data class SubmissionSummary(
     val submittedAt: LocalDateTime
 )
 
+// ── Student: 응시 세션 (N-20B, 2026-05-21) ──
+// 새로고침 시 잔여 시간 복원을 위해 서버에 응시 시작 시점·만료 시점 보존.
+data class TestActiveSessionResponse(
+    val sessionId: String,
+    val testId: String,
+    val attemptNo: Int,
+    val startedAtIso: String,            // ISO 8601 (LocalDateTime → toString)
+    val timeLimitMinutes: Int?,          // null 이면 무제한
+    val examDeadlineIso: String?,        // null 이면 마감 없음
+    val remainingSec: Long?              // 클라이언트 편의용 (deadline - now), null 이면 무제한
+)
+
 // ── Student: History ──
 data class TestHistoryItem(
     val testId: String,

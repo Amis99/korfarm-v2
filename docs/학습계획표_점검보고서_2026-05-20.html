@@ -2130,14 +2130,50 @@ fun verifyStudentTestAccess(testId: String, userId: String) {
     → 새로고침해도 챕터 테스트 타이머가 서버 절대 시각 기준 잔여 시간으로 표시. 학습 모드는 examDeadlineIso 없으므로 기존 1초 감소 방식 유지.
   </p>
 
-  <h4>잔여 — N-20B 기타 테스트 OMR (★★)</h4>
+  <h4>N-20B 적용 결과 (기타 테스트 OMR, 2026-05-21)</h4>
+  <table class="compact">
+    <thead><tr><th>#</th><th>변경</th><th>위치</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><code>TestActiveSessionResponse</code> DTO 신설 — sessionId / attemptNo / startedAtIso / timeLimitMinutes / examDeadlineIso / remainingSec</td><td><code>TestDtos.kt</code></td></tr>
+      <tr><td>2</td><td><code>startStudentTestSession</code> — graded row 있고 admin 아니면 ALREADY_SUBMITTED, in_progress row 있으면 그것 반환, 없으면 신규 in_progress row insert. timeLimitMinutes null 이면 deadline null (무제한)</td><td><code>TestService.kt</code></td></tr>
+      <tr><td>3</td><td><code>getStudentActiveSession</code> — in_progress row 가장 최근 1개 반환 또는 null</td><td><code>TestService.kt</code></td></tr>
+      <tr><td>4</td><td><code>submitOmr</code> 보강 — in_progress row 있으면 그 row 를 graded 로 update (신규 insert 안 함). attemptNo / id 보존</td><td><code>TestService.kt</code></td></tr>
+      <tr><td>5</td><td><code>POST /v1/test-storage/{id}/start</code> + <code>GET /v1/test-storage/{id}/active-session</code> endpoint 추가</td><td><code>TestController.kt</code></td></tr>
+      <tr><td>6</td><td><code>TestOmrPage</code> mount 시 active-session 페치 → 없으면 start. examDeadlineMs 기반 setInterval 매초 (deadline-now) 계산. 잔여 0 도달 시 autoSubmit</td><td><code>TestOmrPage.jsx</code></td></tr>
+      <tr><td>7</td><td>OMR 화면 타이머 UI (<code>.ts-omr-timer</code> 5분 이하 경고색)</td><td><code>test-storage.css</code></td></tr>
+    </tbody>
+  </table>
+  <p style="margin: 8px 0 0; font-size: 0.92rem; color: var(--muted);">
+    → 기타 테스트 OMR 새로고침해도 서버 절대 시각 기준 잔여 시간으로 타이머가 이어진다. 시험지 timeLimitMinutes 가 null 이면 타이머 미표시(무제한 응시).
+  </p>
+
+  <h3>8.21 신규 이슈 — org_hq STUDENT 학생 "기관 시험" 카테고리 0개 (회귀) <span class="badge ok">2026-05-21 fix</span></h3>
+
+  <div class="root-cause">
+    <h4>증상: org_hq 멤버십 STUDENT 가 "기관 시험" 필터에서 자기 기관 시험 못 봄</h4>
+  </div>
   <ul>
-    <li><code>test_submissions</code> 에 <code>status='in_progress'</code> row pre-insert 도입 필요.
-      <code>started_at</code>(또는 created_at) + 시험지의 timeLimitMinutes 로 deadline 계산.</li>
-    <li>신규 endpoint <code>GET /v1/test-storage/{id}/active-session</code> — 활성 세션 잔여 시간 반환.</li>
-    <li><code>TestOmrPage</code> mount 시 active-session 확인 → 잔여 시간으로 타이머 표시.</li>
-    <li><code>submitOmr</code> 가 기존 in_progress row 를 status='graded' 로 update (신규 row 안 만들도록 보강).</li>
+    <li>운영 영향: org_hq active STUDENT <strong>74명</strong>.</li>
+    <li><strong>root cause</strong>: N-15A 의 <code>listTests</code> source="org" 분기에서
+      <code>it.orgId != "org_hq"</code> 차단 추가 → org_hq 학생의 자기 기관(=org_hq) 시험이 "기관" 카테고리에서 0개.</li>
+    <li><strong>fix</strong>: source="org" 에서 orgId != "org_hq" 조건 제거. 자기 기관 == 본사인 학생은 본사 시험을 "기관 시험" 으로도 노출 (의미적으로 자연스러움). source="hq" / 전체 분기는 그대로 (다른 기관 학생 영향 X).</li>
   </ul>
+
+  <h3>8.22 신규 안전 보강 — 본문 저장 시 응시 기록 경고 모달 (N-22) <span class="badge ok">2026-05-21 적용</span></h3>
+  <p>
+    review 발견 — N-16 의 syncQuestionsFromPayload 가 응시 기록 있는 시험에서도 questions 통째 재생성. 어드민이 무심코 본문 편집 후 저장 시 응시자가 푼 문제와 달라질 위험.
+  </p>
+  <ul>
+    <li><code>AdminTestEditorPage</code> 의 "본문 저장" 버튼 클릭 시 <code>/v1/admin/test-papers/{id}/students</code> 페치 → hasSubmitted=true 카운트 &gt; 0 이면 confirm 모달.</li>
+    <li>"이 시험은 이미 N명이 응시했습니다 ... 그래도 저장하시겠습니까?" — 취소 시 저장 안 함.</li>
+    <li>응시자 수 fetch 실패해도 저장은 진행 (가용성 우선).</li>
+  </ul>
+
+  <h3>8.23 N-23 deprecate — createPlan(target=class) 경고 모달 <span class="badge ok">2026-05-21 close</span></h3>
+  <p>
+    review 시 후속 항목으로 등록했으나, 어드민 프론트에 신규 plan 생성 UI 가 없음 (학생당 1 plan 정책으로 자동 생성만 사용). class target plan 만드는 경로가 운영에 없어 모달도 무의미.
+    백엔드 endpoint <code>POST /v1/admin/study-plans</code> 는 외부 호출 차단 X — 추후 admin agent · 직접 API 호출 가능. 그 시점에 가드 보강 필요.
+  </p>
 
   <h3>8.13 정책 확정 — 학생당 plan 1개 (다중 plan 폐기) <span class="badge ok">2026-05-21 결정</span></h3>
 

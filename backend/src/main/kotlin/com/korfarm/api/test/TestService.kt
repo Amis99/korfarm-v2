@@ -85,10 +85,12 @@ class TestService(
 
         // source 필터: "hq" = 본사(orgId 가 null 또는 "org_hq"), "org" = 소속 기관
         // N-15A (2026-05-21) — 본사 시험 판정을 verifyStudentTestAccess 와 일치 (null || "org_hq")
+        // N-24 (2026-05-21) — source="org" 에서 orgId != "org_hq" 차단 제거. org_hq STUDENT 74명이
+        //   자기 기관 시험 카테고리에서 0개로 보이던 사고. 자기 기관 == 본사인 학생은 본사 시험도 노출.
         if (source == "hq") {
             papers = papers.filter { it.orgId == null || it.orgId == "org_hq" }
         } else if (source == "org") {
-            papers = papers.filter { it.orgId != null && it.orgId != "org_hq" && userOrgIds.contains(it.orgId) }
+            papers = papers.filter { it.orgId != null && userOrgIds.contains(it.orgId) }
         } else {
             // 전체: 본사 + 소속 기관 시험만 (다른 기관 시험은 제외)
             papers = papers.filter { it.orgId == null || it.orgId == "org_hq" || userOrgIds.contains(it.orgId) }
@@ -199,11 +201,88 @@ class TestService(
         }
     }
 
+    // ─── Student: 응시 세션 시작 (N-20B, 2026-05-21) ───
+    // 학생 응시 화면 진입 시 호출. status='in_progress' row pre-insert + 서버 deadline 보존.
+    // 새로고침해도 GET active-session 으로 잔여 시간 복원 가능.
+    @Transactional
+    fun startStudentTestSession(testId: String, userId: String): TestActiveSessionResponse {
+        if (testId.startsWith("diag_paper_")) {
+            throw ApiException(
+                "UNSUPPORTED",
+                "진단 시험은 진단 테스트 메뉴에서 응시해 주세요.",
+                HttpStatus.BAD_REQUEST
+            )
+        }
+        verifyStudentTestAccess(testId, userId)
+        val paper = findPaper(testId)
+        val existing = submissionRepo.findFirstByTestIdAndUserIdOrderByAttemptNoDesc(testId, userId)
+
+        // 기존 graded row 있고 admin 아니면 차단 (재응시 불가)
+        if (existing != null && existing.status != "in_progress") {
+            throw ApiException("ALREADY_SUBMITTED", "이미 제출한 시험입니다.", HttpStatus.CONFLICT)
+        }
+
+        // 이미 in_progress row 있으면 그대로 반환 (새로고침 복원 경로)
+        if (existing != null && existing.status == "in_progress") {
+            return existing.toActiveSession(paper.timeLimitMinutes)
+        }
+
+        // 신규 in_progress row
+        val nextAttemptNo = submissionRepo.maxAttemptNo(testId, userId) + 1
+        val now = LocalDateTime.now()
+        val row = TestSubmissionEntity(
+            id = IdGenerator.newId("tsub"),
+            testId = testId,
+            userId = userId,
+            submittedBy = userId,
+            answersJson = "{}",
+            score = 0,
+            correctCount = 0,
+            statsJson = null,
+            status = "in_progress",
+            attemptNo = nextAttemptNo,
+            attemptedAt = now,
+        )
+        val saved = submissionRepo.save(row)
+        return saved.toActiveSession(paper.timeLimitMinutes)
+    }
+
+    // ─── Student: 활성 응시 세션 조회 (없으면 null) ───
+    @Transactional(readOnly = true)
+    fun getStudentActiveSession(testId: String, userId: String): TestActiveSessionResponse? {
+        if (testId.startsWith("diag_paper_")) return null
+        verifyStudentTestAccess(testId, userId)
+        val paper = findPaper(testId)
+        val existing = submissionRepo.findFirstByTestIdAndUserIdOrderByAttemptNoDesc(testId, userId)
+        return if (existing != null && existing.status == "in_progress") {
+            existing.toActiveSession(paper.timeLimitMinutes)
+        } else null
+    }
+
+    /** in_progress row → API 응답. timeLimitMinutes null 이면 무제한(deadline 없음). */
+    private fun TestSubmissionEntity.toActiveSession(timeLimitMinutes: Int?): TestActiveSessionResponse {
+        val startedAt = attemptedAt ?: createdAt
+        val deadline = timeLimitMinutes?.let { startedAt.plusMinutes(it.toLong()) }
+        val remaining = deadline?.let {
+            java.time.Duration.between(LocalDateTime.now(), it).seconds.coerceAtLeast(0L)
+        }
+        return TestActiveSessionResponse(
+            sessionId = id,
+            testId = testId,
+            attemptNo = attemptNo,
+            startedAtIso = startedAt.toString(),
+            timeLimitMinutes = timeLimitMinutes,
+            examDeadlineIso = deadline?.toString(),
+            remainingSec = remaining,
+        )
+    }
+
     // ─── Student: submit OMR + auto-grade ───
     // 다중 응시 정책 (V0137):
     //   - 학생 직접 응시: 1회만 (ALREADY_SUBMITTED 차단)
     //   - 어드민 대리(submittedBy=adminId): 중복 응시 허용. 기존 row 보존 + attempt_no+1 새 row INSERT.
     //   - attemptedAt: 어드민이 응시 일자 지정 가능 (null 이면 createdAt 사용)
+    // N-20B (2026-05-21): in_progress row 가 있으면 그것을 graded 로 update (신규 insert 안 함).
     @Transactional
     fun submitOmr(
         testId: String,
@@ -221,11 +300,13 @@ class TestService(
         }
         val isAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
         val existing = submissionRepo.findFirstByTestIdAndUserIdOrderByAttemptNoDesc(testId, userId)
-        if (existing != null && !isAdmin) {
+        val inProgress = if (existing?.status == "in_progress") existing else null
+        // graded row 있고 admin 아니면 차단 (in_progress 는 정상 — 그 row 를 graded 로 update)
+        if (existing != null && inProgress == null && !isAdmin) {
             throw ApiException("ALREADY_SUBMITTED", "이미 제출한 시험입니다.", HttpStatus.CONFLICT)
         }
-        // 다중 응시 — 새 attempt_no 부여 (기존 row 삭제 안 함, 모든 이력 보존)
-        val nextAttemptNo = submissionRepo.maxAttemptNo(testId, userId) + 1
+        // 신규 attempt_no 는 in_progress 없을 때만 부여 (in_progress 는 start 가 이미 박은 attemptNo 유지)
+        val nextAttemptNo = inProgress?.attemptNo ?: (submissionRepo.maxAttemptNo(testId, userId) + 1)
         val questions = questionRepo.findByTestIdOrderByNumberAsc(testId)
         if (questions.isEmpty()) {
             throw ApiException("NO_QUESTIONS", "문항이 등록되지 않은 시험입니다.", HttpStatus.BAD_REQUEST)
@@ -273,19 +354,32 @@ class TestService(
             )
         }
 
-        val entity = TestSubmissionEntity(
-            id = IdGenerator.newId("tsub"),
-            testId = testId,
-            userId = userId,
-            submittedBy = submittedBy,
-            answersJson = objectMapper.writeValueAsString(answers),
-            score = score,
-            correctCount = correctCount,
-            statsJson = objectMapper.writeValueAsString(details),
-            status = "graded",
-            attemptNo = nextAttemptNo,
-            attemptedAt = attemptedAt,
-        )
+        // N-20B (2026-05-21): in_progress row 가 있으면 그것을 update, 없으면 신규 insert
+        val entity = if (inProgress != null) {
+            inProgress.apply {
+                this.submittedBy = submittedBy
+                this.answersJson = objectMapper.writeValueAsString(answers)
+                this.score = score
+                this.correctCount = correctCount
+                this.statsJson = objectMapper.writeValueAsString(details)
+                this.status = "graded"
+                if (attemptedAt != null) this.attemptedAt = attemptedAt
+            }
+        } else {
+            TestSubmissionEntity(
+                id = IdGenerator.newId("tsub"),
+                testId = testId,
+                userId = userId,
+                submittedBy = submittedBy,
+                answersJson = objectMapper.writeValueAsString(answers),
+                score = score,
+                correctCount = correctCount,
+                statsJson = objectMapper.writeValueAsString(details),
+                status = "graded",
+                attemptNo = nextAttemptNo,
+                attemptedAt = attemptedAt,
+            )
+        }
         val saved = submissionRepo.save(entity)
 
         // 씨앗 보상 — 학생 직접 응시 첫 회(attempt_no=1) 만 지급. 통합 정책 사용.

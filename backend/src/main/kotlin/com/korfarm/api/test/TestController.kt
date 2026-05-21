@@ -151,6 +151,23 @@ class TestController(
         return ApiResponse(success = true, data = data)
     }
 
+    // N-20B (2026-05-21) — 학생 응시 세션 시작 / 활성 세션 조회
+    @PostMapping("/{testId}/start")
+    fun startSession(@PathVariable testId: String): ApiResponse<TestActiveSessionResponse> {
+        val userId = currentUser()
+        requireStudent()
+        val data = testService.startStudentTestSession(testId, userId)
+        return ApiResponse(success = true, data = data)
+    }
+
+    @GetMapping("/{testId}/active-session")
+    fun activeSession(@PathVariable testId: String): ApiResponse<TestActiveSessionResponse?> {
+        val userId = currentUser()
+        requireStudent()
+        val data = testService.getStudentActiveSession(testId, userId)
+        return ApiResponse(success = true, data = data)
+    }
+
     @PostMapping("/{testId}/submit")
     fun submit(
         @PathVariable testId: String,

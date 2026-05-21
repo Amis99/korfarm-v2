@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { apiGet, apiPost } from "../utils/api";
@@ -16,24 +16,67 @@ function TestOmrPage() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  // N-20B (2026-05-21) — 서버 측 응시 세션 + 잔여 시간 타이머
+  const [examDeadlineMs, setExamDeadlineMs] = useState(null);
+  const [remainingSec, setRemainingSec] = useState(null);
+  const autoSubmitRef = useRef(false);
 
   useEffect(() => {
     if (!isLoggedIn) return;
-    Promise.all([
-      apiGet(`/v1/test-storage/${testId}`),
-      apiGet(`/v1/test-storage/${testId}/questions`).catch(() => [])
-    ])
-      .then(([testData, qs]) => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const [testData, qs] = await Promise.all([
+          apiGet(`/v1/test-storage/${testId}`),
+          apiGet(`/v1/test-storage/${testId}/questions`).catch(() => []),
+        ]);
+        if (cancelled) return;
         if (testData.hasSubmitted) {
           navigate(`/tests/${testId}/report`, { replace: true });
           return;
         }
         setTest(testData);
         setQuestions(Array.isArray(qs) ? qs : []);
-      })
-      .catch(() => navigate("/tests"))
-      .finally(() => setLoading(false));
+
+        // 서버 응시 세션 — 활성 있으면 그것, 없으면 신규 start
+        let session = null;
+        try {
+          session = await apiGet(`/v1/test-storage/${testId}/active-session`);
+        } catch { session = null; }
+        if (!session) {
+          try {
+            session = await apiPost(`/v1/test-storage/${testId}/start`, {});
+          } catch { session = null; }
+        }
+        if (!cancelled && session?.examDeadlineIso) {
+          const ms = Date.parse(session.examDeadlineIso);
+          if (Number.isFinite(ms)) setExamDeadlineMs(ms);
+        }
+      } catch {
+        if (!cancelled) navigate("/tests");
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+    return () => { cancelled = true; };
   }, [isLoggedIn, testId, navigate]);
+
+  // 타이머 — 서버 절대 deadline 기준 (deadline - now) 매초 계산
+  useEffect(() => {
+    if (examDeadlineMs == null) return undefined;
+    const update = () => {
+      const sec = Math.max(0, Math.floor((examDeadlineMs - Date.now()) / 1000));
+      setRemainingSec(sec);
+      if (sec <= 0 && !autoSubmitRef.current) {
+        autoSubmitRef.current = true;
+        handleSubmit();
+      }
+    };
+    update();
+    const id = setInterval(update, 1000);
+    return () => clearInterval(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [examDeadlineMs]);
 
   const handleBubble = (qNum, choice) => {
     setAnswers(prev => {
@@ -93,6 +136,11 @@ function TestOmrPage() {
 
       <div className="ts-omr-status">
         <span>{answeredCount} / {questions.length} 응답</span>
+        {remainingSec != null && (
+          <span className={`ts-omr-timer${remainingSec <= 300 ? " warn" : ""}`}>
+            남은 시간 {String(Math.floor(remainingSec / 60)).padStart(2, "0")}:{String(remainingSec % 60).padStart(2, "0")}
+          </span>
+        )}
       </div>
 
       <div className="ts-omr-grid">

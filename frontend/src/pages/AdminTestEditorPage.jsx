@@ -6,6 +6,7 @@ import ClassificationPicker from "../components/editor/ClassificationPicker";
 import AiTestAnalysisModal from "../components/admin/AiTestAnalysisModal";
 import { useTestEditor } from "../hooks/useTestEditor";
 import { apiPut } from "../utils/adminApi";
+import { apiGet } from "../utils/api";
 import { LEVEL_LABELS } from "../constants/levels";
 import "../styles/test-storage.css";
 import "../styles/content-editor.css";
@@ -140,7 +141,24 @@ export default function AdminTestEditorPage() {
           </button>
           <button
             className="ce-btn ce-btn-primary"
-            onClick={editor.save}
+            onClick={async () => {
+              // N-22 (2026-05-21) — 응시 기록 있는 시험은 본문 저장 시 questions 가 재생성되어
+              //   응시자가 푼 문제와 달라질 수 있다. 응시자 수 fetch 후 > 0 이면 confirm.
+              try {
+                const subs = await apiGet(`/v1/admin/test-papers/${testId}/students`);
+                const cnt = (Array.isArray(subs) ? subs : []).filter(s => s?.hasSubmitted).length;
+                if (cnt > 0) {
+                  const ok = window.confirm(
+                    `이 시험은 이미 ${cnt}명이 응시했습니다.\n\n` +
+                    "본문 저장 시 문항이 다시 생성되어 응시자가 푼 문제와 달라질 수 있습니다.\n" +
+                    "통계는 문항 번호 기준이라 정합성이 일부 깨질 수 있습니다.\n\n" +
+                    "그래도 저장하시겠습니까?"
+                  );
+                  if (!ok) return;
+                }
+              } catch { /* 응시자 수 fetch 실패해도 저장은 진행 */ }
+              await editor.save();
+            }}
             disabled={editor.saving || !editor.dirty}
           >{editor.saving ? "저장 중..." : "본문 저장"}</button>
         </div>
