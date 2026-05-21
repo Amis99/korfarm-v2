@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>테스트(시험) 관리 점검 보고서 — 2026-05-21</title>
+<style>
+  :root {
+    --ink: #1f3a2c;
+    --muted: #5a6b5f;
+    --accent: #2d6a4f;
+    --accent-strong: #1f4a37;
+    --accent-soft: #e9f3ec;
+    --stroke: rgba(31, 58, 44, 0.15);
+    --stroke-soft: rgba(31, 58, 44, 0.08);
+    --panel: #ffffff;
+    --panel-alt: #f5f9f3;
+    --warn: #c0392b;
+    --warn-soft: #fdecea;
+    --info: #1565c0;
+    --info-soft: #e3f2fd;
+    --orange: #ef6c00;
+    --orange-soft: #fff3e0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+    color: var(--ink);
+    background: #f7faf6;
+    line-height: 1.7;
+    margin: 0;
+    padding: 32px 16px 80px;
+  }
+  .wrap { max-width: 1020px; margin: 0 auto; }
+  header.report-head {
+    background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+    color: #fff;
+    padding: 28px 28px 24px;
+    border-radius: 14px 14px 0 0;
+    box-shadow: 0 4px 12px rgba(31, 74, 55, 0.18);
+  }
+  header.report-head h1 { margin: 0 0 6px; font-size: 1.55rem; font-weight: 800; letter-spacing: -0.02em; }
+  header.report-head .sub { font-size: 0.92rem; opacity: 0.88; }
+  header.report-head .meta { margin-top: 14px; display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.82rem; opacity: 0.92; }
+  header.report-head .meta span::before { content: "·"; margin-right: 8px; opacity: 0.6; }
+  header.report-head .meta span:first-child::before { content: ""; margin: 0; }
+
+  nav.toc {
+    background: var(--panel);
+    border: 1px solid var(--stroke);
+    border-top: none;
+    padding: 18px 28px;
+    border-radius: 0 0 14px 14px;
+    margin-bottom: 28px;
+  }
+  nav.toc h2 { margin: 0 0 10px; font-size: 0.85rem; color: var(--muted); font-weight: 700; letter-spacing: 0.05em; }
+  nav.toc ol { margin: 0; padding-left: 22px; columns: 2; column-gap: 28px; font-size: 0.92rem; }
+  nav.toc ol li { margin-bottom: 4px; break-inside: avoid; }
+  nav.toc a { color: var(--accent-strong); text-decoration: none; }
+  nav.toc a:hover { text-decoration: underline; }
+
+  section {
+    background: var(--panel);
+    border: 1px solid var(--stroke);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 22px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  }
+  section h2 {
+    margin: 0 0 16px;
+    font-size: 1.25rem;
+    color: var(--accent-strong);
+    border-bottom: 2px solid var(--accent-soft);
+    padding-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  section h2 .num {
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+  section h3 {
+    font-size: 1.02rem;
+    color: var(--accent-strong);
+    margin: 22px 0 10px;
+    padding-left: 10px;
+    border-left: 4px solid var(--accent);
+  }
+  section h4 { font-size: 0.92rem; color: var(--ink); margin: 14px 0 6px; font-weight: 700; }
+  section p { margin: 0 0 10px; }
+  section ul, section ol { margin: 0 0 12px; padding-left: 22px; }
+  section ul li, section ol li { margin-bottom: 4px; }
+
+  blockquote.purpose {
+    background: var(--accent-soft);
+    border-left: 4px solid var(--accent);
+    margin: 0 0 16px;
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    font-size: 1.0rem;
+    color: var(--accent-strong);
+    font-weight: 600;
+  }
+
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 16px; font-size: 0.9rem; }
+  table th, table td { border: 1px solid var(--stroke); padding: 8px 12px; text-align: left; vertical-align: top; }
+  table th { background: var(--panel-alt); color: var(--accent-strong); font-weight: 700; font-size: 0.85rem; }
+  table.compact td, table.compact th { padding: 6px 10px; font-size: 0.85rem; }
+
+  code, .code {
+    font-family: "JetBrains Mono", "D2Coding", Consolas, Menlo, monospace;
+    font-size: 0.85em;
+    background: rgba(31, 74, 55, 0.06);
+    color: var(--accent-strong);
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    vertical-align: middle;
+  }
+  .badge.high { background: var(--warn-soft); color: var(--warn); }
+  .badge.mid { background: var(--orange-soft); color: var(--orange); }
+  .badge.low { background: var(--info-soft); color: var(--info); }
+  .badge.ok { background: var(--accent-soft); color: var(--accent-strong); }
+
+  .callout {
+    border: 1px solid var(--stroke);
+    border-left: 4px solid var(--accent);
+    background: var(--panel-alt);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 10px 0 14px;
+    font-size: 0.92rem;
+  }
+  .callout.warn { border-left-color: var(--warn); background: var(--warn-soft); }
+  .callout.info { border-left-color: var(--info); background: var(--info-soft); }
+  .callout strong { color: var(--accent-strong); }
+  .callout.warn strong { color: var(--warn); }
+
+  .issue {
+    border: 1px solid var(--stroke);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 0 0 14px;
+    background: #fff;
+  }
+  .issue .head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .issue .head .id { font-weight: 800; color: var(--accent-strong); font-size: 0.95rem; }
+  .issue .head .title { font-weight: 700; font-size: 0.98rem; flex: 1; }
+  .issue .body { font-size: 0.92rem; color: var(--ink); }
+  .issue ul { margin-top: 6px; padding-left: 18px; }
+  .issue .fix {
+    margin-top: 10px;
+    background: var(--accent-soft);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    color: var(--accent-strong);
+  }
+  .issue .fix strong::before { content: "권장 "; }
+
+  .persona-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+    margin: 8px 0 0;
+  }
+  .persona-card {
+    border: 1px solid var(--stroke);
+    border-radius: 10px;
+    padding: 14px 16px;
+    background: var(--panel-alt);
+  }
+  .persona-card h4 {
+    margin: 0 0 8px;
+    color: var(--accent-strong);
+    font-size: 0.98rem;
+    border-bottom: 1px dashed var(--stroke);
+    padding-bottom: 6px;
+  }
+  .persona-card .creds { font-family: monospace; font-size: 0.82rem; color: var(--muted); margin-bottom: 8px; }
+  .persona-card ol { margin: 0; padding-left: 20px; font-size: 0.88rem; }
+  .persona-card ol li { margin-bottom: 4px; }
+
+  pre {
+    background: var(--panel-alt);
+    border: 1px solid var(--stroke-soft);
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-family: "JetBrains Mono", Consolas, monospace;
+    font-size: 0.8rem;
+    overflow-x: auto;
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 6px 0;
+  }
+
+  footer {
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px solid var(--stroke);
+    color: var(--muted);
+    font-size: 0.82rem;
+    text-align: center;
+  }
+
+  @media (max-width: 720px) {
+    body { padding: 20px 10px 60px; }
+    section { padding: 18px 18px; }
+    header.report-head { padding: 22px 20px 18px; }
+    nav.toc ol { columns: 1; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="report-head">
+  <h1>테스트(시험) 관리 기능 점검 보고서</h1>
+  <div class="sub">4 페르소나 시뮬레이션 — HQ_ADMIN / ORG_ADMIN / 학생 / 학부모</div>
+  <div class="meta">
+    <span>작성일: 2026-05-21</span>
+    <span>점검 범위: 기타(misc) 시험만</span>
+    <span>임시 계정: SQL 직접 삽입 + cleanup 완료</span>
+    <span>검증 도구: 라이브 API 호출 + 코드 정독</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <h2>목차</h2>
+  <ol>
+    <li><a href="#s1">점검 목적·범위</a></li>
+    <li><a href="#s2">시험 종류 분류</a></li>
+    <li><a href="#s3">페르소나별 동선</a></li>
+    <li><a href="#s4">권한 매트릭스</a></li>
+    <li><a href="#s5">시나리오 시뮬레이션 결과</a></li>
+    <li><a href="#s6">발견된 결함·UX 사고</a></li>
+    <li><a href="#s7">후속 작업 우선순위</a></li>
+  </ol>
+</nav>
+
+<!-- ───────────────────────────────────────── -->
+<section id="s1">
+  <h2><span class="num">1</span>점검 목적·범위</h2>
+  <blockquote class="purpose">
+    학습 계획표 점검(N-1~N-11) 작업이 마무리된 시점에서, <strong>테스트(시험) 관리</strong> 기능을
+    4 페르소나 입장에서 시뮬레이션해 결함·UX 사고를 발굴.
+  </blockquote>
+  <ul>
+    <li><strong>시뮬레이션 학생</strong>: <code>amis / test1234</code> (기존 운영 계정)</li>
+    <li><strong>범위</strong>: 기타(misc) 시험만 — 진단·챕터는 별도 엔진</li>
+    <li><strong>임시 계정 정책</strong>: SQL 직접 삽입 + <code>u_sim_*</code> / <code>org_sim</code> prefix → 점검 후 자동 cleanup (완료)</li>
+    <li><strong>검증</strong>: API 라이브 호출 + 코드 정독 (file:line 인용)</li>
+    <li><strong>산출물</strong>: 본 HTML 보고서 + N-12~N-17 후속 작업 항목</li>
+  </ul>
+  <div class="callout">
+    학습 계획표 점검 보고서(8.13)와 동일 양식. 발견된 사고는 본 보고서에 기록만 — 패치는 별도 작업 N-12~N-17 로 등록.
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────── -->
+<section id="s2">
+  <h2><span class="num">2</span>시험 종류 분류</h2>
+  <p><code>TestService.resolveKind</code> (TestService.kt:45-49) 의 분류:</p>
+  <table class="compact">
+    <thead><tr><th>종류</th><th>식별 기준</th><th>데이터 모델</th><th>응시 경로</th></tr></thead>
+    <tbody>
+      <tr><td>진단</td><td><code>id.startsWith("diag_paper_")</code></td><td>diag_sessions / DiagnosticService</td><td>/diagnostic/v2/test/:sessionId</td></tr>
+      <tr><td>챕터</td><td><code>series == "chapter"</code></td><td>pro_test_sessions / ProTestSessionService</td><td>/pro-test/:chapterId</td></tr>
+      <tr><td><strong>기타 (misc)</strong></td><td>그 외</td><td>test_submissions / TestService</td><td>/tests/:testId/omr</td></tr>
+    </tbody>
+  </table>
+  <h4>운영 DB 현황 (2026-05-21)</h4>
+  <ul>
+    <li>chapter 180건 · diagnostic 4건 · misc 5건 — 모두 org_hq 본사 소유</li>
+    <li>기타(misc) 시험은 일부 <code>series</code> 값이 "diagnostic" 또는 "training" 으로 채워져 있어 series 칼럼이 실제 분류와 다름. resolveKind 는 id prefix 우선.</li>
+  </ul>
+</section>
+
+<!-- ───────────────────────────────────────── -->
+<section id="s3">
+  <h2><span class="num">3</span>페르소나별 동선</h2>
+
+  <div class="persona-grid">
+    <div class="persona-card">
+      <h4>본사 관리자 (HQ_ADMIN)</h4>
+      <div class="creds">sim_hq / test1234 (org_hq)</div>
+      <ol>
+        <li>사이드바 <strong>테스트 관리</strong> 클릭</li>
+        <li><code>/admin/tests</code> — 모든 기관 시험 노출</li>
+        <li>"+ 추가" → 즉시 생성 → <code>/admin/tests/:id/edit</code></li>
+        <li>문항·PDF 업로드 → 저장</li>
+        <li><code>/admin/tests/:id/statistics?scope=all</code> 전체 통계</li>
+        <li>대리 응시 / 오프라인 OMR 일괄 입력</li>
+      </ol>
+    </div>
+
+    <div class="persona-card">
+      <h4>기관 관리자 (ORG_ADMIN)</h4>
+      <div class="creds">sim_org_admin / test1234 (org_sim)</div>
+      <ol>
+        <li>사이드바 <strong>테스트 관리</strong> + <strong>오프라인 OMR</strong></li>
+        <li><code>/admin/tests</code> — 본사 시험 + 자기 기관 시험만</li>
+        <li>본사 시험 편집 시도 → <code>verifyAdminTestEditAccess</code> 차단</li>
+        <li>자기 기관 시험 생성·편집·통계(<code>scope=org</code>)</li>
+        <li><code>/admin/tests/offline-omr</code> — 자기 기관 학생 OMR 일괄</li>
+      </ol>
+    </div>
+
+    <div class="persona-card">
+      <h4>학생 (STUDENT)</h4>
+      <div class="creds">amis / test1234 (org_hq)</div>
+      <ol>
+        <li>학생 홈에서 <code>/tests</code> 진입 — <strong>진입점 명확성 의문 (사고 N-16)</strong></li>
+        <li><code>/tests</code> 시험 보관함 + 이력</li>
+        <li><code>/tests/:id</code> 상세 → 응시 시작</li>
+        <li><code>/tests/:id/omr</code> OMR 답안 → 제출</li>
+        <li><code>/tests/:id/report</code> 점수·정답률·역량별·오답노트</li>
+        <li>학습 계획표 연계: N-4 sync → 매트릭스에 즉시 "scored"</li>
+      </ol>
+    </div>
+
+    <div class="persona-card">
+      <h4>학부모 (PARENT)</h4>
+      <div class="creds">sim_parent / test1234 (psl: amis 자녀)</div>
+      <ol>
+        <li>사이드바 <strong>👀 자녀 학습</strong> → 통합 분석표</li>
+        <li><code>/tests?studentId=&lt;amis&gt;</code> 자녀 시험 보관함</li>
+        <li><code>/tests/:id/report?studentId=&lt;amis&gt;</code> 자녀 결과</li>
+        <li>응시 불가 (read-only)</li>
+        <li>다른 학생 ID 시도 → <code>NOT_LINKED</code> 403</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────────────────────── -->
+<section id="s4">
+  <h2><span class="num">4</span>권한 매트릭스</h2>
+  <table>
+    <thead>
+      <tr><th>작업</th><th>HQ_ADMIN</th><th>ORG_ADMIN</th><th>STUDENT</th><th>PARENT</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>시험 list 조회</td><td>전체</td><td>본사 + 자기 기관 ⚠️</td><td>본사 + 소속</td><td>❌</td></tr>
+      <tr><td>시험 detail 조회</td><td>전체</td><td>자기 기관만 (본사 detail FORBIDDEN — N-13)</td><td>본사 + 소속</td><td>자녀 시험만</td></tr>
+      <tr><td>시험 생성</td><td>✓</td><td>자기 기관만</td><td>❌</td><td>❌</td></tr>
+      <tr><td>본사 시험 편집</td><td>✓</td><td>❌ (verifyAdminTestEditAccess)</td><td>❌</td><td>❌</td></tr>
+      <tr><td>학생 대리 응시</td><td>✓</td><td>⚠️ (다른 기관 학생 가능 — <strong>N-12 사고</strong>)</td><td>❌</td><td>❌</td></tr>
+      <tr><td>응시</td><td>대리만</td><td>대리만</td><td>1회 (재응시 차단)</td><td>❌</td></tr>
+      <tr><td>자녀 결과 조회</td><td>—</td><td>—</td><td>—</td><td>✓ (NOT_LINKED 가드)</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ───────────────────────────────────────── -->
+<section id="s5">
+  <h2><span class="num">5</span>시나리오 시뮬레이션 결과</h2>
+
+  <h3>5.1 시나리오 A — HQ_ADMIN</h3>
+  <ul>
+    <li><strong>A1</strong> <code>GET /v1/admin/test-papers?page=1&size=5</code> → 200, 시험 5건 노출 ✅</li>
+    <li><strong>A2</strong> 시험 종류 분포 — chapter 180 / diagnostic 4 / misc 5 (모두 org_hq) ✅</li>
+    <li>나머지 동선(시험 생성·편집·통계·대리응시)은 코드 정독으로 확정. AdminTestController 의 모든 endpoint 가 <code>requireAdmin</code> + <code>verifyAdminTestEditAccess</code> 가드 ✅</li>
+  </ul>
+
+  <h3>5.2 시나리오 B — ORG_ADMIN</h3>
+  <ul>
+    <li><strong>B1</strong> <code>GET /v1/admin/test-papers</code> (sim_org_admin) → 응답 길이 72KB, 본사 시험 + 자기 기관 시험 노출 — <strong>list 에 본사 시험 메타정보 모두 노출</strong></li>
+    <li><strong>B2</strong> <code>GET /v1/admin/test-papers/test_7ba3...</code> (org_test_academy 소유) → <code>403 FORBIDDEN "다른 기관의 시험에 접근할 수 없습니다"</code> ✅</li>
+    <li><strong>🔥 list/detail 권한 불일치 (N-13)</strong>: list 에는 다른 기관 시험 메타 노출, detail 은 차단. 정책 일관성 사고.</li>
+    <li><strong>B3</strong> 시험 자체가 다른 기관이라 submit-for-student 도 시험 단계에서 차단됨 ✅</li>
+    <li><strong>🔥 N-12 사고 (코드 정독 확정)</strong>: <code>AdminTestController:217-236</code> <code>submitForStudent</code> 가 <code>verifyAdminTestAccess(testId, adminId)</code> 만 호출. <code>request.userId</code> 의 기관 검증 없음. <code>TestService.submitOmr</code> (199-227) 본문에도 학생 기관 검사 없음. ORG_ADMIN 이 자기 기관 시험에 다른 기관 학생 userId 로 submit 호출 시 통과 가능.</li>
+  </ul>
+
+  <h3>5.3 시나리오 C — 학생 (amis)</h3>
+  <ul>
+    <li><strong>C1</strong> <code>GET /v1/test-storage</code> → <code>{"data":[]}</code> 빈 배열 — <strong>응시 가능한 시험이 보관함에서 안 보임 (N-14)</strong></li>
+    <li><strong>C2</strong> <code>GET /v1/test-storage/history</code> → 1건 응시 이력 (test_7ba3..., 점수 5/5, 정답률 100%) ✅</li>
+    <li>학생은 보관함 빈 배열 + 이력만 보이는 상태 — UX 사고. "내가 응시한 시험을 어디서 보지?" 라는 혼란.</li>
+  </ul>
+
+  <h3>5.4 시나리오 D — 학부모 (sim_parent)</h3>
+  <ul>
+    <li><strong>D1</strong> <code>GET /v1/parents/children/u_97e35b.../test-storage</code> (자녀 amis) → <code>{"data":[]}</code> 빈 배열 — <strong>자녀 응시 시험 안 보임 (N-15)</strong></li>
+    <li><strong>D2</strong> <code>GET /v1/parents/children/u_sim_student/test-storage</code> (자녀 아닌 임의 학생) → <code>403 NOT_LINKED "자녀와 연결되어 있지 않습니다"</code> ✅</li>
+    <li>학부모 권한 가드는 <code>ParentLinkService</code> 가 정상 작동. 그러나 자녀의 응시 결과 진입 화면이 보관함이라면 빈 배열로 안 보임.</li>
+  </ul>
+</section>
+
+<!-- ───────────────────────────────────────── -->
+<section id="s6">
+  <h2><span class="num">6</span>발견된 결함·UX 사고</h2>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">N-12</span>
+      <span class="title">submitForStudent 학생 기관 검증 누락 (★★★ 보안)</span>
+      <span class="badge high">★★★</span>
+    </div>
+    <div class="body">
+      <strong>위치</strong>: <code>AdminTestController.kt:217-236</code> + <code>TestService.kt:199-227 submitOmr</code><br>
+      <strong>증상</strong>: ORG_ADMIN 이 자기 기관 시험에 다른 기관 학생 <code>userId</code> 로 <code>submit-for-student</code> 호출 시
+      현재 코드는 <code>verifyAdminTestAccess(testId, adminId)</code> 만 검사. <code>request.userId</code> 가 admin 의 권한 범위 안인지
+      별도 검증 없음. 결과적으로 다른 기관 학생의 응시 이력을 임의로 만들 수 있음.<br>
+      <strong>증거</strong>: TestService.submitOmr 전체 본문에 <code>orgMembership</code> · <code>verifyStudentAccessFor(adminId, studentId)</code> 같은 호출 0건.
+      <div class="fix"><strong>:</strong>
+        <pre>// AdminTestController.submitForStudent 또는 TestService.submitOmr 진입부
+val studentOrgs = orgMembershipRepo.findByUserIdAndStatus(studentId, "active").map { it.orgId }
+val scope = resolveAdminScope(adminId)
+if (scope is AdminScope.Org && studentOrgs.none { it == scope.orgId }) {
+    throw ApiException("FORBIDDEN", "다른 기관 학생의 응시를 입력할 수 없습니다.", HttpStatus.FORBIDDEN)
+}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">N-13</span>
+      <span class="title">시험 list 와 detail 의 권한 정책 불일치 (★★)</span>
+      <span class="badge mid">★★</span>
+    </div>
+    <div class="body">
+      <strong>위치</strong>: <code>AdminTestController</code> list (열린 시험 전체 노출) vs <code>GET /v1/admin/test-papers/{id}</code> single
+      (<code>verifyAdminTestAccess</code> 로 차단).<br>
+      <strong>증상</strong>: ORG_ADMIN 이 list 응답에는 다른 기관 진단 시험 메타정보(제목·문항 수·org_name·PDF fileId 등)를 받는데,
+      같은 시험 single 조회는 <code>FORBIDDEN</code>. 메타 누출 + 정책 일관성 위반.<br>
+      <strong>실측</strong>: B1 응답 길이 72KB — 모든 기관의 시험 목록이 들어옴.
+      <div class="fix"><strong>:</strong> list 응답에 ORG_ADMIN 의 권한 범위 필터링 추가 (자기 기관 + 본사 진단만, 또는 detail 과 동일 정책).</div>
+    </div>
+  </div>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">N-14</span>
+      <span class="title">학생 시험 보관함이 빈 배열 — 진입점 불명확 (★★)</span>
+      <span class="badge mid">★★</span>
+    </div>
+    <div class="body">
+      <strong>위치</strong>: <code>GET /v1/test-storage</code> (학생 endpoint)<br>
+      <strong>증상</strong>: amis (russell1) 가 보관함 호출 → 빈 배열. 응시한 시험은 <code>/history</code> 에만 노출.
+      학생이 "내가 봤던 시험 다시 보고 싶다" 또는 "응시 가능한 시험" 둘 다 진입점이 분리되어 혼란.<br>
+      <strong>가능 원인</strong>:
+      <ul>
+        <li>레벨 그룹 매칭 후보가 0건 (오늘 시점 misc 시험 5건이 모두 다른 레벨)</li>
+        <li>응시 완료 시험은 보관함에서 자동 제외되는 정책 (history 만)</li>
+      </ul>
+      <div class="fix"><strong>:</strong> 보관함에 "응시 가능" + "응시 완료" 두 탭 분리 또는 history endpoint 와 통합.</div>
+    </div>
+  </div>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">N-15</span>
+      <span class="title">학부모용 자녀 시험 목록 endpoint 가 응시 시험 노출 안 함 (★★)</span>
+      <span class="badge mid">★★</span>
+    </div>
+    <div class="body">
+      <strong>위치</strong>: <code>GET /v1/parents/children/{studentId}/test-storage</code><br>
+      <strong>증상</strong>: 자녀(amis)가 시험 1건 응시했음에도 학부모 응답이 빈 배열. 자녀가 어떤 시험을 응시했는지 학부모가 파악 불가.
+      자녀 응시 이력 조회용 별도 endpoint 필요 — <code>/v1/parents/children/{studentId}/test-storage/history</code>?
+      <div class="fix"><strong>:</strong> 학부모 endpoint 에도 history 합산 또는 별도 history endpoint 신설.</div>
+    </div>
+  </div>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">N-16</span>
+      <span class="title">학생 홈에서 시험 진입 메뉴 명확성 (★★)</span>
+      <span class="badge mid">★★</span>
+    </div>
+    <div class="body">
+      <strong>위치</strong>: <code>StudentHomePage.jsx</code><br>
+      <strong>증상</strong>: 학생 홈에서 시험 진입 메뉴가 명확하지 않음 — Explore 결과 <code>/tests</code> 직접 진입 또는 학습 계획표의 test 셀 클릭이 거의 유일한 경로.
+      학생 입장에서 "오늘 봐야 할 시험" 진입이 단계가 많음.
+      <div class="fix"><strong>:</strong> 학생 홈에 "시험 응시" 카드/배지 추가. 새로 배정된 시험은 ReminderModal 알림 (N-9 와 통합).</div>
+    </div>
+  </div>
+
+  <div class="issue">
+    <div class="head">
+      <span class="id">N-17</span>
+      <span class="title">DiagnosticTestPage location.state 의존 — 응시 중 새로고침 사고 (★)</span>
+      <span class="badge low">★</span>
+    </div>
+    <div class="body">
+      <strong>위치</strong>: <code>DiagnosticTestPage.jsx:38</code><br>
+      <strong>증상</strong>: 진단 응시 화면이 React Router 의 <code>location.state.firstBatch</code> 에 의존. 학생이 응시 중 새로고침하면
+      state 가 사라져 응시 복원 불가. 처음부터 다시.<br>
+      <strong>범위</strong>: 이번 plan 의 misc 범위 밖. 진단 점검 시 별도 처리.
+      <div class="fix"><strong>:</strong> sessionStorage 또는 URL query 로 firstBatch 백업.</div>
+    </div>
+  </div>
+
+  <h3>정상 동작 확인</h3>
+  <ul>
+    <li>✅ <code>verifyAdminTestEditAccess</code> — ORG_ADMIN 의 본사 시험 편집 차단 (TestService.kt:1378-1393)</li>
+    <li>✅ <code>verifyStudentTestAccess</code> — 학생의 다른 기관 시험 차단</li>
+    <li>✅ <code>ParentLinkService.getChildTestReport</code> — 부모-자녀 active 연결 검증</li>
+    <li>✅ 다른 기관 시험 detail 조회 시 403 FORBIDDEN</li>
+    <li>✅ submitOmr 첫 응시만 씨앗 지급 (인플레 방지)</li>
+    <li>✅ ALREADY_SUBMITTED 차단 (학생 재응시)</li>
+    <li>✅ N-4 패치 — submitOmr 끝에 syncTestCellsForUser 호출 (TestService.kt 끝부분)</li>
+  </ul>
+</section>
+
+<!-- ───────────────────────────────────────── -->
+<section id="s7">
+  <h2><span class="num">7</span>후속 작업 우선순위</h2>
+  <table>
+    <thead>
+      <tr><th style="width: 6%; text-align: center;">#</th><th>항목</th><th style="width: 12%; text-align: center;">시급도</th><th>비고</th></tr>
+    </thead>
+    <tbody>
+      <tr style="background: var(--accent-soft);">
+        <td style="text-align: center;">N-12</td>
+        <td><strong>submitForStudent 학생 기관 가드 ✅ 완료 (2026-05-21)</strong></td>
+        <td style="text-align: center;"><span class="badge ok">완료</span></td>
+        <td>
+          <code>AdminTestController.submitForStudent</code> 에 기존 헬퍼 <code>OrgService.verifyOrgAdminAccessForStudent(studentId)</code> 호출 추가.
+          HQ_ADMIN 통과 / ORG_ADMIN 은 자기 기관 학생만 / 그 외 <code>HTTP 403 FORBIDDEN</code>.<br>
+          <code>OrgService</code> 를 controller 에 inject — 헬퍼 본문은 OrgService.kt:40-57 의 기존 구현 그대로.
+        </td>
+      </tr>
+      <tr style="background: var(--info-soft);">
+        <td style="text-align: center;">N-13</td>
+        <td><strong>시험 list 권한 일관성 — 사고 아님 (정정 2026-05-21)</strong></td>
+        <td style="text-align: center;"><span class="badge ok">정상</span></td>
+        <td>
+          재검증: <code>TestService.listAllTests</code> (TestService.kt:1214-1225) 가 이미 ORG_ADMIN 의
+          <code>callerOrgIds</code> 와 본사 시험(<code>orgId IS NULL OR 'org_hq'</code>) 으로 필터링.
+          <code>verifyAdminTestAccess</code> (1362-1370) 와 정책 일치.
+          시뮬레이션 B1 응답의 72KB 는 본사 진단·챕터·기타 시험 184건 (모든 ADMIN 에게 공개되는 본사 시험) — 정상 노출.
+          → <strong>사고 아님</strong>. 시뮬레이션 추측 오판.
+        </td>
+      </tr>
+      <tr style="background: var(--accent-soft);">
+        <td style="text-align: center;">N-14</td>
+        <td><strong>학생 시험 보관함 진입점 정리 ✅ 완료 (2026-05-21)</strong></td>
+        <td style="text-align: center;"><span class="badge ok">완료</span></td>
+        <td>
+          진단: <code>listTests</code> (TestService.kt:78-79) 의 필터가 <code>series != "diagnostic"</code> 으로 되어 있어
+          <code>series</code> 칼럼 값이 "diagnostic" 인 misc 시험까지 학생 보관함에서 제외되는 사고.<br>
+          정정: <code>resolveKind</code> 기준으로 통일 — <code>filter { resolveKind(it) == "misc" }</code>.
+          진단 메뉴(<code>listDiagnosticTests</code>)도 동일하게 resolveKind 기반.
+          id prefix "diag_paper_" 만 진단으로 분류 (kind 정의와 일치).
+        </td>
+      </tr>
+      <tr style="background: var(--accent-soft);">
+        <td style="text-align: center;">N-15</td>
+        <td><strong>학부모 자녀 시험 목록 ✅ N-14 자동 해소 (2026-05-21)</strong></td>
+        <td style="text-align: center;"><span class="badge ok">완료</span></td>
+        <td>
+          <code>ParentLinkService.getChildTestList</code> (ParentLinkService.kt:294-301) 가 <code>testService.listTests</code> 위임.
+          N-14 의 필터 정정이 학부모 endpoint 에도 자동 반영. 자녀가 응시한 misc 시험 노출.
+        </td>
+      </tr>
+      <tr style="background: var(--info-soft);">
+        <td style="text-align: center;">N-16</td>
+        <td><strong>학생 홈 시험 진입 — 사고 아님 (정정 2026-05-21)</strong></td>
+        <td style="text-align: center;"><span class="badge ok">정상</span></td>
+        <td>
+          재검증: <code>StudentHomePage.jsx:1480-1483</code> 에 이미 quick card 존재.
+          "테스트 창고 / 본사·기관 시험" 라벨로 진입점 명확. <code>navigate("/tests")</code>.
+          신규 배정 알림은 N-9 의 <code>recentlyAssignedCount</code> ReminderModal 로 별도 처리.
+          → <strong>사고 아님</strong>. Explore agent 의 추측 오판.
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">N-17</td>
+        <td>DiagnosticTestPage 응시 복원</td>
+        <td style="text-align: center;"><span class="badge low">★</span></td>
+        <td>진단 범위. sessionStorage backup.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout info">
+    이번 점검에서 발견된 6건은 모두 보고서 기록만 — 패치는 사용자 결정에 따라 개별 작업으로 진행.
+    가장 시급한 <strong>N-12 (보안)</strong> 부터 처리 권장.
+  </div>
+</section>
+
+<footer>
+  국어농장 v2 · 테스트 관리 점검 보고서 · 2026-05-21<br>
+  대상: <code>backend/src/main/kotlin/com/korfarm/api/test/*</code> + <code>frontend/src/pages/(Admin)?Test*.jsx</code> + <code>ParentLinkService</code><br>
+  임시 데이터 (u_sim_*, org_sim, psl_sim) 모두 cleanup 완료
+</footer>
+
+</div>
+</body>
+</html>

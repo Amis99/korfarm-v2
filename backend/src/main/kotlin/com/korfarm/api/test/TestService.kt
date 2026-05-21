@@ -75,8 +75,11 @@ class TestService(
         // 사용자의 소속 기관 ID 조회
         val userOrgIds = orgMembershipRepository.findByUserIdAndStatus(userId, "active").map { it.orgId }
 
+        // N-14 (2026-05-21) — resolveKind 기준 misc 만 노출.
+        // 기존: series=="diagnostic" 필터로 series 값이 "diagnostic" 인 misc 시험까지 제외돼 학생 보관함이 빈 배열.
+        // 정정: id prefix "diag_paper_" 가 진짜 진단, series=="chapter" 가 진짜 챕터. 그 외는 misc.
         var papers = testPaperRepo.findByStatus("open")
-            .filter { it.series != "chapter" && it.series != "diagnostic" }  // 프로 모드 챕터 테스트 + 진단 테스트 제외
+            .filter { resolveKind(it) == "misc" }
 
         // source 필터: "hq" = 본사(orgId가 null), "org" = 소속 기관
         if (source == "hq") {
@@ -124,8 +127,10 @@ class TestService(
     @Transactional(readOnly = true)
     fun listDiagnosticTests(userId: String): List<TestPaperSummary> {
         val isAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        // N-14 (2026-05-21) — resolveKind 기준 diagnostic 만 (id prefix diag_paper_).
+        // 기존 series 칼럼 기반은 series="diagnostic" 인 misc 시험까지 잡아 일관성 깨짐.
         val papers = testPaperRepo.findByStatus("open")
-            .filter { it.series == "diagnostic" }
+            .filter { resolveKind(it) == "diagnostic" }
 
         val submissions = submissionRepo.findByUserId(userId).associateBy { it.testId }
         return papers.sortedByDescending { it.createdAt }.map { p ->

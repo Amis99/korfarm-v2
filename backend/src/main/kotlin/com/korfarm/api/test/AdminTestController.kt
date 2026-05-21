@@ -26,6 +26,8 @@ class AdminTestController(
     private val testAnalysisService: com.korfarm.api.aigen.TestAnalysisService,
     private val grapefruitService: com.korfarm.api.grapefruit.GrapefruitService,
     private val diagnosticService: com.korfarm.api.diagnostic.DiagnosticService,
+    // N-12 (2026-05-21) — submitForStudent 학생 기관 가드용
+    private val orgService: com.korfarm.api.org.OrgService,
 ) {
     private fun requireAdmin() {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
@@ -224,6 +226,8 @@ class AdminTestController(
         testService.verifyAdminTestAccess(testId, adminId)
         val studentId = request.userId
             ?: throw ApiException("BAD_REQUEST", "userId is required for proxy submission", HttpStatus.BAD_REQUEST)
+        // N-12 (2026-05-21) — ORG_ADMIN 의 다른 기관 학생 대리 응시 차단. HQ_ADMIN 은 통과.
+        orgService.verifyOrgAdminAccessForStudent(studentId)
         val sub = testService.submitOmr(testId, studentId, adminId, request.answers)
         return ApiResponse(
             success = true,
