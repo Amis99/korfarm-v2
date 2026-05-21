@@ -41,7 +41,10 @@ data class TestPaperDetail(
     val series: String?,
     val hasQuestions: Boolean,
     val hasSubmitted: Boolean,
-    val createdAt: LocalDateTime
+    val createdAt: LocalDateTime,
+    /** V0149 (2026-05-21) — 시험지 출처. 'manual' / 'ocr_generated'.
+     *  학생 화면이 'ocr_generated' 일 때 지문·문항·선택지 텍스트 미노출, OMR 입력 UI 만 표시. */
+    val source: String = "manual"
 )
 
 // ── Admin: Question view ──

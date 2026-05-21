@@ -28,6 +28,8 @@ class AdminTestController(
     private val diagnosticService: com.korfarm.api.diagnostic.DiagnosticService,
     // N-12 (2026-05-21) — submitForStudent 학생 기관 가드용
     private val orgService: com.korfarm.api.org.OrgService,
+    // V0149 (2026-05-21) — 테스트 정보 생성 (OCR)
+    private val ocrTestService: OcrTestService,
 ) {
     private fun requireAdmin() {
         AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")
@@ -214,6 +216,92 @@ class AdminTestController(
         testService.verifyAdminTestAccess(testId, currentUser())
         val data = testService.getSubmissions(testId)
         return ApiResponse(success = true, data = data)
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // V0149 (2026-05-21) — 테스트 정보 생성 (OCR) endpoint 3종
+    // ─────────────────────────────────────────────────────────────
+
+    /** OCR 시작 — 시험지(+정답) fileId 받아 Claude Vision 호출, draft 저장. 페이지당 1자몽 차감. */
+    @PostMapping("/ocr-generate")
+    fun ocrGenerate(@RequestBody request: Map<String, String?>): ApiResponse<Map<String, Any?>> {
+        requireAdmin()
+        val sourceFileId = request["source_file_id"]?.takeIf { it.isNotBlank() }
+            ?: throw ApiException("BAD_REQUEST", "source_file_id 가 필요합니다.", HttpStatus.BAD_REQUEST)
+        val answerFileId = request["answer_file_id"]?.takeIf { it.isNotBlank() }
+        val draft = ocrTestService.generate(currentUser(), sourceFileId, answerFileId)
+        return ApiResponse(
+            success = true,
+            data = mapOf(
+                "draft_id" to draft.id,
+                "status" to draft.status,
+                "page_count" to draft.pageCount,
+                "grapefruit_deducted" to draft.grapefruitDeducted,
+                "payload_json" to draft.payloadJson,
+                "error_message" to draft.errorMessage,
+            )
+        )
+    }
+
+    /** OCR draft 조회 — 어드민 검수 화면용. */
+    @GetMapping("/ocr-drafts/{draftId}")
+    fun ocrDraft(@PathVariable draftId: String): ApiResponse<Map<String, Any?>> {
+        requireAdmin()
+        val draft = ocrTestService.getDraft(draftId, currentUser())
+        return ApiResponse(
+            success = true,
+            data = mapOf(
+                "draft_id" to draft.id,
+                "status" to draft.status,
+                "page_count" to draft.pageCount,
+                "source_file_id" to draft.sourceFileId,
+                "answer_file_id" to draft.answerFileId,
+                "payload_json" to draft.payloadJson,
+                "admin_note" to draft.adminNote,
+                "confirmed_test_paper_id" to draft.confirmedTestPaperId,
+                "error_message" to draft.errorMessage,
+                "created_at" to draft.createdAt.toString(),
+            )
+        )
+    }
+
+    /** OCR 미확정 draft 목록 (작성자 본인 + 같은 기관). */
+    @GetMapping("/ocr-drafts")
+    fun ocrDraftList(): ApiResponse<List<Map<String, Any?>>> {
+        requireAdmin()
+        val drafts = ocrTestService.listPendingDrafts(currentUser())
+        return ApiResponse(
+            success = true,
+            data = drafts.map {
+                mapOf(
+                    "draft_id" to it.id,
+                    "status" to it.status,
+                    "page_count" to it.pageCount,
+                    "created_at" to it.createdAt.toString(),
+                    "admin_note" to it.adminNote,
+                )
+            }
+        )
+    }
+
+    /** OCR 확정 — payload 검수 후 test_papers + test_questions INSERT (source='ocr_generated'). */
+    @PostMapping("/ocr-drafts/{draftId}/confirm")
+    fun ocrConfirm(
+        @PathVariable draftId: String,
+        @RequestBody(required = false) request: Map<String, String?>?
+    ): ApiResponse<Map<String, Any?>> {
+        requireAdmin()
+        val editedPayload = request?.get("payload_json")?.takeIf { it.isNotBlank() }
+        val paper = ocrTestService.confirm(draftId, currentUser(), editedPayload)
+        return ApiResponse(
+            success = true,
+            data = mapOf(
+                "test_id" to paper.id,
+                "title" to paper.title,
+                "total_questions" to paper.totalQuestions,
+                "source" to paper.source,
+            )
+        )
     }
 
     @PostMapping("/{testId}/submit-for-student")

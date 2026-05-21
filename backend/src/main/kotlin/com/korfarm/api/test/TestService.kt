@@ -46,10 +46,13 @@ class TestService(
 ) {
     private val logger = LoggerFactory.getLogger(TestService::class.java)
 
-    // 시험지 ID/series 로 종류 분류 — diagnostic / chapter / misc
+    // 시험지 ID/series/source 로 종류 분류 — diagnostic / chapter / response_only / misc
+    // V0149 / O-6 (2026-05-21) — source='ocr_generated' 는 별도 종류 'response_only' (응시 전용 테스트).
+    // 종이 시험지 + OMR 만, 화면 노출·인쇄 차단.
     private fun resolveKind(paper: TestPaperEntity): String = when {
         paper.id.startsWith("diag_paper_") -> "diagnostic"
         paper.series == "chapter" -> "chapter"
+        paper.source == "ocr_generated" -> "response_only"
         else -> "misc"
     }
 
@@ -75,11 +78,10 @@ class TestService(
         // 사용자의 소속 기관 ID 조회
         val userOrgIds = orgMembershipRepository.findByUserIdAndStatus(userId, "active").map { it.orgId }
 
-        // N-14 (2026-05-21) — resolveKind 기준 misc 만 노출.
-        // 기존: series=="diagnostic" 필터로 series 값이 "diagnostic" 인 misc 시험까지 제외돼 학생 보관함이 빈 배열.
-        // 정정: id prefix "diag_paper_" 가 진짜 진단, series=="chapter" 가 진짜 챕터. 그 외는 misc.
+        // N-14 + O-6 (2026-05-21) — 학생 보관함에 misc (기타) + response_only (응시 전용 OCR) 노출.
+        // 두 종류 모두 학생이 OMR 입력 가능. response_only 는 화면 노출 차단 분기는 TestDetailPage 가 담당.
         var papers = testPaperRepo.findByStatus("open")
-            .filter { resolveKind(it) == "misc" }
+            .filter { resolveKind(it) in setOf("misc", "response_only") }
 
         // source 필터: "hq" = 본사(orgId가 null), "org" = 소속 기관
         if (source == "hq") {
@@ -175,7 +177,8 @@ class TestService(
             series = p.series,
             hasQuestions = hasQuestions,
             hasSubmitted = if (isAdmin) false else hasSub,
-            createdAt = p.createdAt
+            createdAt = p.createdAt,
+            source = p.source,
         )
     }
 

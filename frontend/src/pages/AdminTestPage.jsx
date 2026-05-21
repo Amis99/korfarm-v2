@@ -27,10 +27,13 @@ function normalizeTest(t) {
     pdfFileId: t.pdfFileId ?? t.pdf_file_id ?? null,
     answerPdfFileId: t.answerPdfFileId ?? t.answer_pdf_file_id ?? null,
     createdAt: t.createdAt ?? t.created_at ?? null,
-    // 종류: diagnostic / chapter / misc — 백엔드에서 제공. 누락 시 ID/series 로 추론.
+    source: t.source ?? "manual",
+    // 종류: diagnostic / chapter / response_only / misc — 백엔드 제공, 누락 시 추론.
+    // V0149 / O-6 (2026-05-21) — source='ocr_generated' 는 응시 전용 (response_only).
     kind: t.kind || (
       String(t.testId ?? t.test_id ?? "").startsWith("diag_paper_") ? "diagnostic"
-      : (t.series === "chapter" ? "chapter" : "misc")
+      : (t.series === "chapter" ? "chapter"
+      : ((t.source ?? "manual") === "ocr_generated" ? "response_only" : "misc"))
     ),
   };
 }
@@ -40,6 +43,7 @@ const KIND_LABEL = {
   diagnostic: "진단",
   chapter: "챕터",
   misc: "기타",
+  response_only: "응시 전용",
 };
 
 function AdminTestPage() {
@@ -224,16 +228,24 @@ function AdminTestPage() {
           >
             <span className="material-symbols-outlined">add</span> {creating ? "생성 중..." : "시험 추가"}
           </button>
+          {/* O-4 (2026-05-21) — 테스트 정보 생성 (OCR) 진입점. 페이지당 1자몽 차감. */}
+          <button
+            className="ts-btn"
+            onClick={() => navigate("/admin/tests/ocr/new")}
+            title="시험지 PDF·이미지 업로드 → Claude Vision OCR → 자동 분석 → 시험지 DB 등록 (페이지당 1자몽)"
+            style={{ background: "rgba(34,139,230,0.12)", color: "#1971c2", borderColor: "rgba(34,139,230,0.4)" }}
+          >
+            <span className="material-symbols-outlined">upload_file</span> 시험지 업로드 (OCR)
+          </button>
         </div>
       </header>
 
-      {/* 종류 탭 — ORG_ADMIN 은 자기 기관 테스트(기타)만 보이므로 탭 숨김 */}
-      {isHq && (
+      {/* 종류 탭 — O-6 (2026-05-21) 부터 ORG_ADMIN 도 노출. response_only(응시 전용) 탭 추가. */}
       <div className="ts-kind-tabs" style={{
         display: "flex", gap: 4, marginBottom: 10,
         borderBottom: "2px solid var(--stroke)",
       }}>
-        {["all", "diagnostic", "chapter", "misc"].map((k) => {
+        {["all", "diagnostic", "chapter", "misc", "response_only"].map((k) => {
           const isActive = activeTab === k;
           return (
             <button
@@ -257,7 +269,6 @@ function AdminTestPage() {
           );
         })}
       </div>
-      )}
 
       {/* 필터/검색 바 */}
       <div className="ts-filter-bar" style={{

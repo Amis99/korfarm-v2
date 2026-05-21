@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>테스트 정보 생성 (OCR) 기능 — 작업 보고서 (진행 중)</title>
+<style>
+  :root {
+    --ink: #1f3a2c;
+    --muted: #5a6b5f;
+    --accent: #2d6a4f;
+    --accent-strong: #1f4a37;
+    --accent-soft: #e9f3ec;
+    --stroke: rgba(31, 58, 44, 0.15);
+    --stroke-soft: rgba(31, 58, 44, 0.08);
+    --panel: #ffffff;
+    --panel-alt: #f5f9f3;
+    --warn: #c0392b;
+    --warn-soft: #fdecea;
+    --info: #1565c0;
+    --info-soft: #e3f2fd;
+    --orange: #ef6c00;
+    --orange-soft: #fff3e0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--ink); background: #f7faf6; line-height: 1.7;
+    margin: 0; padding: 32px 16px 80px;
+  }
+  .wrap { max-width: 1020px; margin: 0 auto; }
+  header.report-head {
+    background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+    color: #fff; padding: 28px 28px 24px;
+    border-radius: 14px 14px 0 0;
+    box-shadow: 0 4px 12px rgba(31, 74, 55, 0.18);
+  }
+  header.report-head h1 { margin: 0 0 6px; font-size: 1.55rem; font-weight: 800; }
+  header.report-head .sub { font-size: 0.92rem; opacity: 0.88; }
+  header.report-head .meta { margin-top: 14px; display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.82rem; opacity: 0.92; }
+  header.report-head .meta span::before { content: "·"; margin-right: 8px; opacity: 0.6; }
+  header.report-head .meta span:first-child::before { content: ""; margin: 0; }
+
+  nav.toc {
+    background: var(--panel); border: 1px solid var(--stroke); border-top: none;
+    padding: 18px 28px; border-radius: 0 0 14px 14px; margin-bottom: 28px;
+  }
+  nav.toc h2 { margin: 0 0 10px; font-size: 0.85rem; color: var(--muted); font-weight: 700; }
+  nav.toc ol { margin: 0; padding-left: 22px; columns: 2; column-gap: 28px; font-size: 0.92rem; }
+  nav.toc ol li { margin-bottom: 4px; break-inside: avoid; }
+  nav.toc a { color: var(--accent-strong); text-decoration: none; }
+  nav.toc a:hover { text-decoration: underline; }
+
+  section {
+    background: var(--panel); border: 1px solid var(--stroke); border-radius: 12px;
+    padding: 24px 28px; margin-bottom: 22px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  }
+  section h2 {
+    margin: 0 0 16px; font-size: 1.25rem; color: var(--accent-strong);
+    border-bottom: 2px solid var(--accent-soft); padding-bottom: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  section h2 .num {
+    background: var(--accent); color: #fff;
+    font-size: 0.85rem; font-weight: 800;
+    padding: 3px 10px; border-radius: 999px;
+  }
+  section h3 {
+    font-size: 1.02rem; color: var(--accent-strong);
+    margin: 22px 0 10px; padding-left: 10px;
+    border-left: 4px solid var(--accent);
+  }
+  section p { margin: 0 0 10px; }
+  section ul, section ol { margin: 0 0 12px; padding-left: 22px; }
+
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 16px; font-size: 0.9rem; }
+  table th, table td { border: 1px solid var(--stroke); padding: 8px 12px; text-align: left; vertical-align: top; }
+  table th { background: var(--panel-alt); color: var(--accent-strong); font-weight: 700; font-size: 0.85rem; }
+  code {
+    font-family: "JetBrains Mono", Consolas, monospace;
+    font-size: 0.85em;
+    background: rgba(31, 74, 55, 0.06); color: var(--accent-strong);
+    padding: 1px 6px; border-radius: 4px;
+  }
+  .badge {
+    display: inline-block; font-size: 0.72rem; padding: 2px 8px;
+    border-radius: 999px; font-weight: 700;
+  }
+  .badge.ok { background: var(--accent-soft); color: var(--accent-strong); }
+  .badge.pending { background: var(--orange-soft); color: var(--orange); }
+  .badge.high { background: var(--warn-soft); color: var(--warn); }
+  .callout {
+    border: 1px solid var(--stroke); border-left: 4px solid var(--accent);
+    background: var(--panel-alt); border-radius: 6px;
+    padding: 12px 16px; margin: 10px 0 14px; font-size: 0.92rem;
+  }
+  .callout.info { border-left-color: var(--info); background: var(--info-soft); }
+  pre {
+    background: var(--panel-alt); border: 1px solid var(--stroke-soft);
+    border-radius: 6px; padding: 10px 12px;
+    font-family: "JetBrains Mono", Consolas, monospace;
+    font-size: 0.8rem; overflow-x: auto; line-height: 1.5;
+    color: var(--ink); margin: 6px 0;
+  }
+  blockquote.purpose {
+    background: var(--accent-soft); border-left: 4px solid var(--accent);
+    margin: 0 0 16px; padding: 14px 18px;
+    border-radius: 0 8px 8px 0; font-size: 1.0rem;
+    color: var(--accent-strong); font-weight: 600;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="report-head">
+  <h1>테스트 정보 생성 (OCR) 기능 — 작업 보고서</h1>
+  <div class="sub">시험지 업로드 → Claude Vision OCR → 분석 데이터 자동 생성 → DB 등록</div>
+  <div class="meta">
+    <span>작성일: 2026-05-21</span>
+    <span>OCR 엔진: Claude Vision Sonnet (기존 인프라 재사용)</span>
+    <span>비용: 페이지당 1자몽 (기존 OCR 정책)</span>
+    <span>상태: 백엔드 완료·배포 / 프론트 진행 중</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <h2>목차</h2>
+  <ol>
+    <li><a href="#s1">기능 목적·결정 정책</a></li>
+    <li><a href="#s2">전체 흐름</a></li>
+    <li><a href="#s3">백엔드 구현 (완료)</a></li>
+    <li><a href="#s4">API 엔드포인트 카탈로그</a></li>
+    <li><a href="#s5">프론트엔드 구현 (진행 중)</a></li>
+    <li><a href="#s6">학생 OMR 흐름</a></li>
+    <li><a href="#s7">검증·후속 작업</a></li>
+  </ol>
+</nav>
+
+<section id="s1">
+  <h2><span class="num">1</span>기능 목적·결정 정책</h2>
+  <blockquote class="purpose">
+    어드민이 종이 시험지(PDF/이미지) 를 업로드하면 Claude Vision 으로 OCR + 구조화 + 분석 데이터 자동 생성 →
+    test_papers DB 에 자동 등록 → 학생은 OMR 답안만 입력 → 채점·통계·학습 계획표 sync 자동.
+    온라인 응시 화면(지문·문항 노출) 은 만들지 않음 — 어드민이 종이로 배포, 우리는 응시 기록·분석만.
+  </blockquote>
+
+  <h3>사용자 확정 정책 (2026-05-21)</h3>
+  <table>
+    <thead><tr><th>항목</th><th>결정</th><th>비고</th></tr></thead>
+    <tbody>
+      <tr><td>OCR 엔진</td><td>Claude Vision Sonnet</td><td>기존 채팅·튜터·포도 OCR 인프라 재사용. 추가 의존성 0.</td></tr>
+      <tr><td>데이터 모델</td><td>기존 <code>test_papers</code> + <code>source</code> 칼럼</td><td>'manual' (기존) / 'ocr_generated' (신규)</td></tr>
+      <tr><td>학생 응시</td><td>OMR 답안만 입력 (지문·문항 미노출) + 어드민 대리 OMR 둘 다</td><td>기존 <code>submitOmr</code>·<code>offline-omr-bulk</code> 흐름 재사용</td></tr>
+      <tr><td>비용</td><td>OCR 페이지당 1자몽</td><td>기존 "wisdom-ocr" kind 재사용. <code>GrapefruitService.spendOrg</code> 호출</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="s2">
+  <h2><span class="num">2</span>전체 흐름</h2>
+  <ol>
+    <li><strong>업로드</strong> — 어드민이 시험지 파일(필수) + 정답·해설 파일(선택) PUT 업로드 → 기존 presign 흐름. <code>fileId</code> 받음.</li>
+    <li><strong>OCR generate</strong> — <code>POST /v1/admin/test-papers/ocr-generate</code> 호출.
+      페이지 수 카운트 (PDFBox) → 페이지당 1자몽 차감 → Claude Vision Sonnet 호출 → JSON payload → <code>ocr_test_drafts</code> 에 <code>status='pending'</code> 저장.</li>
+    <li><strong>어드민 검수</strong> — preview 화면에서 payload JSON 확인·수정 (지문·문항·정답·역량 등).</li>
+    <li><strong>OCR confirm</strong> — <code>POST /v1/admin/test-papers/ocr-drafts/{draftId}/confirm</code>.
+      <code>test_papers</code> + <code>test_questions</code> INSERT (<code>source='ocr_generated'</code>) → draft <code>status='confirmed'</code>.</li>
+    <li><strong>응시</strong> — 학생 보관함에 노출 (기존 misc 분류). OMR 답안만 입력 UI (지문 미노출). 또는 어드민 대리 OMR.</li>
+    <li><strong>채점·통계·sync</strong> — 기존 <code>submitOmr</code> 흐름 그대로. 학습 계획표 셀 즉시 갱신(N-4).</li>
+  </ol>
+</section>
+
+<section id="s3">
+  <h2><span class="num">3</span>백엔드 구현 (완료·배포)</h2>
+
+  <h3>3.1 V0149 마이그레이션 <span class="badge ok">완료</span></h3>
+  <ul>
+    <li><code>test_papers.source VARCHAR(32) NOT NULL DEFAULT 'manual'</code> 칼럼 추가 + index</li>
+    <li><code>ocr_test_drafts</code> 테이블 신설 — preview·검수 대기 데이터 보관 (id / org_id / created_by / status / source_file_id / answer_file_id / page_count / payload_json / admin_note / confirmed_test_paper_id / grapefruit_deducted / error_message)</li>
+    <li>파일: <code>backend/src/main/resources/db/migration/V0149__test_papers_source_and_ocr_drafts.sql</code></li>
+  </ul>
+
+  <h3>3.2 Entity·Repository <span class="badge ok">완료</span></h3>
+  <ul>
+    <li><code>TestPaperEntity.source: String = "manual"</code> 필드 추가</li>
+    <li><code>OcrTestDraftEntity</code> + <code>OcrTestDraftRepository</code> 신설 (<code>backend/.../test/OcrTestDraftEntity.kt</code>)</li>
+  </ul>
+
+  <h3>3.3 OcrTestService <span class="badge ok">완료</span></h3>
+  <p>핵심 메서드:</p>
+  <ul>
+    <li><code>generate(adminId, sourceFileId, answerFileId)</code> — 페이지 카운트(PDFBox), 자몽 차감, Claude Vision 호출, JSON 파싱, draft 저장</li>
+    <li><code>confirm(draftId, adminId, editedPayloadJson?)</code> — draft → <code>test_papers</code> + <code>test_questions</code> INSERT (<code>source='ocr_generated'</code>)</li>
+    <li><code>getDraft</code>, <code>listPendingDrafts</code> — 어드민 검수용</li>
+  </ul>
+  <p>재사용 인프라:</p>
+  <ul>
+    <li><code>AiCallHelper.callMultimodal</code> — Claude Vision Sonnet 호출</li>
+    <li><code>AiCallHelper.pdfBlock</code> / <code>imageBlock</code> — base64 content block</li>
+    <li><code>GrapefruitService.spendOrg("wisdom-ocr", ...)</code> — 페이지당 1자몽 차감</li>
+    <li><code>FileService.readBytes</code> + <code>FileRepository</code> — 파일 byte 조회</li>
+    <li><code>org.apache.pdfbox.Loader</code> — PDF 페이지 수 카운트</li>
+  </ul>
+
+  <h3>3.4 Claude Vision Prompt</h3>
+  <p>시스템·사용자 프롬프트 설계 — 원문자 ①②③ · (1)(2) · 박스·표 인식 강조. JSON 코드블록으로만 응답:</p>
+  <pre>{
+  "title": "...",
+  "level_id": "saussure1|frege1|russell1|wittgenstein1|...",
+  "total_questions": N, "total_points": N, "time_limit_minutes": N,
+  "passages": [{"id":"p1","text":"...","domain":"독서|문학|...","sub_domain":"..."}],
+  "questions": [
+    {
+      "number": 1, "type": "객관식|서술형",
+      "passage_id": "p1", "stem": "...",
+      "choices": [{"id":"c1","text":"..."}, ...],
+      "answer_id": "c1", "points": 5,
+      "explanation": "..."
+    }
+  ]
+}</pre>
+</section>
+
+<section id="s4">
+  <h2><span class="num">4</span>API 엔드포인트 카탈로그</h2>
+  <table>
+    <thead><tr><th>Method</th><th>Path</th><th>설명</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>POST</td>
+        <td><code>/v1/admin/test-papers/ocr-generate</code></td>
+        <td>OCR 시작. body: <code>{source_file_id, answer_file_id?}</code> → draft 생성 + 자몽 차감</td>
+      </tr>
+      <tr>
+        <td>GET</td>
+        <td><code>/v1/admin/test-papers/ocr-drafts</code></td>
+        <td>본인·같은 기관의 미확정 draft 목록</td>
+      </tr>
+      <tr>
+        <td>GET</td>
+        <td><code>/v1/admin/test-papers/ocr-drafts/{draftId}</code></td>
+        <td>draft 단건 (검수 화면용 payload_json 포함)</td>
+      </tr>
+      <tr>
+        <td>POST</td>
+        <td><code>/v1/admin/test-papers/ocr-drafts/{draftId}/confirm</code></td>
+        <td>확정. body: <code>{payload_json?}</code> (검수 시 수정한 JSON) → <code>test_papers</code> + <code>test_questions</code> INSERT</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="callout">
+    모든 endpoint 에 <code>AdminGuard.requireAnyRole("HQ_ADMIN", "ORG_ADMIN")</code> 적용. draft 권한은 작성자 본인 + 같은 기관 ORG_ADMIN 만.
+  </div>
+</section>
+
+<section id="s5">
+  <h2><span class="num">5</span>프론트엔드 구현 (진행 중) <span class="badge pending">진행 중</span></h2>
+  <p>다음 단계로 진행:</p>
+  <ol>
+    <li><strong>어드민 진입점</strong> — <code>AdminTestPage</code> 에 "📤 시험지 업로드 (OCR)" 버튼 추가</li>
+    <li><strong>업로드 모달</strong> — 시험지·정답 파일 input + "OCR 시작" 버튼. 페이지 수 안내 + 자몽 차감 confirm.</li>
+    <li><strong>검수 화면</strong> — <code>/admin/tests/ocr-drafts/{draftId}</code>. payload JSON 미리보기 + 지문/문항/선택지 편집 + "확정" 버튼.</li>
+    <li><strong>확정 후 이동</strong> — 기존 <code>AdminTestEditorPage</code> 또는 <code>AdminTestPage</code> 목록으로 복귀</li>
+  </ol>
+</section>
+
+<section id="s6">
+  <h2><span class="num">6</span>학생 OMR 흐름</h2>
+  <p>학생 응시 분기 (다음 단계):</p>
+  <ul>
+    <li><strong>보관함 노출</strong> — N-14 패치로 <code>resolveKind</code> = misc 인 시험은 학생 보관함에 자동 노출. <code>source='ocr_generated'</code> 도 misc.</li>
+    <li><strong>시험 상세 화면</strong> — <code>source='ocr_generated'</code> 일 때 지문·문항·선택지 텍스트 미노출, OMR 답안 입력 UI 만 노출 (1번: ①②③④⑤ 식)</li>
+    <li><strong>제출 후</strong> — 기존 <code>submitOmr</code> 흐름 그대로. 점수 즉시 채점 + N-4 학습 계획표 sync 자동</li>
+    <li><strong>어드민 대리</strong> — <code>offline-omr-bulk</code> 그대로 활용. N-12 가드로 다른 기관 학생 차단</li>
+  </ul>
+</section>
+
+<section id="s7">
+  <h2><span class="num">7</span>검증·후속 작업</h2>
+  <h3>다음 작업 (대기)</h3>
+  <ul>
+    <li><strong>O-4</strong>: AdminTestPage UI — 업로드 버튼 + 모달 + 검수 화면</li>
+    <li><strong>O-5</strong>: TestDetailPage 의 <code>source='ocr_generated'</code> 분기 — 지문·문항 미노출 OMR 입력 UI</li>
+    <li><strong>O-6 (선택)</strong>: TestAnalysisService 자동 호출 — confirm 직후 비동기 분석 (영역·역량 벡터·약점 등)</li>
+  </ul>
+
+  <h3>라이브 검증 방법</h3>
+  <ol>
+    <li>본사 어드민으로 로그인 → 테스트 관리 → 시험지 업로드</li>
+    <li>샘플 PDF 시험지 + 정답 파일 업로드 → "OCR 시작"</li>
+    <li>preview 화면에서 JSON 확인·수정 → 확정</li>
+    <li><code>test_papers</code> 에 <code>source='ocr_generated'</code> 로 INSERT 됐는지 DB 검증</li>
+    <li>학생(amis) 로 응시 → OMR 입력 → 결과 확인</li>
+    <li>학습 계획표 매트릭스에서 즉시 "scored" 표시 확인</li>
+  </ol>
+</section>
+
+<footer style="margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--stroke); color: var(--muted); font-size: 0.82rem; text-align: center;">
+  국어농장 v2 · 테스트 정보 생성 (OCR) 기능 작업 보고서 · 2026-05-21<br>
+  V0149 마이그 + Entity + Service + Controller 백엔드 배포 완료. 프론트 어드민·학생 UI 작업 진행 중.
+</footer>
+
+</div>
+</body>
+</html>

@@ -25,12 +25,14 @@ function TestDetailPage() {
     apiGet(`/v1/test-storage/${testId}`)
       .then(data => {
         setTest(data);
-        // 미제출 + 문항이 있으면 문항 로드 & PDF 자동 표시
+        // 미제출 + 문항이 있으면 문항 로드 & PDF 자동 표시.
+        // V0149 / O-5 (2026-05-21) — OCR 생성 시험(source='ocr_generated')은 PDF 미노출 (학생은 종이 시험지 사용).
+        const isOcrGenerated = data.source === "ocr_generated";
         if (!data.hasSubmitted && data.hasQuestions) {
           apiGet(`/v1/test-storage/${testId}/questions`)
             .then(qs => setQuestions(Array.isArray(qs) ? qs : []))
             .catch(() => {});
-          if (data.pdfFileId) setShowPdf(true);
+          if (data.pdfFileId && !isOcrGenerated) setShowPdf(true);
         }
       })
       .catch(() => navigate("/tests"))
@@ -69,7 +71,9 @@ function TestDetailPage() {
   if (loading) return <div className="ts-page ts-center"><p>불러오는 중...</p></div>;
   if (!test) return null;
 
-  const pdfUrl = test.pdfFileId
+  // O-5 — OCR 생성 시험은 PDF 학생 노출 차단 (지문 노출 방지)
+  const isOcrGenerated = test.source === "ocr_generated";
+  const pdfUrl = test.pdfFileId && !isOcrGenerated
     ? `${API_BASE}/v1/files/${test.pdfFileId}/download`
     : null;
 
@@ -121,8 +125,35 @@ function TestDetailPage() {
 
       {error && <p className="ts-error">{error}</p>}
 
-      {/* 미제출: PDF + 답안 패널 통합 레이아웃 */}
-      {canAnswer && pdfUrl && (
+      {/* O-5 — OCR 생성 시험: 종이 시험지로 풀고 답안만 입력 안내 + OMR 페이지로 이동 버튼 */}
+      {canAnswer && isOcrGenerated && (
+        <div className="ts-detail-card" style={{ marginTop: 16 }}>
+          <div style={{
+            background: "rgba(34,139,230,0.08)",
+            border: "1px solid rgba(34,139,230,0.25)",
+            borderRadius: 8,
+            padding: "16px 18px",
+            marginBottom: 16,
+            color: "#1971c2",
+            fontSize: 14,
+            lineHeight: 1.6,
+          }}>
+            <strong>📝 종이 시험지로 응시하는 시험입니다.</strong><br/>
+            선생님께서 나눠준 종이 시험지를 풀고, 아래 버튼을 눌러 답안만 입력하세요.
+            화면에서는 문항·지문이 노출되지 않습니다.
+          </div>
+          <button
+            className="ts-btn ts-btn-primary ts-btn-lg"
+            onClick={() => navigate(`/tests/${testId}/omr`)}
+          >
+            <span className="material-symbols-outlined">edit_note</span>
+            OMR 답안 입력 시작
+          </button>
+        </div>
+      )}
+
+      {/* 미제출: PDF + 답안 패널 통합 레이아웃 (일반 misc 시험) */}
+      {canAnswer && !isOcrGenerated && pdfUrl && (
         <div className="test-online-split">
           <div className="test-online-pdf" onContextMenu={e => e.preventDefault()}>
             <div className="ts-pdf-overlay" />

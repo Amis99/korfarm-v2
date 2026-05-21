@@ -52,6 +52,10 @@ class TestPaperEntity(
     @Column(nullable = false)
     var status: String = "draft",
 
+    /** 시험지 출처 (V0149) — 'manual' (어드민 수동) / 'ocr_generated' (OCR 자동 생성). */
+    @Column(nullable = false)
+    var source: String = "manual",
+
     @Column(name = "payload_json", columnDefinition = "LONGTEXT")
     var payloadJson: String? = null,
 
