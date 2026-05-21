@@ -115,8 +115,9 @@ export default function StudyPlanPage() {
       return;
     }
 
-    // 학습활동: pending/partial → 제출 페이지
-    if (aType === "activity" && (cell.status === "pending" || cell.status === "partial")) {
+    // 학습활동: pending/partial/submitted/completed 모두 제출 페이지(추가 업로드 허용)
+    // disabled/unassigned 는 위에서 차단됨
+    if (aType === "activity") {
       navigate(`/study-plan/submit/${cell.cellId}`);
       return;
     }

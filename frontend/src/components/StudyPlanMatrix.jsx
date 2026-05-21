@@ -14,8 +14,10 @@ const STATUS_FILTER_OPTIONS = [
   { value: "unassigned", label: "배정 전" },
   { value: "pending", label: "미수행" },
   { value: "overdue", label: "미완료" },
-  { value: "done", label: "수행완료" },
-  { value: "reviewed", label: "점검완료" },
+  { value: "student_submitted", label: "학생 수행 완료" },
+  { value: "student_partial", label: "학생 일부 완료" },
+  { value: "done", label: "확인 완료" },
+  { value: "reviewed", label: "일부 확인" },
   { value: "disabled", label: "비활성" },
 ];
 
@@ -50,12 +52,20 @@ function classifyScopeStatus(scope, cells) {
   return daysSince <= STALE_DAYS ? "completed-recent" : "completed-old";
 }
 
-// 6단계 라벨 매핑 — DB status → STATUS_FILTER_OPTIONS.value 와 비교용
+// 라벨 매핑 — DB status → STATUS_FILTER_OPTIONS.value 와 비교용
+// activity 만 학생 자기보고/관리자 확인을 분리해서 표시.
 function classifyCellStatus(cell) {
   if (!cell) return "unassigned";
   if (cell.status === "disabled" || cell.isDisabled) return "disabled";
   if (cell.status === "unassigned") return "unassigned";
   if (cell.isOverdue) return "overdue";
+  if (cell.assetType === "activity") {
+    if (cell.status === "submitted") return "student_submitted";
+    if (cell.status === "partial") return "student_partial";
+    if (cell.status === "reviewed") return "reviewed";
+    if (cell.status === "completed") return "done";
+    return "pending";
+  }
   if (cell.status === "reviewed") return "reviewed";
   if (cell.status === "completed" || cell.status === "passed" || cell.status === "submitted") return "done";
   return "pending";
@@ -185,6 +195,12 @@ export default function StudyPlanMatrix({
     if (!cell) return "";
     if (cell.status === "disabled" || cell.isDisabled) return "cell-disabled";
     if (cell.status === "unassigned") return "cell-unassigned";
+    if (cell.assetType === "activity") {
+      if (cell.status === "submitted") return "cell-student-submitted";
+      if (cell.status === "partial") return "cell-student-partial";
+      if (cell.status === "reviewed") return "cell-admin-reviewed";
+      if (cell.status === "completed") return "cell-admin-completed";
+    }
     if (cell.status === "partial") return "cell-partial";
     return "";
   };
@@ -426,6 +442,7 @@ export default function StudyPlanMatrix({
                         <CellStatusBadge
                           status={cell.status}
                           isOverdue={cell.isOverdue}
+                          assetType={asset.assetType}
                         />
                         {asset.assetType === "korfarm" && (cell.assignments?.length || 0) > 1 && (
                           <div style={{ fontSize: 10, color: "#555", marginTop: 2 }}>

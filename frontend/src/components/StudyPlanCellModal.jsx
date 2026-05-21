@@ -248,6 +248,7 @@ export default function StudyPlanCellModal({ cell, scope, asset, onClose, onUpda
           <CellStatusBadge
             status={cell.status}
             isOverdue={cell.isOverdue}
+            assetType={asset?.assetType || cell?.assetType}
           />
           {cell.dueAt && (
             <span style={{ marginLeft: 8, fontSize: "0.75rem", color: "#888" }}>
@@ -506,24 +507,47 @@ export default function StudyPlanCellModal({ cell, scope, asset, onClose, onUpda
           </div>
         )}
 
-        {/* ── 학습활동 submitted: 완료/일부 완료 ── */}
-        {isActivity && cell.status === "submitted" && (
-          <div className="asp-cell-actions">
-            <button
-              className="asp-btn-approve"
-              onClick={() => handleStatusChange("completed")}
-              disabled={saving}
-            >
-              완료
-            </button>
-            <button
-              className="asp-btn-retry"
-              onClick={() => handleStatusChange("partial")}
-              disabled={saving}
-            >
-              일부 완료
-            </button>
-          </div>
+        {/* ── 학습활동 학생 제출(submitted/partial): 관리자 확인 완료/일부 확인 ── */}
+        {isActivity && (cell.status === "submitted" || cell.status === "partial") && (
+          <>
+            <div style={{ fontSize: "0.82rem", color: "#8a7468", marginBottom: 6 }}>
+              학생 자기보고: {cell.status === "submitted" ? "수행 완료" : "일부 완료"}
+            </div>
+            <div className="asp-cell-actions">
+              <button
+                className="asp-btn-approve"
+                onClick={() => handleStatusChange("completed")}
+                disabled={saving}
+              >
+                확인 완료
+              </button>
+              <button
+                className="asp-btn-retry"
+                onClick={() => handleStatusChange("reviewed")}
+                disabled={saving}
+              >
+                일부 확인
+              </button>
+            </div>
+          </>
+        )}
+
+        {/* ── 학습활동 관리자 확인 후(completed/reviewed): 상태 표시 + 재확인 버튼 ── */}
+        {isActivity && (cell.status === "completed" || cell.status === "reviewed") && (
+          <>
+            <div style={{ fontSize: "0.82rem", color: "#2c7a3f", marginBottom: 6 }}>
+              관리자 확인: {cell.status === "completed" ? "확인 완료" : "일부 확인"}
+            </div>
+            <div className="asp-cell-actions">
+              <button
+                className="asp-btn-approve"
+                onClick={() => handleStatusChange(cell.status === "completed" ? "reviewed" : "completed")}
+                disabled={saving}
+              >
+                {cell.status === "completed" ? "일부 확인으로 변경" : "확인 완료로 변경"}
+              </button>
+            </div>
+          </>
         )}
 
         {/* ── 테스트 pending: 응시 전 표시 ── */}

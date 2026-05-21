@@ -109,7 +109,12 @@ data class UpdateCellStatusRequest(
 )
 
 data class SubmitCellRequest(
-    val fileIds: List<String> = emptyList()
+    val fileIds: List<String> = emptyList(),
+    // 2026-05-21 — 학생 자기보고 verdict.
+    //   "full"    → status=submitted (수행 완료 자기보고)
+    //   "partial" → status=partial   (일부 완료 자기보고)
+    // null/기타 → "full" 로 처리(기존 동작 호환).
+    val verdict: String? = null
 )
 
 data class CreateScheduleRequest(

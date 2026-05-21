@@ -53,7 +53,8 @@ export default function StudyPlanSubmitPage() {
     setPendingFiles((prev) => prev.filter((_, i) => i !== idx));
   };
 
-  const handleSubmit = async () => {
+  // verdict: "full" = 수행 완료, "partial" = 일부 완료
+  const handleSubmit = async (verdict) => {
     if (pendingFiles.length === 0) {
       setError("파일을 첨부해 주세요.");
       return;
@@ -77,8 +78,8 @@ export default function StudyPlanSubmitPage() {
         }
       }
 
-      // 2. 셀 제출
-      await apiPost(`/v1/study-plans/cells/${cellId}/submit`, { fileIds });
+      // 2. 셀 제출 (학생 자기보고 verdict 동봉)
+      await apiPost(`/v1/study-plans/cells/${cellId}/submit`, { fileIds, verdict });
       navigate("/study-plan");
     } catch (e) {
       setError(e.message);
@@ -93,7 +94,7 @@ export default function StudyPlanSubmitPage() {
     <div className="sp-submit-page">
       <h1 style={{ fontSize: "1.2rem", marginBottom: 16, display: "flex", alignItems: "center", gap: 8 }}>
         <span className="material-symbols-outlined">upload_file</span>
-        학습활동 제출
+        {existingFiles.length > 0 ? "학습활동 추가 업로드" : "학습활동 제출"}
       </h1>
 
       {/* 이전 제출 파일 */}
@@ -169,13 +170,29 @@ export default function StudyPlanSubmitPage() {
         </div>
       )}
 
-      <button
-        className="sp-submit-btn"
-        onClick={handleSubmit}
-        disabled={submitting || pendingFiles.length === 0}
-      >
-        {submitting ? "제출 중..." : `제출하기 (${pendingFiles.length}건)`}
-      </button>
+      {/* 학생 자기보고 verdict — 수행 완료 / 일부 완료 */}
+      <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
+        <button
+          className="sp-submit-btn"
+          onClick={() => handleSubmit("full")}
+          disabled={submitting || pendingFiles.length === 0}
+          style={{ flex: 1 }}
+        >
+          {submitting ? "업로드 중..." : `수행 완료로 제출 (${pendingFiles.length}건)`}
+        </button>
+        <button
+          className="sp-submit-btn"
+          onClick={() => handleSubmit("partial")}
+          disabled={submitting || pendingFiles.length === 0}
+          style={{ flex: 1, background: "#d4a017", color: "#fff" }}
+        >
+          {submitting ? "업로드 중..." : `일부 완료로 제출 (${pendingFiles.length}건)`}
+        </button>
+      </div>
+      <p style={{ fontSize: "0.78rem", color: "#8a7468", marginTop: 8, lineHeight: 1.4 }}>
+        ‧ 다 마쳤다면 "수행 완료" 로 제출하세요.<br />
+        ‧ 일부만 했다면 "일부 완료" 로 제출하세요. 나중에 추가 업로드로 다시 보낼 수 있어요.
+      </p>
     </div>
   );
 }

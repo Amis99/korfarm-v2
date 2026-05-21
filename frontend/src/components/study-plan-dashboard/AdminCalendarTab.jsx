@@ -313,7 +313,7 @@ export default function AdminCalendarTab({ classId }) {
                         <td>{st.userName || st.user_name || st.name || userId}</td>
                         <td>{st.className || st.class_name || "-"}</td>
                         <td>
-                          <CellStatusBadge status={st.status} isOverdue={st.isOverdue} />
+                          <CellStatusBadge status={st.status} isOverdue={st.isOverdue} assetType={st.assetType || actionModal.item?.assetType} />
                           {st.score != null && (
                             <span style={{ marginLeft: 6, fontSize: 12, color: "var(--admin-muted)" }}>
                               {st.score}점

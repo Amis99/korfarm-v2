@@ -369,6 +369,7 @@ class StudyPlanService(
     fun addAsset(planId: String, req: AddAssetRequest): StudyPlanAssetEntity {
         verifyAdminAccessToPlan(planId)
         validateAssetType(req.assetType)
+        if (req.assetType == "test") ensureMiscTestPaperOrThrow(req.refId)
         // sortOrder 자동 결정 — 기본은 기존 min-1 (신규 열이 가장 좌측으로 들어감)
         val prevSortOrder = assetRepo.findByPlanIdOrderBySortOrder(planId)
             .minOfOrNull { it.sortOrder - 1 } ?: 0
@@ -406,9 +407,32 @@ class StudyPlanService(
         req.label?.let { asset.label = it }
         req.assetType?.let { validateAssetType(it); asset.assetType = it }
         req.assetKind?.let { asset.assetKind = it }
-        req.refId?.let { asset.refId = it }
+        // N-15D — refId 갱신 시 test asset 이면 paper.series 검증
+        req.refId?.let {
+            if (asset.assetType == "test") ensureMiscTestPaperOrThrow(it)
+            asset.refId = it
+        }
         req.configJson?.let { asset.configJson = it }
         return assetRepo.save(asset)
+    }
+
+    /**
+     * N-15D (2026-05-21) — test asset/cell 배정은 기타(misc) 테스트만 허용.
+     * 챕터·진단 시험은 학습 계획표 외부의 다른 흐름에서 응시.
+     */
+    private fun ensureMiscTestPaperOrThrow(paperId: String?) {
+        if (paperId.isNullOrBlank()) return
+        val paper = testPaperRepo.findById(paperId).orElseThrow {
+            ApiException("NOT_FOUND", "시험을 찾을 수 없습니다", HttpStatus.NOT_FOUND)
+        }
+        if (paper.series == "chapter" || paper.series == "diagnostic") {
+            val label = if (paper.series == "chapter") "챕터 테스트" else "진단 테스트"
+            throw ApiException(
+                "BAD_REQUEST",
+                "${label} 는 학습 계획표에 배정할 수 없습니다. 기타 테스트만 배정 가능합니다.",
+                HttpStatus.BAD_REQUEST
+            )
+        }
     }
 
     @Transactional
@@ -473,7 +497,7 @@ class StudyPlanService(
             cells.forEach { cell ->
                 if (cell.status == "disabled") return@forEach  // V0147 — 진행률 분모 제외
                 val isKorfarm = cell.assetId in korfarmAssetIds
-                val (t, c) = countForCell(cell, isKorfarm, { it.status in setOf("completed", "passed") }, { it.status == "completed" })
+                val (t, c) = countForCell(cell, isKorfarm, { it.status in setOf("completed", "passed") }, { it.status in setOf("completed", "reviewed") })
                 total += t; completed += c
 
                 if (isKorfarm) {
@@ -512,7 +536,7 @@ class StudyPlanService(
     fun getSubmissions(planId: String): List<SubmissionResponse> {
         verifyAdminAccessToPlan(planId)
         val allCells = cellRepo.findByPlanId(planId)
-            .filter { it.submissionCount > 0 || it.status in listOf("submitted", "partial", "completed", "scored", "passed") }
+            .filter { it.submissionCount > 0 || it.status in listOf("submitted", "partial", "completed", "reviewed", "scored", "passed") }
         if (allCells.isEmpty()) return emptyList()
 
         val userIds = allCells.map { it.userId }.toSet()
@@ -728,6 +752,7 @@ class StudyPlanService(
                 if (req.cellRefId.isNullOrBlank()) {
                     throw ApiException("BAD_REQUEST", "${asset.assetType} 자산은 ref id 가 필요합니다", HttpStatus.BAD_REQUEST)
                 }
+                if (asset.assetType == "test") ensureMiscTestPaperOrThrow(req.cellRefId)
             }
             "writing" -> {
                 // ref 없거나 자유주제일 수 있음 — 단 어느 쪽이든 라벨이 있어야
@@ -1348,8 +1373,13 @@ class StudyPlanService(
         if (asset?.assetType != "activity") {
             throw ApiException("BAD_REQUEST", "학습활동 에셋만 제출이 가능합니다", HttpStatus.BAD_REQUEST)
         }
-        if (cell.status !in listOf("pending", "partial")) {
-            throw ApiException("BAD_REQUEST", "제출 가능한 상태가 아닙니다 (미수행/일부 완료만 가능)", HttpStatus.BAD_REQUEST)
+        // 차단: 배부 전·만료·비활성만. 관리자 확인 완료(completed/reviewed) 셀에도 추가 업로드 허용.
+        if (cell.status in listOf("unassigned", "expired", "disabled")) {
+            throw ApiException(
+                "BAD_REQUEST",
+                "현재 상태에서는 파일을 업로드할 수 없습니다 (${cell.status})",
+                HttpStatus.BAD_REQUEST
+            )
         }
         // 파일 첨부
         req.fileIds.forEach { fileId ->
@@ -1360,11 +1390,23 @@ class StudyPlanService(
                 uploadedBy = userId
             ))
         }
-        cell.status = "submitted"
+        val prevStatus = cell.status
+        // 2026-05-21 — 학생 verdict 기반 상태 전이.
+        //   verdict="partial" → partial (학생 "일부 완료" 자기보고)
+        //   그 외(full/null)  → submitted (학생 "수행 완료" 자기보고)
+        // 관리자 확인(completed/reviewed) 후 학생이 추가 업로드하면 자기보고 단계로 reset
+        // 되어 관리자 재확인이 필요해진다.
+        val newStatus = if (req.verdict == "partial") "partial" else "submitted"
+        cell.status = newStatus
         cell.submissionCount += 1
         cell.adminNote = null
         cellRepo.save(cell)
-        createEvent(cell, "submitted")
+        val eventType = when {
+            prevStatus == newStatus -> "file_added"
+            prevStatus in listOf("completed", "reviewed") -> "resubmitted"
+            else -> "submitted"
+        }
+        createEvent(cell, eventType)
         return cell
     }
 
@@ -1406,10 +1448,13 @@ class StudyPlanService(
                 "in_progress" to setOf("completed")
             )
             "activity" -> mapOf(
+                // 2026-05-21 — 2단계 verdict (학생 수행/일부 + 관리자 확인/일부확인) 반영
                 "unassigned" to setOf("pending"),
-                "pending" to setOf("submitted"),
-                "submitted" to setOf("completed", "partial"),
-                "partial" to setOf("submitted")
+                "pending"    to setOf("submitted", "partial"),
+                "submitted"  to setOf("partial", "completed", "reviewed"),
+                "partial"    to setOf("submitted", "completed", "reviewed"),
+                "completed"  to setOf("submitted", "partial", "reviewed"),
+                "reviewed"   to setOf("submitted", "partial", "completed")
             )
             "test" -> mapOf(
                 "pending" to setOf("scored"),
@@ -2436,7 +2481,7 @@ class StudyPlanService(
         val allCells = plans.flatMap { cellRepo.findByPlanId(it.id) }
             .filter {
                 it.submissionCount > 0 ||
-                it.status in listOf("submitted", "partial", "completed", "scored", "passed")
+                it.status in listOf("submitted", "partial", "completed", "reviewed", "scored", "passed")
             }
             .filter { c -> userIdFilter == null || c.userId == userIdFilter }
             .filter { c -> classUserIds == null || c.userId in classUserIds }
@@ -2639,7 +2684,7 @@ class StudyPlanService(
             val cells = cellRepo.findByAssetId(asset.id)
                 .filter { classUserIds == null || it.userId in classUserIds }
             val total = cells.size
-            val completed = cells.count { it.status in listOf("completed", "scored", "passed") }
+            val completed = cells.count { it.status in listOf("completed", "reviewed", "scored", "passed") }
             val pending = cells.count { it.status in listOf("pending", "retry") }
             val avg = cells.mapNotNull { it.score }.let { if (it.isEmpty()) null else it.average() }
             val paper = asset.refId?.let { paperMap[it] }

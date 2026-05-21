@@ -18,8 +18,9 @@ const LEVEL_LABEL = {
 /**
  * 테스트 검색 모달.
  * - GET /v1/admin/test-papers 전체 조회
- * - kind === 'diagnostic' 자동 제외
- * - 제목 검색 + 종류·레벨 필터
+ * - 학습 계획표 배정은 기타 테스트만 허용 (N-15D, 2026-05-21)
+ *   chapter·diagnostic·response_only 자동 제외
+ * - 제목 검색 + 레벨 필터
  * - 선택 시 onSelect({ testId, title, ...})
  */
 export default function TestSearchModal({ onSelect, onClose }) {
@@ -27,7 +28,6 @@ export default function TestSearchModal({ onSelect, onClose }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
-  const [filterKind, setFilterKind] = useState(""); // "" / chapter / misc
   const [filterLevel, setFilterLevel] = useState("");
 
   useEffect(() => {
@@ -35,8 +35,11 @@ export default function TestSearchModal({ onSelect, onClose }) {
     apiGet("/v1/admin/test-papers")
       .then((data) => {
         const list = Array.isArray(data) ? data : [];
-        // 진단 제외
-        setTests(list.filter((t) => (t.kind || t.series) !== "diagnostic"));
+        // 챕터·진단·응시전용 제외 (학습 계획표 배정은 기타 테스트만)
+        setTests(list.filter((t) => {
+          const kind = t.kind || t.series;
+          return kind !== "diagnostic" && kind !== "chapter" && kind !== "response_only";
+        }));
       })
       .catch((e) => setError(e?.message || "테스트 조회 실패"))
       .finally(() => setLoading(false));
@@ -44,14 +47,13 @@ export default function TestSearchModal({ onSelect, onClose }) {
 
   const filtered = useMemo(() => {
     let list = tests;
-    if (filterKind) list = list.filter((t) => (t.kind || "misc") === filterKind);
     if (filterLevel) list = list.filter((t) => (t.levelId || t.level_id) === filterLevel);
     if (search.trim()) {
       const q = search.trim().toLowerCase();
       list = list.filter((t) => (t.title || "").toLowerCase().includes(q));
     }
     return list;
-  }, [tests, filterKind, filterLevel, search]);
+  }, [tests, filterLevel, search]);
 
   const handlePick = (test) => {
     onSelect?.({
@@ -68,7 +70,7 @@ export default function TestSearchModal({ onSelect, onClose }) {
     <div className="sp-reminder-overlay" onClick={onClose}>
       <div className="sp-content-search-modal" onClick={(e) => e.stopPropagation()}>
         <div className="sp-csm-header">
-          <h3>테스트 선택 (진단 제외)</h3>
+          <h3>테스트 선택 (기타 테스트만)</h3>
           <button className="sp-csm-close" onClick={onClose}>
             <span className="material-symbols-outlined">close</span>
           </button>
@@ -83,11 +85,6 @@ export default function TestSearchModal({ onSelect, onClose }) {
             autoFocus
             style={{ flex: 1 }}
           />
-          <select value={filterKind} onChange={(e) => setFilterKind(e.target.value)}>
-            <option value="">전체 종류</option>
-            <option value="chapter">챕터 테스트</option>
-            <option value="misc">기타 (본사·기관)</option>
-          </select>
           <select value={filterLevel} onChange={(e) => setFilterLevel(e.target.value)}>
             <option value="">전체 레벨</option>
             {Object.entries(LEVEL_LABEL).map(([k, v]) => (

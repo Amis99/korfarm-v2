@@ -1775,6 +1775,161 @@ studyPlanService.ensureDefaultPlanForStudent(toOrgId, userId)
     cleanup 후 amis = <strong>active plan 1개</strong> (자기 default user-target) — 정책 정상 복원.
   </p>
 
+  <h3>8.15 신규 이슈 — 테스트 탭 0건 + 학생 테스트 셀 클릭 시 로그인 redirect <span class="badge high">2026-05-21 발견</span></h3>
+
+  <div class="root-cause">
+    <h4>증상 1: 학습 계획표 "테스트" 탭이 항상 "배정된 테스트가 없습니다"</h4>
+    <p style="margin: 0 0 6px; font-size: 0.92rem;">
+      org_test_academy ORG_ADMIN 이 amis 학생에게 "러셀1 18장 테스트" 를 배정. 학생별 탭의 매트릭스에는
+      셀이 "미수행" 으로 정상 노출. 그런데 같은 화면의 <strong>"테스트" 탭에서는 0건</strong>으로 표시.
+    </p>
+  </div>
+
+  <h4>1차 root cause (★★★) — examDate null 이면 무조건 누락</h4>
+  <p>
+    <code>StudyPlanService.adminListTestAssets</code> (2680L) 의 from/to 기간 필터:
+  </p>
+  <pre>val filtered = items.filter { item -&gt;
+    val d = item.dueAt  // = paper.examDate.toString()
+    (from == null || (d != null &amp;&amp; d &gt;= from)) &amp;&amp; (to == null || (d != null &amp;&amp; d &lt;= to))
+}</pre>
+  <p>
+    <code>paper.examDate</code> 가 <strong>NULL</strong> 인 경우 d == null → from/to 가 not null 이면 항상 false →
+    <strong>해당 테스트가 결과에서 제외</strong>. 챕터 시험은 마감일이 없는 경우가 일반적이므로 챕터 테스트 배정은 사실상 전부 누락.
+  </p>
+  <p>
+    더불어 셀에는 어드민이 설정한 <code>cell.due_at</code> 이 따로 존재(예: 2026-05-28)하지만
+    <code>adminListTestAssets</code> 는 이 값을 활용하지 않고 paper.examDate 만 본다.
+  </p>
+
+  <h4>DB 검증 (2026-05-21 KST)</h4>
+  <pre>tp_173eb06bf9654e628e96d06e56129916  "러셀1 18장 테스트"
+  org_id    = org_hq
+  series    = chapter
+  status    = open
+  exam_date = NULL           ← 이게 원인. cell.due_at(2026-05-28)는 따로 존재.
+  source    = manual</pre>
+
+  <h4>패치 방향</h4>
+  <pre>// StudyPlanService.adminListTestAssets — dueAt 우선순위 변경
+val items = testAssets.map { asset -&gt;
+    val cells = cellRepo.findByAssetId(asset.id)
+        .filter { classUserIds == null || it.userId in classUserIds }
+    val paper = asset.refId?.let { paperMap[it] }
+    // 1순위 paper.examDate, 2순위 cells 의 dueAt 중 가장 늦은 값
+    val cellDueAt = cells.mapNotNull { it.dueAt }.maxOrNull()?.toLocalDate()?.toString()
+    val effectiveDueAt = paper?.examDate?.toString() ?: cellDueAt
+    AdminTestAssetItem(... dueAt = effectiveDueAt ...)
+}
+// 또는 필터링도 effectiveDueAt 기준으로 변경. 마감일이 정말 없는 paper 는 항상 포함.</pre>
+
+  <hr style="margin: 20px 0; border: 0; border-top: 1px solid var(--stroke);">
+
+  <div class="root-cause">
+    <h4>증상 2: 학생이 학습 계획표에서 테스트 셀(미수행) 클릭 → 로그인 페이지로 튕김</h4>
+    <p style="margin: 0 0 6px; font-size: 0.92rem;">
+      amis (org_test_academy 소속) 가 매트릭스에서 "테스트 1 / 러셀1 18장 테스트" 셀 클릭 →
+      <code>/tests/{refId}/omr</code> 로 navigate → 즉시 로그인 페이지로 redirect.
+    </p>
+  </div>
+
+  <h4>1차 root cause (★★★) — "본사 시험" 표현 불일치</h4>
+  <p>
+    <code>TestService.verifyStudentTestAccess</code> (1407L):
+  </p>
+  <pre>fun verifyStudentTestAccess(testId: String, userId: String) {
+    val paper = findPaper(testId)
+    if (paper.orgId == null) return                      // ← 본사 시험을 null 로만 판정
+    if (paper.series == "diagnostic") return
+    val userOrgIds = orgMembershipRepository.findByUserIdAndStatus(userId, "active").map { it.orgId }
+    if (!userOrgIds.contains(paper.orgId)) {
+        throw ApiException("FORBIDDEN", "해당 시험에 접근 권한이 없습니다.", HttpStatus.FORBIDDEN)
+    }
+}</pre>
+  <p>
+    <code>test_papers</code> 테이블은 본사 시험을 <code>org_id = 'org_hq'</code> 로 저장한다.
+    가드는 <code>orgId == null</code> 만 본사 시험으로 인정 → <strong>org_hq 시험이 다른 기관 학생에게는 FORBIDDEN</strong>.
+    amis 의 org 멤버십은 <code>org_test_academy</code> 뿐이고 <code>org_hq</code> 가 없으므로 contains 통과 실패.
+  </p>
+  <p>
+    프론트는 <code>safeJson</code> (api.js:108) 이 401·403 모두 자동 로그아웃 + 로그인 redirect 로 처리.
+    그래서 학생 입장에선 "시험 셀 누르니 갑자기 로그아웃" 으로 보임.
+  </p>
+
+  <h4>회귀 점검 — 다른 곳도 같은 불일치 있는지</h4>
+  <ul>
+    <li><strong>TestService.listTests</strong> 등 학생 시험 리스트 — 본사 시험 판정 기준이 어떻게 되는지 grep 필요.</li>
+    <li><strong>OrgScopeResolver / ORG_HQ 상수</strong> — "본사" 의 표시가 <code>orgId IS NULL</code> 인지 <code>orgId='org_hq'</code> 인지 컨벤션 합의 필요.</li>
+    <li>현재 운영 데이터는 본사 시험 만들 때 <code>orgId='org_hq'</code> 로 박힘 — 가드를 그쪽으로 맞추는 게 자연스러움.</li>
+  </ul>
+
+  <h4>패치 방향</h4>
+  <pre>// TestService.verifyStudentTestAccess — 본사 시험 판정 확장
+fun verifyStudentTestAccess(testId: String, userId: String) {
+    val paper = findPaper(testId)
+    if (paper.orgId == null || paper.orgId == "org_hq") return  // 두 표현 모두 본사 시험
+    if (paper.series == "diagnostic") return
+    val userOrgIds = orgMembershipRepository.findByUserIdAndStatus(userId, "active").map { it.orgId }
+    if (!userOrgIds.contains(paper.orgId)) {
+        throw ApiException("FORBIDDEN", "해당 시험에 접근 권한이 없습니다.", HttpStatus.FORBIDDEN)
+    }
+}</pre>
+
+  <h4>사용자 결정 (2026-05-21)</h4>
+  <div class="callout" style="border-left-color: var(--accent);">
+    <strong>학습 계획표 테스트 배정 정책:</strong>
+    <ul style="margin: 6px 0 0;">
+      <li>챕터 테스트(<code>series=chapter</code>) <strong>배정 금지</strong> — 챕터별 학습 흐름 안에서 응시</li>
+      <li>진단 테스트(<code>series=diagnostic</code>) <strong>배정 금지</strong> — 별도 진단 엔진</li>
+      <li>응시전용(<code>source=ocr_generated</code>) <strong>배정 금지</strong> — 종이 시험만 + 온라인 OMR</li>
+      <li>기타 테스트(<code>series=misc</code>) <strong>만 배정 허용</strong></li>
+    </ul>
+  </div>
+
+  <h4>적용 결과 (2026-05-21 배포)</h4>
+  <table class="compact">
+    <thead><tr><th>#</th><th>항목</th><th>위치</th><th>상태</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>N-15D</td>
+        <td><strong>챕터·진단 테스트 학습 계획표 배정 차단</strong> — 가드 헬퍼 <code>ensureMiscTestPaperOrThrow</code> 신설.
+          <code>addAsset</code> / <code>updateAsset</code>(refId 갱신 시) / <code>assignCellContent</code> 3곳에서 호출.
+          chapter/diagnostic paper.series 면 BAD_REQUEST throw.</td>
+        <td><code>StudyPlanService.kt</code></td>
+        <td><span class="badge ok">완료</span></td>
+      </tr>
+      <tr>
+        <td>N-15D-프론트</td>
+        <td><code>TestSearchModal</code> 목록에서 chapter / diagnostic / response_only 자동 제외.
+          헤더 라벨 "테스트 선택 (기타 테스트만)" + 종류 필터 드롭다운 제거 (기타만 노출이라 의미 없음).</td>
+        <td><code>TestSearchModal.jsx</code></td>
+        <td><span class="badge ok">완료</span></td>
+      </tr>
+      <tr>
+        <td>N-15E</td>
+        <td><strong>amis 잘못 배정된 챕터 테스트 셀 리셋</strong> — <code>cell_ref_id / due_at / assigned_label / score / submission_count / assigned_at / reviewed_*</code> NULL,
+          <code>status='unassigned'</code>. cell_files·cell_assignments 의존 정리.</td>
+        <td>RDS 직접 UPDATE</td>
+        <td><span class="badge ok">완료</span></td>
+      </tr>
+      <tr>
+        <td>N-15A</td>
+        <td><code>verifyStudentTestAccess</code> 가드 — <code>orgId == null || orgId == "org_hq"</code> 둘 다 본사 시험 인정.
+          <strong>현재 보류</strong> — N-15D 로 챕터 시험이 학습 계획표에 들어올 일이 없어졌으나 다른 경로(직접 URL 입력 등) 의 회귀를 막으려면 후속 적용 권장.</td>
+        <td><code>TestService.kt:1407</code></td>
+        <td><span class="badge high">대기</span></td>
+      </tr>
+      <tr>
+        <td>N-15B</td>
+        <td><code>adminListTestAssets</code> dueAt 우선순위 — paper.examDate ?: cells.maxOf{dueAt}.
+          기타 시험도 examDate null 가능하므로 잠재 버그.
+          <strong>현재 보류</strong> — 후속 적용 권장.</td>
+        <td><code>StudyPlanService.kt:2680</code></td>
+        <td><span class="badge high">대기</span></td>
+      </tr>
+    </tbody>
+  </table>
+
   <h3>8.13 정책 확정 — 학생당 plan 1개 (다중 plan 폐기) <span class="badge ok">2026-05-21 결정</span></h3>
 
   <div class="callout" style="border-left-color: var(--accent);">
