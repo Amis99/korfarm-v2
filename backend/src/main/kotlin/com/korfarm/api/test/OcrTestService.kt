@@ -79,35 +79,67 @@ class OcrTestService(
 ```""".trimIndent()
     }
 
-    /** OCR 시작 — 파일 검증·페이지 카운트·자몽 차감·Claude Vision 호출·draft 저장. */
+    /**
+     * 시험지 등록 시작.
+     *  - 파일 모드 (sourceFileId): Claude Vision OCR + 페이지당 1자몽 차감
+     *  - 텍스트 모드 (sourceText): Claude API text-only 구조화 + 자몽 차감 0
+     *    (O-7 / 2026-05-21 — 사용자 결정: OCR 비용은 OCR 단계만, 텍스트 입력은 0자몽)
+     *  - 둘 다 결과는 ocr_test_drafts 의 payload_json 으로 저장
+     */
     @Transactional
-    fun generate(adminId: String, sourceFileId: String, answerFileId: String?): OcrTestDraftEntity {
+    fun generate(
+        adminId: String,
+        sourceFileId: String?,
+        answerFileId: String?,
+        sourceText: String?,
+        answerText: String?,
+    ): OcrTestDraftEntity {
         val orgMembership = orgMembershipRepository.findByUserIdAndStatus(adminId, "active").firstOrNull()
             ?: throw ApiException("FORBIDDEN", "기관 정보가 없습니다.", HttpStatus.FORBIDDEN)
         val orgId = orgMembership.orgId
 
-        val sourceBytes = fileService.readBytes(sourceFileId)
-            ?: throw ApiException("NOT_FOUND", "시험지 파일을 찾을 수 없습니다.", HttpStatus.NOT_FOUND)
-        val sourceMime = fileRepository.findById(sourceFileId).orElse(null)?.mime ?: "application/octet-stream"
-        val pageCount = countPages(sourceMime, sourceBytes)
-        if (pageCount <= 0) throw ApiException("BAD_REQUEST", "페이지를 인식할 수 없습니다.", HttpStatus.BAD_REQUEST)
-
-        // 자몽 차감 — 페이지당 1자몽
-        repeat(pageCount) {
-            grapefruitService.spendOrg(orgId, OCR_KIND, null, "OCR 시험지 생성")
+        val useTextMode = !sourceText.isNullOrBlank()
+        val useFileMode = !sourceFileId.isNullOrBlank()
+        if (!useTextMode && !useFileMode) {
+            throw ApiException("BAD_REQUEST", "시험지 파일 또는 텍스트를 입력해 주세요.", HttpStatus.BAD_REQUEST)
         }
 
-        // Claude Vision 호출
+        // 파일 모드 페이지 카운트 + OCR 자몽 차감
+        var pageCount = 0
+        var grapefruitDeducted = 0
+        var sourceBytes: ByteArray? = null
+        var sourceMime: String = "text/plain"
+        if (useFileMode) {
+            sourceBytes = fileService.readBytes(sourceFileId!!)
+                ?: throw ApiException("NOT_FOUND", "시험지 파일을 찾을 수 없습니다.", HttpStatus.NOT_FOUND)
+            sourceMime = fileRepository.findById(sourceFileId).orElse(null)?.mime ?: "application/octet-stream"
+            pageCount = countPages(sourceMime, sourceBytes)
+            if (pageCount <= 0) throw ApiException("BAD_REQUEST", "페이지를 인식할 수 없습니다.", HttpStatus.BAD_REQUEST)
+            repeat(pageCount) {
+                grapefruitService.spendOrg(orgId, OCR_KIND, null, "OCR 시험지 생성")
+            }
+            grapefruitDeducted = pageCount
+        }
+        // 텍스트 모드는 OCR 자몽 차감 0 — 사용자 결정 (2026-05-21)
+
+        // Claude 호출 — 모드별 content 구성
         val content = mutableListOf<Map<String, Any?>>()
         content.add(aiCallHelper.textBlock(USER_PROMPT))
-        content.add(aiCallHelper.textBlock("[시험지 파일]"))
-        content.add(buildFileBlock(sourceMime, sourceBytes))
-        if (answerFileId != null) {
-            val ansBytes = fileService.readBytes(answerFileId)
-            val ansMime = fileRepository.findById(answerFileId).orElse(null)?.mime ?: "application/octet-stream"
-            if (ansBytes != null) {
-                content.add(aiCallHelper.textBlock("[정답·해설 파일 — answer_id 와 explanation 채우는 데 사용]"))
-                content.add(buildFileBlock(ansMime, ansBytes))
+        if (useTextMode) {
+            content.add(aiCallHelper.textBlock("[시험지 본문 — 텍스트 입력]\n\n${sourceText!!.trim()}"))
+            if (!answerText.isNullOrBlank()) {
+                content.add(aiCallHelper.textBlock("[정답·해설 — 텍스트 입력]\n\n${answerText.trim()}"))
+            }
+        } else {
+            content.add(aiCallHelper.textBlock("[시험지 파일]"))
+            content.add(buildFileBlock(sourceMime, sourceBytes!!))
+            if (answerFileId != null) {
+                val ansBytes = fileService.readBytes(answerFileId)
+                val ansMime = fileRepository.findById(answerFileId).orElse(null)?.mime ?: "application/octet-stream"
+                if (ansBytes != null) {
+                    content.add(aiCallHelper.textBlock("[정답·해설 파일 — answer_id 와 explanation 채우는 데 사용]"))
+                    content.add(buildFileBlock(ansMime, ansBytes))
+                }
             }
         }
 
@@ -119,14 +151,14 @@ class OcrTestService(
                 maxTokens = MAX_TOKENS,
             )
         } catch (e: Exception) {
-            logger.warn("OCR Claude Vision 호출 실패: adminId={} error={}", adminId, e.message)
+            logger.warn("OCR Claude 호출 실패: adminId={} error={} mode={}", adminId, e.message, if (useTextMode) "text" else "file")
             return ocrDraftRepo.save(
                 OcrTestDraftEntity(
                     id = IdGenerator.newId("otd"),
                     orgId = orgId, createdBy = adminId, status = "failed",
                     sourceFileId = sourceFileId, answerFileId = answerFileId,
-                    pageCount = pageCount, grapefruitDeducted = pageCount,
-                    errorMessage = "Claude Vision 호출 실패: ${e.message}",
+                    pageCount = pageCount, grapefruitDeducted = grapefruitDeducted,
+                    errorMessage = "Claude 호출 실패: ${e.message}",
                 )
             )
         }
@@ -138,7 +170,7 @@ class OcrTestService(
                 orgId = orgId, createdBy = adminId, status = "pending",
                 sourceFileId = sourceFileId, answerFileId = answerFileId,
                 pageCount = pageCount, payloadJson = payloadJson,
-                grapefruitDeducted = pageCount,
+                grapefruitDeducted = grapefruitDeducted,
             )
         )
     }

@@ -222,14 +222,22 @@ class AdminTestController(
     // V0149 (2026-05-21) — 테스트 정보 생성 (OCR) endpoint 3종
     // ─────────────────────────────────────────────────────────────
 
-    /** OCR 시작 — 시험지(+정답) fileId 받아 Claude Vision 호출, draft 저장. 페이지당 1자몽 차감. */
+    /**
+     * 시험지 등록 시작 — 파일(OCR) 또는 텍스트 두 모드 지원.
+     *  - 파일 모드: source_file_id + (선택) answer_file_id → Claude Vision OCR. 페이지당 1자몽.
+     *  - 텍스트 모드: source_text + (선택) answer_text → Claude API text-only. 0자몽.
+     */
     @PostMapping("/ocr-generate")
     fun ocrGenerate(@RequestBody request: Map<String, String?>): ApiResponse<Map<String, Any?>> {
         requireAdmin()
         val sourceFileId = request["source_file_id"]?.takeIf { it.isNotBlank() }
-            ?: throw ApiException("BAD_REQUEST", "source_file_id 가 필요합니다.", HttpStatus.BAD_REQUEST)
         val answerFileId = request["answer_file_id"]?.takeIf { it.isNotBlank() }
-        val draft = ocrTestService.generate(currentUser(), sourceFileId, answerFileId)
+        val sourceText = request["source_text"]?.takeIf { it.isNotBlank() }
+        val answerText = request["answer_text"]?.takeIf { it.isNotBlank() }
+        if (sourceFileId == null && sourceText == null) {
+            throw ApiException("BAD_REQUEST", "source_file_id 또는 source_text 가 필요합니다.", HttpStatus.BAD_REQUEST)
+        }
+        val draft = ocrTestService.generate(currentUser(), sourceFileId, answerFileId, sourceText, answerText)
         return ApiResponse(
             success = true,
             data = mapOf(
