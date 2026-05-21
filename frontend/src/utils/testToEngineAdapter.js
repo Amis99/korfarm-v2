@@ -23,38 +23,38 @@ export function adaptDiagnosticQuestions(questions) {
 }
 
 /**
- * 챕터 테스트(test_storage) 문제 → ExamModule 형식 (객관식만)
+ * 챕터 테스트(test_storage) 문제 → ExamModule 형식.
+ * N-21 (2026-05-21) — 객관식 필터 제거. 서술형도 그대로 노출 (type 보존).
  */
 export function adaptTestQuestions(questions) {
-  return questions
-    .filter((q) => q.type === "객관식")
-    .map((q) => {
-      // content가 없고 passage만 있으면 passage를 stem으로 사용 (기존 OnlineTestRenderer 로직)
-      let stem = q.content || "";
-      let passage = null;
-      if (q.passage && q.content) {
-        passage = q.passage;
-      } else if (q.passage && !q.content) {
-        // passage에서 <보기> 구분자 분리
-        const marker = q.passage.indexOf("<보기>");
-        if (marker > 0) {
-          stem = q.passage.slice(0, marker).trim();
-        } else {
-          stem = q.passage;
-        }
+  return questions.map((q) => {
+    // content가 없고 passage만 있으면 passage를 stem으로 사용 (기존 OnlineTestRenderer 로직)
+    let stem = q.content || "";
+    let passage = null;
+    if (q.passage && q.content) {
+      passage = q.passage;
+    } else if (q.passage && !q.content) {
+      // passage에서 <보기> 구분자 분리
+      const marker = q.passage.indexOf("<보기>");
+      if (marker > 0) {
+        stem = q.passage.slice(0, marker).trim();
+      } else {
+        stem = q.passage;
       }
-      return {
-        id: String(q.number),
-        stem,
-        passage,
-        boxContent: null,
-        choices: (q.choices || []).map((text, i) => ({
-          id: String(i + 1),
-          text,
-        })),
-        questionKind: q.domain || "CHAPTER_TEST",
-      };
-    });
+    }
+    return {
+      id: String(q.number),
+      stem,
+      passage,
+      boxContent: null,
+      type: q.type || "객관식",
+      choices: (q.choices || []).map((text, i) => ({
+        id: String(i + 1),
+        text,
+      })),
+      questionKind: q.domain || "CHAPTER_TEST",
+    };
+  });
 }
 
 /**

@@ -272,11 +272,14 @@ function ProTestPage() {
   };
 
   // 엔진 모드 완료 (온라인 풀기)
+  // N-21 (2026-05-21) — 서술형 답안(essayText) 도 함께 보냄
   const handleEngineFinish = async ({ records }) => {
     setError("");
     const engineAnswers = {};
     records.forEach((r) => {
-      if (r.id && r.selectedId) engineAnswers[r.id] = r.selectedId;
+      if (!r.id) return;
+      if (r.selectedId) engineAnswers[r.id] = r.selectedId;
+      else if (r.essayText) engineAnswers[r.id] = r.essayText;
     });
     setSubmitting(true);
     try {

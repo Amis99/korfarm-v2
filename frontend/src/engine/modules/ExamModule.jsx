@@ -90,6 +90,24 @@ function ExamModule({ content }) {
     }
   };
 
+  // 서술형 입력 (N-21, 2026-05-21)
+  const handleEssayChange = (questionId, text, questionIdx) => {
+    if (isSubmitting) return;
+    setAnswers((prev) => {
+      const next = { ...prev };
+      if (text === "") delete next[questionId];
+      else next[questionId] = text;
+      return next;
+    });
+    // 첫 입력이 들어오면 다음 문제 자동 노출
+    if (text && questionIdx === currentIndex && currentIndex < questions.length - 1) {
+      if (advanceRef.current) clearTimeout(advanceRef.current);
+      advanceRef.current = setTimeout(() => {
+        setCurrentIndex((prev) => Math.max(prev, questionIdx + 1));
+      }, 800);
+    }
+  };
+
   // 제출
   const handleSubmit = () => {
     if (isSubmitting) return;
@@ -106,10 +124,14 @@ function ExamModule({ content }) {
     // collected 배열을 직접 모아 finish 에 인자로 전달 (records 누락 버그 방지)
     const collected = [];
     questions.forEach((q) => {
-      if (finalAnswers[q.id]) {
+      const v = finalAnswers[q.id];
+      if (v != null && v !== "") {
+        const isEssay = q.type === "서술형";
         const entry = {
           id: q.id,
-          selectedId: finalAnswers[q.id],
+          // 객관식: selectedId(choiceId). 서술형: essayText(answer text).
+          selectedId: isEssay ? null : v,
+          essayText: isEssay ? v : null,
           questionKind: q.questionKind,
           timeSpentMs: timeRef.current[q.id]?.totalMs || 0,
         };
@@ -156,34 +178,47 @@ function ExamModule({ content }) {
               </div>
             )}
 
-            {/* 선택지 */}
-            <div className="exam-choices">
-              {(q.choices || []).map((c, ci) => {
-                const isSelected = selectedId === c.id;
-                return (
-                  <div
-                    key={c.id}
-                    className={`exam-choice ${isSelected ? "selected" : ""}`}
-                    onClick={() => handleChoice(q.id, c.id, idx)}
-                  >
-                    <span className="exam-choice-num">
-                      {CIRCLE_NUMS[ci] || `(${ci + 1})`}
-                      {isSelected && (
-                        <img
-                          src="/정답 동그라미.png"
-                          alt=""
-                          className="exam-choice-mark"
-                          draggable={false}
-                        />
-                      )}
-                    </span>
-                    <span className="exam-choice-text">
-                      <RichText>{c.text}</RichText>
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+            {/* 선택지 (객관식) 또는 서술형 입력 */}
+            {q.type === "서술형" ? (
+              <div className="exam-essay">
+                <textarea
+                  className="exam-essay-input"
+                  rows={4}
+                  placeholder="답안을 입력하세요"
+                  value={selectedId || ""}
+                  onChange={(e) => handleEssayChange(q.id, e.target.value, idx)}
+                  disabled={isSubmitting}
+                />
+              </div>
+            ) : (
+              <div className="exam-choices">
+                {(q.choices || []).map((c, ci) => {
+                  const isSelected = selectedId === c.id;
+                  return (
+                    <div
+                      key={c.id}
+                      className={`exam-choice ${isSelected ? "selected" : ""}`}
+                      onClick={() => handleChoice(q.id, c.id, idx)}
+                    >
+                      <span className="exam-choice-num">
+                        {CIRCLE_NUMS[ci] || `(${ci + 1})`}
+                        {isSelected && (
+                          <img
+                            src="/정답 동그라미.png"
+                            alt=""
+                            className="exam-choice-mark"
+                            draggable={false}
+                          />
+                        )}
+                      </span>
+                      <span className="exam-choice-text">
+                        <RichText>{c.text}</RichText>
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         );
       })}
