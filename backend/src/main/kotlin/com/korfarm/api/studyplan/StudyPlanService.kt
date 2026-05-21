@@ -65,29 +65,13 @@ class StudyPlanService(
 
     @Transactional
     fun createPlan(orgId: String, createdBy: String, req: CreateStudyPlanRequest): StudyPlanEntity {
-        // N-5 (2026-05-21) — 학생당 plan 1개 정책 방어.
-        // target_type=user 로 박힌 학생 중 이미 active non-template plan 보유 시 거부.
-        // 기관 default 템플릿 신설 (target_type=class) 또는 학생간 복제(propagate)·자동 생성 사용 권장.
-        val userTargets = req.targets.filter { it.targetType == "user" }
-        if (userTargets.isNotEmpty()) {
-            val alreadyOwned = userTargets.mapNotNull { t ->
-                val existing = targetRepo.findByTargetTypeAndTargetId("user", t.targetId)
-                    .map { it.planId }
-                if (existing.isEmpty()) return@mapNotNull null
-                val active = planRepo.findAllById(existing)
-                    .filter { !it.isTemplate && it.status == "active" }
-                if (active.isEmpty()) null else t.targetId
-            }
-            if (alreadyOwned.isNotEmpty()) {
-                throw ApiException(
-                    "ALREADY_HAS_PLAN",
-                    "학생당 학습 계획표는 1개만 운영합니다. " +
-                        "이미 plan 보유 학생: ${alreadyOwned.joinToString()}. " +
-                        "기존 plan 에 행/열을 추가하거나 학생간 복제 기능을 사용하세요.",
-                    HttpStatus.CONFLICT
-                )
-            }
-        }
+        // N-13A (2026-05-21) — 학생당 plan 1개 정책: 신규 plan 생성 시점에 대상 학생들의
+        // 기존 active plan(user target + class target) 모두 자동 폐기. 셀/행/열 복제(propagateDelta)는
+        // 별도 경로에서 기존 plan 에 추가만 한다.
+        val targetUserIdsForDiscard = resolveTargetUserIds(req.targets.map { StudyPlanTargetEntity(
+            id = "", planId = "", targetType = it.targetType, targetId = it.targetId
+        ) })
+        targetUserIdsForDiscard.forEach { uid -> discardPlansForUser(uid) }
 
         val plan = StudyPlanEntity(
             id = IdGenerator.newId("sp"),
@@ -272,9 +256,19 @@ class StudyPlanService(
     @Transactional
     fun deletePlan(planId: String) {
         verifyAdminAccessToPlan(planId)
+        cascadeDeletePlan(planId)
+    }
+
+    /**
+     * N-13A/N-13B (2026-05-21) — plan 및 의존 데이터를 한 번에 정리.
+     * 외부 진입점이 아니라 createPlan·org 이동 hook 등 내부에서 호출.
+     * 권한 체크 없음(호출 측에서 검증).
+     */
+    private fun cascadeDeletePlan(planId: String) {
         val cellIds = cellRepo.findByPlanId(planId).map { it.id }
         if (cellIds.isNotEmpty()) {
             cellFileRepo.deleteByCellIdIn(cellIds)
+            cellAssignmentRepo.deleteByCellIdIn(cellIds)
         }
         cellRepo.deleteByPlanId(planId)
         scopeRepo.deleteByPlanId(planId)
@@ -283,6 +277,33 @@ class StudyPlanService(
         scheduleRepo.deleteByPlanId(planId)
         eventRepo.deleteByPlanId(planId)
         planRepo.deleteById(planId)
+    }
+
+    /**
+     * N-13A (2026-05-21) — 학생 1명의 모든 active non-template plan 폐기.
+     * user target + class target 모두 정리. 신규 plan 생성·org 이동 hook 에서 호출.
+     */
+    @Transactional
+    fun discardPlansForUser(userId: String) {
+        val planIds = resolveMyPlanIds(userId).toList()
+        planIds.forEach { pid ->
+            val plan = planRepo.findById(pid).orElse(null) ?: return@forEach
+            if (plan.isTemplate || plan.status != "active") return@forEach
+            cascadeDeletePlan(pid)
+        }
+    }
+
+    /**
+     * N-13B (2026-05-21) — 학생 org 이동 후 호출. 기존 user-target active plan 이 없으면
+     * createDefaultPlanForStudent 로 1개 생성. 있으면 noop.
+     */
+    @Transactional
+    fun ensureDefaultPlanForStudent(orgId: String, userId: String): StudyPlanEntity? {
+        val existing = targetRepo.findByTargetTypeAndTargetId("user", userId)
+            .mapNotNull { planRepo.findById(it.planId).orElse(null) }
+            .firstOrNull { it.status == "active" && !it.isTemplate }
+        if (existing != null) return existing
+        return createDefaultPlanForStudent(orgId, userId)
     }
 
     // ── 관리자: 범위(행) 관리 ──
@@ -1152,7 +1173,18 @@ class StudyPlanService(
 
     @Transactional(readOnly = true)
     fun getCellFiles(cellId: String): List<CellFileResponse> {
-        verifyAdminAccessToCell(cellId)
+        // N-14 (2026-05-21) — 학생·어드민 호출자 분기.
+        // 학생: 본인 cell 만 통과. 어드민: 기존 plan org 가드 (verifyAdminAccessToPlan).
+        // 기존 verifyAdminAccessToCell 단독 호출은 학생 호출 시 403 redirect 사고 (N-10 회귀).
+        val cell = findCell(cellId)
+        val currentUserId = SecurityUtils.currentUserId()
+            ?: throw ApiException("UNAUTHORIZED", "unauthorized", HttpStatus.UNAUTHORIZED)
+        val isAdmin = SecurityUtils.hasAnyRole("HQ_ADMIN", "ORG_ADMIN")
+        if (isAdmin) {
+            verifyAdminAccessToPlan(cell.planId)
+        } else if (cell.userId != currentUserId) {
+            throw ApiException("FORBIDDEN", "본인의 셀이 아닙니다.", HttpStatus.FORBIDDEN)
+        }
         return cellFileRepo.findByCellId(cellId).map { it.toResponse() }
     }
 

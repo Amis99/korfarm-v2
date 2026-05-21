@@ -35,6 +35,7 @@ class OrgService(
     private val subscriptionRepository: SubscriptionRepository,
     private val passwordEncoder: PasswordEncoder,
     private val orgScopeResolver: OrgScopeResolver,
+    private val studyPlanService: com.korfarm.api.studyplan.StudyPlanService,
 ) {
     // ORG_ADMIN인 경우 대상 학생이 자기 기관 소속인지 검증 (HQ_ADMIN은 통과)
     fun verifyOrgAdminAccessForStudent(targetUserId: String) {
@@ -303,6 +304,10 @@ class OrgService(
             }
         }
 
+        // N-13B (2026-05-21) — 학생 org 이동 시 기존 plan 폐기 + 새 default plan 1개 자동 생성
+        studyPlanService.discardPlansForUser(userId)
+        studyPlanService.ensureDefaultPlanForStudent("org_hq", userId)
+
         return mapOf(
             "status" to "transferred",
             "previousOrgId" to orgId,
@@ -372,6 +377,10 @@ class OrgService(
                 classMembershipRepository.save(cm)
             }
         }
+
+        // N-13B (2026-05-21) — 학생 org 이동 시 기존 plan 폐기 + 새 default plan 1개 자동 생성
+        studyPlanService.discardPlansForUser(userId)
+        studyPlanService.ensureDefaultPlanForStudent(toOrgId, userId)
 
         return mapOf(
             "status" to "transferred",
