@@ -2347,6 +2347,35 @@ fun verifyStudentTestAccess(testId: String, userId: String) {
   </table>
 </section>
 
+<section>
+  <h2>9. 작업 절차 규약 (2026-05-21 사용자 명시) <span class="badge ok">정책</span></h2>
+
+  <div class="callout" style="border-left-color: var(--accent);">
+    <strong>매 N-XX 작업 묶음에 적용:</strong>
+    <ol style="margin: 6px 0 0;">
+      <li>작업 완료 시 <strong>이 HTML 보고서</strong>에 결과 섹션(8.XX) 즉시 추가 — 증상·root cause·DB 검증·적용 결과 표·잔여 항목. 별도 메모리 파일·다른 문서 사용 금지.</li>
+      <li>운영 영향 큰 묶음 끝나면 <strong>gstack <code>/review</code></strong> 1회 호출 (회귀·security·cross-cutting 점검). 매 작은 fix 마다 호출은 부담이라 묶음 단위.</li>
+      <li>피드백·정책 변경은 이 보고서의 §9 에 누적. 메모리 파일 신규 생성은 코드 변경에 직접 묶이는 핵심 정책만(예: 보안 가드 패턴).</li>
+      <li>커밋 분리: 작업 단위(N-XX) 마다 별도 commit. 한 turn 묶음이면 묶어서 1 commit 도 허용.</li>
+      <li>커밋 메시지 한국어, Co-Authored-By 트레일러 포함.</li>
+    </ol>
+  </div>
+
+  <h3>9.1 보고서 작성 규칙</h3>
+  <ul>
+    <li>섹션 번호 8.XX 연번 (현재 8.23 까지). 새 작업은 다음 번호.</li>
+    <li>각 섹션 = root-cause div + DB 검증 pre + 적용 결과 table.</li>
+    <li>잔여 항목은 "잔여 — " 또는 별도 표의 "대기" badge 로 표시. 후속 N-XX 등록.</li>
+    <li>완료 시 badge "ok" 갱신.</li>
+  </ul>
+
+  <h3>9.2 메모리(.md) vs 보고서(HTML) 분담</h3>
+  <ul>
+    <li><strong>HTML 보고서</strong>: 학습 계획표·시험·OMR·테스트 관리 등 이번 운영 사이클의 모든 N-XX 사고·정책·작업 흐름. 사용자가 한눈에 추적.</li>
+    <li><strong>메모리 .md</strong>: 코드 변경에 직접 묶이는 도메인 규칙만 (예: <code>feedback_org_id_validation.md</code> 의 OrgScopeResolver 가드 패턴). 작업 절차·운영 정책은 박지 않음.</li>
+  </ul>
+</section>
+
 <footer>
   국어농장 v2 · 학습 계획표 점검 보고서 · 2026-05-20<br>
   대상: <code>backend/src/main/kotlin/com/korfarm/api/studyplan/*</code> + <code>frontend/src/{pages,components}/StudyPlan*</code> + <code>frontend/src/components/study-plan-dashboard/*</code>
