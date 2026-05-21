@@ -124,6 +124,7 @@ function ProTestPage() {
                 title: "챕터 테스트",
                 questions: engineQuestions,
                 timeLimitSec: (active.remainingMinutes ?? 60) * 60,
+                examDeadlineIso: active.omrDeadline,  // N-20A: 서버 절대 deadline
                 contentType: "CHAPTER_TEST",
               }),
             );
@@ -209,6 +210,7 @@ function ProTestPage() {
           title: "챕터 테스트",
           questions: engineQuestions,
           timeLimitSec: (res.remainingMinutes ?? 60) * 60,
+          examDeadlineIso: res.omrDeadline,  // N-20A: 서버 절대 deadline
           contentType: "CHAPTER_TEST",
         }),
       );

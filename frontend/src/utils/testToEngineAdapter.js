@@ -58,12 +58,15 @@ export function adaptTestQuestions(questions) {
 }
 
 /**
- * EngineShell에 전달할 content 래퍼 생성
+ * EngineShell에 전달할 content 래퍼 생성.
+ * N-20A (2026-05-21) — examDeadlineIso 전달 가능. 있으면 EngineShell 이 deadline 기준
+ * 잔여 시간 계산 → 새로고침해도 타이머가 절대 시각에서 줄어든다.
  */
-export function buildEngineContent({ title, questions, timeLimitSec, contentType, targetLevel }) {
+export function buildEngineContent({ title, questions, timeLimitSec, contentType, targetLevel, examDeadlineIso }) {
   return {
     title,
     timeLimitSec,
+    examDeadlineIso: examDeadlineIso || null,
     contentType,
     targetLevel: targetLevel || null,
     seedReward: { count: 1 },

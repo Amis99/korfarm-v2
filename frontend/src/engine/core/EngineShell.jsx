@@ -129,6 +129,16 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
   const { user } = useAuth();
   const studentName = user?.name || user?.login_id || "학생";
   const timeLimit = getTimeLimit(content);
+  // N-20A (2026-05-21) — 시험 모드에서 서버 절대 deadline 기준 잔여 시간 계산.
+  // examDeadlineIso 있으면 매 setInterval 마다 (deadline - now) 사용 →
+  // 새로고침해도 timeLeft 가 서버 기준으로 줄어든다.
+  const examDeadlineMs = content?.examDeadlineIso
+    ? (() => { const t = Date.parse(content.examDeadlineIso); return Number.isFinite(t) ? t : null; })()
+    : null;
+  const computeRemainingFromDeadline = () => {
+    if (examDeadlineMs == null) return null;
+    return Math.max(0, Math.floor((examDeadlineMs - Date.now()) / 1000));
+  };
 
   /** 인쇄 핸들러 — 파일명 학생명_레벨명_학습명 */
   const handlePrint = () => {
@@ -144,7 +154,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
   const farmLogIdRef = useRef(farmLogId);
   farmLogIdRef.current = farmLogId;
   const [status, setStatus] = useState("READY");
-  const [timeLeft, setTimeLeft] = useState(timeLimit);
+  const [timeLeft, setTimeLeft] = useState(() => computeRemainingFromDeadline() ?? timeLimit);
   const [timePulse, setTimePulse] = useState(null);
   const [records, setRecords] = useState([]);
   const recordsRef = useRef(records);
@@ -497,6 +507,13 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
       return;
     }
     intervalRef.current = setInterval(() => {
+      // N-20A (2026-05-21) — 시험 모드 examDeadlineIso 있으면 절대 deadline 기준 계산.
+      // 학습 모드 또는 deadline 없는 경우는 기존 1초 감소 방식.
+      const fromDeadline = computeRemainingFromDeadline();
+      if (fromDeadline != null) {
+        setTimeLeft(fromDeadline);
+        return;
+      }
       setTimeLeft((prev) => {
         if (prev <= 0) {
           return 0;
@@ -505,7 +522,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
       });
     }, 1000 / timeSpeed);
     return () => clearInterval(intervalRef.current);
-  }, [status, timeSpeed]);
+  }, [status, timeSpeed, examDeadlineMs]);
 
   useEffect(() => {
     if (!timePulse) return undefined;

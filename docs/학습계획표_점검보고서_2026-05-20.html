@@ -2043,6 +2043,102 @@ fun verifyStudentTestAccess(testId: String, userId: String) {
     </tbody>
   </table>
 
+  <h3>8.18 신규 이슈 — 챕터 테스트 응시 화면 좌우 글자 잘림 <span class="badge ok">2026-05-21 fix</span></h3>
+
+  <div class="root-cause">
+    <h4>증상: PC 에서 챕터 테스트 응시 시 종이 좌우 경계에 글자 닿아 첫·끝 글자 잘려보임</h4>
+    <p style="margin: 0 0 6px; font-size: 0.92rem;">
+      EngineShell + ExamModule 의 종이 컨테이너 좌우 padding 이 4 ~ 6px 에 불과해
+      본문/지문/선택지 텍스트가 종이 경계와 거의 붙어 시각적 잘림.
+    </p>
+  </div>
+
+  <h4>root cause</h4>
+  <ul>
+    <li><code>.engine-body.stack</code> padding 0 + <code>.exam-module</code> padding 좌우 4px + <code>.exam-q</code> padding 좌우 6px = 좌우 합 10px 만 안쪽 여유.</li>
+    <li>좁은 viewport (모바일·태블릿·노트북) 에서 종이 자체가 화면 거의 다 차지하면서 시험 종료 버튼(footer) 도 좌측 잘림.</li>
+  </ul>
+
+  <h4>적용 결과 (N-18 + N-19 2026-05-21)</h4>
+  <table class="compact">
+    <thead><tr><th>#</th><th>변경</th><th>위치</th></tr></thead>
+    <tbody>
+      <tr><td>N-18</td><td>.exam-module padding 좌우 4 → 28 (1차), .exam-q padding 좌우 6 → 10</td><td><code>learning-engine.css</code></td></tr>
+      <tr><td>N-19 추가</td><td>.exam-module padding 좌우 28 → 40, .exam-q 10 → 12, footer center 정렬 + 시험 종료 버튼 padding/font 축소, 모바일 미디어쿼리에서 viewport center + exam-module 좌우 20 + footer 패딩·버튼 축소</td><td><code>learning-engine.css</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3>8.19 신규 이슈 — 챕터 테스트 온라인 응시 서술형 문제 미표시 <span class="badge ok">2026-05-21 fix</span></h3>
+
+  <div class="root-cause">
+    <h4>증상: 챕터 테스트(ExamModule) 응시 시 서술형 문항이 화면에 안 보임</h4>
+    <p style="margin: 0 0 6px; font-size: 0.92rem;">
+      백엔드 <code>getQuestionStubs</code> 는 서술형까지 반환하지만 프론트가 객관식만 표시.
+    </p>
+  </div>
+
+  <h4>root cause (★★)</h4>
+  <ul>
+    <li><code>testToEngineAdapter.adaptTestQuestions</code> 가 <code>.filter(q =&gt; q.type === "객관식")</code> 로 서술형 통째 제외.</li>
+    <li><code>ExamModule</code> 자체도 객관식 선택지만 렌더링, 서술형 분기 없음.</li>
+    <li>기타 테스트(<code>TestOmrPage</code>) / <code>OnlineTestRenderer</code> 는 서술형 textarea 분기 이미 존재 → 정상이어야 함.</li>
+  </ul>
+
+  <h4>적용 결과 (N-21 2026-05-21)</h4>
+  <table class="compact">
+    <thead><tr><th>#</th><th>변경</th><th>위치</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>객관식 필터 제거, q.type 보존</td><td><code>testToEngineAdapter.adaptTestQuestions</code></td></tr>
+      <tr><td>2</td><td>q.type === "서술형" 분기 추가 — textarea + handleEssayChange</td><td><code>ExamModule.jsx</code></td></tr>
+      <tr><td>3</td><td>handleSubmit collected entry 에 selectedId(객관식)/essayText(서술형) 분리</td><td><code>ExamModule.jsx</code></td></tr>
+      <tr><td>4</td><td>handleEngineFinish 에서 essayText 도 engineAnswers[id] 매핑</td><td><code>ProTestPage.jsx</code></td></tr>
+      <tr><td>5</td><td>.exam-essay / .exam-essay-input 종이 톤 스타일</td><td><code>learning-engine.css</code></td></tr>
+    </tbody>
+  </table>
+  <p style="margin: 8px 0 0; font-size: 0.92rem; color: var(--muted);">
+    Pro 백엔드(<code>ProTestSessionService.submitOmr</code>) 는 이미 q.type=="서술형" 채점 분기와 <code>essayGradingService.createGradingsForSubmission</code> 호출 보유 — 백엔드 변경 불요.
+  </p>
+
+  <h3>8.20 신규 이슈 — 시험 응시 새로고침 시 타이머 리셋 (챕터·OMR) <span class="badge high">2026-05-21 발견 / 일부 fix</span></h3>
+
+  <div class="root-cause">
+    <h4>증상: 응시 중 새로고침 시 타이머가 처음 값으로 다시 시작</h4>
+    <p style="margin: 0 0 6px; font-size: 0.92rem;">
+      사용자 명시: "타이머는 서버 내부에서 돌아가고 있어야 해". 챕터 테스트(EngineShell + ExamModule) + 기타 테스트 OMR(TestOmrPage) 둘 다 동일.
+    </p>
+  </div>
+
+  <h4>root cause</h4>
+  <ul>
+    <li><strong>EngineShell.timeLeft</strong> 가 React state. <code>useState(timeLimit)</code> 초기값 = props 그대로. setInterval 매초 -1.
+      새로고침 시 컴포넌트 재마운트 → 초기값 다시 적용. <strong>서버 절대 시각 무시.</strong></li>
+    <li>챕터 테스트는 <strong>백엔드 인프라 이미 존재</strong>(<code>ProTestSessionEntity.omrDeadline</code> +
+      <code>getTestStatus.activeSession.remainingMinutes</code>). 그러나 프론트가 분 단위로 받아 다시 timeLimitSec 으로 환산만 함 → 분 단위 반올림 손실 + 초 단위 부정확.</li>
+    <li>OMR(기타 테스트)는 백엔드에 deadline 자체 없음.</li>
+  </ul>
+
+  <h4>적용 결과 (N-20A 챕터 테스트만, 2026-05-21)</h4>
+  <table class="compact">
+    <thead><tr><th>#</th><th>변경</th><th>위치</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><code>buildEngineContent({examDeadlineIso})</code> 인자 추가</td><td><code>testToEngineAdapter.js</code></td></tr>
+      <tr><td>2</td><td><code>ProTestPage.loadTestStatus</code> + <code>handleOnlineStart</code> 가 active.omrDeadline / res.omrDeadline 을 examDeadlineIso 로 전달</td><td><code>ProTestPage.jsx</code></td></tr>
+      <tr><td>3</td><td>EngineShell 의 <code>timeLeft</code> 초기값 = <code>computeRemainingFromDeadline() ?? timeLimit</code>. setInterval 매 tick 마다 deadline 있으면 (deadline-now) 계산.</td><td><code>EngineShell.jsx</code></td></tr>
+    </tbody>
+  </table>
+  <p style="margin: 8px 0 0; font-size: 0.92rem; color: var(--muted);">
+    → 새로고침해도 챕터 테스트 타이머가 서버 절대 시각 기준 잔여 시간으로 표시. 학습 모드는 examDeadlineIso 없으므로 기존 1초 감소 방식 유지.
+  </p>
+
+  <h4>잔여 — N-20B 기타 테스트 OMR (★★)</h4>
+  <ul>
+    <li><code>test_submissions</code> 에 <code>status='in_progress'</code> row pre-insert 도입 필요.
+      <code>started_at</code>(또는 created_at) + 시험지의 timeLimitMinutes 로 deadline 계산.</li>
+    <li>신규 endpoint <code>GET /v1/test-storage/{id}/active-session</code> — 활성 세션 잔여 시간 반환.</li>
+    <li><code>TestOmrPage</code> mount 시 active-session 확인 → 잔여 시간으로 타이머 표시.</li>
+    <li><code>submitOmr</code> 가 기존 in_progress row 를 status='graded' 로 update (신규 row 안 만들도록 보강).</li>
+  </ul>
+
   <h3>8.13 정책 확정 — 학생당 plan 1개 (다중 plan 폐기) <span class="badge ok">2026-05-21 결정</span></h3>
 
   <div class="callout" style="border-left-color: var(--accent);">
