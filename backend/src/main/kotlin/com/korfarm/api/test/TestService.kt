@@ -508,11 +508,22 @@ class TestService(
                 is String -> essayRubricRaw.takeIf { it.isNotBlank() }
                 else -> objectMapper.writeValueAsString(essayRubricRaw)
             }
+            // payload enum → 운영 표준 한글 type 변환. test_questions.type 은 한글이 표준
+            // ("객관식" 3299/"서술형" 532 row). OMR 페이지·통계 분기가 한글 기준이라 영문 enum 그대로
+            // 박으면 서술형 fallback 으로 잘못 표시된다. (2026-05-21 N-17)
+            val rawType = (q["type"] as? String).orEmpty()
+            val resolvedType = when (rawType.uppercase()) {
+                "MULTI_CHOICE", "MC", "객관식" -> "객관식"
+                "ESSAY", "서술형" -> "서술형"
+                "SHORT_ANSWER", "SA", "단답형" -> "단답형"
+                "OX", "TRUE_FALSE", "OX형" -> "OX"
+                else -> rawType.ifBlank { "객관식" }
+            }
             TestQuestionEntity(
                 id = (q["id"] as? String)?.takeIf { it.isNotBlank() } ?: IdGenerator.newId("tq"),
                 testId = paper.id,
                 number = (q["number"] as? Number)?.toInt() ?: (idx + 1),
-                type = (q["type"] as? String) ?: "MULTI_CHOICE",
+                type = resolvedType,
                 domain = domain,
                 subDomain = subDomain,
                 passage = passageText,

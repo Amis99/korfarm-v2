@@ -1994,6 +1994,55 @@ fun verifyStudentTestAccess(testId: String, userId: String) {
     </tbody>
   </table>
 
+  <h3>8.17 신규 이슈 — OMR 페이지 문항 type 표시 오류(객관식 → 서술형) <span class="badge high">2026-05-21 발견</span></h3>
+
+  <div class="root-cause">
+    <h4>증상: 시뮬레이션 시험의 객관식 2문제가 학생 OMR 페이지에서 서술형으로 표시</h4>
+    <p style="margin: 0 0 6px; font-size: 0.92rem;">
+      어드민 본문 에디터는 객관식 2문제, N-16 sync 후 test_questions 도 2 row 정상. 그런데 학생 OMR 화면은 두 문제 모두 서술형 텍스트 입력 박스.
+    </p>
+  </div>
+
+  <h4>root cause (★★★) — type 컬럼 표기 불일치</h4>
+  <p>
+    <code>test_questions.type</code> 운영 표준은 <strong>한글</strong> (객관식 3299 row / 서술형 532 row).
+    그런데 어드민 본문 에디터(<code>TestPaperDocEditor.jsx</code>)는 <strong>영문 enum</strong> 사용:
+    <code>MULTI_CHOICE / ESSAY</code>. N-16 sync 가 payload 의 영문 enum 을 그대로 entity 에 박아
+    test_questions 에 <code>MULTI_CHOICE</code> 2 row 생성.
+  </p>
+  <p>
+    학생 OMR 페이지(<code>TestOmrPage.jsx:108</code>) 의 분기는 한글 기준:
+    <code>q.type === "객관식" ? &lt;OMR input&gt; : &lt;textarea&gt;</code>.
+    영문 <code>MULTI_CHOICE</code> 가 <code>=== "객관식"</code> 통과 못 함 → 서술형 fallback.
+  </p>
+
+  <h4>DB 검증 (2026-05-21 KST)</h4>
+  <pre>SELECT type, COUNT(*) FROM test_questions GROUP BY type:
+  객관식         3299
+  서술형          532
+  MULTI_CHOICE    2  ← 시뮬레이션 시험. 영문 enum 그대로.</pre>
+
+  <h4>적용 결과 (2026-05-21 배포)</h4>
+  <table class="compact">
+    <thead><tr><th>#</th><th>항목</th><th>위치</th><th>상태</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>N-17 패치</td>
+        <td><code>syncQuestionsFromPayload</code> 의 type 매핑 — payload 영문 enum 을 운영 표준 한글로 변환.
+          <code>MULTI_CHOICE → 객관식</code>, <code>ESSAY → 서술형</code>, <code>SHORT_ANSWER → 단답형</code>, <code>OX → OX</code>.</td>
+        <td><code>TestService.kt</code></td>
+        <td><span class="badge ok">완료</span></td>
+      </tr>
+      <tr>
+        <td>N-17 백테필</td>
+        <td>RDS 직접 UPDATE — <code>MULTI_CHOICE → 객관식</code>(2 row, 시뮬레이션 시험), 안전망으로 <code>ESSAY/SHORT_ANSWER</code> 도 변환 (0 row 영향).
+          변환 후 type 분포: 객관식 3301 / 서술형 532 / 영문 enum 0.</td>
+        <td>RDS</td>
+        <td><span class="badge ok">완료</span></td>
+      </tr>
+    </tbody>
+  </table>
+
   <h3>8.13 정책 확정 — 학생당 plan 1개 (다중 plan 폐기) <span class="badge ok">2026-05-21 결정</span></h3>
 
   <div class="callout" style="border-left-color: var(--accent);">
