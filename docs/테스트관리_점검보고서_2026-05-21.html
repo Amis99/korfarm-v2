@@ -592,6 +592,185 @@ if (scope is AdminScope.Org && studentOrgs.none { it == scope.orgId }) {
   </div>
 </section>
 
+<section>
+  <h2>8. N-35 OMR 타이머 만료 동작 통일 (2026-05-22) <span class="badge high">★★★ critical</span></h2>
+
+  <h3>8.1 사용자 보고 (재발)</h3>
+  <div class="callout" style="border-left: 3px solid var(--high); background: rgba(192,57,43,0.06); padding: 10px 14px;">
+    김유건 학생이 진단 테스트를 봤는데 또 OMR 입력이 안 됐어. … 진단·챕터·기타·응시전용 모두 동일하게:
+    타이머 끝나면 페이지 아웃 X, 자동 제출 X, OMR 마킹·수정만 막힘, 제출 버튼은 언제든 활성화.
+    이 문제로 계속 작업했는데 왜 개선이 안 되니?
+  </div>
+
+  <h3>8.2 현재 동작 분석 (왜 계속 같은 사고가 났는가)</h3>
+
+  <h4>① 진단 + 챕터 테스트 — EngineShell + ExamModule (moduleKey="exam")</h4>
+  <p><code>EngineShell.jsx:544-561</code>:</p>
+  <pre>useEffect(() =&gt; {
+  if (status !== "RUNNING") return;
+  if (timeLeft &gt; 0) return;
+  setSeed((prev) =&gt; {
+    const nextSeed = Math.max(0, prev - 1);
+    if (nextSeed === 0) {
+      if (preventAutoFinish) {
+        setSeedExhausted(true);
+        setStatus("PAUSED");
+        return 0;
+      }
+      finish(false, { seed: 0 });  // ← 시험 모드에서도 자동 finish 호출
+      return 0;
+    }
+    setTimeLeft(timeLimit);  // ← 학습 모드 패턴: 씨앗 차감 후 timer 재시작
+    return nextSeed;
+  });
+}, [timeLeft, status, timeLimit, preventAutoFinish]);</pre>
+  <p>
+    이 useEffect 는 <strong>학습 모드의 "씨앗 차감" 로직</strong>인데 <strong>시험 모드(isExam) 에서도 그대로 동작</strong>한다.
+    결과: timeLeft 가 0 도달하면 시험에서도 <code>finish(false, ...)</code> → 학생 답안 강제 제출 → 결과 페이지 자동 이동.
+    학생이 보기엔 "갑자기 화면이 사라짐 / OMR 마킹 못 함". 이것이 김유건 학생 사고의 직접 원인.
+  </p>
+  <p>
+    이전 N-20A 작업은 "새로고침 시 잔여시간 복원" 만 해결, <strong>"timer 만료 후 동작"</strong> 은 그대로 학습 모드 로직 사용.
+  </p>
+
+  <h4>② 기타 + 응시전용 테스트 — TestOmrPage</h4>
+  <p><code>TestOmrPage.jsx:64-80</code>:</p>
+  <pre>useEffect(() =&gt; {
+  if (examDeadlineMs == null) return undefined;
+  const update = () =&gt; {
+    const sec = Math.max(0, Math.floor((examDeadlineMs - Date.now()) / 1000));
+    setRemainingSec(sec);
+    if (sec &lt;= 0 &amp;&amp; !autoSubmitRef.current) {
+      autoSubmitRef.current = true;
+      handleSubmit();  // ← 자동 제출 — 페이지 떠남
+    }
+  };
+  ...
+});</pre>
+  <p>
+    N-20B 작업 시 "타이머 0 도달 = autoSubmit" 으로 작성. 그러나 사용자 의도는
+    <strong>"마킹만 잠금, 제출 버튼은 학생이 직접"</strong>. autoSubmit 자체가 잘못된 정책이었음.
+  </p>
+
+  <h4>③ OnlineTestRenderer</h4>
+  <p>독자 타이머 없음 — props 로 받음. 호출처(주로 TestDetailPage 등) 에서 분기 관리. 현재 페이지 아웃 사고 보고 없음 → 우선순위 낮음. 일관성 위해 같은 패턴 적용.</p>
+
+  <h3>8.3 사용자 명시 정책 (2026-05-22)</h3>
+  <div class="callout" style="border-left: 3px solid var(--accent); background: rgba(180,83,9,0.06); padding: 10px 14px;">
+    <strong>4 화면(진단·챕터·기타·응시전용) 공통 동작:</strong>
+    <ol style="margin: 6px 0 0;">
+      <li>타이머 0 도달 시 페이지 자동 이동 X.</li>
+      <li>자동 제출 X.</li>
+      <li>OMR 마킹·수정만 즉시 잠금(read-only).</li>
+      <li>제출 버튼은 timer 종료 후에도 활성화 유지 — 학생이 직접 제출.</li>
+      <li>타이머 종료 안내 메시지 표시 (학생 인지).</li>
+    </ol>
+  </div>
+
+  <h3>8.4 수정 방안 (N-35)</h3>
+
+  <table class="compact">
+    <thead><tr><th>#</th><th>변경</th><th>위치</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><code>EngineShell</code> 의 timeLeft=0 분기에 <strong>isExam 가드</strong>. 시험 모드면 씨앗 차감/finish 호출 안 함, 대신 <code>timeUp</code> state = true 로만 마킹.</td>
+        <td><code>EngineShell.jsx:544-561</code></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>EngineContext 에 <code>timeUp</code> 추가. ExamModule 이 useEngine() 으로 읽어 handleChoice / handleEssayChange / 키 이벤트 분기 시 <code>if (timeUp) return</code>.</td>
+        <td><code>EngineShell.jsx</code> + <code>ExamModule.jsx</code></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>ExamModule 의 제출 버튼 — timeUp 시에도 활성화 유지. 오히려 timeUp 시 제출 권장 안내 표시.</td>
+        <td><code>ExamModule.jsx</code></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>EngineShell 헤더에 timeUp 시 "⏰ 시간이 종료되었습니다. 제출 버튼을 눌러 마치세요." 띠 표시.</td>
+        <td><code>EngineShell.jsx</code></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>TestOmrPage — <code>autoSubmitRef</code> + <code>handleSubmit()</code> 자동 호출 제거. <code>timeUp</code> state 만 true 로. handleBubble + setAnswers 텍스트 입력 차단.</td>
+        <td><code>TestOmrPage.jsx</code></td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>TestOmrPage 제출 버튼 — <code>disabled={submitting}</code> 만, timeUp 무관 활성화. 헤더에 timeUp 안내 표시.</td>
+        <td><code>TestOmrPage.jsx</code></td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>OnlineTestRenderer — 동일 패턴. props <code>locked</code> 받아 onAnswer 차단. timer 자체는 호출처가 관리.</td>
+        <td><code>OnlineTestRenderer.jsx</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>8.5 회귀 점검 항목</h3>
+  <ul>
+    <li>학습 모드(non-exam) 의 씨앗 차감 로직 그대로 — 시험 모드만 분기.</li>
+    <li>서버 측 타이머(N-20A/B)는 그대로 — 새로고침 시 잔여시간 복원도 동작.</li>
+    <li>서버 측에서 deadline 후 submit 받아도 정상 채점 — backend 의 ALREADY_SUBMITTED 같은 차단 없음.</li>
+    <li>관리자 대리 응시(<code>submit-for-student</code>) 영향 없음 — 별도 흐름.</li>
+  </ul>
+
+  <h3>8.6 적용 결과 (2026-05-22 배포) <span class="badge ok">완료</span></h3>
+  <table class="compact">
+    <thead><tr><th>#</th><th>변경</th><th>위치</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><code>EngineShell</code> timeLeft=0 useEffect 에 <strong>isExam 가드</strong> 추가. 시험 모드면 <code>setStatus("LOCKED")</code> 만, 씨앗 차감/finish 호출 안 함. 학습 모드는 기존 로직 그대로.</td>
+        <td><code>EngineShell.jsx:544-562</code></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>EngineShell 시험 모드 헤더에 <strong>"시간 종료 — 답안 제출만 가능" 안내 띠</strong> (status==="LOCKED" 시 표시, 빨간 톤).</td>
+        <td><code>EngineShell.jsx</code></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><code>ExamModule</code> — useEngine().status === "LOCKED" 면 <code>isLocked</code>. handleChoice / handleEssayChange / handleEssayKeyDown 첫 줄에서 <code>if (isSubmitting || isLocked) return</code>.</td>
+        <td><code>ExamModule.jsx</code></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>ExamModule 의 <strong>제출 바 표시 조건 확장</strong> — <code>{(allRevealed || isLocked) &amp;&amp; ...}</code>. 시간 종료 시 누적 카드 도달 전이라도 즉시 제출 가능.</td>
+        <td><code>ExamModule.jsx</code></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>ExamModule <code>visibleQuestions</code> — isLocked 시 <code>questions</code> 전체 노출 (학생이 안 푼 문제도 검토 가능).</td>
+        <td><code>ExamModule.jsx</code></td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td><code>TestOmrPage</code> — <code>autoSubmitRef</code> + <code>handleSubmit()</code> 자동 호출 제거. <code>isTimeUp</code> state 만 true. <code>handleBubble</code> + 서술형 <code>onChange</code> 첫 줄 <code>if (isTimeUp) return</code>. 서술형 <code>readOnly={isTimeUp}</code>.</td>
+        <td><code>TestOmrPage.jsx</code></td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>TestOmrPage 상단에 "⏰ 시간 종료" 안내 띠 + 타이머 표시 "남은 시간 → 시간 종료" 전환. 제출 버튼은 <code>disabled={submitting}</code> 만 유지 (timeUp 무관).</td>
+        <td><code>TestOmrPage.jsx</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>8.7 검증 시나리오</h3>
+  <ol>
+    <li>학생이 진단/챕터/기타 시험 응시 중 타이머 0 도달.</li>
+    <li>화면 그대로 유지 (페이지 이동 X).</li>
+    <li>OMR 마킹 시도 → 무반응 (잠금).</li>
+    <li>서술형 입력 시도 → 무반응 / readOnly.</li>
+    <li>상단에 "시간 종료" 안내 띠 표시.</li>
+    <li>"답안 제출" 버튼은 활성 — 학생이 직접 누르면 정상 제출 → 결과 페이지 이동.</li>
+  </ol>
+</section>
+
 <footer>
   국어농장 v2 · 테스트 관리 점검 보고서 · 2026-05-21<br>
   대상: <code>backend/src/main/kotlin/com/korfarm/api/test/*</code> + <code>frontend/src/pages/(Admin)?Test*.jsx</code> + <code>ParentLinkService</code><br>

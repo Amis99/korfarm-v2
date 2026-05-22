@@ -541,9 +541,18 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
     return () => window.removeEventListener("resize", measure);
   }, [content?.title, content?.targetLevel, content?.subArea, seed]);
 
+  // N-35 (2026-05-22) — 시험 모드(isExam) 와 학습 모드 동작 분기.
+  //   시험 모드: timeLeft=0 도달 시 자동 finish/씨앗 차감 안 함. status="LOCKED" 로만 마킹.
+  //              학생이 직접 제출 버튼 눌러야 finish. OMR 마킹은 ExamModule 이 status 보고 차단.
+  //   학습 모드: 기존 동작 (씨앗 차감 + nextSeed=0 시 finish).
   useEffect(() => {
     if (status !== "RUNNING") return;
     if (timeLeft > 0) return;
+    if (isExam) {
+      // 시험 모드 — 페이지 유지·자동 제출 X. 학생이 제출 버튼 누를 때까지 기다림.
+      setStatus("LOCKED");
+      return;
+    }
     setSeed((prev) => {
       const nextSeed = Math.max(0, prev - 1);
       if (nextSeed === 0) {
@@ -558,7 +567,7 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
       setTimeLeft(timeLimit);
       return nextSeed;
     });
-  }, [timeLeft, status, timeLimit, preventAutoFinish]);
+  }, [timeLeft, status, timeLimit, preventAutoFinish, isExam]);
 
   const contextValue = useMemo(
     () => ({
@@ -641,6 +650,22 @@ function EngineShell({ content, moduleKey, onExit, farmLogId, preventAutoFinish,
                   </strong>
                 </div>
               </div>
+              {/* N-35 (2026-05-22) — 시간 종료 안내 띠. 마킹은 잠기고 제출은 활성 */}
+              {status === "LOCKED" && (
+                <div style={{
+                  marginTop: 8,
+                  padding: "6px 12px",
+                  background: "rgba(192,57,43,0.10)",
+                  border: "1px solid rgba(192,57,43,0.35)",
+                  borderRadius: 6,
+                  color: "#c0392b",
+                  fontSize: "0.85rem",
+                  fontWeight: 600,
+                  textAlign: "center",
+                }}>
+                  ⏰ 시간이 종료되었습니다. 추가 입력·수정은 불가하며, 아래의 <strong>답안 제출</strong> 버튼을 눌러 마치세요.
+                </div>
+              )}
             </header>
           ) : (
             /* ── 학습 모드 헤더 (기존) ── */

@@ -19,6 +19,8 @@ function ExamModule({ content }) {
   const { status, start, recordAnswer, finish } = useEngine();
   const payload = content?.payload || {};
   const questions = payload.questions || [];
+  // N-35 (2026-05-22) — 시간 종료 시 status="LOCKED". 마킹·서술형 입력 차단, 제출은 유지.
+  const isLocked = status === "LOCKED";
 
   const [currentIndex, setCurrentIndex] = useState(0);
   // { [questionId]: choiceId }
@@ -56,7 +58,7 @@ function ExamModule({ content }) {
 
   // 선택지 클릭
   const handleChoice = (questionId, choiceId, questionIdx) => {
-    if (isSubmitting) return;
+    if (isSubmitting || isLocked) return; // N-35: 시간 종료 후 입력 잠금
     const current = answers[questionId];
     const now = Date.now();
     const tData = timeRef.current[questionId] || { totalMs: 0, deselectTs: null };
@@ -93,7 +95,7 @@ function ExamModule({ content }) {
   // 서술형 입력 (N-21, 2026-05-21)
   // N-25 (2026-05-21) — 자동 다음 문제 노출 제거. Enter 키로 명시적 제출.
   const handleEssayChange = (questionId, text) => {
-    if (isSubmitting) return;
+    if (isSubmitting || isLocked) return; // N-35
     setAnswers((prev) => {
       const next = { ...prev };
       if (text === "") delete next[questionId];
@@ -105,7 +107,7 @@ function ExamModule({ content }) {
   // Enter = 제출(다음 문제 노출). Shift+Enter = 줄바꿈(기본 동작 유지).
   const handleEssayKeyDown = (e, questionIdx) => {
     if (e.key !== "Enter" || e.shiftKey) return;
-    if (isSubmitting) return;
+    if (isSubmitting || isLocked) return; // N-35
     e.preventDefault();
     if (questionIdx === currentIndex && currentIndex < questions.length - 1) {
       setCurrentIndex((prev) => Math.max(prev, questionIdx + 1));
@@ -148,7 +150,8 @@ function ExamModule({ content }) {
 
   if (questions.length === 0) return null;
 
-  const visibleQuestions = questions.slice(0, currentIndex + 1);
+  // N-35: 시간 종료 시 모든 문제 노출 (학생이 안 푼 문제도 확인 가능)
+  const visibleQuestions = isLocked ? questions : questions.slice(0, currentIndex + 1);
   const answeredCount = Object.keys(answers).length;
   const allRevealed = currentIndex >= questions.length - 1;
 
@@ -228,11 +231,11 @@ function ExamModule({ content }) {
         );
       })}
 
-      {/* 제출 바 — 마지막 문제가 나타난 후 표시 */}
-      {allRevealed && (
+      {/* 제출 바 — 마지막 문제 도달 또는 시간 종료(LOCKED) 시 표시. N-35: 시간 종료 후에도 항상 활성 */}
+      {(allRevealed || isLocked) && (
         <div className="exam-submit-bar">
           <p className="exam-submit-info">
-            {questions.length}문항 중 {answeredCount}문항 응답 완료
+            {questions.length}문항 중 {answeredCount}문항 응답 {isLocked ? "(시간 종료)" : "완료"}
           </p>
           <button
             className="exam-submit-btn"

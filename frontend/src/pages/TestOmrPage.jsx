@@ -17,9 +17,10 @@ function TestOmrPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   // N-20B (2026-05-21) — 서버 측 응시 세션 + 잔여 시간 타이머
+  // N-35 (2026-05-22) — 타이머 종료 시 자동 제출 X, isTimeUp 만 true. 마킹 잠금, 제출 버튼은 학생이 직접.
   const [examDeadlineMs, setExamDeadlineMs] = useState(null);
   const [remainingSec, setRemainingSec] = useState(null);
-  const autoSubmitRef = useRef(false);
+  const [isTimeUp, setIsTimeUp] = useState(false);
 
   useEffect(() => {
     if (!isLoggedIn) return;
@@ -62,23 +63,24 @@ function TestOmrPage() {
   }, [isLoggedIn, testId, navigate]);
 
   // 타이머 — 서버 절대 deadline 기준 (deadline - now) 매초 계산
+  // N-35 (2026-05-22) — 타이머 0 도달 시 자동 제출 X. isTimeUp=true 로만 마킹.
+  // OMR 마킹·서술형 입력은 핸들러에서 isTimeUp 체크로 차단. 제출 버튼은 학생이 직접.
   useEffect(() => {
     if (examDeadlineMs == null) return undefined;
     const update = () => {
       const sec = Math.max(0, Math.floor((examDeadlineMs - Date.now()) / 1000));
       setRemainingSec(sec);
-      if (sec <= 0 && !autoSubmitRef.current) {
-        autoSubmitRef.current = true;
-        handleSubmit();
+      if (sec <= 0) {
+        setIsTimeUp(true);
       }
     };
     update();
     const id = setInterval(update, 1000);
     return () => clearInterval(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [examDeadlineMs]);
 
   const handleBubble = (qNum, choice) => {
+    if (isTimeUp) return; // N-35: 시간 종료 후 마킹 잠금
     setAnswers(prev => {
       const key = String(qNum);
       if (prev[key] === String(choice)) {
@@ -138,10 +140,27 @@ function TestOmrPage() {
         <span>{answeredCount} / {questions.length} 응답</span>
         {remainingSec != null && (
           <span className={`ts-omr-timer${remainingSec <= 300 ? " warn" : ""}`}>
-            남은 시간 {String(Math.floor(remainingSec / 60)).padStart(2, "0")}:{String(remainingSec % 60).padStart(2, "0")}
+            {isTimeUp ? "⏰ 시간 종료" : `남은 시간 ${String(Math.floor(remainingSec / 60)).padStart(2, "0")}:${String(remainingSec % 60).padStart(2, "0")}`}
           </span>
         )}
       </div>
+
+      {/* N-35 (2026-05-22) — 시간 종료 안내 띠. 마킹 잠금, 제출 가능. */}
+      {isTimeUp && (
+        <div style={{
+          padding: "10px 14px",
+          margin: "0 0 14px",
+          background: "rgba(192,57,43,0.10)",
+          border: "1px solid rgba(192,57,43,0.35)",
+          borderRadius: 6,
+          color: "#c0392b",
+          fontWeight: 600,
+          textAlign: "center",
+          fontSize: "0.92rem",
+        }}>
+          시험 시간이 종료되었습니다. 추가 입력·수정은 불가하며, 아래 <strong>제출하기</strong> 버튼을 눌러 마무리해 주세요.
+        </div>
+      )}
 
       <div className="ts-omr-grid">
         {rows.map((row, ri) => (
@@ -169,9 +188,13 @@ function TestOmrPage() {
                   <div className="ts-omr-essay">
                     <input
                       type="text"
-                      placeholder="서술형"
+                      placeholder={isTimeUp ? "시간 종료" : "서술형"}
                       value={answers[String(q.number)] || ""}
-                      onChange={e => setAnswers(prev => ({ ...prev, [String(q.number)]: e.target.value }))}
+                      onChange={e => {
+                        if (isTimeUp) return; // N-35
+                        setAnswers(prev => ({ ...prev, [String(q.number)]: e.target.value }));
+                      }}
+                      readOnly={isTimeUp}
                       className="ts-omr-essay-input"
                     />
                   </div>
